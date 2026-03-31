@@ -198,6 +198,7 @@ tbody tr:nth-child(even){background:#fafbfc}
   table{font-size:.78rem}
   thead th{padding:.5rem .6rem}
   tbody td{padding:.5rem .6rem}
+  .mvv-box .mvv-grid-3{grid-template-columns:1fr!important}
 }
 </style>
 </head>
@@ -252,6 +253,10 @@ tbody tr:nth-child(even){background:#fafbfc}
 <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg></span>
 共有ドライブ
 </a>
+<a href="#" data-page="company" onclick="switchPage('company',this);return false">
+<span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9h1"/><path d="M9 13h1"/><path d="M9 17h1"/></svg></span>
+会社情報
+</a>
 <a href="#" data-page="links" onclick="switchPage('links',this);return false">
 <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg></span>
 リンク集
@@ -274,13 +279,28 @@ tbody tr:nth-child(even){background:#fafbfc}
 
 <!-- MVV -->
 <div class="mvv-box">
-<h3>Mission / Vision / Values</h3>
-<div class="mvv-mission">EC運用のプロフェッショナル集団として、<br>クライアントの売上最大化と持続的成長を実現する</div>
+<div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem">
+<img src="https://cd-s.co.jp/wp-content/themes/%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BEcards/assets/images/common/logo.webp" alt="CARDS" style="height:36px;filter:brightness(0) invert(1)">
+<h3 style="margin:0">Mission / Vision / Values</h3>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:.5rem">
+<div>
+<div style="font-size:.7rem;opacity:.6;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.3rem">Mission</div>
+<div style="font-size:1.1rem;font-weight:700;line-height:1.5">作り手の想いを届ける切り札となる</div>
+</div>
+<div>
+<div style="font-size:.7rem;opacity:.6;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.3rem">Vision</div>
+<div style="font-size:1.1rem;font-weight:700;line-height:1.5">挑戦する作り手を増やす</div>
+</div>
+<div>
+<div style="font-size:.7rem;opacity:.6;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.3rem">Values</div>
+<div style="font-size:1.1rem;font-weight:700;line-height:1.5">お客様第一で最善を尽くすプロ集団である</div>
+</div>
+</div>
 <div class="mvv-values">
-<div class="mvv-value">品質へのこだわり</div>
-<div class="mvv-value">スピード感のある対応</div>
-<div class="mvv-value">データドリブンな意思決定</div>
-<div class="mvv-value">チームワーク</div>
+<div class="mvv-value">ECモール運用支援&コンサルティング</div>
+<div class="mvv-value">EC専売商品企画</div>
+<div class="mvv-value">ECブランド戦略サポート</div>
 </div>
 </div>
 
@@ -782,6 +802,64 @@ tbody tr:nth-child(even){background:#fafbfc}
 </div>
 </div>
 
+<!-- ===== COMPANY ===== -->
+<div id="page-company" class="page">
+<h2 class="page-title">会社情報</h2>
+<div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem">
+<div style="flex:1;min-width:320px;background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden">
+<div style="background:linear-gradient(135deg,#0E043A 0%,#2d1b69 50%,#4a2d8a 100%);padding:2rem;text-align:center">
+<img src="https://cd-s.co.jp/wp-content/themes/%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BEcards/assets/images/common/logo.webp" alt="CARDS" style="height:48px;filter:brightness(0) invert(1)">
+<p style="color:rgba(255,255,255,.7);font-size:.8rem;margin-top:.5rem">株式会社CARDS</p>
+</div>
+<div style="padding:1.5rem">
+<table style="width:100%;font-size:.85rem">
+<tr><td style="font-weight:600;color:var(--accent);padding:.5rem 1rem .5rem 0;white-space:nowrap;width:100px">代表者</td><td style="padding:.5rem 0">猿川 哲朗（さるかわ てつろう）</td></tr>
+<tr><td style="font-weight:600;color:var(--accent);padding:.5rem 1rem .5rem 0">所在地</td><td style="padding:.5rem 0">東京都渋谷区渋谷2-14-13 岡崎ビル910</td></tr>
+<tr><td style="font-weight:600;color:var(--accent);padding:.5rem 1rem .5rem 0">設立</td><td style="padding:.5rem 0">2023年</td></tr>
+<tr><td style="font-weight:600;color:var(--accent);padding:.5rem 1rem .5rem 0">公式サイト</td><td style="padding:.5rem 0"><a href="https://cd-s.co.jp/" target="_blank" class="external-link">https://cd-s.co.jp/</a></td></tr>
+</table>
+</div>
+</div>
+<div style="flex:1;min-width:320px">
+<div style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem;margin-bottom:1.5rem">
+<h3 style="color:var(--accent);margin-bottom:1rem;font-size:1rem">事業内容</h3>
+<div style="display:flex;flex-direction:column;gap:.6rem">
+<div style="padding:.8rem 1rem;background:var(--bg);border-radius:8px;border-left:3px solid var(--highlight)">
+<div style="font-weight:600;font-size:.9rem">ECモール運用支援&コンサルティング</div>
+<div style="font-size:.78rem;color:var(--text-light);margin-top:.2rem">Amazon / 楽天 / Yahoo!ショッピング / Qoo10</div>
+</div>
+<div style="padding:.8rem 1rem;background:var(--bg);border-radius:8px;border-left:3px solid var(--highlight)">
+<div style="font-weight:600;font-size:.9rem">EC専売商品企画</div>
+<div style="font-size:.78rem;color:var(--text-light);margin-top:.2rem">商品コンセプト設計 / PL設計 / ターゲット設計</div>
+</div>
+<div style="padding:.8rem 1rem;background:var(--bg);border-radius:8px;border-left:3px solid var(--highlight)">
+<div style="font-weight:600;font-size:.9rem">ECブランド戦略サポート</div>
+<div style="font-size:.78rem;color:var(--text-light);margin-top:.2rem">市場分析 / 競合調査 / レビュー分析 / 予算最適化</div>
+</div>
+</div>
+</div>
+<div style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem">
+<h3 style="color:var(--accent);margin-bottom:.8rem;font-size:1rem">代表 略歴</h3>
+<p style="font-size:.85rem;line-height:1.7;color:var(--text)">岩手県盛岡市出身。大手飲料メーカー営業、人材系ベンチャー法人営業、D2Cフィットネス企業（年商60億円成長に貢献）での経験を経て独立。EC運用支援実績は100社以上。</p>
+<div style="margin-top:.8rem;display:flex;flex-wrap:wrap;gap:.5rem">
+<span style="font-size:.75rem;padding:.3rem .7rem;background:var(--bg);border-radius:4px;border:1px solid var(--border)">一般社団法人いわて圏 理事</span>
+<span style="font-size:.75rem;padding:.3rem .7rem;background:var(--bg);border-radius:4px;border:1px solid var(--border)">岩手県商工会連合会 専門家</span>
+<span style="font-size:.75rem;padding:.3rem .7rem;background:var(--bg);border-radius:4px;border:1px solid var(--border)">盛岡商工会議所 専門家</span>
+</div>
+</div>
+</div>
+</div>
+<div style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem">
+<h3 style="color:var(--accent);margin-bottom:1rem;font-size:1rem">SNS / 外部リンク</h3>
+<div style="display:flex;gap:1rem;flex-wrap:wrap">
+<a href="https://www.facebook.com/sarukawatetsuro/" target="_blank" style="display:flex;align-items:center;gap:.5rem;padding:.7rem 1.2rem;background:var(--bg);border-radius:8px;text-decoration:none;color:var(--text);font-size:.85rem;font-weight:500;border:1px solid var(--border);transition:all .2s">Facebook</a>
+<a href="https://x.com/T_Sarukawa" target="_blank" style="display:flex;align-items:center;gap:.5rem;padding:.7rem 1.2rem;background:var(--bg);border-radius:8px;text-decoration:none;color:var(--text);font-size:.85rem;font-weight:500;border:1px solid var(--border);transition:all .2s">X (Twitter)</a>
+<a href="https://note.com/tetsurosarukawa/" target="_blank" style="display:flex;align-items:center;gap:.5rem;padding:.7rem 1.2rem;background:var(--bg);border-radius:8px;text-decoration:none;color:var(--text);font-size:.85rem;font-weight:500;border:1px solid var(--border);transition:all .2s">Note</a>
+<a href="https://cd-s.co.jp/" target="_blank" style="display:flex;align-items:center;gap:.5rem;padding:.7rem 1.2rem;background:var(--primary);border-radius:8px;text-decoration:none;color:#fff;font-size:.85rem;font-weight:500;transition:all .2s">公式サイト</a>
+</div>
+</div>
+</div>
+
 <!-- ===== LINKS ===== -->
 <div id="page-links" class="page">
 <h2 class="page-title">リンク集 / マニュアル</h2>
@@ -834,7 +912,7 @@ function switchPage(pageId, navEl){
     document.getElementById('sidebarOverlay').classList.remove('open');
   }
   // Update header title
-  var titles = {home:'ホーム',accounts:'アカウント情報','store-logins':'店舗別ログイン',logins:'個別ログイン',clients:'クライアント一覧',team:'担当者一覧',org:'組織図',rules:'社内ルール',drive:'共有ドライブ',links:'リンク集'};
+  var titles = {home:'ホーム',accounts:'アカウント情報','store-logins':'店舗別ログイン',logins:'個別ログイン',clients:'クライアント一覧',team:'担当者一覧',org:'組織図',rules:'社内ルール',drive:'共有ドライブ',company:'会社情報',links:'リンク集'};
   document.querySelector('.header-title').textContent = titles[pageId] || 'CARDS Portal';
 }
 
