@@ -268,28 +268,34 @@ function apiGet(params) {
   return fetch(GAS_URL + '?' + qs).then(function(r) { return r.json(); });
 }
 
-/* ========== Dashboard - Single batch request ========== */
+/* ========== Dashboard - Parallel sheet loading ========== */
 function loadDashboard() {
-  var sheetIds = SHEETS.map(function(s) { return s.id; });
+  var loaded = 0;
+  var total = SHEETS.length;
+  showStatus('データ読み込み中... (0/' + total + ')', '');
 
-  apiPost({ action: 'getAllSheets', sheets: sheetIds, password: password })
-    .then(function(res) {
-      if (!res.success) {
-        showStatus('データ取得エラー', 'error');
-        return;
-      }
-      // Store all data at once
-      var allData = res.data;
-      for (var key in allData) {
-        sheetDataCache[key] = allData[key];
-      }
-      renderDashboard();
-      buildAllSections();
-      showStatus('全データ読み込み完了', 'success');
-    })
-    .catch(function(e) {
-      showStatus('通信エラー: ' + e.message, 'error');
-    });
+  SHEETS.forEach(function(s) {
+    apiGet({ action: 'getSheet', sheet: s.id })
+      .then(function(res) {
+        sheetDataCache[s.id] = res;
+        buildSection(s);
+        loaded++;
+        if (loaded >= total) {
+          renderDashboard();
+          showStatus('全データ読み込み完了', 'success');
+        } else {
+          showStatus('データ読み込み中... (' + loaded + '/' + total + ')', '');
+          renderDashboard();
+        }
+      })
+      .catch(function() {
+        loaded++;
+        if (loaded >= total) {
+          renderDashboard();
+          showStatus('一部データの取得に失敗', 'error');
+        }
+      });
+  });
 }
 
 function renderDashboard() {
