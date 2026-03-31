@@ -956,7 +956,19 @@ function linkOrText(url,text){if(url)return'<a href="'+escHtml(url)+'" target="_
 var GAS_API = 'https://script.google.com/macros/s/AKfycbxUxm3HCosAwW4EImmGzFnW-g8svH-NKaquJ1a1G2kBrLLVQwhBZGgjGEpZxiw-Cj9h/exec';
 
 function loadAllData(){
-  ['login-ec-tbody','login-tool-tbody','login-store-tbody','login-coupon-tbody','login-boss-tbody','login-teps-tbody','login-individual-tbody'].forEach(function(id){var el=document.getElementById(id);if(el)el.innerHTML='<tr><td colspan="8" style="text-align:center;padding:2rem;color:var(--text-light)">読み込み中...</td></tr>';});
+  var loading='<tr><td colspan="8" style="text-align:center;padding:2rem;color:var(--text-light)">読み込み中...</td></tr>';
+  var loadingDiv='<div style="text-align:center;padding:2rem;color:var(--text-light)">読み込み中...</div>';
+  ['login-ec-tbody','login-tool-tbody','login-store-tbody','login-coupon-tbody','login-boss-tbody','login-teps-tbody','login-individual-tbody'].forEach(function(id){var el=document.getElementById(id);if(el)el.innerHTML=loading;});
+  var el;
+  el=document.getElementById('clientGrid');if(el)el.innerHTML=loadingDiv;
+  el=document.getElementById('org-tree-container');if(el)el.innerHTML=loadingDiv;
+  el=document.getElementById('team-consultant-cards');if(el)el.innerHTML=loadingDiv;
+  el=document.getElementById('team-assistant-cards');if(el)el.innerHTML=loadingDiv;
+  el=document.getElementById('manual-grid');if(el)el.innerHTML=loadingDiv;
+  el=document.getElementById('ai-cards-grid');if(el)el.innerHTML=loadingDiv;
+  el=document.getElementById('client-drive-tbody');if(el)el.innerHTML=loading;
+  el=document.querySelector('#page-links .info-grid');if(el)el.innerHTML=loadingDiv;
+  el=document.querySelector('#page-team .table-wrapper tbody');if(el)el.innerHTML=loading;
   fetch(GAS_API + '?action=getAllData')
     .then(function(r){return r.json()})
     .then(function(d){
