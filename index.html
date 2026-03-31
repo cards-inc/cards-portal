@@ -238,7 +238,7 @@ tbody tr:nth-child(even){background:#fafbfc}
 
 <!-- Sidebar -->
 <aside class="sidebar" id="sidebar">
-<div class="sidebar-header" style="cursor:pointer" onclick="location.reload()">
+<div class="sidebar-header" style="cursor:pointer" onclick="try{Object.keys(sessionStorage).forEach(function(k){if(k.indexOf('portal_')===0)sessionStorage.removeItem(k)})}catch(e){}location.reload()">
 <div style="display:flex;align-items:baseline;gap:.5rem">
 <img src="https://cd-s.co.jp/wp-content/themes/%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BEcards/assets/images/common/logo.webp" alt="CARDS" style="height:28px;max-width:140px;object-fit:contain;filter:brightness(0) invert(1);display:block">
 <span style="font-size:1.3rem;font-family:'Arial Black',Impact,'Helvetica Neue',sans-serif;font-weight:900;letter-spacing:.02em;color:#fff">Portal</span>
@@ -951,6 +951,19 @@ function linkOrText(url,text){if(url)return'<a href="'+escHtml(url)+'" target="_
 
 var GAS_API = 'https://script.google.com/macros/s/AKfycbxUxm3HCosAwW4EImmGzFnW-g8svH-NKaquJ1a1G2kBrLLVQwhBZGgjGEpZxiw-Cj9h/exec';
 
+var _apiData={};
+var CACHE_TTL=180000;
+function cachedFetch(url,key){
+  try{
+    var c=sessionStorage.getItem('portal_'+key);
+    if(c){var p=JSON.parse(c);if(Date.now()-p.t<CACHE_TTL){return Promise.resolve(p.d);}}
+  }catch(e){}
+  return fetch(url).then(function(r){return r.json()}).then(function(d){
+    try{sessionStorage.setItem('portal_'+key,JSON.stringify({t:Date.now(),d:d}));}catch(e){}
+    return d;
+  });
+}
+
 function loadAllData(){
   var loading='<tr><td colspan="8" style="text-align:center;padding:2rem;color:var(--text-light)">読み込み中...</td></tr>';
   var loadingDiv='<div style="text-align:center;padding:2rem;color:var(--text-light)">読み込み中...</div>';
@@ -965,9 +978,11 @@ function loadAllData(){
   el=document.getElementById('client-drive-tbody');if(el)el.innerHTML=loading;
   el=document.querySelector('#page-links .info-grid');if(el)el.innerHTML=loadingDiv;
   el=document.querySelector('#page-team .table-wrapper tbody');if(el)el.innerHTML=loading;
-  fetch(GAS_API + '?action=getAllData')
-    .then(function(r){return r.json()})
+
+  /* 並列読み込み: getAllDataを1回で取得（GASキャッシュ有効時は高速） */
+  cachedFetch(GAS_API + '?action=getAllData','all')
     .then(function(d){
+      _apiData=d;
       if(d.accounts) renderAccounts(d.accounts);
       if(d.storeLogins) renderStoreLogins(d.storeLogins);
       if(d.clients){ renderClients(d.clients,d.drive); renderDrive(d.clients); }
@@ -984,7 +999,7 @@ function loadAllData(){
       console.log('APIデータ読み込み完了');
       injectCopyButtons();
     })
-    .catch(function(e){console.log('API接続なし - 静的表示を維持:',e)});
+    .catch(function(e){console.log('API接続なし:',e)});
   return;
   // Legacy GAS-hosted code below
   console.log('静的HTMLで表示中');return;
