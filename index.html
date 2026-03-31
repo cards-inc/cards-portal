@@ -642,10 +642,30 @@ AIチャットボット
 </div>
 
 <div id="rules-comm" class="rules-panel active">
-<div style="margin-bottom:1rem">
-<a class="rule-link" href="https://docs.google.com/document/d/1PGR9s93pvMIeGDAb-RUOYZJdMFoGQO-5nLUEKdzUJ4o/edit?tab=t.lbkaqwca49ye#heading=h.67g2qsqntdz7" target="_blank">Google Docsで社内規則を開く</a>
+<div class="rules-content">
+<h2>コミュニケーションポリシー</h2>
+<h3>コミュニケーション頻度</h3>
+<ul>
+<li>1週間で<strong>5往復</strong>は最低でもコミュニケーションを取ること</li>
+</ul>
+<h3>コミュニケーション漏れ防止への取り組み</h3>
+<ul>
+<li>Slackの「check_alert」CHにて<strong>3営業日以上</strong>動きのないチャットの担当者へアラーム
+<ul>
+<li>アラートが発信された場合、該当者は対応完了の旨を報告すること</li>
+<li>※リアクションのみ禁止</li>
+</ul>
+</li>
+</ul>
+<h3>チャットワーク運用ルール</h3>
+<ul>
+<li>メンバー追加/削除の際は投稿を削除徹底
+<ul>
+<li>お客様からの心象が悪くなるため</li>
+</ul>
+</li>
+</ul>
 </div>
-<div class="rules-content" id="rules-content-comm">読み込み中...</div>
 </div>
 
 <div id="rules-procedures" class="rules-panel">
@@ -887,7 +907,6 @@ function loadAllData(){
       if(d.storeLogins) renderStoreLogins(d.storeLogins);
       if(d.clients){ renderClients(d.clients,d.drive); }
       if(d.team){ renderTeam(d.team); renderTeamCards(d.team); renderClientCounts(d.team); }
-      if(d.rules) renderRules(d.rules);
       if(d.news) renderNews(d.news);
       if(d.company) renderCompany(d.company);
       if(d.org) renderOrg(d.org);
@@ -908,7 +927,6 @@ function loadAllData(){
     renderStoreLogins(d.storeLogins);
     renderClients(d.clients);
     renderTeam(d.team);
-    renderRules(d.rules);
     document.getElementById('loading-overlay').style.display='none';
     injectCopyButtons();
   }).withFailureHandler(function(e){
@@ -1053,12 +1071,6 @@ function renderTeam(team){
   tbody.innerHTML=html;
 }
 
-
-function renderRules(rulesHtml){
-  if(!rulesHtml)return;
-  var rulesSection=document.getElementById('rules-content-comm');
-  if(rulesSection) rulesSection.innerHTML=rulesHtml;
-}
 
 function switchRulesTab(tabId,btn){
   document.querySelectorAll('.rules-tab').forEach(function(t){t.classList.remove('active')});
