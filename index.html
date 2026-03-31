@@ -163,12 +163,29 @@ tbody tr:nth-child(even){background:#fafbfc}
 .rules-content h3{font-size:1rem;color:var(--accent);margin:1rem 0 .5rem}
 .rules-content ul{padding-left:1.5rem;margin:.3rem 0}
 .rules-content li{margin:.2rem 0}
-.procedure-card{background:var(--card-bg);border-radius:var(--radius);padding:1.5rem;box-shadow:var(--shadow);margin-bottom:1rem;border-left:4px solid var(--highlight)}
-.procedure-card h3{font-size:1rem;color:var(--primary);margin-bottom:.5rem}
-.procedure-card .proc-meta{font-size:.82rem;color:var(--text-light);margin-bottom:.8rem}
-.procedure-card .proc-body{font-size:.88rem;line-height:1.8}
-.procedure-card a{color:var(--accent);text-decoration:none}
-.procedure-card a:hover{text-decoration:underline}
+/* Rule cards */
+.rule-cards{display:grid;gap:1.2rem}
+.rule-card{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem 1.8rem;border-left:4px solid var(--highlight);font-size:.9rem;line-height:1.7}
+.rule-card p{margin:.3rem 0}
+.rule-card ul{padding-left:1.5rem;margin:.4rem 0}
+.rule-card li{margin:.2rem 0}
+.rule-card h3{font-size:1rem;color:var(--primary);margin:0}
+.rule-card-head{display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem}
+.rule-num{background:var(--highlight);color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:4px;flex-shrink:0}
+.rule-link-inline{color:var(--highlight);font-weight:600;text-decoration:none}
+.rule-link-inline:hover{text-decoration:underline}
+.rule-warn{color:var(--danger);font-weight:600}
+.rule-note{background:var(--bg);border-radius:8px;padding:1rem 1.2rem;margin-top:.8rem;font-size:.85rem;line-height:1.8;color:var(--text-light)}
+.rule-sub{margin-top:.5rem;font-size:.85rem;color:var(--text-light)}
+.rule-compare{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+.rule-compare-bad{background:#fef5f5;border-radius:8px;padding:1rem 1.2rem}
+.rule-compare-good{background:#f0faf7;border-radius:8px;padding:1rem 1.2rem}
+.rule-compare-title{font-size:.78rem;font-weight:700;margin-bottom:.5rem}
+.rule-compare ul{font-size:.82rem;line-height:1.9;padding-left:1.2rem;margin:0}
+.rule-compare li{margin:.1rem 0}
+@media(max-width:768px){.rule-compare{grid-template-columns:1fr}}
+/* Procedure cards (業務管理ルール) */
+.proc-badge{display:inline-block;background:var(--bg);font-size:.75rem;font-weight:600;color:var(--text-light);padding:.2rem .7rem;border-radius:4px;margin-bottom:.8rem}
 
 /* Org chart - Tree style */
 .org-tree{background:var(--card-bg);border-radius:var(--radius);padding:2.5rem 1.5rem;box-shadow:var(--shadow);overflow-x:auto;max-width:100%;-webkit-overflow-scrolling:touch}
@@ -283,11 +300,7 @@ tbody tr:nth-child(even){background:#fafbfc}
 </a>
 <a href="#" data-page="logins" onclick="switchPage('logins',this);return false">
 <span class="nav-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></span>
-ログイン情報
-</a>
-<a href="#" data-page="links" onclick="switchPage('links',this);return false">
-<span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg></span>
-リンク集
+各種リンク/ログイン
 </a>
 <a href="#" data-page="ai" onclick="switchPage('ai',this);return false">
 <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M12 2a2 2 0 012 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 017 7h1a2 2 0 110 4h-1a7 7 0 01-7 7H9a7 7 0 01-7-7H1a2 2 0 110-4h1a7 7 0 017-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 012-2z"/><circle cx="9" cy="13" r="1.25"/><circle cx="15" cy="13" r="1.25"/><path d="M10 17h4" stroke-linecap="round"/></svg></span>
@@ -388,7 +401,7 @@ AIチャットボット
 
 <!-- ===== LOGINS (unified) ===== -->
 <div id="page-logins" class="page">
-<h2 class="page-title">ログイン情報</h2>
+<h2 class="page-title">各種リンク/ログイン</h2>
 
 <div class="filter-tabs" style="margin-bottom:1.5rem">
 <span class="filter-tab active" onclick="filterLoginSection('all',this)">全て表示</span>
@@ -642,39 +655,36 @@ AIチャットボット
 </div>
 
 <div id="rules-comm" class="rules-panel active">
-<div class="rules-content" style="padding:0;background:none;box-shadow:none">
-<div style="display:grid;gap:1.2rem">
+<div class="rule-cards">
 
-<div style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem 1.8rem;border-left:4px solid var(--highlight)">
-<div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem"><span style="background:var(--highlight);color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:4px">01</span><h3 style="font-size:1rem;color:var(--primary);margin:0">コミュニケーション頻度</h3></div>
+<div class="rule-card" style="border-left-color:var(--highlight)">
+<div class="rule-card-head"><span class="rule-num">01</span><h3>コミュニケーション頻度</h3></div>
 <p>各案件・担当顧客との連絡は、1週間あたり最低<strong>5往復</strong>を目安に維持すること。<br>滞りが生じた場合は、こちらから積極的に連絡を入れる。</p>
 </div>
 
-<div style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem 1.8rem;border-left:4px solid var(--highlight)">
-<div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem"><span style="background:var(--highlight);color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:4px">02</span><h3 style="font-size:1rem;color:var(--primary);margin:0">コミュニケーション漏れの防止</h3></div>
-<p>Slack <a href="https://cardsinc.slack.com/archives/C09UU758NS3" target="_blank" style="color:var(--highlight);font-weight:600;text-decoration:none">#check_alert</a> チャンネルにて、<strong>3営業日以上</strong>返信・更新のないチャットを自動検知し、担当者へアラートを通知する。</p>
+<div class="rule-card" style="border-left-color:var(--highlight)">
+<div class="rule-card-head"><span class="rule-num">02</span><h3>コミュニケーション漏れの防止</h3></div>
+<p>Slack <a href="https://cardsinc.slack.com/archives/C09UU758NS3" target="_blank" class="rule-link-inline">#check_alert</a> チャンネルにて、<strong>3営業日以上</strong>返信・更新のないチャットを自動検知し、担当者へアラートを通知する。</p>
 <p style="margin-top:.6rem">アラートを受け取った担当者は、以下を必ず実施すること。</p>
-<ul style="margin-top:.4rem">
+<ul>
 <li>該当チャットの対応状況を確認し、テキストで対応完了の旨を報告する</li>
-<li style="color:var(--danger);font-weight:600">リアクション（絵文字スタンプ）のみでの報告は禁止</li>
+<li class="rule-warn">リアクション（絵文字スタンプ）のみでの報告は禁止</li>
 </ul>
 </div>
 
-<div style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem 1.8rem;border-left:4px solid var(--danger)">
-<div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem"><span style="background:var(--danger);color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:4px">03</span><h3 style="font-size:1rem;color:var(--primary);margin:0">個別DM禁止</h3></div>
+<div class="rule-card" style="border-left-color:var(--danger)">
+<div class="rule-card-head"><span class="rule-num" style="background:var(--danger)">03</span><h3>個別DM禁止</h3></div>
 <p>社内での連絡は、各案件ごとに設けられたチャンネルで行うこと。<strong>個別DM（ダイレクトメッセージ）は原則禁止</strong>とする。</p>
-<div style="background:var(--bg);border-radius:8px;padding:1rem 1.2rem;margin-top:.8rem;font-size:.85rem;line-height:1.8;color:var(--text-light)">
-「DM利用率は業績悪化率に比例する」というエビデンスがあるように、DMに頼ると社内ナレッジの蓄積が妨げられ、情報の属人化や対応漏れを招く。案件チャンネルを活用することで、誰でも状況を把握できる環境を維持する。
-</div>
+<div class="rule-note">「DM利用率は業績悪化率に比例する」というエビデンスがあるように、DMに頼ると社内ナレッジの蓄積が妨げられ、情報の属人化や対応漏れを招く。案件チャンネルを活用することで、誰でも状況を把握できる環境を維持する。</div>
 </div>
 
-<div style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem 1.8rem;border-left:4px solid #00b894">
-<div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem"><span style="background:#00b894;color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:4px">04</span><h3 style="font-size:1rem;color:var(--primary);margin:0">テキストコミュニケーションの徹底</h3></div>
+<div class="rule-card" style="border-left-color:#00b894">
+<div class="rule-card-head"><span class="rule-num" style="background:#00b894">04</span><h3>テキストコミュニケーションの徹底</h3></div>
 <p>業務上のやりとりは、口頭ではなく<strong>テキストを基本</strong>とすること。</p>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem">
-<div style="background:#fef5f5;border-radius:8px;padding:1rem 1.2rem">
-<div style="font-size:.78rem;font-weight:700;color:var(--danger);margin-bottom:.5rem">口頭ベースで起こりやすい弊害</div>
-<ul style="font-size:.82rem;line-height:1.9;color:var(--text);padding-left:1.2rem;margin:0">
+<div class="rule-compare">
+<div class="rule-compare-bad">
+<div class="rule-compare-title" style="color:var(--danger)">口頭ベースの弊害</div>
+<ul>
 <li>「言った・言わない」トラブルの発生</li>
 <li>社内ナレッジが蓄積されない</li>
 <li>思考が整理されず情報の質が下がる</li>
@@ -682,9 +692,9 @@ AIチャットボット
 <li>顧客へのテキスト対応力が育たない</li>
 </ul>
 </div>
-<div style="background:#f0faf7;border-radius:8px;padding:1rem 1.2rem">
-<div style="font-size:.78rem;font-weight:700;color:#00b894;margin-bottom:.5rem">テキスト習慣化のメリット</div>
-<ul style="font-size:.82rem;line-height:1.9;color:var(--text);padding-left:1.2rem;margin:0">
+<div class="rule-compare-good">
+<div class="rule-compare-title" style="color:#00b894">テキスト習慣化のメリット</div>
+<ul>
 <li>過去のやりとりを参照できる</li>
 <li>社内共有・引き継ぎがスムーズになる</li>
 <li>思考整理が速くなり情報感度が上がる</li>
@@ -694,63 +704,60 @@ AIチャットボット
 </div>
 </div>
 
-<div style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem 1.8rem;border-left:4px solid var(--warning)">
-<div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem"><span style="background:var(--warning);color:var(--primary);font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:4px">05</span><h3 style="font-size:1rem;color:var(--primary);margin:0">Chatwork 運用ルール</h3></div>
+<div class="rule-card" style="border-left-color:var(--warning)">
+<div class="rule-card-head"><span class="rule-num" style="background:var(--warning);color:var(--primary)">05</span><h3>Chatwork 運用ルール</h3></div>
 <p>顧客とのグループチャットにおいて、メンバーの追加・削除を行った際は、該当のシステムメッセージを<strong>必ず削除</strong>すること。</p>
-<p style="margin-top:.5rem;font-size:.85rem;color:var(--text-light)">※メンバー変動の通知がお客様の目に入ると、社内体制への不信感や印象悪化につながるため。</p>
+<p class="rule-sub">※メンバー変動の通知がお客様の目に入ると、社内体制への不信感や印象悪化につながるため。</p>
 </div>
 
-</div>
 </div>
 </div>
 
 <div id="rules-procedures" class="rules-panel">
-<div class="rules-content" style="padding:0;background:none;box-shadow:none">
-<div style="display:grid;gap:1.2rem">
+<div class="rule-cards">
 
-<div style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem 1.8rem;border-left:4px solid var(--highlight)">
-<div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem"><span style="background:var(--highlight);color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:4px">01</span><h3 style="font-size:1rem;color:var(--primary);margin:0">BP案件比率の工数管理</h3></div>
-<div style="display:inline-block;background:var(--bg);font-size:.75rem;font-weight:600;color:var(--text-light);padding:.2rem .7rem;border-radius:4px;margin-bottom:.8rem">対象：BP該当者</div>
+<div class="rule-card" style="border-left-color:var(--highlight)">
+<div class="rule-card-head"><span class="rule-num">01</span><h3>BP案件比率の工数管理</h3></div>
+<div class="proc-badge">対象：BP該当者</div>
 <p>BP案件における工数比率を適切に管理するため、以下のスプレッドシートを定期的に更新すること。</p>
-<ul style="margin-top:.5rem">
-<li>更新先：<a href="https://docs.google.com/spreadsheets/" target="_blank" style="color:var(--highlight);font-weight:600;text-decoration:none">【CARDS】BP案件工数管理表</a></li>
+<ul>
+<li>更新先：<a href="https://docs.google.com/spreadsheets/" target="_blank" class="rule-link-inline">【CARDS】BP案件工数管理表</a></li>
 <li>該当者は自身の工数を定期的に記録・更新すること</li>
 </ul>
 </div>
 
-<div style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem 1.8rem;border-left:4px solid var(--highlight)">
-<div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem"><span style="background:var(--highlight);color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:4px">02</span><h3 style="font-size:1rem;color:var(--primary);margin:0">制作物依頼・オプション請求</h3></div>
-<div style="display:inline-block;background:var(--bg);font-size:.75rem;font-weight:600;color:var(--text-light);padding:.2rem .7rem;border-radius:4px;margin-bottom:.8rem">対象：制作物依頼が必要なメンバー／コンサルタント</div>
+<div class="rule-card" style="border-left-color:var(--highlight)">
+<div class="rule-card-head"><span class="rule-num">02</span><h3>制作物依頼・オプション請求</h3></div>
+<div class="proc-badge">対象：制作物依頼が必要なメンバー／コンサルタント</div>
 <p>制作物の依頼、またはオプション請求が必要な場合は、以下のシートに記入すること。</p>
-<ul style="margin-top:.5rem">
-<li>記入先：<a href="https://docs.google.com/spreadsheets/" target="_blank" style="color:var(--highlight);font-weight:600;text-decoration:none">CARDS_オプション請求管理表_第三期</a></li>
+<ul>
+<li>記入先：<a href="https://docs.google.com/spreadsheets/" target="_blank" class="rule-link-inline">CARDS_オプション請求管理表_第三期</a></li>
 <li>コンサルタントは「クライアントへの請求有無」を必ず確認してから記入すること</li>
 <li>請求月分の記入漏れがないよう、<strong>月末までに入力を完了</strong>すること</li>
 </ul>
 </div>
 
-<div style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem 1.8rem;border-left:4px solid var(--warning)">
-<div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem"><span style="background:var(--warning);color:var(--primary);font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:4px">03</span><h3 style="font-size:1rem;color:var(--primary);margin:0">成果報酬の記録</h3></div>
-<div style="display:inline-block;background:var(--bg);font-size:.75rem;font-weight:600;color:var(--text-light);padding:.2rem .7rem;border-radius:4px;margin-bottom:.8rem">対象：成果報酬発生店舗の担当者</div>
+<div class="rule-card" style="border-left-color:var(--warning)">
+<div class="rule-card-head"><span class="rule-num" style="background:var(--warning);color:var(--primary)">03</span><h3>成果報酬の記録</h3></div>
+<div class="proc-badge">対象：成果報酬発生店舗の担当者</div>
 <p>成果報酬が発生した店舗については、以下のシートに報酬額を記録すること。</p>
-<ul style="margin-top:.5rem">
-<li>記入先：<a href="https://docs.google.com/spreadsheets/" target="_blank" style="color:var(--highlight);font-weight:600;text-decoration:none">CARDS_オプション請求管理表_第三期</a></li>
+<ul>
+<li>記入先：<a href="https://docs.google.com/spreadsheets/" target="_blank" class="rule-link-inline">CARDS_オプション請求管理表_第三期</a></li>
 <li>報酬額は<strong>税抜金額</strong>で記載すること</li>
 <li>仕様変更が発生した場合は、必ず更新内容を確認してから記入すること</li>
 </ul>
 </div>
 
-<div style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem 1.8rem;border-left:4px solid #00b894">
-<div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem"><span style="background:#00b894;color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:4px">04</span><h3 style="font-size:1rem;color:var(--primary);margin:0">請求書に関するルール</h3></div>
-<div style="display:inline-block;background:var(--bg);font-size:.75rem;font-weight:600;color:var(--text-light);padding:.2rem .7rem;border-radius:4px;margin-bottom:.8rem">対象：全メンバー</div>
+<div class="rule-card" style="border-left-color:#00b894">
+<div class="rule-card-head"><span class="rule-num" style="background:#00b894">04</span><h3>請求書に関するルール</h3></div>
+<div class="proc-badge">対象：全メンバー</div>
 <p>請求書の取り扱いについては、社内規則ドキュメントを参照すること。</p>
-<ul style="margin-top:.5rem">
-<li>参照先：<a href="https://docs.google.com/document/d/1PGR9s93pvMIeGDAb-RUOYZJdMFoGQO-5nLUEKdzUJ4o/edit" target="_blank" style="color:var(--highlight);font-weight:600;text-decoration:none">社内規則ドキュメント（請求書ルール）</a></li>
+<ul>
+<li>参照先：<a href="https://docs.google.com/document/d/1PGR9s93pvMIeGDAb-RUOYZJdMFoGQO-5nLUEKdzUJ4o/edit" target="_blank" class="rule-link-inline">社内規則ドキュメント（請求書ルール）</a></li>
 <li>不明点がある場合は、担当者へ確認してから対応すること</li>
 </ul>
 </div>
 
-</div>
 </div>
 </div>
 </div>
@@ -773,43 +780,6 @@ AIチャットボット
 </div>
 
 <!-- ===== LINKS ===== -->
-<div id="page-links" class="page">
-<h2 class="page-title">リンク集</h2>
-<div class="info-grid">
-<div class="info-card"><h3>管理スプレッドシート</h3>
-<p style="font-size:.75rem;color:var(--text-light);margin-bottom:.5rem">社内管理で使用するスプレッドシート</p>
-<ul>
-<li><a href="https://docs.google.com/spreadsheets/d/11Cui2lS6SZxyMuerL3lc6FfMU_NKFakwYGgtNEXpfpg/edit?gid=1904162674#gid=1904162674" target="_blank" class="external-link">ツール/アカウント管理台帳</a></li>
-<li><a href="https://docs.google.com/spreadsheets/d/11Cui2lS6SZxyMuerL3lc6FfMU_NKFakwYGgtNEXpfpg/edit?gid=1032381051#gid=1032381051" target="_blank" class="external-link">各種ログイン情報</a></li>
-<li><a href="https://docs.google.com/spreadsheets/d/11Cui2lS6SZxyMuerL3lc6FfMU_NKFakwYGgtNEXpfpg/edit" target="_blank" class="external-link">施策管理表</a></li>
-</ul></div>
-<div class="info-card"><h3>EC運用ツール</h3>
-<p style="font-size:.75rem;color:var(--text-light);margin-bottom:.5rem">日常業務で使用するツール・サービス</p>
-<ul>
-<li><a href="https://app.teps.io/" target="_blank" class="external-link">Teps（一括商品設定）</a></li>
-<li><a href="https://client.automatic.co.jp/" target="_blank" class="external-link">Automatic（広告運用）</a></li>
-<li><a href="https://aun-mypage.tools/folder/list" target="_blank" class="external-link">aun（校正・共有）</a></li>
-<li><a href="https://tool.ec-masters.net/" target="_blank" class="external-link">EC Masters（分析）</a></li>
-<li><a href="https://www.compass-next.com/menu" target="_blank" class="external-link">Compass（SEO）</a></li>
-</ul></div>
-<div class="info-card"><h3>楽天関連</h3>
-<p style="font-size:.75rem;color:var(--text-light);margin-bottom:.5rem">楽天市場の管理・申請系</p>
-<ul>
-<li><a href="https://mainmenu.rms.rakuten.co.jp/" target="_blank" class="external-link">楽天 RMS</a></li>
-<li><a href="https://rakutenkoqml.formstack.com/forms/room_promotion_new" target="_blank" class="external-link">ROOM申請フォーム</a></li>
-<li><a href="https://coupon.ultra-cloud.com/login" target="_blank" class="external-link">Rakura Coupon</a></li>
-<li><a href="https://boss-oms.jp/BOSSWeb/Auth/Login" target="_blank" class="external-link">BOSS（受注管理）</a></li>
-</ul></div>
-<div class="info-card"><h3>コミュニケーション</h3>
-<p style="font-size:.75rem;color:var(--text-light);margin-bottom:.5rem">社内外のコミュニケーションツール</p>
-<ul>
-<li><a href="https://zoom.us/myhome" target="_blank" class="external-link">Zoom（Web会議）</a></li>
-<li><a href="https://manager.line.biz/" target="_blank" class="external-link">LINE Business（顧客対応）</a></li>
-<li><a href="https://accounts.google.com/" target="_blank" class="external-link">Chrome共有アカウント</a></li>
-</ul></div>
-</div>
-</div>
-
 </div><!-- /content -->
 </div><!-- /main -->
 
@@ -911,7 +881,7 @@ function linkOrText(url,text){if(url)return'<a href="'+escHtml(url)+'" target="_
 var GAS_API = 'https://script.google.com/macros/s/AKfycbxUxm3HCosAwW4EImmGzFnW-g8svH-NKaquJ1a1G2kBrLLVQwhBZGgjGEpZxiw-Cj9h/exec';
 
 var _apiData={};
-var CACHE_TTL=180000;
+var CACHE_TTL=600000;
 function cachedFetch(url,key){
   try{
     var c=sessionStorage.getItem('portal_'+key);
@@ -934,7 +904,6 @@ function loadAllData(){
   el=document.getElementById('team-assistant-cards');if(el)el.innerHTML=loadingDiv;
   el=document.getElementById('manual-grid');if(el)el.innerHTML=loadingDiv;
   el=document.getElementById('ai-cards-grid');if(el)el.innerHTML=loadingDiv;
-  el=document.querySelector('#page-links .info-grid');if(el)el.innerHTML=loadingDiv;
   el=document.querySelector('#page-team .table-wrapper tbody');if(el)el.innerHTML=loading;
 
   /* 並列読み込み: getAllDataを1回で取得（GASキャッシュ有効時は高速） */
@@ -948,7 +917,6 @@ function loadAllData(){
       if(d.news) renderNews(d.news);
       if(d.company) renderCompany(d.company);
       if(d.org) renderOrg(d.org);
-      if(d.links) renderLinksFromApi(d.links);
       if(d.logins) renderLoginsFromApi(d.logins);
       if(d.manual) renderManualFromApi(d.manual);
       if(d.ai) renderAiFromApi(d.ai);
@@ -1240,29 +1208,6 @@ function renderNews(news){
     html+='<span class="news-text">'+escHtml(n.text)+'</span></li>';
   });
   list.innerHTML=html;
-}
-
-function renderLinksFromApi(links){
-  if(!links||!links.length)return;
-  var grid=document.querySelector('#page-links .info-grid');if(!grid)return;
-  var cats={};
-  links.forEach(function(l){
-    if(!cats[l.category])cats[l.category]=[];
-    cats[l.category].push(l);
-  });
-  var html='';
-  Object.keys(cats).forEach(function(cat){
-    html+='<div class="info-card"><h3>'+escHtml(cat)+'</h3><ul>';
-    cats[cat].forEach(function(l){
-      if(l.url){
-        html+='<li><a href="'+escHtml(l.url)+'" target="_blank" class="external-link">'+escHtml(l.name)+'</a></li>';
-      } else {
-        html+='<li>'+escHtml(l.name)+'</li>';
-      }
-    });
-    html+='</ul></div>';
-  });
-  grid.innerHTML=html;
 }
 
 
