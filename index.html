@@ -642,20 +642,65 @@ AIチャットボット
 </div>
 
 <div id="rules-comm" class="rules-panel active">
-<div class="rules-content">
-<h2>コミュニケーションポリシー</h2>
-<h3>1. クライアントへのコミュニケーション頻度</h3>
+<div class="rules-content" style="padding:0;background:none;box-shadow:none">
+<div style="display:grid;gap:1.2rem">
+
+<div style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem 1.8rem;border-left:4px solid var(--highlight)">
+<div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem"><span style="background:var(--highlight);color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:4px">01</span><h3 style="font-size:1rem;color:var(--primary);margin:0">コミュニケーション頻度</h3></div>
 <p>各案件・担当顧客との連絡は、1週間あたり最低<strong>5往復</strong>を目安に維持すること。<br>滞りが生じた場合は、こちらから積極的に連絡を入れる。</p>
-<h3>2. コミュニケーション漏れの防止</h3>
-<p>Slack「<strong>#check_alert</strong>」チャンネルにて、<strong>3営業日以上</strong>返信・更新のないチャットを自動検知し、担当者へアラートを通知する。</p>
-<p>アラートを受け取った担当者は、以下を必ず実施すること。</p>
-<ul>
+</div>
+
+<div style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem 1.8rem;border-left:4px solid var(--highlight)">
+<div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem"><span style="background:var(--highlight);color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:4px">02</span><h3 style="font-size:1rem;color:var(--primary);margin:0">コミュニケーション漏れの防止</h3></div>
+<p>Slack <a href="https://cardsinc.slack.com/archives/C09UU758NS3" target="_blank" style="color:var(--highlight);font-weight:600;text-decoration:none">#check_alert</a> チャンネルにて、<strong>3営業日以上</strong>返信・更新のないチャットを自動検知し、担当者へアラートを通知する。</p>
+<p style="margin-top:.6rem">アラートを受け取った担当者は、以下を必ず実施すること。</p>
+<ul style="margin-top:.4rem">
 <li>該当チャットの対応状況を確認し、テキストで対応完了の旨を報告する</li>
-<li><strong>リアクション（絵文字スタンプ）のみでの報告は禁止</strong></li>
+<li style="color:var(--danger);font-weight:600">リアクション（絵文字スタンプ）のみでの報告は禁止</li>
 </ul>
-<h3>3. Chatwork 運用ルール</h3>
-<p>顧客とのグループチャットにおいて、メンバーの追加・削除を行った際は、該当のシステムメッセージの通知を<strong>必ず削除</strong>すること。</p>
-<p style="color:var(--text-light);font-size:.85rem">※メンバー変動の通知がお客様の目に入ると、社内体制への不信感や印象悪化につながるため。</p>
+</div>
+
+<div style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem 1.8rem;border-left:4px solid var(--danger)">
+<div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem"><span style="background:var(--danger);color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:4px">03</span><h3 style="font-size:1rem;color:var(--primary);margin:0">個別DM禁止</h3></div>
+<p>社内での連絡は、各案件ごとに設けられたチャンネルで行うこと。<strong>個別DM（ダイレクトメッセージ）は原則禁止</strong>とする。</p>
+<div style="background:var(--bg);border-radius:8px;padding:1rem 1.2rem;margin-top:.8rem;font-size:.85rem;line-height:1.8;color:var(--text-light)">
+「DM利用率は業績悪化率に比例する」というエビデンスがあるように、DMに頼ると社内ナレッジの蓄積が妨げられ、情報の属人化や対応漏れを招く。案件チャンネルを活用することで、誰でも状況を把握できる環境を維持する。
+</div>
+</div>
+
+<div style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem 1.8rem;border-left:4px solid #00b894">
+<div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem"><span style="background:#00b894;color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:4px">04</span><h3 style="font-size:1rem;color:var(--primary);margin:0">テキストコミュニケーションの徹底</h3></div>
+<p>業務上のやりとりは、口頭ではなく<strong>テキストを基本</strong>とすること。</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem">
+<div style="background:#fef5f5;border-radius:8px;padding:1rem 1.2rem">
+<div style="font-size:.78rem;font-weight:700;color:var(--danger);margin-bottom:.5rem">口頭ベースで起こりやすい弊害</div>
+<ul style="font-size:.82rem;line-height:1.9;color:var(--text);padding-left:1.2rem;margin:0">
+<li>「言った・言わない」トラブルの発生</li>
+<li>社内ナレッジが蓄積されない</li>
+<li>思考が整理されず情報の質が下がる</li>
+<li>相手の作業を中断させ時間を奪う</li>
+<li>顧客へのテキスト対応力が育たない</li>
+</ul>
+</div>
+<div style="background:#f0faf7;border-radius:8px;padding:1rem 1.2rem">
+<div style="font-size:.78rem;font-weight:700;color:#00b894;margin-bottom:.5rem">テキスト習慣化のメリット</div>
+<ul style="font-size:.82rem;line-height:1.9;color:var(--text);padding-left:1.2rem;margin:0">
+<li>過去のやりとりを参照できる</li>
+<li>社内共有・引き継ぎがスムーズになる</li>
+<li>思考整理が速くなり情報感度が上がる</li>
+<li>議事録・報告書の作成スピードが向上する</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem 1.8rem;border-left:4px solid var(--warning)">
+<div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem"><span style="background:var(--warning);color:var(--primary);font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:4px">05</span><h3 style="font-size:1rem;color:var(--primary);margin:0">Chatwork 運用ルール</h3></div>
+<p>顧客とのグループチャットにおいて、メンバーの追加・削除を行った際は、該当のシステムメッセージを<strong>必ず削除</strong>すること。</p>
+<p style="margin-top:.5rem;font-size:.85rem;color:var(--text-light)">※メンバー変動の通知がお客様の目に入ると、社内体制への不信感や印象悪化につながるため。</p>
+</div>
+
+</div>
 </div>
 </div>
 
