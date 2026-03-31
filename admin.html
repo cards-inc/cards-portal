@@ -130,7 +130,6 @@ tbody tr:nth-child(even){background:#fafbfc}
 <div class="topbar">
 <h1>CARDS Portal 管理画面</h1>
 <div class="tb-right">
-<button onclick="clearServerCache()">キャッシュクリア</button>
 <a href="index.html" style="color:#fff;font-size:.78rem;text-decoration:none;opacity:.7">ポータルへ</a>
 <button onclick="logout()">ログアウト</button>
 </div>
@@ -341,7 +340,27 @@ function switchTab(tabId, btn) {
       var sec = document.getElementById('sec-' + sheetId);
       if (sec) sec.classList.add('active');
     });
+  } else {
+    // シートIDで直接呼ばれた場合、親タブを探して表示
+    var parentTab = getParentTab(tabId);
+    if (parentTab) {
+      document.querySelectorAll('.tab-bar button').forEach(function(b) {
+        b.classList.remove('active');
+        if (b.dataset.tab === parentTab) b.classList.add('active');
+      });
+      TAB_SHEETS[parentTab].forEach(function(sid) {
+        var sec = document.getElementById('sec-' + sid);
+        if (sec) sec.classList.add('active');
+      });
+    }
   }
+}
+
+function getParentTab(sheetId) {
+  for (var tab in TAB_SHEETS) {
+    if (TAB_SHEETS[tab].indexOf(sheetId) >= 0) return tab;
+  }
+  return null;
 }
 
 /* ========== Build Sections ========== */
@@ -575,15 +594,6 @@ function refreshSheet(sheetId) {
         showStatus('エラー: ' + (res.error || '不明'), 'error');
       }
     });
-}
-
-/* ========== Cache Clear ========== */
-function clearServerCache() {
-  apiGet({ action: 'clearCache' }).then(function() {
-    showStatus('サーバーキャッシュをクリアしました', 'success');
-  }).catch(function() {
-    showStatus('キャッシュクリアに失敗', 'error');
-  });
 }
 
 /* ========== Status Bar ========== */
