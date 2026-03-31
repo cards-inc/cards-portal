@@ -6,19 +6,19 @@
 <title>CARDS Portal</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <style>
-:root{--primary:#1a1a2e;--secondary:#16213e;--accent:#0f3460;--highlight:#e94560;--bg:#f5f6fa;--card-bg:#fff;--text:#2d3436;--text-light:#636e72;--border:#dfe6e9;--shadow:0 2px 16px rgba(0,0,0,.06);--radius:14px;--transition:all .25s ease;--sidebar-w:240px}
+:root{--primary:#0E043A;--secondary:#1a0d52;--accent:#2d1b69;--highlight:#6C3CE0;--bg:#f4f3f8;--card-bg:#fff;--text:#1a1a2e;--text-light:#6b6b80;--border:#e2e0ec;--shadow:0 2px 16px rgba(14,4,58,.06);--radius:14px;--transition:all .25s ease;--sidebar-w:240px}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Segoe UI','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;display:flex;min-height:100vh}
 
 /* Sidebar */
-.sidebar{width:var(--sidebar-w);background:linear-gradient(180deg,var(--primary) 0%,var(--secondary) 100%);color:#fff;position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:100;display:flex;flex-direction:column;transition:transform .3s ease}
+.sidebar{width:var(--sidebar-w);background:linear-gradient(180deg,#0E043A 0%,#1a0d52 40%,#251466 100%);color:#fff;position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:100;display:flex;flex-direction:column;transition:transform .3s ease}
 .sidebar-header{padding:1.5rem 1.2rem 1rem;border-bottom:1px solid rgba(255,255,255,.1)}
 .sidebar-header h1{font-size:1.3rem;font-weight:700;letter-spacing:.1em}
 .sidebar-header p{opacity:.6;font-size:.75rem;margin-top:.2rem}
 .sidebar-nav{flex:1;padding:.5rem 0}
 .sidebar-nav a{display:flex;align-items:center;gap:.7rem;padding:.7rem 1.2rem;color:rgba(255,255,255,.7);text-decoration:none;font-size:.85rem;font-weight:500;transition:all .2s;border-left:3px solid transparent}
-.sidebar-nav a:hover{color:#fff;background:rgba(255,255,255,.08);border-left-color:rgba(233,69,96,.5)}
-.sidebar-nav a.active{color:#fff;background:rgba(233,69,96,.15);border-left-color:var(--highlight)}
+.sidebar-nav a:hover{color:#fff;background:rgba(255,255,255,.08);border-left-color:rgba(108,60,224,.5)}
+.sidebar-nav a.active{color:#fff;background:rgba(108,60,224,.2);border-left-color:var(--highlight)}
 .sidebar-nav .nav-icon{width:18px;height:18px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
 .sidebar-nav .nav-icon svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .sidebar-footer{padding:1rem 1.2rem;border-top:1px solid rgba(255,255,255,.1);font-size:.7rem;opacity:.4;text-align:center}
@@ -49,7 +49,7 @@ body{font-family:'Segoe UI','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-seri
 .home-card-body{padding:1rem 1.2rem;font-size:.85rem}
 
 /* MVV */
-.mvv-box{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;border-radius:var(--radius);padding:2rem;margin-bottom:2rem;box-shadow:0 4px 20px rgba(0,0,0,.15)}
+.mvv-box{background:linear-gradient(135deg,#0E043A 0%,#2d1b69 50%,#4a2d8a 100%);color:#fff;border-radius:var(--radius);padding:2rem;margin-bottom:2rem;box-shadow:0 4px 20px rgba(0,0,0,.15)}
 .mvv-box h3{font-size:1.1rem;margin-bottom:.8rem;letter-spacing:.05em;opacity:.9}
 .mvv-box .mvv-mission{font-size:1.3rem;font-weight:700;line-height:1.6;margin-bottom:1rem}
 .mvv-box .mvv-values{display:flex;gap:1rem;flex-wrap:wrap;margin-top:.8rem}
@@ -61,21 +61,21 @@ body{font-family:'Segoe UI','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-seri
 .news-list li:last-child{border-bottom:none}
 .news-date{color:var(--text-light);font-size:.75rem;white-space:nowrap;min-width:80px;font-weight:500}
 .news-tag{font-size:.65rem;padding:.15rem .45rem;border-radius:3px;font-weight:600;white-space:nowrap}
-.news-tag-info{background:#0984e3;color:#fff}
-.news-tag-important{background:var(--highlight);color:#fff}
-.news-tag-update{background:#00b894;color:#fff}
+.news-tag-info{background:#2d1b69;color:#fff}
+.news-tag-important{background:#e94560;color:#fff}
+.news-tag-update{background:var(--highlight);color:#fff}
 .news-text{flex:1}
 
 /* Stats */
 .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
 .stat-item{text-align:center;padding:.6rem;background:var(--bg);border-radius:8px}
-.stat-num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-num{font-size:1.5rem;font-weight:700;color:#0E043A}
 .stat-label{font-size:.72rem;color:var(--text-light);margin-top:.2rem}
 
 /* Quick links */
 .quick-links{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;margin-bottom:2rem}
 .quick-link{background:var(--card-bg);border-radius:var(--radius);padding:1.5rem;text-align:center;box-shadow:var(--shadow);transition:var(--transition);cursor:pointer;text-decoration:none;color:var(--text);border:2px solid transparent}
-.quick-link:hover{transform:translateY(-4px);border-color:var(--highlight);box-shadow:0 8px 25px rgba(233,69,96,.15)}
+.quick-link:hover{transform:translateY(-4px);border-color:var(--highlight);box-shadow:0 8px 25px rgba(108,60,224,.15)}
 .quick-link .ql-title{font-weight:600;font-size:.95rem}
 .quick-link .ql-desc{font-size:.75rem;color:var(--text-light);margin-top:.3rem}
 
@@ -83,9 +83,9 @@ body{font-family:'Segoe UI','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-seri
 .table-wrapper{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);overflow-x:auto;margin-bottom:1.5rem;border:1px solid var(--border)}
 .table-wrapper h3{padding:1rem 1.5rem .5rem;color:var(--accent);font-size:1rem}
 table{width:100%;border-collapse:collapse;font-size:.85rem}
-thead th{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;padding:.7rem 1rem;text-align:left;font-weight:600;white-space:nowrap;font-size:.82rem;letter-spacing:.02em}
+thead th{background:linear-gradient(135deg,#0E043A,#2d1b69);color:#fff;padding:.7rem 1rem;text-align:left;font-weight:600;white-space:nowrap;font-size:.82rem;letter-spacing:.02em}
 tbody tr{border-bottom:1px solid var(--border);transition:background .15s}
-tbody tr:hover{background:#edf2ff}
+tbody tr:hover{background:#f0ecfa}
 tbody td{padding:.65rem 1rem;vertical-align:top}
 tbody tr:nth-child(even){background:#fafbfc}
 
@@ -112,7 +112,7 @@ tbody tr:nth-child(even){background:#fafbfc}
 .pw-toggle{margin-left:6px;color:var(--accent);cursor:pointer;display:inline-flex;align-items:center;vertical-align:middle}
 .pw-toggle svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .copy-btn{margin-left:6px;color:var(--text-light);cursor:pointer;display:inline-flex;align-items:center;vertical-align:middle;background:none;border:none;padding:2px;border-radius:4px;transition:all .2s}
-.copy-btn:hover{color:var(--accent);background:#e8f0fe}
+.copy-btn:hover{color:var(--highlight);background:#f0ecfa}
 .copy-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .copy-btn.copied{color:#00b894}
 .copy-btn.copied svg{stroke:#00b894}
