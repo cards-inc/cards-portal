@@ -363,25 +363,42 @@ AIチャットボット
 
 <div class="filter-tabs" style="margin-bottom:1.5rem">
 <span class="filter-tab active" onclick="filterLoginSection('all',this)">全て表示</span>
-<span class="filter-tab" onclick="filterLoginSection('tool',this)">ツール / サービス</span>
+<span class="filter-tab" onclick="filterLoginSection('ec',this)">ECプラットフォーム</span>
+<span class="filter-tab" onclick="filterLoginSection('tool',this)">ツール</span>
 <span class="filter-tab" onclick="filterLoginSection('store',this)">店舗別ログイン</span>
 <span class="filter-tab" onclick="filterLoginSection('individual',this)">個別ログイン</span>
 </div>
 
+<div class="login-section" data-login-cat="ec">
+<div class="sub-title">ECプラットフォーム</div>
+<div class="table-wrapper">
+<table><thead><tr><th>サービス</th><th>ログインURL</th><th>ID/ユーザー名</th><th>PW</th><th>備考</th></tr></thead>
+<tbody id="login-ec-tbody">
+<tr><td><span class="tag tag-rakuten">楽天市場</span></td><td><a href="https://glogin.rms.rakuten.co.jp/2fa/" target="_blank" class="external-link">楽天ビジネスログイン</a></td><td>sarukawa.tetsuro@gmail.com</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">cds1002</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td></td></tr>
+<tr><td><span class="tag tag-amazon">Amazon Seller</span></td><td><a href="https://sellercentral.amazon.co.jp/home" target="_blank" class="external-link">Amazon Seller Central</a></td><td>concierge.cards@gmail.com</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">cards123!</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>Authenticator必要 / <a href="https://apps.apple.com/jp/app/google-authenticator/id388497605" target="_blank" class="external-link">QR: Authenticator</a></td></tr>
+<tr><td><span class="tag tag-amazon">Amazon Seller</span></td><td><a href="https://sellercentral.amazon.co.jp/home" target="_blank" class="external-link">Amazon Seller Central</a></td><td>sarukawa.tetsuro@gmail.com</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">cds1002</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td></td></tr>
+<tr><td><span class="tag tag-amazon">Amazonベンダー</span></td><td><a href="https://vendorcentral.amazon.co.jp/" target="_blank" class="external-link">Amazon Vendor Central</a></td><td>sarukawa.tetsuro@gmail.com</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">cds1002</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>Authenticator必要 / <a href="https://apps.apple.com/jp/app/google-authenticator/id388497605" target="_blank" class="external-link">QR: Authenticator</a></td></tr>
+<tr><td><span class="tag tag-yahoo">ファーマフーズ様Yahoo</span></td><td><a href="https://pro.store.yahoo.co.jp/" target="_blank" class="external-link">Yahoo!</a></td><td>iwrtg40900</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">Saikora123</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td></td></tr>
+<tr><td><span class="tag tag-yahoo">中島大祥堂様Yahoo</span></td><td><a href="https://pro.store.yahoo.co.jp/pro.nakajimataishodo" target="_blank" class="external-link">Yahoo!</a></td><td>cadcu38891</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">Kazu0213</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td></td></tr>
+</tbody></table>
+</div>
+</div>
+
 <div class="login-section" data-login-cat="tool">
-<div class="sub-title" style="margin-top:2rem">ツール / サービス</div>
+<div class="sub-title" style="margin-top:2rem">ツール</div>
 <div class="table-wrapper">
 <table><thead><tr><th>ツール</th><th>ログインURL</th><th>ID/ユーザー名</th><th>PW</th><th>備考</th></tr></thead>
 <tbody id="login-tool-tbody">
-<tr><td><span class="tag tag-tool">Teps</span></td><td><a href="https://app.teps.io/" target="_blank" class="external-link">app.teps.io</a></td><td>t.sarukawa@cd-s.co.jp</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">Tetsu123!</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>WEB API設定</td></tr>
-<tr><td><span class="tag tag-other">Chrome共有</span></td><td><a href="https://accounts.google.com/" target="_blank" class="external-link">Googleアカウント</a></td><td>support@cd-s.co.jp</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">cards-support123</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td></td></tr>
-<tr><td><span class="tag tag-line">LINE Business</span></td><td><a href="https://manager.line.biz/" target="_blank" class="external-link">LINE Business ID</a></td><td>support@cd-s.co.jp</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">cards-support123</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td></td></tr>
-<tr><td><span class="tag tag-line">LINE Pharma</span></td><td><a href="https://manager.line.biz/" target="_blank" class="external-link">LINE Business ID</a></td><td>outsource_mall@future-labo.com</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">future241009-</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td></td></tr>
+<tr><td><span class="tag tag-tool">teps</span></td><td><a href="https://app.teps.io/" target="_blank" class="external-link">app.teps.io</a></td><td>t.sarukawa@cd-s.co.jp</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">Tetsu123!</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td></td></tr>
+<tr><td><span class="tag tag-other">GoogleChrome 共有用アカウント</span></td><td><a href="https://accounts.google.com/" target="_blank" class="external-link">Googleアカウント</a></td><td>support@cd-s.co.jp</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">cards-support123</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td></td></tr>
+<tr><td><span class="tag tag-line">LINEビジネスアカウント</span></td><td><a href="https://manager.line.biz/" target="_blank" class="external-link">LINE Business ID</a></td><td>support@cd-s.co.jp</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">cards-support123</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td></td></tr>
+<tr><td><span class="tag tag-line">LINEファーマフーズ</span></td><td><a href="https://manager.line.biz/" target="_blank" class="external-link">LINE Business ID</a></td><td>outsource_mall@future-labo.com</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">future241009-</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td></td></tr>
 <tr><td><span class="tag tag-tool">広告ツール</span></td><td><a href="https://client.automatic.co.jp/" target="_blank" class="external-link">Automatic</a></td><td>t.sarukawa@cd-s.co.jp</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">$@6Uka_aTik</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td></td></tr>
-<tr><td><span class="tag tag-other">Zoom</span></td><td><a href="https://zoom.us/myhome" target="_blank" class="external-link">Zoom</a></td><td>support@cd-s.co.jp</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">Cards-support123</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td></td></tr>
+<tr><td><span class="tag tag-rakuten">ROOM申請</span></td><td><a href="https://room.rakuten.co.jp/" target="_blank" class="external-link">ROOM広告エントリーフォーム</a></td><td></td><td></td><td></td></tr>
+<tr><td><span class="tag tag-other">ZOOM</span></td><td><a href="https://zoom.us/myhome" target="_blank" class="external-link">Zoomログイン</a></td><td>support@cd-s.co.jp</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">Cards-support123</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td></td></tr>
+<tr><td><span class="tag tag-other">百福堂_tiktok</span></td><td><a href="https://seller-jp.tiktok.com/settle/verification?channel=l2l_am_handa&shop_region=JP" target="_blank" class="external-link">TikTok Seller</a></td><td>070 9272 8923</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">cards-support123</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td></td></tr>
 <tr><td><span class="tag tag-other">aun</span></td><td><a href="https://aun-mypage.tools/folder/list" target="_blank" class="external-link">aun</a></td><td>concierge.cards@gmail.com</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">Cards-support1</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td></td></tr>
-<tr><td><span class="tag tag-other">EC Masters</span></td><td><a href="https://tool.ec-masters.net/login.php" target="_blank" class="external-link">EC Masters</a></td><td>hyakufukudo</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">hyakufukudo</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td></td></tr>
-<tr><td><span class="tag tag-other">TikTok</span></td><td><a href="https://seller-jp.tiktok.com/" target="_blank" class="external-link">TikTok Seller</a></td><td>070 9272 8923</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">cards-support123</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>百福堂</td></tr>
+<tr><td><span class="tag tag-other">ECマスターズ</span></td><td><a href="https://tool.ec-masters.net/login.php?redirect=https%3A%2F%2Ftool.ec-masters.net%2Fhome.php%3F_gl%3D1%2A1dxpst4%2A_gcl_au%2ANDgzNzEyMTcuMTc3MjUwNDgzMA..%2A_ga%2AMTYzMjkyMDcxNi4xNzYzNDQzOTkx%2A_ga_NVMZNCLV5V%2AczE3NzI1MDQ4MjkkbzI4JGcxJHQxNzcyNTA0ODc5JGoxMCRsMCRoMA.." target="_blank" class="external-link">EC Masters</a></td><td>hyakufukudo</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">hyakufukudo</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td></td></tr>
 </tbody></table>
 </div>
 </div>
@@ -957,17 +974,29 @@ function loadAllData(){
 
 function renderAccounts(acc){
   if(!acc)return;
-  if(acc.toolAccounts&&acc.toolAccounts.length){
+  if(acc.ecAccounts&&acc.ecAccounts.length){
     var html='';
-    acc.toolAccounts.forEach(function(a){
-      html+='<tr><td><span class="tag '+tagClass(a.tool)+'">'+escHtml(a.tool)+'</span></td>';
+    acc.ecAccounts.forEach(function(a){
+      html+='<tr><td><span class="tag '+tagClass(a.channel)+'">'+escHtml(a.channel)+'</span></td>';
       html+='<td>'+linkOrText(a.loginUrl,a.loginText)+'</td>';
       html+='<td>'+escHtml(a.id)+'</td>';
       html+=pwCell(a.pw);
       html+='<td>'+escHtml(a.note)+'</td></tr>';
     });
+    var ecTable=document.getElementById('login-ec-tbody');
+    if(ecTable)ecTable.innerHTML=html;
+  }
+  if(acc.toolAccounts&&acc.toolAccounts.length){
+    var html2='';
+    acc.toolAccounts.forEach(function(a){
+      html2+='<tr><td><span class="tag '+tagClass(a.tool)+'">'+escHtml(a.tool)+'</span></td>';
+      html2+='<td>'+linkOrText(a.loginUrl,a.loginText)+'</td>';
+      html2+='<td>'+escHtml(a.id)+'</td>';
+      html2+=pwCell(a.pw);
+      html2+='<td>'+escHtml(a.note)+'</td></tr>';
+    });
     var toolTable=document.getElementById('login-tool-tbody');
-    if(toolTable)toolTable.innerHTML=html;
+    if(toolTable)toolTable.innerHTML=html2;
   }
 }
 
