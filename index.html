@@ -151,12 +151,24 @@ tbody tr:nth-child(even){background:#fafbfc}
 .external-link::after{content:none}
 
 /* Rules */
+.rules-tabs{display:flex;gap:0;margin-bottom:1.5rem;border-bottom:2px solid var(--border);overflow-x:auto}
+.rules-tab{padding:.7rem 1.3rem;font-size:.85rem;font-weight:600;color:var(--text-light);background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:all .2s}
+.rules-tab:hover{color:var(--text)}
+.rules-tab.active{color:var(--highlight);border-bottom-color:var(--highlight)}
+.rules-panel{display:none}
+.rules-panel.active{display:block}
 .rules-content{background:var(--card-bg);border-radius:var(--radius);padding:2.5rem;box-shadow:var(--shadow);line-height:2;font-size:.92rem}
 .rules-content h2{font-size:1.15rem;color:var(--primary);margin:1.5rem 0 .8rem;padding-bottom:.3rem;border-bottom:2px solid var(--highlight)}
 .rules-content h2:first-child{margin-top:0}
 .rules-content h3{font-size:1rem;color:var(--accent);margin:1rem 0 .5rem}
 .rules-content ul{padding-left:1.5rem;margin:.3rem 0}
 .rules-content li{margin:.2rem 0}
+.procedure-card{background:var(--card-bg);border-radius:var(--radius);padding:1.5rem;box-shadow:var(--shadow);margin-bottom:1rem;border-left:4px solid var(--highlight)}
+.procedure-card h3{font-size:1rem;color:var(--primary);margin-bottom:.5rem}
+.procedure-card .proc-meta{font-size:.82rem;color:var(--text-light);margin-bottom:.8rem}
+.procedure-card .proc-body{font-size:.88rem;line-height:1.8}
+.procedure-card a{color:var(--accent);text-decoration:none}
+.procedure-card a:hover{text-decoration:underline}
 
 /* Org chart - Tree style */
 .org-tree{background:var(--card-bg);border-radius:var(--radius);padding:2.5rem 1.5rem;box-shadow:var(--shadow);overflow-x:auto;max-width:100%;-webkit-overflow-scrolling:touch}
@@ -540,63 +552,7 @@ AIチャットボット
 <span class="filter-tab" onclick="filterClients('open',this)">OPEN案件</span>
 <span class="filter-tab" onclick="filterClients('ended',this)">終了案件</span>
 </div>
-<div class="client-grid" id="clientGrid">
-<div class="client-card" data-category="furusato"><div class="cc-header"><div><div class="cc-name">白糠町納税</div><div class="cc-store">北海道白糠町</div></div><span class="tag tag-furusato">納税</span></div><div class="cc-details"><span>コンサル: 千葉慎</span><span>広告: 千葉慎</span><span>アシスタント: 櫻井</span></div></div>
-<div class="client-card" data-category="furusato"><div class="cc-header"><div><div class="cc-name">一関市納税</div><div class="cc-store">岩手県一関市</div></div><span class="tag tag-furusato">納税</span></div><div class="cc-details"><span>コンサル: 千葉慎</span><span>広告: 千葉慎</span><span>アシスタント: 櫻井</span></div></div>
-<div class="client-card" data-category="furusato"><div class="cc-header"><div><div class="cc-name">角田市納税</div><div class="cc-store">宮城県角田市</div></div><span class="tag tag-furusato">納税</span></div><div class="cc-details"><span>コンサル: 千葉慎</span><span>広告: 千葉慎</span><span>アシスタント: 櫻井</span></div></div>
-<div class="client-card" data-category="furusato"><div class="cc-header"><div><div class="cc-name">常総市納税</div><div class="cc-store">茨城県常総市</div></div><span class="tag tag-furusato">納税</span></div><div class="cc-details"><span>管理者: 原</span><span>コンサル: 千葉</span><span>広告: 千葉</span><span>アシスタント: 秋葉</span></div></div>
-<div class="client-card" data-category="active"><div class="cc-header"><div><div class="cc-name">Herzskin</div><div class="cc-store">Herz skin 楽天市場店</div></div><span class="tag tag-active">通常</span></div><div class="cc-details"><span>管理者: 猿川(和)</span><span>コンサル: 内田</span><span>広告: 内田</span><span>アシスタント: 佐藤</span></div></div>
-<div class="client-card" data-category="active"><div class="cc-header"><div><div class="cc-name">関西酵素</div><div class="cc-store">関西酵素公式</div></div><span class="tag tag-active">通常</span></div><div class="cc-details"><span>管理者: 猿川(和)</span><span>コンサル: 内田</span><span>広告: 内田</span><span>アシスタント: 原</span></div></div>
-<div class="client-card" data-category="active"><div class="cc-header"><div><div class="cc-name">her lip to BEAUTY</div><div class="cc-store">Her lip to BEAUTY</div></div><span class="tag tag-active">通常</span></div><div class="cc-details"><span>管理者: 猿川(和)</span><span>コンサル: 秋葉</span><span>広告: 秋葉</span><span>アシスタント: 佐藤</span></div></div>
-<div class="client-card" data-category="active"><div class="cc-header"><div><div class="cc-name">her lip to ROSIER</div><div class="cc-store">ROSIER by Her lip to</div></div><span class="tag tag-active">通常</span></div><div class="cc-details"><span>管理者: 猿川(和)</span><span>コンサル: 秋葉</span><span>広告: 秋葉</span><span>アシスタント: 佐藤</span></div></div>
-<div class="client-card" data-category="active"><div class="cc-header"><div><div class="cc-name">イエリオ</div><div class="cc-store">家具</div></div><span class="tag tag-active">通常</span></div><div class="cc-details"><span>管理者: 猿川(和)</span><span>コンサル: 飛鳥間</span><span>広告: 飛鳥間</span><span>アシスタント: 佐藤</span></div></div>
-<div class="client-card" data-category="active"><div class="cc-header"><div><div class="cc-name">yu'now</div><div class="cc-store">YU'NOW</div></div><span class="tag tag-active">通常</span></div><div class="cc-details"><span>管理者: 猿川(和)</span><span>コンサル: 飛鳥間</span><span>広告: 飛鳥間</span><span>アシスタント: 中瀬</span></div></div>
-<div class="client-card" data-category="active"><div class="cc-header"><div><div class="cc-name">スピック</div><div class="cc-store">Lypo-C公式</div></div><span class="tag tag-active">通常</span></div><div class="cc-details"><span>管理者: 猿川(和)</span><span>コンサル: 内田</span><span>広告: 内田</span><span>アシスタント: 佐藤</span></div></div>
-<div class="client-card" data-category="active"><div class="cc-header"><div><div class="cc-name">LOVE CHORME</div><div class="cc-store">公式</div></div><span class="tag tag-active">通常</span></div><div class="cc-details"><span>管理者: 猿川(和)</span><span>コンサル: 秋葉</span><span>広告: 永井</span><span>アシスタント: 櫻井</span></div></div>
-<div class="client-card" data-category="active"><div class="cc-header"><div><div class="cc-name">in sky</div><div class="cc-store">高知自然商店 is</div></div><span class="tag tag-active">通常</span></div><div class="cc-details"><span>管理者: 猿川(和)</span><span>コンサル: 秋葉</span><span>広告: 秋葉</span><span>アシスタント: 櫻井</span></div></div>
-<div class="client-card" data-category="active"><div class="cc-header"><div><div class="cc-name">Nelse</div><div class="cc-store">Mydiine楽天市場店</div></div><span class="tag tag-active">通常</span></div><div class="cc-details"><span>管理者: 猿川(和)</span><span>コンサル: 猿川(和)</span><span>広告: 猿川(和)</span><span>アシスタント: 佐藤</span></div></div>
-<div class="client-card" data-category="active"><div class="cc-header"><div><div class="cc-name">KATAN</div><div class="cc-store">KATAN公式</div></div><span class="tag tag-active">通常</span></div><div class="cc-details"><span>管理者: 猿川(和)</span><span>コンサル: 内田</span><span>広告: 内田</span><span>アシスタント: 中瀬</span></div></div>
-<div class="client-card" data-category="active"><div class="cc-header"><div><div class="cc-name">和牛セレブ</div><div class="cc-store">和牛肉専門店</div></div><span class="tag tag-active">通常</span></div><div class="cc-details"><span>管理者: 猿川(和)</span><span>コンサル: 猿川(和)</span><span>広告: 秋葉</span><span>アシスタント: 中瀬</span></div></div>
-<div class="client-card" data-category="bp"><div class="cc-header"><div><div class="cc-name">銀座華茶 (シェリーブラン)</div><div class="cc-store">写真</div></div><span class="tag tag-bp">BP</span></div><div class="cc-details"><span>管理者: 猿川</span><span>コンサル: 黛</span><span>広告: 黛</span><span>アシスタント: 佐藤</span></div></div>
-<div class="client-card" data-category="bp"><div class="cc-header"><div><div class="cc-name">百福堂</div><div class="cc-store">百福堂</div></div><span class="tag tag-bp">BP</span></div><div class="cc-details"><span>管理者: 猿川</span><span>コンサル: 黛</span><span>広告: 黛</span><span>アシスタント: 佐藤</span></div></div>
-<div class="client-card" data-category="open"><div class="cc-header"><div><div class="cc-name">鯱輪</div><div class="cc-store">名古屋辛麺 鯱輪 楽天市場店</div></div><span class="tag tag-open">OPEN</span></div><div class="cc-details"><span>進捗: 審査中</span></div></div>
-<div class="client-card" data-category="open"><div class="cc-header"><div><div class="cc-name">シェリーブラン</div><div class="cc-store">-</div></div><span class="tag tag-open">OPEN</span></div><div class="cc-details"><span>進捗: 完了</span></div></div>
-<div class="client-card ended" data-category="ended"><div class="cc-header"><div><div class="cc-name">HINOKI</div></div><span class="tag tag-ended">終了</span></div></div>
-<div class="client-card ended" data-category="ended"><div class="cc-header"><div><div class="cc-name">NORM / MAJIDE</div></div><span class="tag tag-ended">終了</span></div></div>
-<div class="client-card ended" data-category="ended"><div class="cc-header"><div><div class="cc-name">ばぶばぶストア</div></div><span class="tag tag-ended">終了</span></div></div>
-<div class="client-card ended" data-category="ended"><div class="cc-header"><div><div class="cc-name">エーレスタイル</div></div><span class="tag tag-ended">終了</span></div></div>
-<div class="client-card ended" data-category="ended"><div class="cc-header"><div><div class="cc-name">メンマ屋大門</div></div><span class="tag tag-ended">終了</span></div></div>
-<div class="client-card ended" data-category="ended"><div class="cc-header"><div><div class="cc-name">激安仏壇店</div></div><span class="tag tag-ended">終了</span></div></div>
-<div class="client-card ended" data-category="ended"><div class="cc-header"><div><div class="cc-name">メンマ屋大門</div></div><span class="tag tag-ended">終了</span></div></div>
-<div class="client-card ended" data-category="ended"><div class="cc-header"><div><div class="cc-name">ニッセイエコ</div></div><span class="tag tag-ended">終了</span></div></div>
-<div class="client-card ended" data-category="ended"><div class="cc-header"><div><div class="cc-name">中島大祥堂</div></div><span class="tag tag-ended">終了</span></div></div>
-<div class="client-card ended" data-category="ended"><div class="cc-header"><div><div class="cc-name">角道具屋</div></div><span class="tag tag-ended">終了</span></div></div>
-<div class="sub-title" style="margin-top:2.5rem">共有ドライブ <a href="https://drive.google.com/drive/u/0/folders/0AAzV1tr-WUzVUk9PVA" target="_blank" style="font-size:.75rem;margin-left:1rem;font-weight:400" class="external-link">CARDS共有ドライブを開く</a></div>
-<div class="table-wrapper">
-<table><thead><tr><th>クライアント</th><th>共有ドライブ</th><th>共有シート</th><th>SEOシート</th><th>クリエイティブシート</th><th>Canva</th></tr></thead>
-<tbody id="client-drive-tbody">
-<tr><td>白糠町</td><td><a href="https://drive.google.com/drive/folders/1Ro1lpi-WVwiTdYnAJCjvOQy_9ZeLmjRm" target="_blank" class="external-link">白糠町</a></td><td><a href="https://docs.google.com/spreadsheets/d/1GyzKyRGdA4Vzyf1ubGNbZX35APadv-HV76IVTQxUyIM/edit?gid=94749795#gid=94749795" target="_blank" class="external-link">共有シート</a></td><td>-</td><td>-</td><td>-</td></tr>
-<tr><td>一関市</td><td>-</td><td><a href="https://docs.google.com/spreadsheets/d/1fO2hOxXtFeUwAVcjHFEFlK6wLacivYyP8HX2MkV1kEc/edit?gid=94749795#gid=94749795" target="_blank" class="external-link">共有シート</a></td><td>-</td><td>-</td><td>-</td></tr>
-<tr><td>常総市</td><td><a href="https://drive.google.com/drive/folders/1sNRyUGVXxZeR8JnCtC23cB-7E_97G6n7" target="_blank" class="external-link">定例報告書_CARDS様</a></td><td><a href="https://docs.google.com/spreadsheets/d/1aD-0MtT2UUylvp1n1K66gc1zLIb9XvVJw_vBltTBLoQ/edit?gid=608843951#gid=608843951" target="_blank" class="external-link">共有シート</a></td><td>-</td><td>-</td><td>-</td></tr>
-<tr><td>Herzskin（LIENA）</td><td><a href="https://drive.google.com/drive/u/0/folders/1SSjOumammU6_7RyZePtIkOmnTy8v6ddL" target="_blank" class="external-link">MTG資料</a></td><td><a href="https://docs.google.com/spreadsheets/d/1QrhRZQghlQGJyg1w2mQaVddmRsQmCg1xwH4KR0mcN6s/edit?gid=899642865#gid=899642865" target="_blank" class="external-link">共有シート</a></td><td>-</td><td>-</td><td>-</td></tr>
-<tr><td>HLT BEAUTY</td><td><a href="https://drive.google.com/drive/folders/1oJWJ_xMzl-iBnzbCEWjQKxR9AK_CTpIF" target="_blank" class="external-link">her lip to様</a></td><td><a href="https://docs.google.com/spreadsheets/d/16npd1yYLYxMfqtMTJXnKTolAQ1EaXjO9tgeKgeNkdnQ/edit?gid=933051276#gid=933051276" target="_blank" class="external-link">共有シート</a></td><td>-</td><td>-</td><td>-</td></tr>
-<tr><td>HLT ROSIER</td><td><a href="https://drive.google.com/drive/folders/1oJWJ_xMzl-iBnzbCEWjQKxR9AK_CTpIF" target="_blank" class="external-link">her lip to様</a></td><td><a href="https://docs.google.com/spreadsheets/d/1jpkxP-K2cFNUN0YJgH7Rm_B7pmHK8eB-FpaVn2N0Ic8/edit?gid=1542062845#gid=1542062845" target="_blank" class="external-link">共有シート</a></td><td>-</td><td>-</td><td>-</td></tr>
-<tr><td>イエリオ</td><td><a href="https://drive.google.com/drive/folders/1ZeegMvEmINhrafBZ9YGaph2xxe5hf6sE" target="_blank" class="external-link">ベルーナ様</a></td><td><a href="https://docs.google.com/spreadsheets/d/1QIQK28PHJ8EIfAYj_VXTgXdreeFWxwyj4wne0hWygNQ/edit?gid=933051276#gid=933051276" target="_blank" class="external-link">共有シート</a></td><td>-</td><td>-</td><td>-</td></tr>
-<tr><td>スピック</td><td><a href="https://drive.google.com/drive/u/0/folders/1YeL-SilatDfQeNwF7nE1xYOSfmUSuAHy" target="_blank" class="external-link">スピック様</a></td><td><a href="https://docs.google.com/spreadsheets/d/1z6k5ZEj0w97ioRBz8YT9mQBSsBq6Y7MEWM64XqFW16w/edit?usp=sharing" target="_blank" class="external-link">共有シート</a></td><td>-</td><td>-</td><td>-</td></tr>
-<tr><td>関西酵素</td><td><a href="https://drive.google.com/drive/folders/1aeAjsw1gPg75T8YSBmRjHfFtGbknbiJ6" target="_blank" class="external-link">関西酵素様</a></td><td><a href="https://docs.google.com/spreadsheets/d/1UGVuThVQ9eUNgFQ0HXDk2RPiaNiN_P-Amm6_2s24PcM/edit?gid=94749795#gid=94749795" target="_blank" class="external-link">共有シート</a></td><td>-</td><td>-</td><td>-</td></tr>
-<tr><td>中島大祥堂</td><td><a href="https://drive.google.com/drive/folders/1PHDKh-Hieaus7CKl0RpBnnlW0MoxhO5z" target="_blank" class="external-link">中島大祥堂様</a></td><td><a href="https://docs.google.com/spreadsheets/d/1gRcHYBfIgrHzSPgMR1SY5Ds_7IBtRIK755rp3zrhc5k/edit?usp=sharing" target="_blank" class="external-link">共有シート</a></td><td>-</td><td>-</td><td>-</td></tr>
-<tr><td>ファーマフーズ</td><td>-</td><td><a href="https://docs.google.com/spreadsheets/d/1Gzy2uAcDZI91lpyb8E2XbNMZdGquoAxYDG4ajEh0_GE/edit?gid=325956523#gid=325956523" target="_blank" class="external-link">共有シート</a></td><td>-</td><td>-</td><td>-</td></tr>
-<tr><td>ラブクロム</td><td>-</td><td><a href="https://docs.google.com/spreadsheets/d/1hKYMx5gIUTFKBGyTMV3MvtCRGlPeQ0eovZ-qdyo1_kI/edit?gid=608843951#gid=608843951" target="_blank" class="external-link">共有シート</a></td><td>-</td><td>-</td><td>-</td></tr>
-<tr><td>in sky</td><td>-</td><td><a href="https://docs.google.com/spreadsheets/d/1hKUbnSoX9G16p1gyYUL21X3KBAzUV5upcdUU2LiKsiY/edit?gid=917834333#gid=917834333" target="_blank" class="external-link">共有シート</a></td><td>-</td><td>-</td><td>-</td></tr>
-<tr><td>ユナウ</td><td>-</td><td><a href="https://docs.google.com/spreadsheets/d/1FuNY8JcS3elJnXDFBHgLvxzHZSqow3tWPNGm5S3-Ggg/edit?gid=1309004952#gid=1309004952" target="_blank" class="external-link">共有シート</a></td><td>-</td><td>-</td><td>-</td></tr>
-<tr><td>銀座華茶</td><td>-</td><td><a href="https://docs.google.com/spreadsheets/d/11gDB8XgmYEsnMe7DfasTinFD_j0Ot2XFZ9uBHf4kinI/edit?gid=1515846618#gid=1515846618" target="_blank" class="external-link">共有シート</a></td><td>-</td><td>-</td><td>-</td></tr>
-<tr><td>百福堂</td><td>-</td><td><a href="https://docs.google.com/spreadsheets/d/1TadidwLQ4EOaFAyr3kIMAPXAKaeoNhQFPcGNQHBL_fU/edit?gid=1022366051#gid=1022366051" target="_blank" class="external-link">共有シート</a></td><td>-</td><td>-</td><td>-</td></tr>
-<tr><td>KATAN</td><td>-</td><td><a href="https://docs.google.com/spreadsheets/d/1fYHZqtfAF8h9BdUFwiJNCWx_A5aH2tOB9jXSqVz6wZ4/edit?gid=822176252#gid=822176252" target="_blank" class="external-link">共有シート</a></td><td>-</td><td>-</td><td>-</td></tr>
-<tr><td>Nelse</td><td>-</td><td><a href="https://docs.google.com/spreadsheets/d/10wy7bTVdr1iRd2oWlPypJQSpf504bfsqs5pzvao8UwE/edit?gid=2056891893#gid=2056891893" target="_blank" class="external-link">共有シート</a></td><td>-</td><td>-</td><td>-</td></tr>
-<tr><td>和牛セレブ</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
-</tbody></table>
-</div>
-</div>
+<div class="client-grid" id="clientGrid">読み込み中...</div>
 </div>
 
 <!-- ===== ORG ===== -->
@@ -680,119 +636,64 @@ AIチャットボット
 <!-- ===== RULES ===== -->
 <div id="page-rules" class="page">
 <h2 class="page-title">社内規則</h2>
-<div style="margin-bottom:1.5rem">
+<div class="rules-tabs">
+<button class="rules-tab active" onclick="switchRulesTab('comm',this)">コミュニケーションポリシー</button>
+<button class="rules-tab" onclick="switchRulesTab('procedures',this)">業務手続き・請求ルール</button>
+</div>
+
+<div id="rules-comm" class="rules-panel active">
+<div style="margin-bottom:1rem">
 <a class="rule-link" href="https://docs.google.com/document/d/1PGR9s93pvMIeGDAb-RUOYZJdMFoGQO-5nLUEKdzUJ4o/edit?tab=t.lbkaqwca49ye#heading=h.67g2qsqntdz7" target="_blank">Google Docsで社内規則を開く</a>
 </div>
-<div class="rules-content">
-<h2>品質管理ガイドライン</h2>
+<div class="rules-content" id="rules-content-comm">読み込み中...</div>
+</div>
 
-<h2>各アカウントの目標達成（社内向け）</h2>
+<div id="rules-procedures" class="rules-panel">
+<div class="procedure-card">
+<h3>① BP案件比率の工数管理</h3>
+<div class="proc-meta">対象：BP該当者</div>
+<div class="proc-body">
+<p>BP案件の工数比率を管理するため、下記スプレッドシートを更新してください。</p>
 <ul>
-<li>対象者：担当コンサルタント</li>
-<li>月初（3営業日まで）
+<li>更新対象：<a href="https://docs.google.com/spreadsheets/" target="_blank">【CARDS】BP案件工数管理表</a></li>
+<li>該当者は自身の工数を定期的に記録・更新すること</li>
+</ul>
+</div>
+</div>
+<div class="procedure-card">
+<h3>② 制作物依頼・オプション請求</h3>
+<div class="proc-meta">対象：制作物依頼が必要なメンバー / コンサルタント</div>
+<div class="proc-body">
+<p>制作物の依頼およびオプション請求が必要な場合、下記シートに記入してください。</p>
 <ul>
-<li>各店舗の目標数値へ記載
+<li>記入先：<a href="https://docs.google.com/spreadsheets/" target="_blank">CARDS_オプション請求管理表_第三期</a></li>
+<li>コンサルタントは「クライアントへの請求有無」を必ず確認すること</li>
+<li>請求月の請求分について漏れなく記入すること</li>
+</ul>
+</div>
+</div>
+<div class="procedure-card">
+<h3>③ 成果報酬の記録</h3>
+<div class="proc-meta">対象：成果報酬発生店舗の担当者</div>
+<div class="proc-body">
+<p>成果報酬が発生する店舗について、報酬額を記録してください。</p>
 <ul>
-<li>「Slack連携」シートD列の店舗それぞれのスプレッドシートへ記載
+<li>記入先：<a href="https://docs.google.com/spreadsheets/" target="_blank">CARDS_オプション請求管理表_第三期</a></li>
+<li>成果報酬額は<strong>税抜</strong>で記載すること</li>
+<li>仕様変更が行われた場合は更新内容を必ず確認すること</li>
+</ul>
+</div>
+</div>
+<div class="procedure-card">
+<h3>④ 請求書に関するルール</h3>
+<div class="proc-meta">対象：全メンバー</div>
+<div class="proc-body">
+<p>請求書の取り扱いについては、下記ドキュメントを参照してください。</p>
 <ul>
-<li>楽天：「26/○月_RPP予算管理」シートの目標欄</li>
-<li>Amazon：「予実管理」シートの目標欄</li>
-<li>Yahoo!：「目標管理」シートの目標欄</li>
+<li>参照先：<a href="https://docs.google.com/document/d/1PGR9s93pvMIeGDAb-RUOYZJdMFoGQO-5nLUEKdzUJ4o/edit" target="_blank">社内規則ドキュメント（請求書ルール）</a></li>
 </ul>
-</li>
-</ul>
-</li>
-<li>当月の施策内容の策定
-<ul>
-<li>該当月のシートにウィークリーアクションを策定</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>社内週次（毎週月曜）
-<ul>
-<li>該当月シートの各店舗のアカウント状況（売上目標、広告費、ROAS、TACOSなど）を確認し、該当週のGAP要因、追加アクションを記載する</li>
-<li>〆切：翌日火曜11:59</li>
-</ul>
-</li>
-<li>社外週次（毎週火曜まで）
-<ul>
-<li>速報slackからコピペ → 社内週次の報告内容を共に、お客様へ報告</li>
-</ul>
-</li>
-</ul>
-
-<h2>お客様の満足度向上（社外向け）</h2>
-<ul>
-<li>月初
-<ul>
-<li>対象者：担当コンサルタント</li>
-<li>前月末の速報報告(売上、広告費、TACOS等)</li>
-</ul>
-</li>
-<li>イベント開始時
-<ul>
-<li>対象者：担当アシスタント</li>
-<li>オファー適用確認の報告</li>
-</ul>
-</li>
-<li>月末最終日前日（楽天のみ）
-<ul>
-<li>対象者：広告担当者</li>
-<li>RPP割引適用の適用ライン越えた旨をRMSスクショとともに先方へ報告
-<ul>
-<li>条件に対して1万円余分に予算設定</li>
-<li>月末の前日には達成できるように調整</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-<h2>コミュニケーションポリシー</h2>
-<ul>
-<li>コミュニケーション頻度
-<ul>
-<li>1週間で「5往復」は最低でもコミュニケーションを取ること</li>
-</ul>
-</li>
-<li>コミュニケーション漏れ防止への取り組み
-<ul>
-<li>Slackの「check_alert」CHにて3営業日以上動きのないチャットの担当者へアラーム
-<ul>
-<li>アラートが発信された場合、該当者は対応完了の旨を報告すること</li>
-<li>※リアクションのみ禁止</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>チャットワークのメンバー追加/削除の際は投稿を削除徹底
-<ul>
-<li>お客様からの心象が悪くなるため</li>
-</ul>
-</li>
-</ul>
-
-<h2>今後の導入予定</h2>
-<ul>
-<li>レポートの可視化
-<ul>
-<li>お客様へレポートを共有し、毎週月曜、木曜に報告して共通認識を持つ</li>
-</ul>
-</li>
-<li>定例mtg
-<ul>
-<li>実施目的は下記の通りとし、数値報告は基本的にチャット上で行う
-<ul>
-<li>売上目標の目線合わせ</li>
-<li>追加施策の提案＆ディスカッション</li>
-<li>アクション内容の定量的な振り返り</li>
-</ul>
-</li>
-<li>毎月の最終mtgにて翌月のアクションの共有</li>
-</ul>
-</li>
-</ul>
+</div>
+</div>
 </div>
 </div>
 
@@ -975,7 +876,6 @@ function loadAllData(){
   el=document.getElementById('team-assistant-cards');if(el)el.innerHTML=loadingDiv;
   el=document.getElementById('manual-grid');if(el)el.innerHTML=loadingDiv;
   el=document.getElementById('ai-cards-grid');if(el)el.innerHTML=loadingDiv;
-  el=document.getElementById('client-drive-tbody');if(el)el.innerHTML=loading;
   el=document.querySelector('#page-links .info-grid');if(el)el.innerHTML=loadingDiv;
   el=document.querySelector('#page-team .table-wrapper tbody');if(el)el.innerHTML=loading;
 
@@ -985,14 +885,13 @@ function loadAllData(){
       _apiData=d;
       if(d.accounts) renderAccounts(d.accounts);
       if(d.storeLogins) renderStoreLogins(d.storeLogins);
-      if(d.clients){ renderClients(d.clients,d.drive); renderDrive(d.clients); }
+      if(d.clients){ renderClients(d.clients,d.drive); }
       if(d.team){ renderTeam(d.team); renderTeamCards(d.team); renderClientCounts(d.team); }
       if(d.rules) renderRules(d.rules);
       if(d.news) renderNews(d.news);
       if(d.company) renderCompany(d.company);
       if(d.org) renderOrg(d.org);
       if(d.links) renderLinksFromApi(d.links);
-      if(d.drive) renderDriveFromApi(d.drive);
       if(d.logins) renderLoginsFromApi(d.logins);
       if(d.manual) renderManualFromApi(d.manual);
       if(d.ai) renderAiFromApi(d.ai);
@@ -1009,7 +908,6 @@ function loadAllData(){
     renderStoreLogins(d.storeLogins);
     renderClients(d.clients);
     renderTeam(d.team);
-    renderDrive(d.clients);
     renderRules(d.rules);
     document.getElementById('loading-overlay').style.display='none';
     injectCopyButtons();
@@ -1117,12 +1015,14 @@ function renderClients(clients,driveData){
     html+='<div class="cc-header"><div><div class="cc-name">'+escHtml(c.name)+'</div>';
     if(c.store)html+='<div class="cc-store">'+escHtml(c.store)+'</div>';
     html+='</div><span class="tag '+catClass(cat)+'">'+catLabel(cat)+'</span></div>';
-    if(c.teamInfo){html+='<div class="cc-details">'+escHtml(c.teamInfo)+'</div>';}
     var links=[];
     if(dr.driveUrl)links.push('<a href="'+escHtml(dr.driveUrl)+'" target="_blank" class="external-link" title="共有ドライブ">&#128193; ドライブ</a>');
     if(dr.sheetUrl)links.push('<a href="'+escHtml(dr.sheetUrl)+'" target="_blank" class="external-link" title="共有シート">&#128196; シート</a>');
-    if(dr.seoSheet)links.push('<a href="'+escHtml(dr.seoSheet)+'" target="_blank" class="external-link" title="SEO">&#128200; SEO</a>');
+    if(dr.seoSheet)links.push('<a href="'+escHtml(dr.seoSheet)+'" target="_blank" class="external-link" title="SEOシート">&#128200; SEO</a>');
+    if(dr.creativeSheet)links.push('<a href="'+escHtml(dr.creativeSheet)+'" target="_blank" class="external-link" title="クリエイティブ">&#127912; クリエイティブ</a>');
+    if(dr.canva)links.push('<a href="'+escHtml(dr.canva)+'" target="_blank" class="external-link" title="Canva">&#127752; Canva</a>');
     if(dr.taskSheet)links.push('<a href="'+escHtml(dr.taskSheet)+'" target="_blank" class="external-link" title="タスク">&#9745; タスク</a>');
+    if(dr.other)links.push('<a href="'+escHtml(dr.other)+'" target="_blank" class="external-link" title="その他">&#128279; その他</a>');
     if(links.length){html+='<div class="cc-links" style="display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.5rem;padding-top:.5rem;border-top:1px solid var(--border);font-size:.75rem">'+links.join('')+'</div>';}
     html+='</div>';
   });
@@ -1153,28 +1053,19 @@ function renderTeam(team){
   tbody.innerHTML=html;
 }
 
-function renderDrive(clients){
-  if(!clients||!clients.length)return;
-  var driveTable=document.getElementById('client-drive-tbody');if(!driveTable)return;
-  var html='';
-  clients.forEach(function(c){
-    if(c.category==='ended')return;
-    var driveLink=c.driveUrl?'<a href="'+escHtml(c.driveUrl)+'" target="_blank" class="external-link">'+escHtml(c.name)+'</a>':'-';
-    var sheetLink=c.sheetUrl?'<a href="'+escHtml(c.sheetUrl)+'" target="_blank" class="external-link">'+escHtml(c.name)+'様_共有シート</a>':'-';
-    var seoLink=c.seoSheet?'<a href="'+escHtml(c.seoSheet)+'" target="_blank" class="external-link">SEO</a>':'-';
-    var creativeLink=c.creativeSheet?'<a href="'+escHtml(c.creativeSheet)+'" target="_blank" class="external-link">クリエイティブ</a>':'-';
-    var canvaLink=c.canva?'<a href="'+escHtml(c.canva)+'" target="_blank" class="external-link">Canva</a>':'-';
-    html+='<tr><td>'+escHtml(c.name)+'</td><td>'+driveLink+'</td><td>'+sheetLink+'</td><td>'+seoLink+'</td><td>'+creativeLink+'</td><td>'+canvaLink+'</td></tr>';
-  });
-  driveTable.innerHTML=html;
-}
 
 function renderRules(rulesHtml){
   if(!rulesHtml)return;
-  var rulesSection=document.querySelector('#page-rules .rules-content');
-  if(rulesSection){
-    rulesSection.innerHTML=rulesHtml;
-  }
+  var rulesSection=document.getElementById('rules-content-comm');
+  if(rulesSection) rulesSection.innerHTML=rulesHtml;
+}
+
+function switchRulesTab(tabId,btn){
+  document.querySelectorAll('.rules-tab').forEach(function(t){t.classList.remove('active')});
+  document.querySelectorAll('.rules-panel').forEach(function(p){p.classList.remove('active')});
+  btn.classList.add('active');
+  var panel=document.getElementById('rules-'+tabId);
+  if(panel) panel.classList.add('active');
 }
 
 function renderCompany(company){
@@ -1324,20 +1215,6 @@ function renderLinksFromApi(links){
   grid.innerHTML=html;
 }
 
-function renderDriveFromApi(drive){
-  if(!drive||!drive.length)return;
-  var tbody=document.getElementById('client-drive-tbody');if(!tbody)return;
-  var html='';
-  drive.forEach(function(d){
-    html+='<tr><td>'+escHtml(d.client)+'</td>';
-    html+='<td>'+(d.driveUrl?'<a href="'+escHtml(d.driveUrl)+'" target="_blank" class="external-link">'+escHtml(d.driveName||d.client)+'</a>':'-')+'</td>';
-    html+='<td>'+(d.sheetUrl?'<a href="'+escHtml(d.sheetUrl)+'" target="_blank" class="external-link">'+escHtml(d.client)+'様_共有シート</a>':'-')+'</td>';
-    html+='<td>'+(d.seoSheet?'<a href="'+escHtml(d.seoSheet)+'" target="_blank" class="external-link">SEO</a>':'-')+'</td>';
-    html+='<td>'+(d.creativeSheet?'<a href="'+escHtml(d.creativeSheet)+'" target="_blank" class="external-link">クリエイティブ</a>':'-')+'</td>';
-    html+='<td>'+(d.canva?'<a href="'+escHtml(d.canva)+'" target="_blank" class="external-link">Canva</a>':'-')+'</td></tr>';
-  });
-  tbody.innerHTML=html;
-}
 
 function renderLoginsFromApi(logins){
   if(!logins||!logins.length)return;
