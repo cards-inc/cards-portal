@@ -158,11 +158,14 @@ tbody tr:nth-child(even){background:#fafbfc}
 .rules-content li{margin:.2rem 0}
 
 /* Org chart - Tree style */
-.org-tree{background:var(--card-bg);border-radius:var(--radius);padding:2.5rem 1.5rem;box-shadow:var(--shadow);overflow-x:auto}
+.org-tree{background:var(--card-bg);border-radius:var(--radius);padding:2.5rem 1.5rem;box-shadow:var(--shadow);overflow-x:auto;max-width:100%;-webkit-overflow-scrolling:touch}
+.org-tree::-webkit-scrollbar{height:6px}
+.org-tree::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+.org-tree .tree{min-width:900px}
 .tree{display:flex;flex-direction:column;align-items:center}
-.tree ul{display:flex;justify-content:center;padding-top:30px;position:relative;list-style:none;margin:0;padding-left:0}
-.tree li{display:flex;flex-direction:column;align-items:center;position:relative;padding:30px 10px 0}
-.tree li::before,.tree li::after{content:'';position:absolute;top:0;width:50%;height:30px;border-top:2px solid var(--border)}
+.tree ul{display:flex;justify-content:center;padding-top:24px;position:relative;list-style:none;margin:0;padding-left:0}
+.tree li{display:flex;flex-direction:column;align-items:center;position:relative;padding:24px 6px 0}
+.tree li::before,.tree li::after{content:'';position:absolute;top:0;width:50%;height:24px;border-top:2px solid var(--border)}
 .tree li::before{right:50%;border-right:2px solid var(--border)}
 .tree li::after{left:50%;border-left:2px solid var(--border)}
 .tree li:first-child::before,.tree li:last-child::after{border:none}
@@ -170,21 +173,21 @@ tbody tr:nth-child(even){background:#fafbfc}
 .tree li:last-child::before{border-radius:0 8px 0 0}
 .tree li:only-child::before,.tree li:only-child::after{border:none}
 .tree li:only-child{padding-top:0}
-.tree ul>li:only-child{padding-top:30px}
-.tree ul>li:only-child::before{content:'';position:absolute;top:0;left:50%;width:0;height:30px;border-left:2px solid var(--border)}
+.tree ul>li:only-child{padding-top:24px}
+.tree ul>li:only-child::before{content:'';position:absolute;top:0;left:50%;width:0;height:24px;border-left:2px solid var(--border)}
 .tree>ul{padding-top:0}
 .tree>ul>li{padding-top:0}
 .tree>ul>li::before,.tree>ul>li::after{display:none}
-.tree .node{display:inline-block;padding:.6rem 1.2rem;border-radius:10px;font-size:.85rem;font-weight:600;text-align:center;position:relative;z-index:1;min-width:100px;white-space:nowrap}
-.tree .node-ceo{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;font-size:1rem;padding:.8rem 2rem;box-shadow:0 4px 15px rgba(14,4,58,.25)}
-.tree .node-div{background:var(--accent);color:#fff;padding:.6rem 1.5rem;box-shadow:0 2px 8px rgba(14,4,58,.15)}
-.tree .node-dept{background:var(--highlight);color:#fff;padding:.55rem 1.2rem;font-size:.82rem}
-.tree .node-member{background:#fff;color:var(--text);border:2px solid var(--border);padding:.5rem 1rem;font-size:.8rem;font-weight:500;transition:all .2s}
+.tree .node{display:inline-block;padding:.45rem .9rem;border-radius:8px;font-size:.78rem;font-weight:600;text-align:center;position:relative;z-index:1;min-width:80px;white-space:nowrap}
+.tree .node-ceo{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;font-size:.9rem;padding:.6rem 1.5rem;box-shadow:0 4px 15px rgba(14,4,58,.25)}
+.tree .node-div{background:var(--accent);color:#fff;padding:.45rem 1rem;box-shadow:0 2px 8px rgba(14,4,58,.15)}
+.tree .node-dept{background:var(--highlight);color:#fff;padding:.4rem .9rem;font-size:.75rem}
+.tree .node-member{background:#fff;color:var(--text);border:2px solid var(--border);padding:.35rem .7rem;font-size:.73rem;font-weight:500;transition:all .2s}
 .tree .node-member:hover{border-color:var(--highlight);box-shadow:0 2px 10px rgba(108,60,224,.15)}
 .tree .node-member .m-name{font-weight:700;color:var(--accent)}
-.tree .node-member .m-clients{font-size:.7rem;color:var(--text-light);margin-top:.2rem;white-space:normal;max-width:130px;line-height:1.3}
+.tree .node-member .m-clients{font-size:.65rem;color:var(--text-light);margin-top:.15rem;white-space:normal;max-width:110px;line-height:1.3}
 /* Connector from parent to children */
-.tree ul::before{content:'';position:absolute;top:0;left:50%;border-left:2px solid var(--border);height:30px}
+.tree ul::before{content:'';position:absolute;top:0;left:50%;border-left:2px solid var(--border);height:24px}
 
 /* Team member cards */
 .team-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.2rem}
@@ -250,6 +253,10 @@ tbody tr:nth-child(even){background:#fafbfc}
 <a href="#" data-page="clients" onclick="switchPage('clients',this);return false">
 <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></span>
 クライアント一覧
+</a>
+<a href="#" data-page="tasks" onclick="switchPage('tasks',this);return false">
+<span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></span>
+タスク管理
 </a>
 <a href="#" data-page="org" onclick="switchPage('org',this);return false">
 <span class="nav-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="14"/><line x1="12" y1="14" x2="6" y2="18"/><line x1="12" y1="14" x2="18" y2="18"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="19" r="2"/></svg></span>
@@ -571,6 +578,224 @@ AIチャットボット
 <tr><td>和牛セレブ</td><td>-</td><td>-</td><td>-</td><td></td></tr>
 </tbody></table>
 </div>
+</div>
+</div>
+
+<!-- ===== TASKS ===== -->
+<div id="page-tasks" class="page">
+<h2 class="page-title">タスク管理</h2>
+<p style="color:var(--text-light);margin-bottom:1.5rem;font-size:.9rem">クライアント別のタスクシート・進捗管理への導線をまとめています。</p>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-bottom:2rem">
+<a href="https://docs.google.com/spreadsheets/d/11Cui2lS6SZxyMuerL3lc6FfMU_NKFakwYGgtNEXpfpg/edit" target="_blank" class="quick-link" style="border-left:4px solid var(--highlight)">
+<div class="ql-title">ツール/アカウント管理台帳</div>
+<div class="ql-desc">全社タスク・管理スプレッドシート</div>
+</a>
+<a href="https://docs.google.com/spreadsheets/d/11Cui2lS6SZxyMuerL3lc6FfMU_NKFakwYGgtNEXpfpg/edit" target="_blank" class="quick-link" style="border-left:4px solid #00b894">
+<div class="ql-title">ルーティンタスク</div>
+<div class="ql-desc">日次・週次の定期タスク一覧</div>
+</a>
+</div>
+
+<div class="sub-title">クライアント別タスクシート</div>
+
+<div class="filter-tabs" style="margin-bottom:1rem">
+<span class="filter-tab active" onclick="filterTaskCards('all',this)">全て</span>
+<span class="filter-tab" onclick="filterTaskCards('active',this)">通常案件</span>
+<span class="filter-tab" onclick="filterTaskCards('furusato',this)">ふるさと納税</span>
+</div>
+
+<div class="task-cards" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem">
+
+<div class="task-card" data-task-cat="furusato" style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);border-left:4px solid #0984e3;overflow:hidden">
+<div style="padding:.8rem 1.2rem;display:flex;justify-content:space-between;align-items:center">
+<div><div style="font-weight:700;font-size:.95rem">白糠町</div><div style="font-size:.72rem;color:var(--text-light)">ふるさと納税</div></div>
+<span class="tag tag-furusato">ふるさと</span>
+</div>
+<div style="padding:0 1.2rem .8rem;display:flex;gap:.5rem;flex-wrap:wrap">
+<a href="https://docs.google.com/spreadsheets/d/1GyzKyRGdA4Vzyf1ubGNbZX35APadv-HV76IVTQxUyIM/edit?gid=94749795#gid=94749795" target="_blank" style="font-size:.78rem;padding:.3rem .7rem;background:var(--bg);border-radius:6px;color:var(--accent);text-decoration:none;border:1px solid var(--border)">共有シート</a>
+<a href="https://drive.google.com/drive/folders/1Ro1lpi-WVwiTdYnAJCjvOQy_9ZeLmjRm" target="_blank" style="font-size:.78rem;padding:.3rem .7rem;background:var(--bg);border-radius:6px;color:var(--accent);text-decoration:none;border:1px solid var(--border)">ドライブ</a>
+</div>
+</div>
+
+<div class="task-card" data-task-cat="furusato" style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);border-left:4px solid #0984e3;overflow:hidden">
+<div style="padding:.8rem 1.2rem;display:flex;justify-content:space-between;align-items:center">
+<div><div style="font-weight:700;font-size:.95rem">一関市</div><div style="font-size:.72rem;color:var(--text-light)">ふるさと納税</div></div>
+<span class="tag tag-furusato">ふるさと</span>
+</div>
+<div style="padding:0 1.2rem .8rem;display:flex;gap:.5rem;flex-wrap:wrap">
+<a href="https://docs.google.com/spreadsheets/d/1fO2hOxXtFeUwAVcjHFEFlK6wLacivYyP8HX2MkV1kEc/edit?gid=94749795#gid=94749795" target="_blank" style="font-size:.78rem;padding:.3rem .7rem;background:var(--bg);border-radius:6px;color:var(--accent);text-decoration:none;border:1px solid var(--border)">共有シート</a>
+</div>
+</div>
+
+<div class="task-card" data-task-cat="furusato" style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);border-left:4px solid #0984e3;overflow:hidden">
+<div style="padding:.8rem 1.2rem;display:flex;justify-content:space-between;align-items:center">
+<div><div style="font-weight:700;font-size:.95rem">常総市</div><div style="font-size:.72rem;color:var(--text-light)">ふるさと納税</div></div>
+<span class="tag tag-furusato">ふるさと</span>
+</div>
+<div style="padding:0 1.2rem .8rem;display:flex;gap:.5rem;flex-wrap:wrap">
+<a href="https://docs.google.com/spreadsheets/d/1aD-0MtT2UUylvp1n1K66gc1zLIb9XvVJw_vBltTBLoQ/edit?gid=608843951#gid=608843951" target="_blank" style="font-size:.78rem;padding:.3rem .7rem;background:var(--bg);border-radius:6px;color:var(--accent);text-decoration:none;border:1px solid var(--border)">共有シート</a>
+<a href="https://drive.google.com/drive/folders/1sNRyUGVXxZeR8JnCtC23cB-7E_97G6n7" target="_blank" style="font-size:.78rem;padding:.3rem .7rem;background:var(--bg);border-radius:6px;color:var(--accent);text-decoration:none;border:1px solid var(--border)">ドライブ</a>
+</div>
+</div>
+
+<div class="task-card" data-task-cat="active" style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);border-left:4px solid #00b894;overflow:hidden">
+<div style="padding:.8rem 1.2rem;display:flex;justify-content:space-between;align-items:center">
+<div><div style="font-weight:700;font-size:.95rem">Herzskin（LIENA）</div><div style="font-size:.72rem;color:var(--text-light)">通常案件</div></div>
+<span class="tag tag-active">通常</span>
+</div>
+<div style="padding:0 1.2rem .8rem;display:flex;gap:.5rem;flex-wrap:wrap">
+<a href="https://docs.google.com/spreadsheets/d/1QrhRZQghlQGJyg1w2mQaVddmRsQmCg1xwH4KR0mcN6s/edit?gid=899642865#gid=899642865" target="_blank" style="font-size:.78rem;padding:.3rem .7rem;background:var(--bg);border-radius:6px;color:var(--accent);text-decoration:none;border:1px solid var(--border)">共有シート</a>
+<a href="https://drive.google.com/drive/u/0/folders/1SSjOumammU6_7RyZePtIkOmnTy8v6ddL" target="_blank" style="font-size:.78rem;padding:.3rem .7rem;background:var(--bg);border-radius:6px;color:var(--accent);text-decoration:none;border:1px solid var(--border)">ドライブ</a>
+</div>
+</div>
+
+<div class="task-card" data-task-cat="active" style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);border-left:4px solid #00b894;overflow:hidden">
+<div style="padding:.8rem 1.2rem;display:flex;justify-content:space-between;align-items:center">
+<div><div style="font-weight:700;font-size:.95rem">HLT BEAUTY</div><div style="font-size:.72rem;color:var(--text-light)">通常案件</div></div>
+<span class="tag tag-active">通常</span>
+</div>
+<div style="padding:0 1.2rem .8rem;display:flex;gap:.5rem;flex-wrap:wrap">
+<a href="https://docs.google.com/spreadsheets/d/16npd1yYLYxMfqtMTJXnKTolAQ1EaXjO9tgeKgeNkdnQ/edit?gid=933051276#gid=933051276" target="_blank" style="font-size:.78rem;padding:.3rem .7rem;background:var(--bg);border-radius:6px;color:var(--accent);text-decoration:none;border:1px solid var(--border)">共有シート</a>
+<a href="https://drive.google.com/drive/folders/1oJWJ_xMzl-iBnzbCEWjQKxR9AK_CTpIF" target="_blank" style="font-size:.78rem;padding:.3rem .7rem;background:var(--bg);border-radius:6px;color:var(--accent);text-decoration:none;border:1px solid var(--border)">ドライブ</a>
+</div>
+</div>
+
+<div class="task-card" data-task-cat="active" style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);border-left:4px solid #00b894;overflow:hidden">
+<div style="padding:.8rem 1.2rem;display:flex;justify-content:space-between;align-items:center">
+<div><div style="font-weight:700;font-size:.95rem">HLT ROSIER</div><div style="font-size:.72rem;color:var(--text-light)">通常案件</div></div>
+<span class="tag tag-active">通常</span>
+</div>
+<div style="padding:0 1.2rem .8rem;display:flex;gap:.5rem;flex-wrap:wrap">
+<a href="https://docs.google.com/spreadsheets/d/1jpkxP-K2cFNUN0YJgH7Rm_B7pmHK8eB-FpaVn2N0Ic8/edit?gid=1542062845#gid=1542062845" target="_blank" style="font-size:.78rem;padding:.3rem .7rem;background:var(--bg);border-radius:6px;color:var(--accent);text-decoration:none;border:1px solid var(--border)">共有シート</a>
+<a href="https://drive.google.com/drive/folders/1oJWJ_xMzl-iBnzbCEWjQKxR9AK_CTpIF" target="_blank" style="font-size:.78rem;padding:.3rem .7rem;background:var(--bg);border-radius:6px;color:var(--accent);text-decoration:none;border:1px solid var(--border)">ドライブ</a>
+</div>
+</div>
+
+<div class="task-card" data-task-cat="active" style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);border-left:4px solid #00b894;overflow:hidden">
+<div style="padding:.8rem 1.2rem;display:flex;justify-content:space-between;align-items:center">
+<div><div style="font-weight:700;font-size:.95rem">イエリオ（ベルーナ）</div><div style="font-size:.72rem;color:var(--text-light)">通常案件</div></div>
+<span class="tag tag-active">通常</span>
+</div>
+<div style="padding:0 1.2rem .8rem;display:flex;gap:.5rem;flex-wrap:wrap">
+<a href="https://docs.google.com/spreadsheets/d/1QIQK28PHJ8EIfAYj_VXTgXdreeFWxwyj4wne0hWygNQ/edit?gid=933051276#gid=933051276" target="_blank" style="font-size:.78rem;padding:.3rem .7rem;background:var(--bg);border-radius:6px;color:var(--accent);text-decoration:none;border:1px solid var(--border)">共有シート</a>
+<a href="https://drive.google.com/drive/folders/1ZeegMvEmINhrafBZ9YGaph2xxe5hf6sE" target="_blank" style="font-size:.78rem;padding:.3rem .7rem;background:var(--bg);border-radius:6px;color:var(--accent);text-decoration:none;border:1px solid var(--border)">ドライブ</a>
+</div>
+</div>
+
+<div class="task-card" data-task-cat="active" style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);border-left:4px solid #00b894;overflow:hidden">
+<div style="padding:.8rem 1.2rem;display:flex;justify-content:space-between;align-items:center">
+<div><div style="font-weight:700;font-size:.95rem">スピック（Lypo-C）</div><div style="font-size:.72rem;color:var(--text-light)">通常案件</div></div>
+<span class="tag tag-active">通常</span>
+</div>
+<div style="padding:0 1.2rem .8rem;display:flex;gap:.5rem;flex-wrap:wrap">
+<a href="https://docs.google.com/spreadsheets/d/1z6k5ZEj0w97ioRBz8YT9mQBSsBq6Y7MEWM64XqFW16w/edit?usp=sharing" target="_blank" style="font-size:.78rem;padding:.3rem .7rem;background:var(--bg);border-radius:6px;color:var(--accent);text-decoration:none;border:1px solid var(--border)">共有シート</a>
+<a href="https://drive.google.com/drive/u/0/folders/1YeL-SilatDfQeNwF7nE1xYOSfmUSuAHy" target="_blank" style="font-size:.78rem;padding:.3rem .7rem;background:var(--bg);border-radius:6px;color:var(--accent);text-decoration:none;border:1px solid var(--border)">ドライブ</a>
+</div>
+</div>
+
+<div class="task-card" data-task-cat="active" style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);border-left:4px solid #00b894;overflow:hidden">
+<div style="padding:.8rem 1.2rem;display:flex;justify-content:space-between;align-items:center">
+<div><div style="font-weight:700;font-size:.95rem">関西酵素</div><div style="font-size:.72rem;color:var(--text-light)">通常案件</div></div>
+<span class="tag tag-active">通常</span>
+</div>
+<div style="padding:0 1.2rem .8rem;display:flex;gap:.5rem;flex-wrap:wrap">
+<a href="https://docs.google.com/spreadsheets/d/1UGVuThVQ9eUNgFQ0HXDk2RPiaNiN_P-Amm6_2s24PcM/edit?gid=94749795#gid=94749795" target="_blank" style="font-size:.78rem;padding:.3rem .7rem;background:var(--bg);border-radius:6px;color:var(--accent);text-decoration:none;border:1px solid var(--border)">共有シート</a>
+<a href="https://drive.google.com/drive/folders/1aeAjsw1gPg75T8YSBmRjHfFtGbknbiJ6" target="_blank" style="font-size:.78rem;padding:.3rem .7rem;background:var(--bg);border-radius:6px;color:var(--accent);text-decoration:none;border:1px solid var(--border)">ドライブ</a>
+</div>
+</div>
+
+<div class="task-card" data-task-cat="active" style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);border-left:4px solid #00b894;overflow:hidden">
+<div style="padding:.8rem 1.2rem;display:flex;justify-content:space-between;align-items:center">
+<div><div style="font-weight:700;font-size:.95rem">中島大祥堂</div><div style="font-size:.72rem;color:var(--text-light)">通常案件</div></div>
+<span class="tag tag-active">通常</span>
+</div>
+<div style="padding:0 1.2rem .8rem;display:flex;gap:.5rem;flex-wrap:wrap">
+<a href="https://docs.google.com/spreadsheets/d/1gRcHYBfIgrHzSPgMR1SY5Ds_7IBtRIK755rp3zrhc5k/edit?usp=sharing" target="_blank" style="font-size:.78rem;padding:.3rem .7rem;background:var(--bg);border-radius:6px;color:var(--accent);text-decoration:none;border:1px solid var(--border)">共有シート</a>
+<a href="https://drive.google.com/drive/folders/1PHDKh-Hieaus7CKl0RpBnnlW0MoxhO5z" target="_blank" style="font-size:.78rem;padding:.3rem .7rem;background:var(--bg);border-radius:6px;color:var(--accent);text-decoration:none;border:1px solid var(--border)">ドライブ</a>
+</div>
+</div>
+
+<div class="task-card" data-task-cat="active" style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);border-left:4px solid #00b894;overflow:hidden">
+<div style="padding:.8rem 1.2rem;display:flex;justify-content:space-between;align-items:center">
+<div><div style="font-weight:700;font-size:.95rem">ファーマフーズ</div><div style="font-size:.72rem;color:var(--text-light)">通常案件</div></div>
+<span class="tag tag-active">通常</span>
+</div>
+<div style="padding:0 1.2rem .8rem;display:flex;gap:.5rem;flex-wrap:wrap">
+<a href="https://docs.google.com/spreadsheets/d/1Gzy2uAcDZI91lpyb8E2XbNMZdGquoAxYDG4ajEh0_GE/edit?gid=325956523#gid=325956523" target="_blank" style="font-size:.78rem;padding:.3rem .7rem;background:var(--bg);border-radius:6px;color:var(--accent);text-decoration:none;border:1px solid var(--border)">共有シート</a>
+</div>
+</div>
+
+<div class="task-card" data-task-cat="active" style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);border-left:4px solid #00b894;overflow:hidden">
+<div style="padding:.8rem 1.2rem;display:flex;justify-content:space-between;align-items:center">
+<div><div style="font-weight:700;font-size:.95rem">ラブクロム</div><div style="font-size:.72rem;color:var(--text-light)">通常案件</div></div>
+<span class="tag tag-active">通常</span>
+</div>
+<div style="padding:0 1.2rem .8rem;display:flex;gap:.5rem;flex-wrap:wrap">
+<a href="https://docs.google.com/spreadsheets/d/1hKYMx5gIUTFKBGyTMV3MvtCRGlPeQ0eovZ-qdyo1_kI/edit?gid=608843951#gid=608843951" target="_blank" style="font-size:.78rem;padding:.3rem .7rem;background:var(--bg);border-radius:6px;color:var(--accent);text-decoration:none;border:1px solid var(--border)">共有シート</a>
+</div>
+</div>
+
+<div class="task-card" data-task-cat="active" style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);border-left:4px solid #00b894;overflow:hidden">
+<div style="padding:.8rem 1.2rem;display:flex;justify-content:space-between;align-items:center">
+<div><div style="font-weight:700;font-size:.95rem">in sky</div><div style="font-size:.72rem;color:var(--text-light)">通常案件</div></div>
+<span class="tag tag-active">通常</span>
+</div>
+<div style="padding:0 1.2rem .8rem;display:flex;gap:.5rem;flex-wrap:wrap">
+<a href="https://docs.google.com/spreadsheets/d/1hKUbnSoX9G16p1gyYUL21X3KBAzUV5upcdUU2LiKsiY/edit?gid=917834333#gid=917834333" target="_blank" style="font-size:.78rem;padding:.3rem .7rem;background:var(--bg);border-radius:6px;color:var(--accent);text-decoration:none;border:1px solid var(--border)">共有シート</a>
+</div>
+</div>
+
+<div class="task-card" data-task-cat="active" style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);border-left:4px solid #00b894;overflow:hidden">
+<div style="padding:.8rem 1.2rem;display:flex;justify-content:space-between;align-items:center">
+<div><div style="font-weight:700;font-size:.95rem">ユナウ</div><div style="font-size:.72rem;color:var(--text-light)">通常案件</div></div>
+<span class="tag tag-active">通常</span>
+</div>
+<div style="padding:0 1.2rem .8rem;display:flex;gap:.5rem;flex-wrap:wrap">
+<a href="https://docs.google.com/spreadsheets/d/1FuNY8JcS3elJnXDFBHgLvxzHZSqow3tWPNGm5S3-Ggg/edit?gid=1309004952#gid=1309004952" target="_blank" style="font-size:.78rem;padding:.3rem .7rem;background:var(--bg);border-radius:6px;color:var(--accent);text-decoration:none;border:1px solid var(--border)">共有シート</a>
+</div>
+</div>
+
+<div class="task-card" data-task-cat="active" style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);border-left:4px solid #00b894;overflow:hidden">
+<div style="padding:.8rem 1.2rem;display:flex;justify-content:space-between;align-items:center">
+<div><div style="font-weight:700;font-size:.95rem">銀座華茶</div><div style="font-size:.72rem;color:var(--text-light)">自社ブランド</div></div>
+<span class="tag tag-active">通常</span>
+</div>
+<div style="padding:0 1.2rem .8rem;display:flex;gap:.5rem;flex-wrap:wrap">
+<a href="https://docs.google.com/spreadsheets/d/11gDB8XgmYEsnMe7DfasTinFD_j0Ot2XFZ9uBHf4kinI/edit?gid=1515846618#gid=1515846618" target="_blank" style="font-size:.78rem;padding:.3rem .7rem;background:var(--bg);border-radius:6px;color:var(--accent);text-decoration:none;border:1px solid var(--border)">共有シート</a>
+</div>
+</div>
+
+<div class="task-card" data-task-cat="active" style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);border-left:4px solid #00b894;overflow:hidden">
+<div style="padding:.8rem 1.2rem;display:flex;justify-content:space-between;align-items:center">
+<div><div style="font-weight:700;font-size:.95rem">百福堂</div><div style="font-size:.72rem;color:var(--text-light)">自社ブランド</div></div>
+<span class="tag tag-active">通常</span>
+</div>
+<div style="padding:0 1.2rem .8rem;display:flex;gap:.5rem;flex-wrap:wrap">
+<a href="https://docs.google.com/spreadsheets/d/1TadidwLQ4EOaFAyr3kIMAPXAKaeoNhQFPcGNQHBL_fU/edit?gid=1022366051#gid=1022366051" target="_blank" style="font-size:.78rem;padding:.3rem .7rem;background:var(--bg);border-radius:6px;color:var(--accent);text-decoration:none;border:1px solid var(--border)">共有シート</a>
+</div>
+</div>
+
+<div class="task-card" data-task-cat="active" style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);border-left:4px solid #00b894;overflow:hidden">
+<div style="padding:.8rem 1.2rem;display:flex;justify-content:space-between;align-items:center">
+<div><div style="font-weight:700;font-size:.95rem">KATAN</div><div style="font-size:.72rem;color:var(--text-light)">通常案件</div></div>
+<span class="tag tag-active">通常</span>
+</div>
+<div style="padding:0 1.2rem .8rem;display:flex;gap:.5rem;flex-wrap:wrap">
+<a href="https://docs.google.com/spreadsheets/d/1fYHZqtfAF8h9BdUFwiJNCWx_A5aH2tOB9jXSqVz6wZ4/edit?gid=822176252#gid=822176252" target="_blank" style="font-size:.78rem;padding:.3rem .7rem;background:var(--bg);border-radius:6px;color:var(--accent);text-decoration:none;border:1px solid var(--border)">共有シート</a>
+</div>
+</div>
+
+<div class="task-card" data-task-cat="active" style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);border-left:4px solid #00b894;overflow:hidden">
+<div style="padding:.8rem 1.2rem;display:flex;justify-content:space-between;align-items:center">
+<div><div style="font-weight:700;font-size:.95rem">Nelse</div><div style="font-size:.72rem;color:var(--text-light)">通常案件</div></div>
+<span class="tag tag-active">通常</span>
+</div>
+<div style="padding:0 1.2rem .8rem;display:flex;gap:.5rem;flex-wrap:wrap">
+<a href="https://docs.google.com/spreadsheets/d/10wy7bTVdr1iRd2oWlPypJQSpf504bfsqs5pzvao8UwE/edit?gid=2056891893#gid=2056891893" target="_blank" style="font-size:.78rem;padding:.3rem .7rem;background:var(--bg);border-radius:6px;color:var(--accent);text-decoration:none;border:1px solid var(--border)">共有シート</a>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -1019,6 +1244,15 @@ function filterLoginSection(cat,tab){
   tab.classList.add('active');
   document.querySelectorAll('#page-logins .login-section').forEach(function(s){
     s.style.display=(cat==='all'||s.dataset.loginCat===cat)?'':'none';
+  });
+}
+
+/* Filter task cards */
+function filterTaskCards(cat,tab){
+  document.querySelectorAll('#page-tasks .filter-tab').forEach(function(t){t.classList.remove('active')});
+  tab.classList.add('active');
+  document.querySelectorAll('.task-card').forEach(function(c){
+    c.style.display=(cat==='all'||c.dataset.taskCat===cat)?'':'none';
   });
 }
 
