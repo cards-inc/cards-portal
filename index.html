@@ -263,6 +263,10 @@ tbody tr:nth-child(even){background:#fafbfc}
 <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></span>
 社内マニュアル
 </a>
+<a href="#" data-page="ai" onclick="switchPage('ai',this);return false">
+<span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M12 2a2 2 0 012 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 017 7h1a2 2 0 110 4h-1a7 7 0 01-7 7H9a7 7 0 01-7-7H1a2 2 0 110-4h1a7 7 0 017-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 012-2z"/><circle cx="9" cy="13" r="1.25"/><circle cx="15" cy="13" r="1.25"/><path d="M10 17h4" stroke-linecap="round"/></svg></span>
+AIチャットボット
+</a>
 <a href="#" data-page="links" onclick="switchPage('links',this);return false">
 <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg></span>
 リンク集
@@ -799,6 +803,111 @@ tbody tr:nth-child(even){background:#fafbfc}
 </ul></div>
 </div>
 <p style="color:var(--text-light);margin-top:2rem;font-size:.82rem">※ マニュアルは随時追加されます。管理画面から追加できます。</p>
+</div>
+
+<!-- ===== AI CHATBOT ===== -->
+<div id="page-ai" class="page">
+<h2 class="page-title">AIチャットボット</h2>
+<p style="color:var(--text-light);margin-bottom:1.5rem;font-size:.9rem">業務効率化に活用できるAIチャットボット・ツール一覧です。</p>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.2rem;margin-bottom:2rem">
+
+<div style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);overflow:hidden">
+<div style="padding:1rem 1.2rem;background:linear-gradient(135deg,#10a37f,#1a7f5a);color:#fff;display:flex;align-items:center;gap:.8rem">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+<div><div style="font-weight:700;font-size:1rem">ChatGPT</div><div style="font-size:.7rem;opacity:.8">OpenAI</div></div>
+</div>
+<div style="padding:1rem 1.2rem;font-size:.85rem">
+<p style="color:var(--text-light);margin-bottom:.8rem">汎用的な文章生成・要約・翻訳・アイデア出しなど幅広い業務に対応</p>
+<ul style="list-style:none;padding:0;margin:0">
+<li style="padding:.3rem 0;border-bottom:1px solid #f0f0f0"><a href="https://chat.openai.com/" target="_blank" class="external-link">ChatGPT（Web版）</a></li>
+<li style="padding:.3rem 0"><a href="https://platform.openai.com/" target="_blank" class="external-link">OpenAI Platform</a></li>
+</ul>
+</div>
+</div>
+
+<div style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);overflow:hidden">
+<div style="padding:1rem 1.2rem;background:linear-gradient(135deg,#d97706,#b45309);color:#fff;display:flex;align-items:center;gap:.8rem">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+<div><div style="font-weight:700;font-size:1rem">Claude</div><div style="font-size:.7rem;opacity:.8">Anthropic</div></div>
+</div>
+<div style="padding:1rem 1.2rem;font-size:.85rem">
+<p style="color:var(--text-light);margin-bottom:.8rem">長文分析・コード生成・論理的思考に強い。安全性重視のAIアシスタント</p>
+<ul style="list-style:none;padding:0;margin:0">
+<li style="padding:.3rem 0;border-bottom:1px solid #f0f0f0"><a href="https://claude.ai/" target="_blank" class="external-link">Claude（Web版）</a></li>
+<li style="padding:.3rem 0"><a href="https://console.anthropic.com/" target="_blank" class="external-link">Anthropic Console</a></li>
+</ul>
+</div>
+</div>
+
+<div style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);overflow:hidden">
+<div style="padding:1rem 1.2rem;background:linear-gradient(135deg,#4285f4,#1a73e8);color:#fff;display:flex;align-items:center;gap:.8rem">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/></svg>
+<div><div style="font-weight:700;font-size:1rem">Gemini</div><div style="font-size:.7rem;opacity:.8">Google</div></div>
+</div>
+<div style="padding:1rem 1.2rem;font-size:.85rem">
+<p style="color:var(--text-light);margin-bottom:.8rem">Google Workspace連携に強い。スプレッドシート・ドキュメント操作に便利</p>
+<ul style="list-style:none;padding:0;margin:0">
+<li style="padding:.3rem 0;border-bottom:1px solid #f0f0f0"><a href="https://gemini.google.com/" target="_blank" class="external-link">Gemini（Web版）</a></li>
+<li style="padding:.3rem 0"><a href="https://aistudio.google.com/" target="_blank" class="external-link">Google AI Studio</a></li>
+</ul>
+</div>
+</div>
+
+<div style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);overflow:hidden">
+<div style="padding:1rem 1.2rem;background:linear-gradient(135deg,#7c3aed,#5b21b6);color:#fff;display:flex;align-items:center;gap:.8rem">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+<div><div style="font-weight:700;font-size:1rem">Perplexity</div><div style="font-size:.7rem;opacity:.8">AI検索エンジン</div></div>
+</div>
+<div style="padding:1rem 1.2rem;font-size:.85rem">
+<p style="color:var(--text-light);margin-bottom:.8rem">リアルタイム情報検索に特化。ソース付きの回答で市場調査・競合分析に最適</p>
+<ul style="list-style:none;padding:0;margin:0">
+<li style="padding:.3rem 0"><a href="https://www.perplexity.ai/" target="_blank" class="external-link">Perplexity AI</a></li>
+</ul>
+</div>
+</div>
+
+<div style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);overflow:hidden">
+<div style="padding:1rem 1.2rem;background:linear-gradient(135deg,#0ea5e9,#0284c7);color:#fff;display:flex;align-items:center;gap:.8rem">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/></svg>
+<div><div style="font-weight:700;font-size:1rem">AI画像生成</div><div style="font-size:.7rem;opacity:.8">商品画像・バナー作成</div></div>
+</div>
+<div style="padding:1rem 1.2rem;font-size:.85rem">
+<p style="color:var(--text-light);margin-bottom:.8rem">EC商品画像やバナー制作に活用できる画像生成AIツール</p>
+<ul style="list-style:none;padding:0;margin:0">
+<li style="padding:.3rem 0;border-bottom:1px solid #f0f0f0"><a href="https://www.midjourney.com/" target="_blank" class="external-link">Midjourney</a></li>
+<li style="padding:.3rem 0;border-bottom:1px solid #f0f0f0"><a href="https://openai.com/dall-e-3" target="_blank" class="external-link">DALL-E 3（ChatGPT内）</a></li>
+<li style="padding:.3rem 0"><a href="https://www.canva.com/" target="_blank" class="external-link">Canva AI</a></li>
+</ul>
+</div>
+</div>
+
+<div style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);overflow:hidden">
+<div style="padding:1rem 1.2rem;background:linear-gradient(135deg,#475569,#334155);color:#fff;display:flex;align-items:center;gap:.8rem">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+<div><div style="font-weight:700;font-size:1rem">その他AIツール</div><div style="font-size:.7rem;opacity:.8">業務効率化</div></div>
+</div>
+<div style="padding:1rem 1.2rem;font-size:.85rem">
+<p style="color:var(--text-light);margin-bottom:.8rem">議事録・翻訳・文章校正など特化型AIツール</p>
+<ul style="list-style:none;padding:0;margin:0">
+<li style="padding:.3rem 0;border-bottom:1px solid #f0f0f0"><a href="https://notebooklm.google.com/" target="_blank" class="external-link">NotebookLM（資料分析）</a></li>
+<li style="padding:.3rem 0;border-bottom:1px solid #f0f0f0"><a href="https://www.deepl.com/translator" target="_blank" class="external-link">DeepL（翻訳）</a></li>
+<li style="padding:.3rem 0"><a href="https://gamma.app/" target="_blank" class="external-link">Gamma（プレゼン資料AI生成）</a></li>
+</ul>
+</div>
+</div>
+
+</div>
+
+<div style="background:var(--card-bg);border-radius:var(--radius);padding:1.5rem;box-shadow:var(--shadow);border:1px solid var(--border)">
+<h3 style="color:var(--accent);margin-bottom:.8rem;font-size:1rem">AI活用のポイント</h3>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1rem;font-size:.85rem">
+<div style="padding:.8rem;background:var(--bg);border-radius:8px"><strong style="color:var(--primary)">商品ページ改善</strong><br><span style="color:var(--text-light)">商品説明文の生成・SEOキーワード提案にChatGPT/Claudeを活用</span></div>
+<div style="padding:.8rem;background:var(--bg);border-radius:8px"><strong style="color:var(--primary)">競合分析</strong><br><span style="color:var(--text-light)">Perplexityで競合店舗の最新動向・市場トレンドを調査</span></div>
+<div style="padding:.8rem;background:var(--bg);border-radius:8px"><strong style="color:var(--primary)">バナー制作</strong><br><span style="color:var(--text-light)">Canva AI / Midjourneyで商品バナーやイベント画像を作成</span></div>
+<div style="padding:.8rem;background:var(--bg);border-radius:8px"><strong style="color:var(--primary)">レポート作成</strong><br><span style="color:var(--text-light)">Gemini / NotebookLMでスプレッドシートのデータ分析・要約</span></div>
+</div>
+</div>
 </div>
 
 <!-- ===== LINKS ===== -->
