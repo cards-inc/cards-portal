@@ -299,18 +299,18 @@ AIチャットボット
 <img src="https://cd-s.co.jp/wp-content/themes/%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BEcards/assets/images/common/logo.webp" alt="CARDS" style="height:40px;max-width:160px;object-fit:contain;filter:brightness(0) invert(1)">
 <h3 style="margin:0">Mission / Vision / Values</h3>
 </div>
-<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:.5rem">
+<div id="mvv-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:.5rem">
 <div>
 <div style="font-size:.7rem;opacity:.6;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.3rem">Mission</div>
-<div style="font-size:1.1rem;font-weight:700;line-height:1.5">作り手の想いを届ける切り札となる</div>
+<div id="mvv-mission" style="font-size:1.1rem;font-weight:700;line-height:1.5">作り手の想いを届ける切り札となる</div>
 </div>
 <div>
 <div style="font-size:.7rem;opacity:.6;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.3rem">Vision</div>
-<div style="font-size:1.1rem;font-weight:700;line-height:1.5">挑戦する作り手を増やす</div>
+<div id="mvv-vision" style="font-size:1.1rem;font-weight:700;line-height:1.5">挑戦する作り手を増やす</div>
 </div>
 <div>
 <div style="font-size:.7rem;opacity:.6;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.3rem">Values</div>
-<div style="font-size:1.1rem;font-weight:700;line-height:1.5">お客様第一で最善を尽くすプロ集団である</div>
+<div id="mvv-values" style="font-size:1.1rem;font-weight:700;line-height:1.5">お客様第一で最善を尽くすプロ集団である</div>
 </div>
 </div>
 </div>
@@ -585,93 +585,14 @@ AIチャットボット
 <div id="page-org" class="page">
 <h2 class="page-title">組織図・担当者</h2>
 <div class="org-tree">
-<div class="tree">
-<ul>
-<li>
-<div class="node node-ceo">代表 猿川哲朗</div>
-<ul>
-<li>
-<div class="node node-div">EC運用代行事業</div>
-<ul>
-<li>
-<div class="node node-dept">楽天市場運用代行<br><small>猿川和明</small></div>
-<ul>
-<li><div class="node node-member"><div class="m-name">内田</div><div class="m-clients">Herz Skin / 関西酵素<br>スピック / KATAN</div></div></li>
-<li><div class="node node-member"><div class="m-name">秋葉</div><div class="m-clients">HLT BEAUTY / ROSIER<br>LOVE CHORME / in sky</div></div></li>
-<li><div class="node node-member"><div class="m-name">飛鳥間</div><div class="m-clients">イエリオ / yu'now</div></div></li>
-<li><div class="node node-member"><div class="m-name">千葉慎</div><div class="m-clients">白糠町 / 一関市<br>角田市</div></div></li>
-<li><div class="node node-member"><div class="m-name">千葉</div><div class="m-clients">常総市</div></div></li>
-<li><div class="node node-member"><div class="m-name">猿川(和)</div><div class="m-clients">Nelse / 和牛セレブ</div></div></li>
-</ul>
-</li>
-<li>
-<div class="node node-dept">Amazon運用代行<br><small>猿川和明</small></div>
-<ul>
-<li><div class="node node-member"><div class="m-name">小筆</div><div class="m-clients">KATAN / NOCK WOOD<br>和牛セレブ / 森永乳業</div></div></li>
-<li><div class="node node-member"><div class="m-name">櫻井</div><div class="m-clients">エゾボリック<br>ニッセイエコ</div></div></li>
-<li><div class="node node-member"><div class="m-name">平尾</div><div class="m-clients">silk the rich</div></div></li>
-<li><div class="node node-member"><div class="m-name">尾崎</div><div class="m-clients">登別町</div></div></li>
-</ul>
-</li>
-<li>
-<div class="node node-dept">アシスタント<br><small>上原</small></div>
-<ul>
-<li><div class="node node-member"><div class="m-name">佐藤</div><div class="m-clients">Herz Skin / HLT系<br>スピック / Nelse / BP</div></div></li>
-<li><div class="node node-member"><div class="m-name">中瀬</div><div class="m-clients">yu'now / KATAN<br>和牛セレブ / Amazon系</div></div></li>
-<li><div class="node node-member"><div class="m-name">櫻井</div><div class="m-clients">白糠町 / 一関市<br>角田市 / LOVE CHORME</div></div></li>
-<li><div class="node node-member"><div class="m-name">松下</div><div class="m-clients">登別町 / NOCK WOOD<br>森永乳業</div></div></li>
-<li><div class="node node-member"><div class="m-name">上原</div><div class="m-clients">関西酵素</div></div></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<div class="node node-div">自社ブランド</div>
-<ul>
-<li><div class="node node-member"><div class="m-name">黛</div><div class="m-clients">銀座華茶</div></div></li>
-<li><div class="node node-member"><div class="m-name">黛</div><div class="m-clients">百福堂</div></div></li>
-</ul>
-</li>
-<li>
-<div class="node node-div">SCM／CS<br><small>上原</small></div>
-<ul>
-<li><div class="node node-member"><div class="m-name">松下</div></div></li>
-<li><div class="node node-member"><div class="m-name">伊藤</div></div></li>
-</ul>
-</li>
-<li>
-<div class="node node-div">新規事業/営業戦略室<br><small>上原</small></div>
-</li>
-</ul>
-</li>
-</ul>
-</div>
+<div class="tree" id="org-tree-container"></div>
 </div>
 
 <div class="sub-title" style="margin-top:2.5rem">担当者一覧 - コンサルタント</div>
-<div class="team-cards">
-<div class="team-card"><div class="team-card-header"><span class="tc-name">内田</span><span class="tc-role">コンサル&広告運用</span></div><div class="team-card-body"><table><tr><td>Herz Skin</td><td><span class="tag tag-rakuten">Rakuten</span></td><td>AS: 佐藤</td></tr><tr><td>関西酵素</td><td><span class="tag tag-rakuten">Rakuten</span></td><td>AS: 原</td></tr><tr><td>スピック</td><td><span class="tag tag-rakuten">Rakuten</span></td><td>AS: 佐藤</td></tr><tr><td>KATAN</td><td><span class="tag tag-rakuten">Rakuten</span></td><td>AS: 中瀬</td></tr></table></div></div>
-<div class="team-card"><div class="team-card-header"><span class="tc-name">秋葉</span><span class="tc-role">コンサル&広告運用</span></div><div class="team-card-body"><table><tr><td>HLT BEAUTY</td><td><span class="tag tag-rakuten">Rakuten</span></td><td>AS: 佐藤</td></tr><tr><td>HLT ROSIER</td><td><span class="tag tag-rakuten">Rakuten</span></td><td>AS: 佐藤</td></tr><tr><td>LOVE CHORME</td><td><span class="tag tag-rakuten">Rakuten</span></td><td>AS: 櫻井</td></tr><tr><td>in sky</td><td><span class="tag tag-rakuten">Rakuten</span></td><td>AS: 櫻井</td></tr></table></div></div>
-<div class="team-card"><div class="team-card-header"><span class="tc-name">飛鳥間</span><span class="tc-role">コンサル&広告運用</span></div><div class="team-card-body"><table><tr><td>イエリオ</td><td><span class="tag tag-rakuten">Rakuten</span></td><td>AS: 佐藤</td></tr><tr><td>yu'now</td><td><span class="tag tag-rakuten">Rakuten</span></td><td>AS: 中瀬</td></tr></table></div></div>
-<div class="team-card"><div class="team-card-header"><span class="tc-name">千葉慎</span><span class="tc-role">コンサル&広告運用</span></div><div class="team-card-body"><table><tr><td>白糠町</td><td><span class="tag tag-rakuten">Rakuten</span></td><td>AS: 櫻井</td></tr><tr><td>一関市</td><td><span class="tag tag-rakuten">Rakuten</span></td><td>AS: 櫻井</td></tr><tr><td>角田市</td><td><span class="tag tag-rakuten">Rakuten</span></td><td>AS: 櫻井</td></tr></table></div></div>
-<div class="team-card"><div class="team-card-header"><span class="tc-name">千葉</span><span class="tc-role">コンサル&広告運用</span></div><div class="team-card-body"><table><tr><td>常総市</td><td><span class="tag tag-rakuten">Rakuten</span></td><td>AS: 秋葉</td></tr></table></div></div>
-<div class="team-card"><div class="team-card-header"><span class="tc-name">猿川(和)</span><span class="tc-role">コンサル&広告運用</span></div><div class="team-card-body"><table><tr><td>Nelse</td><td><span class="tag tag-rakuten">Rakuten</span></td><td>AS: 佐藤</td></tr><tr><td>和牛セレブ</td><td><span class="tag tag-rakuten">Rakuten</span></td><td>AS: 中瀬</td></tr></table></div></div>
-<div class="team-card"><div class="team-card-header"><span class="tc-name">小筆</span><span class="tc-role">コンサル&広告運用</span></div><div class="team-card-body"><table><tr><td>KATAN</td><td><span class="tag tag-amazon">Amazon</span></td><td>AS: 中瀬</td></tr><tr><td>NOCK WOOD</td><td><span class="tag tag-amazon">Amazon</span></td><td>AS: 松下</td></tr><tr><td>和牛セレブ</td><td><span class="tag tag-amazon">Amazon</span></td><td>AS: 中瀬</td></tr><tr><td>森永乳業</td><td><span class="tag tag-amazon">Amazon</span></td><td>AS: 中瀬/松下</td></tr></table></div></div>
-<div class="team-card"><div class="team-card-header"><span class="tc-name">櫻井</span><span class="tc-role">コンサル&広告運用</span></div><div class="team-card-body"><table><tr><td>エゾボリック</td><td><span class="tag tag-amazon">Amazon</span></td><td>AS: 中瀬</td></tr><tr><td>ニッセイエコ</td><td><span class="tag tag-amazon">Amazon</span></td><td>AS: 中瀬</td></tr></table></div></div>
-<div class="team-card"><div class="team-card-header"><span class="tc-name">平尾</span><span class="tc-role">コンサル&広告運用</span></div><div class="team-card-body"><table><tr><td>silk the rich</td><td><span class="tag tag-amazon">Amazon</span></td><td></td></tr></table></div></div>
-<div class="team-card"><div class="team-card-header"><span class="tc-name">尾崎</span><span class="tc-role">コンサル&広告運用</span></div><div class="team-card-body"><table><tr><td>登別町</td><td><span class="tag tag-amazon">Amazon</span></td><td>AS: 松下</td></tr><tr><td>森永乳業</td><td><span class="tag tag-amazon">Amazon</span></td><td>AS: 中瀬/松下</td></tr></table></div></div>
-<div class="team-card"><div class="team-card-header"><span class="tc-name">黛</span><span class="tc-role">コンサル&広告運用</span></div><div class="team-card-body"><table><tr><td>銀座華茶</td><td><span class="tag tag-rakuten">Rakuten</span></td><td>AS: 佐藤</td></tr><tr><td>百福堂</td><td><span class="tag tag-rakuten">Rakuten</span></td><td>AS: 佐藤</td></tr></table></div></div>
-</div>
+<div id="team-consultant-cards" class="team-cards"></div>
 
 <div class="sub-title" style="margin-top:2rem">担当者一覧 - アシスタント</div>
-<div class="team-cards">
-<div class="team-card"><div class="team-card-header" style="background:linear-gradient(135deg,#2d1b69,#6C3CE0)"><span class="tc-name">佐藤</span><span class="tc-role">アシスタント</span></div><div class="team-card-body"><table><tr><td>Herz Skin</td><td><span class="tag tag-rakuten">Rakuten</span></td></tr><tr><td>HLT BEAUTY / ROSIER</td><td><span class="tag tag-rakuten">Rakuten</span></td></tr><tr><td>イエリオ</td><td><span class="tag tag-rakuten">Rakuten</span></td></tr><tr><td>スピック</td><td><span class="tag tag-rakuten">Rakuten</span></td></tr><tr><td>Nelse</td><td><span class="tag tag-rakuten">Rakuten</span></td></tr><tr><td>銀座華茶 / 百福堂</td><td><span class="tag tag-rakuten">Rakuten</span></td></tr></table></div></div>
-<div class="team-card"><div class="team-card-header" style="background:linear-gradient(135deg,#2d1b69,#6C3CE0)"><span class="tc-name">中瀬</span><span class="tc-role">アシスタント</span></div><div class="team-card-body"><table><tr><td>yu'now</td><td><span class="tag tag-rakuten">Rakuten</span></td></tr><tr><td>KATAN</td><td><span class="tag tag-rakuten">Rakuten</span> <span class="tag tag-amazon">Amazon</span></td></tr><tr><td>和牛セレブ</td><td><span class="tag tag-rakuten">Rakuten</span> <span class="tag tag-amazon">Amazon</span></td></tr><tr><td>エゾボリック / ニッセイエコ</td><td><span class="tag tag-amazon">Amazon</span></td></tr><tr><td>森永乳業</td><td><span class="tag tag-amazon">Amazon</span></td></tr></table></div></div>
-<div class="team-card"><div class="team-card-header" style="background:linear-gradient(135deg,#2d1b69,#6C3CE0)"><span class="tc-name">櫻井</span><span class="tc-role">アシスタント</span></div><div class="team-card-body"><table><tr><td>白糠町 / 一関市 / 角田市</td><td><span class="tag tag-rakuten">Rakuten</span></td></tr><tr><td>LOVE CHORME / in sky</td><td><span class="tag tag-rakuten">Rakuten</span></td></tr></table></div></div>
-<div class="team-card"><div class="team-card-header" style="background:linear-gradient(135deg,#2d1b69,#6C3CE0)"><span class="tc-name">松下</span><span class="tc-role">アシスタント</span></div><div class="team-card-body"><table><tr><td>登別町</td><td><span class="tag tag-amazon">Amazon</span></td></tr><tr><td>NOCK WOOD</td><td><span class="tag tag-amazon">Amazon</span></td></tr><tr><td>森永乳業</td><td><span class="tag tag-amazon">Amazon</span></td></tr></table></div></div>
-<div class="team-card"><div class="team-card-header" style="background:linear-gradient(135deg,#2d1b69,#6C3CE0)"><span class="tc-name">上原</span><span class="tc-role">アシスタント</span></div><div class="team-card-body"><table><tr><td>関西酵素</td><td><span class="tag tag-rakuten">Rakuten</span></td></tr></table></div></div>
-<div class="team-card"><div class="team-card-header" style="background:linear-gradient(135deg,#2d1b69,#6C3CE0)"><span class="tc-name">秋葉</span><span class="tc-role">アシスタント</span></div><div class="team-card-body"><table><tr><td>常総市</td><td><span class="tag tag-rakuten">Rakuten</span></td></tr></table></div></div>
-</div>
+<div id="team-assistant-cards" class="team-cards"></div>
 </div>
 
 <!-- ===== RULES ===== -->
@@ -952,7 +873,14 @@ function loadAllData(){
   fetch(GAS_API + '?action=getAllData')
     .then(function(r){return r.json()})
     .then(function(d){
+      if(d.accounts) renderAccounts(d.accounts);
+      if(d.storeLogins) renderStoreLogins(d.storeLogins);
+      if(d.clients){ renderClients(d.clients); renderDrive(d.clients); }
+      if(d.team){ renderTeam(d.team); renderTeamCards(d.team); }
+      if(d.rules) renderRules(d.rules);
       if(d.news) renderNews(d.news);
+      if(d.company) renderCompany(d.company);
+      if(d.org) renderOrg(d.org);
       if(d.links) renderLinksFromApi(d.links);
       if(d.drive) renderDriveFromApi(d.drive);
       if(d.logins) renderLoginsFromApi(d.logins);
@@ -1121,6 +1049,107 @@ function renderRules(rulesHtml){
   if(rulesSection){
     rulesSection.innerHTML=rulesHtml;
   }
+}
+
+function renderCompany(company){
+  if(!company)return;
+  var m=document.getElementById('mvv-mission');if(m&&company.Mission)m.textContent=company.Mission;
+  var v=document.getElementById('mvv-vision');if(v&&company.Vision)v.textContent=company.Vision;
+  var val=document.getElementById('mvv-values');if(val&&company.Values)val.textContent=company.Values;
+}
+
+function renderOrg(org){
+  if(!org||!org.rows||!org.rows.length)return;
+  var container=document.getElementById('org-tree-container');if(!container)return;
+  var rows=org.rows;
+  // Build tree: CEO -> 事業部 -> 部門 -> メンバー
+  var ceo=null;var divisions=[];var currentDiv=null;var currentDept=null;
+  rows.forEach(function(r){
+    var level=r[0],dept=r[1],person=r[2],clients=r[3]||'';
+    if(level==='CEO'){
+      ceo={dept:dept,person:person};
+    }else if(level==='事業部'){
+      currentDiv={name:dept,leader:person,depts:[],members:[]};
+      divisions.push(currentDiv);currentDept=null;
+    }else if(level==='部門'){
+      currentDept={name:dept,leader:person,members:[]};
+      if(currentDiv)currentDiv.depts.push(currentDept);
+    }else if(level==='メンバー'){
+      var member={name:person,clients:clients};
+      if(currentDept)currentDept.members.push(member);
+      else if(currentDiv)currentDiv.members.push(member);
+    }
+  });
+  // Generate HTML
+  var html='<ul><li>';
+  html+='<div class="node node-ceo">'+escHtml((ceo?ceo.dept+' ':'')+((ceo&&ceo.person)||''))+'</div>';
+  html+='<ul>';
+  divisions.forEach(function(div){
+    html+='<li>';
+    var divLabel=escHtml(div.name);
+    if(div.leader)divLabel+='<br><small>'+escHtml(div.leader)+'</small>';
+    html+='<div class="node node-div">'+divLabel+'</div>';
+    if(div.depts.length||div.members.length){
+      html+='<ul>';
+      div.depts.forEach(function(dept){
+        html+='<li>';
+        var deptLabel=escHtml(dept.name);
+        if(dept.leader)deptLabel+='<br><small>'+escHtml(dept.leader)+'</small>';
+        html+='<div class="node node-dept">'+deptLabel+'</div>';
+        if(dept.members.length){
+          html+='<ul>';
+          dept.members.forEach(function(m){
+            html+='<li><div class="node node-member"><div class="m-name">'+escHtml(m.name)+'</div>';
+            if(m.clients)html+='<div class="m-clients">'+escHtml(m.clients).replace(/ \/ /g,'<br>')+'</div>';
+            html+='</div></li>';
+          });
+          html+='</ul>';
+        }
+        html+='</li>';
+      });
+      div.members.forEach(function(m){
+        html+='<li><div class="node node-member"><div class="m-name">'+escHtml(m.name)+'</div>';
+        if(m.clients)html+='<div class="m-clients">'+escHtml(m.clients).replace(/ \/ /g,'<br>')+'</div>';
+        html+='</div></li>';
+      });
+      html+='</ul>';
+    }
+    html+='</li>';
+  });
+  html+='</ul></li></ul>';
+  container.innerHTML=html;
+}
+
+function renderTeamCards(team){
+  if(!team||!team.length)return;
+  var consultants={};var assistants={};
+  team.forEach(function(t){
+    var p=t.platform?t.platform.toLowerCase():'';
+    var tc=p.indexOf('amazon')>=0?'tag-amazon':p.indexOf('yahoo')>=0?'tag-yahoo':'tag-rakuten';
+    var entry={client:t.client,platform:t.platform,tagClass:tc,adOps:t.adOps||''};
+    // Group by consultant
+    if(t.consultant){
+      t.consultant.split('/').forEach(function(name){
+        name=name.trim();if(!name)return;
+        if(!consultants[name])consultants[name]=[];
+        consultants[name].push(entry);
+      });
+    }
+  });
+  // Consultant cards
+  var cHtml='';
+  Object.keys(consultants).forEach(function(name){
+    cHtml+='<div class="team-card"><div class="team-card-header"><span class="tc-name">'+escHtml(name)+'</span><span class="tc-role">コンサル&広告運用</span></div><div class="team-card-body"><table>';
+    consultants[name].forEach(function(e){
+      cHtml+='<tr><td>'+escHtml(e.client)+'</td><td><span class="tag '+e.tagClass+'">'+escHtml(e.platform)+'</span></td><td></td></tr>';
+    });
+    cHtml+='</table></div></div>';
+  });
+  var cContainer=document.getElementById('team-consultant-cards');
+  if(cContainer)cContainer.innerHTML=cHtml;
+  // Assistant cards - currently no separate assistant data in team sheet, leave empty
+  var aContainer=document.getElementById('team-assistant-cards');
+  if(aContainer&&!aContainer.innerHTML)aContainer.innerHTML='<p style="color:var(--text-light);font-size:.85rem">アシスタントデータは担当者一覧シートに追加してください</p>';
 }
 
 /* API render functions */
