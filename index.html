@@ -82,11 +82,11 @@ body{font-family:'Segoe UI','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-seri
 /* Tables */
 .table-wrapper{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);overflow-x:auto;margin-bottom:1.5rem;border:1px solid var(--border)}
 .table-wrapper h3{padding:1rem 1.5rem .5rem;color:var(--accent);font-size:1rem}
-table{width:100%;border-collapse:collapse;font-size:.85rem}
-thead th{background:linear-gradient(135deg,#0E043A,#2d1b69);color:#fff;padding:.7rem 1rem;text-align:left;font-weight:600;white-space:nowrap;font-size:.82rem;letter-spacing:.02em}
+table{width:100%;border-collapse:collapse;font-size:.88rem}
+thead th{background:linear-gradient(135deg,#0E043A,#2d1b69);color:#fff;padding:.8rem 1.2rem;text-align:left;font-weight:600;white-space:nowrap;font-size:.84rem;letter-spacing:.02em}
 tbody tr{border-bottom:1px solid var(--border);transition:background .15s}
 tbody tr:hover{background:#f0ecfa}
-tbody td{padding:.65rem 1rem;vertical-align:top}
+tbody td{padding:.75rem 1.2rem;vertical-align:top;line-height:1.6}
 tbody tr:nth-child(even){background:#fafbfc}
 
 /* Tags */
@@ -148,33 +148,44 @@ tbody tr:nth-child(even){background:#fafbfc}
 .info-card li:last-child{border-bottom:none}
 .info-card a{color:var(--accent);text-decoration:none}
 .info-card a:hover{color:var(--highlight);text-decoration:underline}
-.external-link::after{content:' \2197';font-size:.7rem}
+.external-link::after{content:none}
 
 /* Rules */
-.rules-content{background:var(--card-bg);border-radius:var(--radius);padding:2rem;box-shadow:var(--shadow);line-height:1.9;font-size:.9rem}
+.rules-content{background:var(--card-bg);border-radius:var(--radius);padding:2.5rem;box-shadow:var(--shadow);line-height:2;font-size:.92rem}
 .rules-content h2{font-size:1.15rem;color:var(--primary);margin:1.5rem 0 .8rem;padding-bottom:.3rem;border-bottom:2px solid var(--highlight)}
 .rules-content h2:first-child{margin-top:0}
 .rules-content h3{font-size:1rem;color:var(--accent);margin:1rem 0 .5rem}
 .rules-content ul{padding-left:1.5rem;margin:.3rem 0}
 .rules-content li{margin:.2rem 0}
 
-/* Org chart */
-.org-chart{background:var(--card-bg);border-radius:var(--radius);padding:2rem;box-shadow:var(--shadow);overflow-x:auto}
-.org-h{display:flex;flex-direction:column;gap:2rem}
-.org-row{display:flex;align-items:flex-start;gap:1rem}
-.org-row-label{min-width:180px;flex-shrink:0}
-.org-row-items{display:flex;flex-wrap:wrap;gap:.5rem;flex:1}
-.org-ceo{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;font-size:1.1rem;font-weight:700;padding:.7rem 1.5rem;border-radius:10px;display:inline-flex;align-items:center;gap:.5rem}
-.org-div{background:var(--accent);color:#fff;font-weight:600;padding:.5rem 1rem;border-radius:8px;font-size:.9rem;display:inline-flex;align-items:center;gap:.4rem;white-space:nowrap}
-.org-dept{background:var(--highlight);color:#fff;font-weight:600;padding:.45rem .9rem;border-radius:7px;font-size:.83rem;display:inline-flex;align-items:center;gap:.4rem;white-space:nowrap}
-.org-card{background:#f8f9fa;border:1px solid var(--border);border-radius:8px;padding:.5rem .8rem;font-size:.82rem;display:flex;flex-direction:column;gap:.2rem;min-width:140px;transition:var(--transition)}
-.org-card:hover{box-shadow:0 2px 8px rgba(0,0,0,.1);border-color:var(--accent)}
-.org-card .org-name{font-weight:700;color:var(--accent);font-size:.85rem}
-.org-card .org-clients{color:var(--text-light);font-size:.72rem;line-height:1.4}
-.org-sub{margin-left:180px;padding-top:.5rem;display:flex;flex-direction:column;gap:.8rem}
-.org-sub-row{display:flex;align-items:flex-start;gap:1rem}
-.org-sub-label{min-width:240px;flex-shrink:0;display:flex;align-items:center;gap:.5rem}
-.org-sub-items{display:flex;flex-wrap:wrap;gap:.5rem;flex:1}
+/* Org chart - Tree style */
+.org-tree{background:var(--card-bg);border-radius:var(--radius);padding:2.5rem 1.5rem;box-shadow:var(--shadow);overflow-x:auto}
+.tree{display:flex;flex-direction:column;align-items:center}
+.tree ul{display:flex;justify-content:center;padding-top:30px;position:relative;list-style:none;margin:0;padding-left:0}
+.tree li{display:flex;flex-direction:column;align-items:center;position:relative;padding:30px 10px 0}
+.tree li::before,.tree li::after{content:'';position:absolute;top:0;width:50%;height:30px;border-top:2px solid var(--border)}
+.tree li::before{right:50%;border-right:2px solid var(--border)}
+.tree li::after{left:50%;border-left:2px solid var(--border)}
+.tree li:first-child::before,.tree li:last-child::after{border:none}
+.tree li:first-child::after{border-radius:8px 0 0 0}
+.tree li:last-child::before{border-radius:0 8px 0 0}
+.tree li:only-child::before,.tree li:only-child::after{border:none}
+.tree li:only-child{padding-top:0}
+.tree ul>li:only-child{padding-top:30px}
+.tree ul>li:only-child::before{content:'';position:absolute;top:0;left:50%;width:0;height:30px;border-left:2px solid var(--border)}
+.tree>ul{padding-top:0}
+.tree>ul>li{padding-top:0}
+.tree>ul>li::before,.tree>ul>li::after{display:none}
+.tree .node{display:inline-block;padding:.6rem 1.2rem;border-radius:10px;font-size:.85rem;font-weight:600;text-align:center;position:relative;z-index:1;min-width:100px;white-space:nowrap}
+.tree .node-ceo{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;font-size:1rem;padding:.8rem 2rem;box-shadow:0 4px 15px rgba(14,4,58,.25)}
+.tree .node-div{background:var(--accent);color:#fff;padding:.6rem 1.5rem;box-shadow:0 2px 8px rgba(14,4,58,.15)}
+.tree .node-dept{background:var(--highlight);color:#fff;padding:.55rem 1.2rem;font-size:.82rem}
+.tree .node-member{background:#fff;color:var(--text);border:2px solid var(--border);padding:.5rem 1rem;font-size:.8rem;font-weight:500;transition:all .2s}
+.tree .node-member:hover{border-color:var(--highlight);box-shadow:0 2px 10px rgba(108,60,224,.15)}
+.tree .node-member .m-name{font-weight:700;color:var(--accent)}
+.tree .node-member .m-clients{font-size:.7rem;color:var(--text-light);margin-top:.2rem;white-space:normal;max-width:130px;line-height:1.3}
+/* Connector from parent to children */
+.tree ul::before{content:'';position:absolute;top:0;left:50%;border-left:2px solid var(--border);height:30px}
 
 .rule-link{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.5rem;background:var(--accent);color:#fff;text-decoration:none;border-radius:8px;font-weight:600;transition:all .2s}
 .rule-link:hover{background:var(--highlight)}
@@ -212,9 +223,9 @@ tbody tr:nth-child(even){background:#fafbfc}
 
 <!-- Sidebar -->
 <aside class="sidebar" id="sidebar">
-<div class="sidebar-header">
-<h1>CARDS Portal</h1>
-<p>社内ポータルサイト</p>
+<div class="sidebar-header" style="cursor:pointer" onclick="switchPage('home',document.querySelector('[data-page=home]'))">
+<img src="https://cd-s.co.jp/wp-content/themes/%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BEcards/assets/images/common/logo.webp" alt="CARDS" style="height:28px;max-width:140px;object-fit:contain;filter:brightness(0) invert(1);display:block">
+<p style="margin-top:.4rem">Portal</p>
 </div>
 <nav class="sidebar-nav">
 <a href="#" class="active" data-page="home" onclick="switchPage('home',this);return false">
@@ -252,10 +263,6 @@ tbody tr:nth-child(even){background:#fafbfc}
 <a href="#" data-page="drive" onclick="switchPage('drive',this);return false">
 <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg></span>
 共有ドライブ
-</a>
-<a href="#" data-page="company" onclick="switchPage('company',this);return false">
-<span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9h1"/><path d="M9 13h1"/><path d="M9 17h1"/></svg></span>
-会社情報
 </a>
 <a href="#" data-page="links" onclick="switchPage('links',this);return false">
 <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg></span>
@@ -576,68 +583,61 @@ tbody tr:nth-child(even){background:#fafbfc}
 <!-- ===== ORG ===== -->
 <div id="page-org" class="page">
 <h2 class="page-title">組織図</h2>
-<div class="org-chart">
-<div class="org-h">
-
-<div class="org-row">
-<div class="org-row-label"><span class="org-ceo">代表 猿川哲朗</span></div>
-</div>
-
-<div class="org-row">
-<div class="org-row-label"><span class="org-div">EC運用代行事業</span></div>
-</div>
-
-<div class="org-sub">
-<div class="org-sub-row">
-<div class="org-sub-label"><span class="org-dept">楽天市場運用代行 / 猿川和明</span></div>
-<div class="org-sub-items">
-<div class="org-card"><div class="org-name">内田</div><div class="org-clients">Herz Skin / 関西酵素 / スピック / KATAN</div></div>
-<div class="org-card"><div class="org-name">秋葉</div><div class="org-clients">HLT BEAUTY / HLT ROSIER / LOVE CHORME / in sky</div></div>
-<div class="org-card"><div class="org-name">飛鳥間</div><div class="org-clients">イエリオ / yu'now</div></div>
-<div class="org-card"><div class="org-name">千葉慎</div><div class="org-clients">白糠町 / 一関市 / 角田市</div></div>
-<div class="org-card"><div class="org-name">千葉</div><div class="org-clients">常総市</div></div>
-<div class="org-card"><div class="org-name">猿川(和)</div><div class="org-clients">Nelse / 和牛セレブ</div></div>
-<div class="org-card"><div class="org-name">麹</div><div class="org-clients">銀座華茶 / 百福堂</div></div>
-<div class="org-card"><div class="org-name">尾崎</div><div class="org-clients">登別町</div></div>
-</div>
-</div>
-
-<div class="org-sub-row">
-<div class="org-sub-label"><span class="org-dept">Amazon運用代行 / 猿川和明</span></div>
-<div class="org-sub-items">
-<div class="org-card"><div class="org-name">小筆</div><div class="org-clients">KATAN / NOCK WOOD / 和牛セレブ / 森永乳業</div></div>
-<div class="org-card"><div class="org-name">櫻井</div><div class="org-clients">エゾボリック / ニッセイエコ</div></div>
-<div class="org-card"><div class="org-name">平尾</div><div class="org-clients">silk the rich</div></div>
-</div>
-</div>
-
-<div class="org-sub-row">
-<div class="org-sub-label"><span class="org-dept">自社ブランド</span></div>
-<div class="org-sub-items">
-<div class="org-card"><div class="org-name">楽天運用</div></div>
-<div class="org-card"><div class="org-name">Amazon運用</div></div>
-<div class="org-card"><div class="org-name">SCM/CS統括 / 上原</div><div class="org-clients">松下(SCM) / 伊藤(CS)</div></div>
-</div>
-</div>
-</div>
-
-<div class="org-row">
-<div class="org-row-label"><span class="org-div">アシスタント組織 / 上原</span></div>
-<div class="org-row-items">
-<div class="org-card"><div class="org-name">佐藤</div><div class="org-clients">Herz Skin / HLT BEAUTY / HLT ROSIER / イエリオ / スピック / Nelse / 銀座華茶 / 百福堂</div></div>
-<div class="org-card"><div class="org-name">中瀬</div><div class="org-clients">yu'now / KATAN / 和牛セレブ / エゾボリック / ニッセイエコ / 森永乳業</div></div>
-<div class="org-card"><div class="org-name">櫻井</div><div class="org-clients">白糠町 / 一関市 / 角田市 / LOVE CHORME / in sky</div></div>
-<div class="org-card"><div class="org-name">秋葉</div><div class="org-clients">常総市</div></div>
-<div class="org-card"><div class="org-name">松下</div><div class="org-clients">登別町 / NOCK WOOD / 森永乳業</div></div>
-<div class="org-card"><div class="org-name">増田</div><div class="org-clients">silk the rich</div></div>
-<div class="org-card"><div class="org-name">上原</div><div class="org-clients">関西酵素</div></div>
-</div>
-</div>
-
-<div class="org-row">
-<div class="org-row-label"><span class="org-div">新規事業/営業戦略室 / 上原</span></div>
-</div>
-
+<div class="org-tree">
+<div class="tree">
+<ul>
+<li>
+<div class="node node-ceo">代表 猿川哲朗</div>
+<ul>
+<li>
+<div class="node node-div">EC運用代行事業</div>
+<ul>
+<li>
+<div class="node node-dept">楽天市場運用代行<br><small>猿川和明</small></div>
+<ul>
+<li><div class="node node-member"><div class="m-name">内田</div><div class="m-clients">Herz Skin / 関西酵素<br>スピック / KATAN</div></div></li>
+<li><div class="node node-member"><div class="m-name">秋葉</div><div class="m-clients">HLT BEAUTY / ROSIER<br>LOVE CHORME / in sky</div></div></li>
+<li><div class="node node-member"><div class="m-name">飛鳥間</div><div class="m-clients">イエリオ / yu'now</div></div></li>
+<li><div class="node node-member"><div class="m-name">千葉慎</div><div class="m-clients">白糠町 / 一関市<br>角田市</div></div></li>
+<li><div class="node node-member"><div class="m-name">千葉</div><div class="m-clients">常総市</div></div></li>
+<li><div class="node node-member"><div class="m-name">猿川(和)</div><div class="m-clients">Nelse / 和牛セレブ</div></div></li>
+<li><div class="node node-member"><div class="m-name">麹</div><div class="m-clients">銀座華茶 / 百福堂</div></div></li>
+<li><div class="node node-member"><div class="m-name">尾崎</div><div class="m-clients">登別町</div></div></li>
+</ul>
+</li>
+<li>
+<div class="node node-dept">Amazon運用代行<br><small>猿川和明</small></div>
+<ul>
+<li><div class="node node-member"><div class="m-name">小筆</div><div class="m-clients">KATAN / NOCK WOOD<br>和牛セレブ / 森永乳業</div></div></li>
+<li><div class="node node-member"><div class="m-name">櫻井</div><div class="m-clients">エゾボリック<br>ニッセイエコ</div></div></li>
+<li><div class="node node-member"><div class="m-name">平尾</div><div class="m-clients">silk the rich</div></div></li>
+</ul>
+</li>
+<li>
+<div class="node node-dept">自社ブランド</div>
+<ul>
+<li><div class="node node-member"><div class="m-name">SCM/CS統括</div><div class="m-clients">上原 / 松下 / 伊藤</div></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="node node-div">アシスタント組織<br><small>上原</small></div>
+<ul>
+<li><div class="node node-member"><div class="m-name">佐藤</div><div class="m-clients">Herz Skin / HLT系<br>スピック / Nelse / BP</div></div></li>
+<li><div class="node node-member"><div class="m-name">中瀬</div><div class="m-clients">yu'now / KATAN<br>和牛セレブ / Amazon系</div></div></li>
+<li><div class="node node-member"><div class="m-name">櫻井</div><div class="m-clients">白糠町 / 一関市<br>角田市 / LOVE CHORME</div></div></li>
+<li><div class="node node-member"><div class="m-name">松下</div><div class="m-clients">登別町 / NOCK WOOD<br>森永乳業</div></div></li>
+<li><div class="node node-member"><div class="m-name">増田</div><div class="m-clients">silk the rich</div></div></li>
+<li><div class="node node-member"><div class="m-name">上原</div><div class="m-clients">関西酵素</div></div></li>
+</ul>
+</li>
+<li>
+<div class="node node-div">新規事業/営業戦略室<br><small>上原</small></div>
+</li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -650,8 +650,6 @@ tbody tr:nth-child(even){background:#fafbfc}
 </div>
 <div class="rules-content">
 <h2>品質管理ガイドライン</h2>
-
-<h2>MVV</h2>
 
 <h2>各アカウントの目標達成（社内向け）</h2>
 <ul>
@@ -797,63 +795,6 @@ tbody tr:nth-child(even){background:#fafbfc}
 </div>
 </div>
 
-<!-- ===== COMPANY ===== -->
-<div id="page-company" class="page">
-<h2 class="page-title">会社情報</h2>
-<div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem">
-<div style="flex:1;min-width:320px;background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden">
-<div style="background:linear-gradient(135deg,#0E043A 0%,#2d1b69 50%,#4a2d8a 100%);padding:2rem;text-align:center">
-<img src="https://cd-s.co.jp/wp-content/themes/%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BEcards/assets/images/common/logo.webp" alt="CARDS" style="height:50px;max-width:200px;object-fit:contain;filter:brightness(0) invert(1)">
-<p style="color:rgba(255,255,255,.7);font-size:.8rem;margin-top:.5rem">株式会社CARDS</p>
-</div>
-<div style="padding:1.5rem">
-<table style="width:100%;font-size:.85rem">
-<tr><td style="font-weight:600;color:var(--accent);padding:.5rem 1rem .5rem 0;white-space:nowrap;width:100px">代表者</td><td style="padding:.5rem 0">猿川 哲朗（さるかわ てつろう）</td></tr>
-<tr><td style="font-weight:600;color:var(--accent);padding:.5rem 1rem .5rem 0">所在地</td><td style="padding:.5rem 0">東京都渋谷区渋谷2-14-13 岡崎ビル910</td></tr>
-<tr><td style="font-weight:600;color:var(--accent);padding:.5rem 1rem .5rem 0">設立</td><td style="padding:.5rem 0">2023年</td></tr>
-<tr><td style="font-weight:600;color:var(--accent);padding:.5rem 1rem .5rem 0">公式サイト</td><td style="padding:.5rem 0"><a href="https://cd-s.co.jp/" target="_blank" class="external-link">https://cd-s.co.jp/</a></td></tr>
-</table>
-</div>
-</div>
-<div style="flex:1;min-width:320px">
-<div style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem;margin-bottom:1.5rem">
-<h3 style="color:var(--accent);margin-bottom:1rem;font-size:1rem">事業内容</h3>
-<div style="display:flex;flex-direction:column;gap:.6rem">
-<div style="padding:.8rem 1rem;background:var(--bg);border-radius:8px;border-left:3px solid var(--highlight)">
-<div style="font-weight:600;font-size:.9rem">ECモール運用支援&コンサルティング</div>
-<div style="font-size:.78rem;color:var(--text-light);margin-top:.2rem">Amazon / 楽天 / Yahoo!ショッピング / Qoo10</div>
-</div>
-<div style="padding:.8rem 1rem;background:var(--bg);border-radius:8px;border-left:3px solid var(--highlight)">
-<div style="font-weight:600;font-size:.9rem">EC専売商品企画</div>
-<div style="font-size:.78rem;color:var(--text-light);margin-top:.2rem">商品コンセプト設計 / PL設計 / ターゲット設計</div>
-</div>
-<div style="padding:.8rem 1rem;background:var(--bg);border-radius:8px;border-left:3px solid var(--highlight)">
-<div style="font-weight:600;font-size:.9rem">ECブランド戦略サポート</div>
-<div style="font-size:.78rem;color:var(--text-light);margin-top:.2rem">市場分析 / 競合調査 / レビュー分析 / 予算最適化</div>
-</div>
-</div>
-</div>
-<div style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem">
-<h3 style="color:var(--accent);margin-bottom:.8rem;font-size:1rem">代表 略歴</h3>
-<p style="font-size:.85rem;line-height:1.7;color:var(--text)">岩手県盛岡市出身。大手飲料メーカー営業、人材系ベンチャー法人営業、D2Cフィットネス企業（年商60億円成長に貢献）での経験を経て独立。EC運用支援実績は100社以上。</p>
-<div style="margin-top:.8rem;display:flex;flex-wrap:wrap;gap:.5rem">
-<span style="font-size:.75rem;padding:.3rem .7rem;background:var(--bg);border-radius:4px;border:1px solid var(--border)">一般社団法人いわて圏 理事</span>
-<span style="font-size:.75rem;padding:.3rem .7rem;background:var(--bg);border-radius:4px;border:1px solid var(--border)">岩手県商工会連合会 専門家</span>
-<span style="font-size:.75rem;padding:.3rem .7rem;background:var(--bg);border-radius:4px;border:1px solid var(--border)">盛岡商工会議所 専門家</span>
-</div>
-</div>
-</div>
-</div>
-<div style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem">
-<h3 style="color:var(--accent);margin-bottom:1rem;font-size:1rem">SNS / 外部リンク</h3>
-<div style="display:flex;gap:1rem;flex-wrap:wrap">
-<a href="https://www.facebook.com/sarukawatetsuro/" target="_blank" style="display:flex;align-items:center;gap:.5rem;padding:.7rem 1.2rem;background:var(--bg);border-radius:8px;text-decoration:none;color:var(--text);font-size:.85rem;font-weight:500;border:1px solid var(--border);transition:all .2s">Facebook</a>
-<a href="https://x.com/T_Sarukawa" target="_blank" style="display:flex;align-items:center;gap:.5rem;padding:.7rem 1.2rem;background:var(--bg);border-radius:8px;text-decoration:none;color:var(--text);font-size:.85rem;font-weight:500;border:1px solid var(--border);transition:all .2s">X (Twitter)</a>
-<a href="https://note.com/tetsurosarukawa/" target="_blank" style="display:flex;align-items:center;gap:.5rem;padding:.7rem 1.2rem;background:var(--bg);border-radius:8px;text-decoration:none;color:var(--text);font-size:.85rem;font-weight:500;border:1px solid var(--border);transition:all .2s">Note</a>
-<a href="https://cd-s.co.jp/" target="_blank" style="display:flex;align-items:center;gap:.5rem;padding:.7rem 1.2rem;background:var(--primary);border-radius:8px;text-decoration:none;color:#fff;font-size:.85rem;font-weight:500;transition:all .2s">公式サイト</a>
-</div>
-</div>
-</div>
 
 <!-- ===== LINKS ===== -->
 <div id="page-links" class="page">
@@ -907,7 +848,7 @@ function switchPage(pageId, navEl){
     document.getElementById('sidebarOverlay').classList.remove('open');
   }
   // Update header title
-  var titles = {home:'ホーム',accounts:'アカウント情報','store-logins':'店舗別ログイン',logins:'個別ログイン',clients:'クライアント一覧',team:'担当者一覧',org:'組織図',rules:'社内ルール',drive:'共有ドライブ',company:'会社情報',links:'リンク集'};
+  var titles = {home:'ホーム',accounts:'アカウント情報','store-logins':'店舗別ログイン',logins:'個別ログイン',clients:'クライアント一覧',team:'担当者一覧',org:'組織図',rules:'社内ルール',drive:'共有ドライブ',links:'リンク集'};
   document.querySelector('.header-title').textContent = titles[pageId] || 'CARDS Portal';
 }
 
@@ -980,7 +921,7 @@ function escHtml(s){if(!s)return'';return s.replace(/&/g,'&amp;').replace(/</g,'
 function tagClass(ch){ch=ch.toLowerCase();if(ch.indexOf('rakuten')>=0||ch.indexOf('楽天')>=0)return'tag-rakuten';if(ch.indexOf('amazon')>=0)return'tag-amazon';if(ch.indexOf('yahoo')>=0)return'tag-yahoo';if(ch.indexOf('line')>=0)return'tag-line';if(ch.indexOf('teps')>=0||ch.indexOf('広告')>=0||ch.indexOf('filezilla')>=0)return'tag-tool';return'tag-other'}
 function linkOrText(url,text){if(url)return'<a href="'+escHtml(url)+'" target="_blank" class="external-link">'+escHtml(text||url)+'</a>';return escHtml(text||'-')}
 
-var GAS_API = 'https://script.google.com/macros/s/AKfycbxkOuL_-2hYFZ0NWhVHsi0NpoivInH8kebtJu8JGTuKkuWyqfz9y1Yj5Qq7CT3rhTO4/exec';
+var GAS_API = 'https://script.google.com/macros/s/AKfycbwY0Imv4W5rlqnmtYBQ1mdaHTz2pRTXIcEoW_WluaFMmZaiCnrUWEIrTFSPc5jQQu0/exec';
 
 function loadAllData(){
   fetch(GAS_API + '?action=getAllData')
