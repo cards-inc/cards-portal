@@ -151,10 +151,10 @@ tbody tr:nth-child(even){background:#fafbfc}
 <div id="sec-dashboard" class="section active">
 <h2 style="color:var(--primary);margin-bottom:1rem">ダッシュボード</h2>
 <div class="stats-grid" id="statsGrid">
-<div class="stat-card"><div class="skeleton" style="width:60px;height:2rem"></div><div class="stat-label">管理シート数</div></div>
+<div class="stat-card" style="border-left-color:#BF0000"><div class="skeleton" style="width:60px;height:2rem"></div><div class="stat-label">楽天クライアント</div></div>
+<div class="stat-card" style="border-left-color:#FF9900"><div class="skeleton" style="width:60px;height:2rem"></div><div class="stat-label">Amazonクライアント</div></div>
+<div class="stat-card" style="border-left-color:#FF0033"><div class="skeleton" style="width:60px;height:2rem"></div><div class="stat-label">Yahooクライアント</div></div>
 <div class="stat-card"><div class="skeleton" style="width:60px;height:2rem"></div><div class="stat-label">総データ行数</div></div>
-<div class="stat-card"><div class="skeleton" style="width:60px;height:2rem"></div><div class="stat-label">クライアント数</div></div>
-<div class="stat-card"><div class="skeleton" style="width:60px;height:2rem"></div><div class="stat-label">お知らせ件数</div></div>
 </div>
 <div class="data-table-wrap" style="margin-top:1rem">
 <table>
@@ -314,11 +314,25 @@ function renderDashboard() {
   });
   tbody.innerHTML = html;
 
+  // 媒体別クライアント数を担当者一覧から集計
+  var teamData = sheetDataCache['担当者一覧'];
+  var cc = { rakuten: 0, amazon: 0, yahoo: 0 };
+  if (teamData && teamData.rows) {
+    var seen = { rakuten: {}, amazon: {}, yahoo: {} };
+    teamData.rows.forEach(function(r) {
+      var p = (r[4] || '').toLowerCase();
+      var client = r[2] || '';
+      if (p.indexOf('rakuten') >= 0 && !seen.rakuten[client]) { cc.rakuten++; seen.rakuten[client] = 1; }
+      if (p.indexOf('amazon') >= 0 && !seen.amazon[client]) { cc.amazon++; seen.amazon[client] = 1; }
+      if (p.indexOf('yahoo') >= 0 && !seen.yahoo[client]) { cc.yahoo++; seen.yahoo[client] = 1; }
+    });
+  }
+
   document.getElementById('statsGrid').innerHTML =
-    '<div class="stat-card"><div class="stat-num">' + Object.keys(TAB_SHEETS).length + '</div><div class="stat-label">管理ページ数</div></div>' +
-    '<div class="stat-card"><div class="stat-num">' + totalRows + '</div><div class="stat-label">総データ行数</div></div>' +
-    '<div class="stat-card"><div class="stat-num">' + (sheetDataCache['クライアント一覧'] ? sheetDataCache['クライアント一覧'].rows.length : 0) + '</div><div class="stat-label">クライアント数</div></div>' +
-    '<div class="stat-card"><div class="stat-num">' + (sheetDataCache['お知らせ'] ? sheetDataCache['お知らせ'].rows.length : 0) + '</div><div class="stat-label">お知らせ件数</div></div>';
+    '<div class="stat-card" style="border-left-color:#BF0000"><div class="stat-num">' + cc.rakuten + '</div><div class="stat-label">楽天クライアント</div></div>' +
+    '<div class="stat-card" style="border-left-color:#FF9900"><div class="stat-num">' + cc.amazon + '</div><div class="stat-label">Amazonクライアント</div></div>' +
+    '<div class="stat-card" style="border-left-color:#FF0033"><div class="stat-num">' + cc.yahoo + '</div><div class="stat-label">Yahooクライアント</div></div>' +
+    '<div class="stat-card"><div class="stat-num">' + totalRows + '</div><div class="stat-label">総データ行数</div></div>';
 }
 
 /* ========== Tab Switching ========== */
@@ -588,17 +602,17 @@ function confirmDelete(sheetId, rowIdx) {
 /* ========== Refresh Single Sheet ========== */
 function refreshSheet(sheetId) {
   showStatus(getSheetLabel(sheetId) + ' を読み込み中...', '');
-  apiPost({ action: 'getSheet', sheet: sheetId, password: password })
+  apiGet({ action: 'getSheet', sheet: sheetId })
     .then(function(res) {
-      if (res.success) {
-        sheetDataCache[sheetId] = res.data;
-        var sheet = SHEETS.find(function(s) { return s.id === sheetId; });
-        buildSection(sheet);
-        switchTab(sheetId, null);
-        showStatus('更新完了', 'success');
-      } else {
-        showStatus('エラー: ' + (res.error || '不明'), 'error');
-      }
+      sheetDataCache[sheetId] = res;
+      var sheet = SHEETS.find(function(s) { return s.id === sheetId; });
+      buildSection(sheet);
+      switchTab(sheetId, null);
+      renderDashboard();
+      showStatus('更新完了', 'success');
+    })
+    .catch(function() {
+      showStatus('通信エラー', 'error');
     });
 }
 
