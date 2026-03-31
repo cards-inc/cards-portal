@@ -150,42 +150,36 @@ tbody tr:nth-child(even){background:#fafbfc}
 .info-card a:hover{color:var(--highlight);text-decoration:underline}
 .external-link::after{content:none}
 
-/* Rules */
+/* Rules - Tab Navigation */
 .rules-tabs{display:flex;gap:0;margin-bottom:1.5rem;border-bottom:2px solid var(--border);overflow-x:auto}
 .rules-tab{padding:.7rem 1.3rem;font-size:.85rem;font-weight:600;color:var(--text-light);background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:all .2s}
 .rules-tab:hover{color:var(--text)}
 .rules-tab.active{color:var(--highlight);border-bottom-color:var(--highlight)}
 .rules-panel{display:none}
 .rules-panel.active{display:block}
-.rules-content{background:var(--card-bg);border-radius:var(--radius);padding:2.5rem;box-shadow:var(--shadow);line-height:2;font-size:.92rem}
-.rules-content h2{font-size:1.15rem;color:var(--primary);margin:1.5rem 0 .8rem;padding-bottom:.3rem;border-bottom:2px solid var(--highlight)}
-.rules-content h2:first-child{margin-top:0}
-.rules-content h3{font-size:1rem;color:var(--accent);margin:1rem 0 .5rem}
-.rules-content ul{padding-left:1.5rem;margin:.3rem 0}
-.rules-content li{margin:.2rem 0}
-/* Rule cards */
+
+/* Rule Cards */
 .rule-cards{display:grid;gap:1.2rem}
-.rule-card{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem 1.8rem;border-left:4px solid var(--highlight);font-size:.9rem;line-height:1.7}
-.rule-card p{margin:.3rem 0}
-.rule-card ul{padding-left:1.5rem;margin:.4rem 0}
-.rule-card li{margin:.2rem 0}
-.rule-card h3{font-size:1rem;color:var(--primary);margin:0}
-.rule-card-head{display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem}
-.rule-num{background:var(--highlight);color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:4px;flex-shrink:0}
-.rule-link-inline{color:var(--highlight);font-weight:600;text-decoration:none}
-.rule-link-inline:hover{text-decoration:underline}
+.rule-card{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem 1.8rem;border-left:4px solid var(--highlight);font-size:.9rem;line-height:1.7;overflow:visible}
+.rule-card p{margin:.4rem 0}
+.rule-card ul{padding-left:1.5rem;margin:.5rem 0}
+.rule-card li{margin:.25rem 0}
+.rule-card h3{font-size:1.05rem;font-weight:700;color:var(--primary);margin:0;border:none;padding:0}
+.rule-card-head{display:flex;align-items:center;gap:.7rem;margin-bottom:.8rem}
+.rule-num{display:inline-flex;align-items:center;justify-content:center;background:var(--highlight);color:#fff;font-size:.72rem;font-weight:700;padding:.25rem .65rem;border-radius:4px;flex-shrink:0;min-width:28px;text-align:center}
+.rule-link-inline{color:var(--highlight);font-weight:600;text-decoration:none;border-bottom:1px dashed var(--highlight)}
+.rule-link-inline:hover{text-decoration:none;border-bottom-style:solid}
 .rule-warn{color:var(--danger);font-weight:600}
 .rule-note{background:var(--bg);border-radius:8px;padding:1rem 1.2rem;margin-top:.8rem;font-size:.85rem;line-height:1.8;color:var(--text-light)}
-.rule-sub{margin-top:.5rem;font-size:.85rem;color:var(--text-light)}
+.rule-sub{margin-top:.6rem;font-size:.85rem;color:var(--text-light)}
 .rule-compare{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
 .rule-compare-bad{background:#fef5f5;border-radius:8px;padding:1rem 1.2rem}
 .rule-compare-good{background:#f0faf7;border-radius:8px;padding:1rem 1.2rem}
-.rule-compare-title{font-size:.78rem;font-weight:700;margin-bottom:.5rem}
-.rule-compare ul{font-size:.82rem;line-height:1.9;padding-left:1.2rem;margin:0}
-.rule-compare li{margin:.1rem 0}
-@media(max-width:768px){.rule-compare{grid-template-columns:1fr}}
-/* Procedure cards (業務管理ルール) */
-.proc-badge{display:inline-block;background:var(--bg);font-size:.75rem;font-weight:600;color:var(--text-light);padding:.2rem .7rem;border-radius:4px;margin-bottom:.8rem}
+.rule-compare-title{font-size:.8rem;font-weight:700;margin-bottom:.5rem}
+.rule-compare ul{font-size:.83rem;line-height:1.8;padding-left:1.2rem;margin:0}
+.rule-compare li{margin:.15rem 0}
+.proc-badge{display:inline-block;background:var(--bg);font-size:.75rem;font-weight:600;color:var(--text-light);padding:.25rem .8rem;border-radius:4px;margin-bottom:.8rem}
+@media(max-width:768px){.rule-compare{grid-template-columns:1fr}.rule-card{padding:1.2rem 1.3rem}}
 
 /* Org chart - Tree style */
 .org-tree{background:var(--card-bg);border-radius:var(--radius);padding:2.5rem 1.5rem;box-shadow:var(--shadow);overflow-x:auto;max-width:100%;-webkit-overflow-scrolling:touch}
@@ -231,8 +225,6 @@ tbody tr:nth-child(even){background:#fafbfc}
 .team-card-body table tr:last-child td{border-bottom:none}
 .team-card-body table td:first-child{font-weight:600;white-space:nowrap}
 
-.rule-link{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.5rem;background:var(--accent);color:#fff;text-decoration:none;border-radius:8px;font-weight:600;transition:all .2s}
-.rule-link:hover{background:var(--highlight)}
 
 /* Responsive */
 @media(max-width:768px){
