@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CARDS Portal</title>
+<style>
+:root{--primary:#1a1a2e;--secondary:#16213e;--accent:#0f3460;--highlight:#e94560;--bg:#f5f6fa;--card-bg:#fff;--text:#2d3436;--text-light:#636e72;--border:#dfe6e9;--shadow:0 2px 16px rgba(0,0,0,.06);--radius:14px;--transition:all .25s ease}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}header{background:linear-gradient(135deg,var(--primary) 0%,var(--accent) 50%,#1e5f8e 100%);color:#fff;padding:2.5rem 0 2rem;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,.18)}header h1{font-size:2rem;font-weight:700;letter-spacing:.1em}header p{opacity:.8;margin-top:.3rem;font-size:.9rem}nav{background:var(--secondary);padding:.7rem 2rem;display:flex;justify-content:center;gap:.4rem;flex-wrap:wrap;position:sticky;top:0;z-index:99;box-shadow:0 2px 12px rgba(0,0,0,.15);backdrop-filter:blur(8px)}nav a{color:#fff;text-decoration:none;padding:.5rem 1.2rem;border-radius:6px;font-size:.85rem;font-weight:500;transition:all .2s;white-space:nowrap}nav a:hover,nav a.active{background:var(--highlight)}.container{max-width:1400px;margin:0 auto;padding:2rem 1.5rem}.section{margin-bottom:2.5rem}.section-title{font-size:1.3rem;font-weight:700;color:var(--primary);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:3px solid var(--highlight);display:flex;align-items:center;gap:.5rem;letter-spacing:.03em}.quick-links{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;margin-bottom:2.5rem}.quick-link{background:var(--card-bg);border-radius:var(--radius);padding:1.5rem;text-align:center;box-shadow:var(--shadow);transition:var(--transition);cursor:pointer;text-decoration:none;color:var(--text);border:2px solid transparent}.quick-link:hover{transform:translateY(-4px);border-color:var(--highlight);box-shadow:0 8px 25px rgba(233,69,96,.15)}.quick-link .ql-icon{font-size:2.5rem;margin-bottom:.5rem}.quick-link .ql-title{font-weight:600;font-size:.95rem}.quick-link .ql-desc{font-size:.75rem;color:var(--text-light);margin-top:.3rem}.table-wrapper{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);overflow-x:auto;margin-bottom:1.5rem;border:1px solid var(--border)}.table-wrapper h3{padding:1rem 1.5rem .5rem;color:var(--accent);font-size:1rem}table{width:100%;border-collapse:collapse;font-size:.85rem}thead th{background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;padding:.7rem 1rem;text-align:left;font-weight:600;white-space:nowrap;font-size:.82rem;letter-spacing:.02em}tbody tr{border-bottom:1px solid var(--border);transition:background .15s}tbody tr:hover{background:#edf2ff}tbody td{padding:.65rem 1rem;vertical-align:top}tbody tr:nth-child(even){background:#fafbfc}.pw-cell{font-family:'Courier New',monospace;user-select:text}.pw-cell .pw-mask{display:inline}.pw-cell .pw-real{display:none}.pw-cell.revealed .pw-mask{display:none}.pw-cell.revealed .pw-real{display:inline}.pw-toggle{margin-left:6px;color:var(--accent);cursor:pointer;display:inline-flex;align-items:center;vertical-align:middle}.pw-toggle svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.tag{display:inline-block;padding:.2rem .6rem;border-radius:4px;font-size:.7rem;font-weight:600;white-space:nowrap}.tag-rakuten{background:#bf0000;color:#fff}.tag-amazon{background:#ff9900;color:#111}.tag-yahoo{background:#ff0033;color:#fff}.tag-line{background:#06c755;color:#fff}.tag-tool{background:#6c5ce7;color:#fff}.tag-other{background:#636e72;color:#fff}.tag-active{background:#00b894;color:#fff}.tag-ended{background:#b2bec3;color:#333}.tag-bp{background:#fdcb6e;color:#333}.tag-furusato{background:#0984e3;color:#fff}.tag-open{background:#e17055;color:#fff}.client-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1rem}.client-card{background:var(--card-bg);border-radius:var(--radius);padding:1.2rem;box-shadow:var(--shadow);border-left:4px solid var(--accent);transition:var(--transition)}.client-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.12)}.client-card.ended{border-left-color:#b2bec3;opacity:.7}.cc-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.5rem}.cc-name{font-weight:700;font-size:1rem}.cc-store{font-size:.8rem;color:var(--text-light)}.cc-details{font-size:.78rem;color:var(--text-light);margin-top:.5rem}.cc-details span{display:inline-block;margin-right:1rem}.rules-card{background:var(--card-bg);border-radius:var(--radius);padding:2rem;box-shadow:var(--shadow)}.rule-link{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.5rem;background:var(--accent);color:#fff;text-decoration:none;border-radius:8px;font-weight:600;transition:all .2s}.rule-link:hover{background:var(--highlight)}.org-placeholder{background:var(--card-bg);border-radius:12px;padding:3rem 2rem;text-align:center;box-shadow:var(--shadow);border:2px dashed var(--border)}.search-bar{display:flex;justify-content:center;margin-bottom:2rem}.search-bar input{width:100%;max-width:600px;padding:.8rem 1.2rem .8rem 2.8rem;border:2px solid var(--border);border-radius:12px;font-size:.95rem;outline:none;transition:var(--transition);background:var(--card-bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23636e72' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E") .9rem center no-repeat}.search-bar input:focus{border-color:var(--accent)}.filter-tabs{display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}.filter-tab{padding:.4rem 1rem;border:1px solid var(--border);border-radius:20px;font-size:.8rem;cursor:pointer;transition:all .2s;background:#fff}.filter-tab:hover,.filter-tab.active{background:var(--primary);color:#fff;border-color:var(--primary)}.info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}.info-card{background:var(--card-bg);border-radius:var(--radius);padding:1.5rem;box-shadow:var(--shadow);border:1px solid var(--border);transition:var(--transition)}.info-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.1)}.info-card h3{font-size:1rem;margin-bottom:.5rem;color:var(--accent)}.info-card ul{list-style:none;padding:0}.info-card li{padding:.3rem 0;font-size:.85rem;border-bottom:1px solid #f0f0f0}.info-card li:last-child{border-bottom:none}.info-card a{color:var(--accent);text-decoration:none}.info-card a:hover{color:var(--highlight);text-decoration:underline}.external-link::after{content:' \2197';font-size:.7rem}footer{text-align:center;padding:2rem;color:var(--text-light);font-size:.8rem}@media(max-width:768px){header h1{font-size:1.5rem}.container{padding:.8rem}nav{padding:.5rem .8rem;gap:.3rem}nav a{padding:.35rem .7rem;font-size:.75rem}.org-tree{font-size:.78rem;overflow-x:auto}.org-node{padding:.3rem .5rem;font-size:.75rem}.org-tree ul{padding-left:1rem}table{font-size:.78rem}thead th{padding:.5rem .6rem}tbody td{padding:.5rem .6rem}.quick-links{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.6rem}.quick-link{padding:1rem}.quick-link .ql-icon{font-size:2rem}}.sub-section{margin-top:1.5rem}.sub-title{font-size:1.05rem;font-weight:600;color:var(--accent);margin-bottom:.8rem;padding:.4rem .5rem .4rem .8rem;border-left:3px solid var(--highlight);background:linear-gradient(90deg,rgba(233,69,96,.05),transparent);border-radius:0 6px 6px 0}.section-title{cursor:pointer;user-select:none}.section-title .toggle-arrow{font-size:.8rem;transition:transform .3s;display:inline-block;margin-left:auto}.section-title .toggle-arrow.collapsed{transform:rotate(-90deg)}.section-content{overflow:hidden;transition:max-height .4s ease,opacity .3s ease;max-height:5000px;opacity:1}.section-content.collapsed{max-height:0;opacity:0;margin:0}.org-chart{background:var(--card-bg);border-radius:12px;padding:2rem;box-shadow:var(--shadow)}.org-tree{font-size:.85rem}.org-tree ul{list-style:none;padding-left:1.5rem;margin:0}.org-tree>ul{padding-left:0}.org-tree li{position:relative;padding:.3rem 0 .3rem 1.2rem;border-left:2px solid var(--border)}.org-tree li:last-child{border-left:2px solid transparent}.org-tree li::before{content:'';position:absolute;left:0;top:1rem;width:1rem;height:0;border-top:2px solid var(--border)}.org-tree>ul>li{border-left:none;padding-left:0}.org-tree>ul>li::before{display:none}.org-node{display:inline-flex;align-items:center;gap:.4rem;padding:.4rem .8rem;border-radius:8px;font-weight:500;margin:.1rem 0}.org-ceo{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;font-size:1.1rem;font-weight:700;padding:.6rem 1.2rem;border-radius:10px}.org-div{background:var(--accent);color:#fff;font-weight:600;padding:.5rem 1rem;border-radius:8px}.org-dept{background:var(--highlight);color:#fff;font-weight:600;padding:.4rem .8rem;border-radius:6px;font-size:.82rem}.org-team{background:#e8f0fe;color:var(--accent);font-weight:600;padding:.35rem .7rem;border-radius:6px;font-size:.8rem}.org-person{background:#f8f9fa;color:var(--text);padding:.3rem .6rem;border-radius:5px;font-size:.8rem;border:1px solid var(--border)}.org-person .org-name{font-weight:600;color:var(--accent)}.org-person .org-clients{color:var(--text-light);font-size:.75rem;margin-left:.3rem}.copy-btn{margin-left:6px;color:var(--text-light);cursor:pointer;display:inline-flex;align-items:center;vertical-align:middle;background:none;border:none;padding:2px;border-radius:4px;transition:all .2s}.copy-btn:hover{color:var(--accent);background:#e8f0fe}.copy-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.copy-btn.copied{color:#00b894}.copy-btn.copied svg{stroke:#00b894}.id-cell{position:relative}
+</style>
+</head>
+<body>
+<header><h1>CARDS Portal</h1><p>社内ポータルサイト</p></header>
+<nav>
+<a href="#quick" class="active">ホーム</a>
+<a href="#accounts">&#128273; アカウント情報</a>
+<a href="#store-logins">&#128274; 店舗別ログイン</a>
+<a href="#logins">&#128274; 個別ログイン</a>
+<a href="#clients">&#128188; クライアント一覧</a>
+<a href="#team">&#128101; 担当者</a>
+<a href="#rules">&#128214; 社内ルール</a>
+<a href="#org">&#127963; 組織図</a>
+<a href="#drive">&#128193; ドライブ</a>
+<a href="#links">&#128279; リンク集</a>
+</nav>
+<div class="container">
+<div class="search-bar"><input type="text" id="globalSearch" placeholder="検索... (クライアント名、ツール名、担当者名など)" oninput="handleSearch(this.value)"></div>
+
+<!-- Quick Access -->
+<div id="quick" class="section">
+<h2 class="section-title" onclick="toggleSection(this)">&#9889; クイックアクセス<span class="toggle-arrow">&#9660;</span></h2>
+<div class="section-content">
+<div class="quick-links">
+<a class="quick-link" href="https://mainmenu.rms.rakuten.co.jp/" target="_blank"><div class="ql-icon">&#128722;</div><div class="ql-title">楽天 RMS</div><div class="ql-desc">店舗管理システム</div></a>
+<a class="quick-link" href="https://sellercentral.amazon.co.jp/home" target="_blank"><div class="ql-icon">&#128230;</div><div class="ql-title">Amazon セラーセントラル</div><div class="ql-desc">セラーセントラル</div></a>
+<a class="quick-link" href="https://app.teps.io/" target="_blank"><div class="ql-icon">&#128736;</div><div class="ql-title">Teps</div><div class="ql-desc">一括商品設定ツール</div></a>
+<a class="quick-link" href="https://client.automatic.co.jp/" target="_blank"><div class="ql-icon">&#128200;</div><div class="ql-title">広告ツール</div><div class="ql-desc">Automatic</div></a>
+<a class="quick-link" href="https://manager.line.biz/" target="_blank"><div class="ql-icon">&#128172;</div><div class="ql-title">LINEビジネス</div><div class="ql-desc">LINE管理画面</div></a>
+<a class="quick-link" href="https://zoom.us/myhome" target="_blank"><div class="ql-icon">&#127909;</div><div class="ql-title">Zoom</div><div class="ql-desc">Web会議</div></a>
+<a class="quick-link" href="https://docs.google.com/spreadsheets/d/11Cui2lS6SZxyMuerL3lc6FfMU_NKFakwYGgtNEXpfpg/edit" target="_blank"><div class="ql-icon">&#128221;</div><div class="ql-title">管理台帳</div><div class="ql-desc">ツール/アカウント管理</div></a>
+<a class="quick-link" href="https://docs.google.com/document/d/1PGR9s93pvMIeGDAb-RUOYZJdMFoGQO-5nLUEKdzUJ4o/edit" target="_blank"><div class="ql-icon">&#128214;</div><div class="ql-title">社内ルール</div><div class="ql-desc">Google Doc</div></a>
+<a class="quick-link" href="https://drive.google.com/drive/u/0/folders/0AAzV1tr-WUzVUk9PVA" target="_blank"><div class="ql-icon">&#128193;</div><div class="ql-title">CARDS共有ドライブ</div><div class="ql-desc">Google Drive</div></a>
+</div>
+</div>
+</div>
+
+<!-- Account Info (shared accounts) -->
+<div id="accounts" class="section">
+<h2 class="section-title" onclick="toggleSection(this)">&#128273; 各種アカウント情報<span class="toggle-arrow">&#9660;</span></h2>
+<div class="section-content">
+<div class="table-wrapper">
+<h3>&#128722; ECプラットフォーム</h3>
+<table><thead><tr><th>チャネル</th><th>ログインURL</th><th>ID/ユーザー名</th><th>PW</th><th>備考</th></tr></thead>
+<tbody>
+<tr><td><span class="tag tag-rakuten">Rakuten</span></td><td><a href="https://glogin.rms.rakuten.co.jp/2fa/" target="_blank" class="external-link">楽天ビジネスログイン</a></td><td>sarukawa.tetsuro@gmail.com</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">cds1002</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td></td></tr>
+<tr><td><span class="tag tag-amazon">Amazon Seller 2</span></td><td><a href="https://sellercentral.amazon.co.jp/home" target="_blank" class="external-link">Amazon Seller Central</a></td><td>concierge.cards@gmail.com</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">cards123!</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>Authenticator必要 / 新規顧客権限付与 / <a href="https://apps.apple.com/jp/app/google-authenticator/id388497605" target="_blank" class="external-link">QR: Authenticator</a></td></tr>
+<tr><td><span class="tag tag-amazon">Amazon Seller</span></td><td><a href="https://sellercentral.amazon.co.jp/home" target="_blank" class="external-link">Amazon Seller Central</a></td><td>sarukawa.tetsuro@gmail.com</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">cds1002</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>北海道登別市アカウントのみ</td></tr>
+<tr><td><span class="tag tag-amazon">Amazon Vendor</span></td><td><a href="https://vendorcentral.amazon.co.jp/" target="_blank" class="external-link">Amazon Vendor Central</a></td><td>sarukawa.tetsuro@gmail.com</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">cds1002</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>Authenticator必要 / <a href="https://apps.apple.com/jp/app/google-authenticator/id388497605" target="_blank" class="external-link">QR: Authenticator</a></td></tr>
+<tr><td><span class="tag tag-yahoo">ファーマYahoo!</span></td><td><a href="https://pro.store.yahoo.co.jp/" target="_blank" class="external-link">Yahoo!</a></td><td>iwrtg40900</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">Saikora123</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td></td></tr>
+<tr><td><span class="tag tag-yahoo">中島大祥堂Yahoo!</span></td><td><a href="https://pro.store.yahoo.co.jp/pro.nakajimataishodo" target="_blank" class="external-link">Yahoo!</a></td><td>cadcu38891</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">Kazu0213</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td></td></tr>
+</tbody></table>
+</div>
+
+<div class="table-wrapper">
+<h3>&#128736; ツール / サービス</h3>
+<table><thead><tr><th>ツール</th><th>ログインURL</th><th>ID/ユーザー名</th><th>PW</th><th>備考</th></tr></thead>
+<tbody>
+<tr><td><span class="tag tag-tool">Teps</span></td><td><a href="https://app.teps.io/" target="_blank" class="external-link">app.teps.io</a></td><td>t.sarukawa@cd-s.co.jp</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">Tetsu123!</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>WEB API設定</td></tr>
+<tr><td><span class="tag tag-other">Chrome共有</span></td><td><a href="https://accounts.google.com/" target="_blank" class="external-link">Googleアカウント</a></td><td>support@cd-s.co.jp</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">cards-support123</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td></td></tr>
+<tr><td><span class="tag tag-line">LINE Business</span></td><td><a href="https://manager.line.biz/" target="_blank" class="external-link">LINE Business ID</a></td><td>support@cd-s.co.jp</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">cards-support123</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td></td></tr>
+<tr><td><span class="tag tag-line">LINE Pharma</span></td><td><a href="https://manager.line.biz/" target="_blank" class="external-link">LINE Business ID</a></td><td>outsource_mall@future-labo.com</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">future241009-</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td></td></tr>
+<tr><td><span class="tag tag-tool">広告ツール</span></td><td><a href="https://client.automatic.co.jp/" target="_blank" class="external-link">Automatic</a></td><td>t.sarukawa@cd-s.co.jp</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">$@6Uka_aTik</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td></td></tr>
+<tr><td><span class="tag tag-other">Zoom</span></td><td><a href="https://zoom.us/myhome" target="_blank" class="external-link">Zoom</a></td><td>support@cd-s.co.jp</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">Cards-support123</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td></td></tr>
+<tr><td><span class="tag tag-other">aun</span></td><td><a href="https://aun-mypage.tools/folder/list" target="_blank" class="external-link">aun</a></td><td>concierge.cards@gmail.com</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">Cards-support1</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td></td></tr>
+<tr><td><span class="tag tag-other">EC Masters</span></td><td><a href="https://tool.ec-masters.net/login.php" target="_blank" class="external-link">EC Masters</a></td><td>hyakufukudo</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">hyakufukudo</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td></td></tr>
+<tr><td><span class="tag tag-other">TikTok</span></td><td><a href="https://seller-jp.tiktok.com/" target="_blank" class="external-link">TikTok Seller</a></td><td>070 9272 8923</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">cards-support123</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>百福堂</td></tr>
+</tbody></table>
+</div>
+</div>
+</div>
+
+<!-- Store 各種ログイン情報 (per-store) -->
+<div id="store-logins" class="section">
+<h2 class="section-title" onclick="toggleSection(this)">&#128274; 店舗別ログイン情報<span class="toggle-arrow">&#9660;</span></h2>
+<div class="section-content">
+
+<div class="sub-section">
+<div class="sub-title">&#128722; 楽天アカウント店舗情報（R-Login / FTP） <a href="https://docs.google.com/spreadsheets/d/1aBUwoiPgbuYlMlc0dvo0QcvtiYqposelg54himEGfJs/edit?gid=0#gid=0" target="_blank" style="font-size:.75rem;margin-left:1rem;font-weight:400" class="external-link">元データ</a></div>
+<div class="table-wrapper">
+<table><thead><tr><th>店舗</th><th>R-Login ID</th><th>R-Login PW</th><th>FTPユーザー名</th><th>FTP PW</th><th>次回更新</th></tr></thead>
+<tbody>
+<tr><td colspan="6" style="background:#e8f5e9;font-weight:700;color:var(--accent)">通常案件</td></tr>
+<tr><td>Her lip to BEAUTY</td><td>heartrelation</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">RM77ite4aLALvB6</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>herliptobeauty</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">yT7munnR</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>2026/04/20</td></tr>
+<tr><td>Her lip to ROSIER</td><td>heartrelation1</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">88R75AF3axX4qC7</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>rosier</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">iD3FR7bp</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>2026/05/04</td></tr>
+<tr><td>Herzskin（LIENA）</td><td>rakutenherzskin</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">Lv2BTUFS</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>herzskin</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">uJ6iBgdm</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>2026/05/12</td></tr>
+<tr><td>関西酵素</td><td>Qxhr74vn3b</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">kansaikoso91717</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>kansaikoso</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">V7YiPmeV</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>2026/06/02</td></tr>
+<tr><td>イエリオ（ベルーナ）</td><td>RBJNfvh6Yi</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">ccbskkks70</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>noan</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">Noan0001</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>2026/06/25</td></tr>
+<tr><td>Lypo-C（スピック）</td><td>spiclypoc</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">lypoc0018</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>lypoc</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">Spic06@@</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>2026/04/16</td></tr>
+<tr><td>ラブクロム</td><td>lovechromeycp</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">lovechrome028</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>lovechrome</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">Lovech28</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>2026/06/13</td></tr>
+<tr><td>ユナウ</td><td>X9xqhksVDu</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">ccbskkks70</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>yunow-shop</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">Yunow002</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>2026/05/27</td></tr>
+<tr><td>in sky</td><td>inskyinc</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">insky04051</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>-</td><td>-</td><td>-</td></tr>
+<tr><td>nelse</td><td>nosc0001</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">wO7nPGbp</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>nosc</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">eL94W3CU</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>-</td></tr>
+<tr><td>中島大祥堂</td><td>danke1912</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">iS5kq3px</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>nakajimataishodo</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">@Danke29</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>2026/03/31</td></tr>
+<tr><td>百福堂</td><td>taste0504</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">Taste0120K</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>nagara-shop</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">HyakU111</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>2026/04/20</td></tr>
+<tr><td>シェリーブラン</td><td>cheriebrin</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">cb202602</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>cherie-brin-cake</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">Cb202602</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>-</td></tr>
+<tr><td>和牛セレブ</td><td>-</td><td>-</td><td>wagyugift</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">Vfgedm34</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>-</td></tr>
+<tr><td>ファーマフーズ</td><td>tamagokichi2021</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">newmo014</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>tamago-kichi</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">Tamago@2</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>-</td></tr>
+<tr><td>EZOBOLIC</td><td>LsuxhgBUpA</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">s42016691</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>ezobolic</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">S420166k</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>-</td></tr>
+<tr><td colspan="6" style="background:#e3f2fd;font-weight:700;color:var(--accent)">ふるさと納税案件</td></tr>
+<tr><td>白糠町</td><td>siranukarakuten</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">34557shishamo</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>f016683-shiranuk</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">Sira2171</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>-</td></tr>
+<tr><td>一関市</td><td>ikigai03209</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">ichinoseki03209</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>f032093-ichinose</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">Koryu759</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>-</td></tr>
+<tr><td>角田市</td><td>furusato0807</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">Kakuda0327</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>-</td><td>-</td><td>-</td></tr>
+<tr><td>常総市</td><td>joso082112</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">joso3504</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>f082112-joso</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">Joso0314</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>2026/05/03</td></tr>
+<tr><td colspan="6" style="background:#f5f5f5;font-weight:700;color:var(--accent)">終了・休止案件</td></tr>
+<tr><td>NORM</td><td>norm1221</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">G5ewDiy9</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>norm-online-stor</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">xT9p2YKB</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>-</td></tr>
+<tr><td>MAJIDE</td><td>majide0701</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">majide1225</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>majide-online-st</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">nR4b6-Qc</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>-</td></tr>
+<tr><td>ばぶばぶストア</td><td>babubabustore01300524</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">cB3mFeiL</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>babu-babu-store</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">baBuBa12</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>-</td></tr>
+<tr><td>エーレスタイル</td><td>styleformom</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">UfanUfe3fhr</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>styleformom</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">Tz4qNG14</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>-</td></tr>
+<tr><td>メンマ屋大門</td><td>S7PfVyd3cb</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">Haha80882509</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>daimommemma</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">HAha8088</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>-</td></tr>
+<tr><td>角の道具屋</td><td>9gq6up5mQS</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">kdouguya0904</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>kadonodouguya</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">Kd251127</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>-</td></tr>
+<tr><td>ニッセイエコ</td><td>nisseieco01</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">Nisseieco06</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>-</td><td>-</td><td>-</td></tr>
+</tbody></table>
+</div>
+</div>
+
+<div class="sub-section">
+<div class="sub-title">&#128276; らくらクーポン（店舗別）</div>
+<div class="table-wrapper">
+<table><thead><tr><th>店舗</th><th>会社ID</th><th>ユーザーID</th><th>PW</th><th>有効期限</th></tr></thead>
+<tbody>
+<tr><td>Her lip to BEAUTY</td><td>herliptobeauty</td><td>admin</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">q9LH!96sFKDq8zx</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td></td></tr>
+<tr><td>Her lip to ROSIER</td><td>rosier</td><td>admin</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">f!2G6J2KZYgAQ4c</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>2025/6/25</td></tr>
+<tr><td>Lypo-C（スピック）</td><td>lypoc</td><td>admin</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">Spic202502</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>2025/5/11</td></tr>
+<tr><td>NORM</td><td>norm-online-store</td><td>admin</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">Norm1221</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>2025/2/20</td></tr>
+<tr><td>MAJIDE</td><td>majide-online-store</td><td>admin</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">Majide1225</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>2025/3/6</td></tr>
+<tr><td>メンマ屋大門</td><td>daimommemma</td><td>admin</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">Haha8088</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>2025/5/26</td></tr>
+<tr><td>ばぶばぶストア</td><td>babu-babu-store</td><td>admin</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">iF8593cf62R!RgD</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>2025/5/5</td></tr>
+</tbody></table>
+<p style="padding:.5rem 1.5rem 1rem;font-size:.8rem;color:var(--text-light)">Login: <a href="https://coupon.ultra-cloud.com/login" target="_blank" class="external-link">coupon.ultra-cloud.com</a></p>
+</div>
+</div>
+
+<div class="sub-section">
+<div class="sub-title">&#128187; BOSS / コンパス / その他ツール（店舗別）</div>
+<div class="table-wrapper">
+<table><thead><tr><th>店舗</th><th>ツール</th><th>ID / ログイン</th><th>PW</th></tr></thead>
+<tbody>
+<tr><td>NORM</td><td><a href="https://boss-oms.jp/BOSSWeb/Auth/Login" target="_blank" class="external-link">BOSS</a></td><td>カスタマーID 71202 / sarukawa</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">sarukawa01</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td></tr>
+<tr><td>NORM</td><td><a href="https://www.compass-next.com/menu" target="_blank" class="external-link">Compass</a></td><td>norm-online-store</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">s9c?.3&60,RPDoHz</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td></tr>
+<tr><td>ラブクロム</td><td><a href="https://boss-oms.jp/BOSSWeb/MallInventorySetting" target="_blank" class="external-link">BOSS</a></td><td>カスタマーID 58615 / ycpterasawa</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">ycpterasawa2027</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td></tr>
+<tr><td>ラブクロム</td><td><a href="https://www.compass-next.com/menu" target="_blank" class="external-link">Compass</a></td><td>lovechrome</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">@Ycplct2310</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td></tr>
+</tbody></table>
+</div>
+</div>
+
+<div class="sub-section">
+<div class="sub-title">&#128272; Teps APIキー（serviceSecret / licenseKey） <a href="https://docs.google.com/spreadsheets/d/1aBUwoiPgbuYlMlc0dvo0QcvtiYqposelg54himEGfJs/edit?gid=2136138274#gid=2136138274" target="_blank" style="font-size:.75rem;margin-left:1rem;font-weight:400" class="external-link">元データ</a></div>
+<div class="table-wrapper">
+<table><thead><tr><th>店舗</th><th>serviceSecret</th><th>licenseKey</th><th>有効期限</th><th>更新日</th></tr></thead>
+<tbody>
+<tr><td>Her lip to BEAUTY</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">SP423937_FT2Bg5hNTYHS6gPl</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">423937_cLgzOyLjEtCHiNSd</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>2026/05/26</td><td>2026/05/21</td></tr>
+<tr><td>Her lip to ROSIER</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">SP427721_coQNEO1p5XCNHDg8</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">427721_IgTP49hVU7YugUpu</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>2026/06/01</td><td>2026/05/27</td></tr>
+<tr><td>Herzskin（LIENA）</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">SP434386_HaiPtsByQ4bUoFhh</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">434386_vSXActchwGJbEEVU</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>2026/05/28</td><td>2026/05/23</td></tr>
+<tr><td>関西酵素</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">SP429336_TLI4AufGmoRlzUUp</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">429336_swhdMBYruj5akK1K</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>2026/05/26</td><td>2026/05/21</td></tr>
+<tr><td>イエリオ（ベルーナ）</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">SP344141_hTX98ZbDBkZuXpkk</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">344141_v0jQKHJcOiJl6AQk</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>2026/05/28</td><td>2026/05/23</td></tr>
+<tr><td>Lypo-C（スピック）</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">SP407098_AVpAUpNeXTg28YOs</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">407098_I6OodkCBCVJufimj</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>2026/06/01</td><td>2026/05/27</td></tr>
+<tr><td>ラブクロム</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">SP312762_4FwFaKrUpXie2Q2T</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">312762_NQeuJ4kqHNSvoTuO</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>2026/05/26</td><td>2026/05/21</td></tr>
+<tr><td>ユナウ</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">SP438248_3wgEt25Kv6m2akB4</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">438248_kwxjaV73bIY5KRT3</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>2026/05/28</td><td>2026/05/23</td></tr>
+<tr><td>シェリーブラン</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">SP432790_lB2tVcHDEvWkYaZ5</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">432790_ml8NiEoS3eopD2TU</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>2026/05/28</td><td>2026/05/23</td></tr>
+<tr><td>中島大祥堂</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">SP386761_F02o6fZUOdoEXqwj</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">386761_Lat5puQgpssgnOYT</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>2026/05/28</td><td>2026/05/23</td></tr>
+<tr><td>ファーマフーズ</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">SP401033_xNHZ808MVrpuk4rp</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">401033_m1ZMxh6EsVZ9FceT</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>2026/05/28</td><td>2026/05/23</td></tr>
+<tr><td>百福堂</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">SP417845_kfcrgSUkiwDHOM3j</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">417845_BeQ7O6kBehQmVLqh</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>2026/05/28</td><td>2026/05/23</td></tr>
+<tr><td>nelse（Mydiine）</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">SP404924_gY0xjx54nMKPznYu</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">404924_a15lXrgTKPICoBIL</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>2026/06/16</td><td>2026/06/11</td></tr>
+<tr><td>和牛セレブ</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">SP425659_ZY63qRYxLRNnVYUt</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">425659_VXL12PmQ2bDifUL8</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>2026/06/12</td><td>2026/06/07</td></tr>
+<tr><td>EZOBOLIC</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">SP437868_E9nEJmq3px1QRjbI</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">437868_tuqkQhX8yUQm73Ot</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>2026/06/17</td><td></td></tr>
+</tbody></table>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Individual 各種ログイン情報 -->
+<div id="logins" class="section">
+<h2 class="section-title" onclick="toggleSection(this)">&#128274; 個別ログイン情報（ファーマフーズ）<span class="toggle-arrow">&#9660;</span></h2>
+<div class="section-content">
+<div class="table-wrapper">
+<table><thead><tr><th>サービス</th><th>ID</th><th>PW</th><th>備考</th></tr></thead>
+<tbody>
+<tr><td>ファーマフーズ楽天RMS</td><td>tamagokichi2021</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">newmo015</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>forcer.pharmafoods@gmail.com / saikora123</td></tr>
+<tr><td>ECマスターズ（ファーマ）</td><td>tamagokichiraku</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">newmo0711</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td></td></tr>
+<tr><td>ファンくる（承認画面）</td><td>famafoods</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">fZdDbH6R</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td><a href="https://newadmin.fancrew.jp/Managers/login" target="_blank" class="external-link">ログインURL</a></td></tr>
+<tr><td>Fancrew (futurelab)</td><td>futurelab</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">sBy5dPDZ</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td></td></tr>
+<tr><td>ファーマECマスターズ</td><td>tamagokichiraku</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">newmo0711</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td><a href="https://tool.ec-masters.net/login.php" target="_blank" class="external-link">ログインURL</a></td></tr>
+</tbody></table>
+</div>
+</div>
+</div>
+
+<!-- Client List -->
+<div id="clients" class="section">
+<h2 class="section-title" onclick="toggleSection(this)">&#128188; クライアント一覧<span class="toggle-arrow">&#9660;</span></h2>
+<div class="section-content">
+<div class="filter-tabs">
+<span class="filter-tab active" onclick="filterClients('all',this)">全て</span>
+<span class="filter-tab" onclick="filterClients('furusato',this)">ふるさと納税</span>
+<span class="filter-tab" onclick="filterClients('active',this)">通常案件</span>
+<span class="filter-tab" onclick="filterClients('bp',this)">BP案件</span>
+<span class="filter-tab" onclick="filterClients('open',this)">OPEN案件</span>
+<span class="filter-tab" onclick="filterClients('ended',this)">終了案件</span>
+</div>
+<div class="client-grid" id="clientGrid">
+<div class="client-card" data-category="furusato"><div class="cc-header"><div><div class="cc-name">&#30333;&#31968;&#30010;&#12405;&#12427;&#12373;&#12392;&#32013;&#31246;</div><div class="cc-store">&#21271;&#28023;&#36947;&#30333;&#31968;&#30010;</div></div><span class="tag tag-furusato">&#12405;&#12427;&#12373;&#12392;&#32013;&#31246;</span></div><div class="cc-details"><span>コンサル: &#21315;&#33865;&#24910;</span><span>広告: &#21315;&#33865;&#24910;</span><span>アシスタント: &#27159;&#20117;</span></div></div>
+<div class="client-card" data-category="furusato"><div class="cc-header"><div><div class="cc-name">&#19968;&#38306;&#24066;&#12405;&#12427;&#12373;&#12392;&#32013;&#31246;</div><div class="cc-store">&#23721;&#25163;&#30476;&#19968;&#38306;&#24066;</div></div><span class="tag tag-furusato">&#12405;&#12427;&#12373;&#12392;&#32013;&#31246;</span></div><div class="cc-details"><span>コンサル: &#21315;&#33865;&#24910;</span><span>広告: &#21315;&#33865;&#24910;</span><span>アシスタント: &#27159;&#20117;</span></div></div>
+<div class="client-card" data-category="furusato"><div class="cc-header"><div><div class="cc-name">&#35282;&#30000;&#24066;&#12405;&#12427;&#12373;&#12392;&#32013;&#31246;</div><div class="cc-store">&#23470;&#22478;&#30476;&#35282;&#30000;&#24066;</div></div><span class="tag tag-furusato">&#12405;&#12427;&#12373;&#12392;&#32013;&#31246;</span></div><div class="cc-details"><span>コンサル: &#21315;&#33865;&#24910;</span><span>広告: &#21315;&#33865;&#24910;</span><span>アシスタント: &#27159;&#20117;</span></div></div>
+<div class="client-card" data-category="furusato"><div class="cc-header"><div><div class="cc-name">&#24120;&#32207;&#24066;&#12405;&#12427;&#12373;&#12392;&#32013;&#31246;</div><div class="cc-store">&#33576;&#22478;&#30476;&#24120;&#32207;&#24066;</div></div><span class="tag tag-furusato">&#12405;&#12427;&#12373;&#12392;&#32013;&#31246;</span></div><div class="cc-details"><span>管理者: &#19978;&#21407;</span><span>コンサル: &#21315;&#33865;</span><span>広告: &#21315;&#33865;</span><span>アシスタント: &#31179;&#33865;</span></div></div>
+<div class="client-card" data-category="active"><div class="cc-header"><div><div class="cc-name">Herzskin</div><div class="cc-store">Herz skin &#27005;&#22825;&#24066;&#22580;&#24215;</div></div><span class="tag tag-active">&#36890;&#24120;</span></div><div class="cc-details"><span>管理者: &#29503;&#24029;(&#21644;)</span><span>コンサル: &#20869;&#30000;</span><span>広告: &#20869;&#30000;</span><span>アシスタント: &#20304;&#34276;</span></div></div>
+<div class="client-card" data-category="active"><div class="cc-header"><div><div class="cc-name">&#38306;&#35199;&#37237;&#32032;</div><div class="cc-store">&#38306;&#35199;&#37237;&#32032;&#20844;&#24335;&#12471;&#12519;&#12483;&#12503;</div></div><span class="tag tag-active">&#36890;&#24120;</span></div><div class="cc-details"><span>管理者: &#29503;&#24029;(&#21644;)</span><span>コンサル: &#20869;&#30000;</span><span>広告: &#20869;&#30000;</span><span>アシスタント: &#19978;&#21407;</span></div></div>
+<div class="client-card" data-category="active"><div class="cc-header"><div><div class="cc-name">her lip to BEAUTY</div><div class="cc-store">Her lip to BEAUTY</div></div><span class="tag tag-active">&#36890;&#24120;</span></div><div class="cc-details"><span>管理者: &#29503;&#24029;(&#21644;)</span><span>コンサル: &#31179;&#33865;</span><span>広告: &#31179;&#33865;</span><span>アシスタント: &#20304;&#34276;</span></div></div>
+<div class="client-card" data-category="active"><div class="cc-header"><div><div class="cc-name">her lip to ROSIER</div><div class="cc-store">ROSIER by Her lip to</div></div><span class="tag tag-active">&#36890;&#24120;</span></div><div class="cc-details"><span>管理者: &#29503;&#24029;(&#21644;)</span><span>コンサル: &#31179;&#33865;</span><span>広告: &#31179;&#33865;</span><span>アシスタント: &#20304;&#34276;</span></div></div>
+<div class="client-card" data-category="active"><div class="cc-header"><div><div class="cc-name">&#12452;&#12456;&#12522;&#12458;&#12452;&#12531;&#12486;&#12522;&#12450;</div><div class="cc-store">&#12452;&#12456;&#12522;&#12458; &#12452;&#12531;&#12486;&#12522;&#12450;&#23478;&#20855;</div></div><span class="tag tag-active">&#36890;&#24120;</span></div><div class="cc-details"><span>管理者: &#29503;&#24029;(&#21644;)</span><span>コンサル: &#39131;&#40165;&#38291;</span><span>広告: &#39131;&#40165;&#38291;</span><span>アシスタント: &#20304;&#34276;</span></div></div>
+<div class="client-card" data-category="active"><div class="cc-header"><div><div class="cc-name">yu'now</div><div class="cc-store">YU'NOW</div></div><span class="tag tag-active">&#36890;&#24120;</span></div><div class="cc-details"><span>管理者: &#29503;&#24029;(&#21644;)</span><span>コンサル: &#39131;&#40165;&#38291;</span><span>広告: &#39131;&#40165;&#38291;</span><span>アシスタント: &#20013;&#28716;</span></div></div>
+<div class="client-card" data-category="active"><div class="cc-header"><div><div class="cc-name">&#12473;&#12500;&#12483;&#12463;</div><div class="cc-store">Lypo-C&#20844;&#24335;&#12471;&#12519;&#12483;&#12503;</div></div><span class="tag tag-active">&#36890;&#24120;</span></div><div class="cc-details"><span>管理者: &#29503;&#24029;(&#21644;)</span><span>コンサル: &#20869;&#30000;</span><span>広告: &#20869;&#30000;</span><span>アシスタント: &#20304;&#34276;</span></div></div>
+<div class="client-card" data-category="active"><div class="cc-header"><div><div class="cc-name">LOVE CHORME</div><div class="cc-store">&#12521;&#12502;&#12463;&#12525;&#12512;&#20844;&#24335;</div></div><span class="tag tag-active">&#36890;&#24120;</span></div><div class="cc-details"><span>管理者: &#29503;&#24029;(&#21644;)</span><span>コンサル: &#31179;&#33865;</span><span>広告: &#27704;&#20117;</span><span>アシスタント: &#27159;&#20117;</span></div></div>
+<div class="client-card" data-category="active"><div class="cc-header"><div><div class="cc-name">in sky</div><div class="cc-store">&#39640;&#30693;&#33258;&#28982;&#21830;&#24215; is</div></div><span class="tag tag-active">&#36890;&#24120;</span></div><div class="cc-details"><span>管理者: &#29503;&#24029;(&#21644;)</span><span>コンサル: &#31179;&#33865;</span><span>広告: &#31179;&#33865;</span><span>アシスタント: &#27159;&#20117;</span></div></div>
+<div class="client-card" data-category="active"><div class="cc-header"><div><div class="cc-name">Nelse</div><div class="cc-store">Mydiine&#27005;&#22825;&#24066;&#22580;&#24215;</div></div><span class="tag tag-active">&#36890;&#24120;</span></div><div class="cc-details"><span>管理者: &#29503;&#24029;(&#21644;)</span><span>コンサル: &#29503;&#24029;(&#21644;)</span><span>広告: &#29503;&#24029;(&#21644;)</span><span>アシスタント: &#20304;&#34276;</span></div></div>
+<div class="client-card" data-category="active"><div class="cc-header"><div><div class="cc-name">KATAN</div><div class="cc-store">KATAN&#20844;&#24335;&#12473;&#12488;&#12450;</div></div><span class="tag tag-active">&#36890;&#24120;</span></div><div class="cc-details"><span>管理者: &#29503;&#24029;(&#21644;)</span><span>コンサル: &#20869;&#30000;</span><span>広告: &#20869;&#30000;</span><span>アシスタント: &#20013;&#28716;</span></div></div>
+<div class="client-card" data-category="active"><div class="cc-header"><div><div class="cc-name">&#21644;&#29275;&#12475;&#12524;&#12502;</div><div class="cc-store">&#21644;&#29275;&#12475;&#12524;&#12502; &#12362;&#32905;&#12462;&#12501;&#12488;&#23554;&#38272;&#24215;</div></div><span class="tag tag-active">&#36890;&#24120;</span></div><div class="cc-details"><span>管理者: &#29503;&#24029;(&#21644;)</span><span>コンサル: &#29503;&#24029;(&#21644;)</span><span>広告: &#31179;&#33865;</span><span>アシスタント: &#20013;&#28716;</span></div></div>
+<div class="client-card" data-category="bp"><div class="cc-header"><div><div class="cc-name">&#37504;&#24231;&#33775;&#33590; (&#12471;&#12455;&#12522;&#12540;&#12502;&#12521;&#12531;)</div><div class="cc-store">&#20889;&#30495;&#12465;&#12540;&#12461;&#12398;&#12471;&#12455;&#12522;&#12540;&#12502;&#12521;&#12531;</div></div><span class="tag tag-bp">BP</span></div><div class="cc-details"><span>管理者: &#29503;&#24029;</span><span>コンサル: &#40667;</span><span>広告: &#40667;</span><span>アシスタント: &#20304;&#34276;</span></div></div>
+<div class="client-card" data-category="bp"><div class="cc-header"><div><div class="cc-name">&#30334;&#31119;&#22530;</div><div class="cc-store">&#30334;&#31119;&#22530;</div></div><span class="tag tag-bp">BP</span></div><div class="cc-details"><span>管理者: &#29503;&#24029;</span><span>コンサル: &#40667;</span><span>広告: &#40667;</span><span>アシスタント: &#20304;&#34276;</span></div></div>
+<div class="client-card" data-category="open"><div class="cc-header"><div><div class="cc-name">&#40140;&#36650;</div><div class="cc-store">&#21517;&#21476;&#23627;&#36763;&#40634; &#40140;&#36650; &#27005;&#22825;&#24066;&#22580;&#24215;</div></div><span class="tag tag-open">OPEN</span></div><div class="cc-details"><span>&#36914;&#25431;: &#23529;&#26619;&#20013;</span></div></div>
+<div class="client-card" data-category="open"><div class="cc-header"><div><div class="cc-name">&#12456;&#12478;&#12508;&#12522;&#12483;&#12463;</div><div class="cc-store">-</div></div><span class="tag tag-open">OPEN</span></div><div class="cc-details"><span>&#36914;&#25431;: &#23436;&#20102;</span></div></div>
+<div class="client-card ended" data-category="ended"><div class="cc-header"><div><div class="cc-name">HINOKI</div></div><span class="tag tag-ended">&#32066;&#20102;</span></div></div>
+<div class="client-card ended" data-category="ended"><div class="cc-header"><div><div class="cc-name">NORM / MAJIDE</div></div><span class="tag tag-ended">&#32066;&#20102;</span></div></div>
+<div class="client-card ended" data-category="ended"><div class="cc-header"><div><div class="cc-name">&#12522;&#12509;&#12473;&#12501;&#12455;&#12522;&#12483;&#12463;</div></div><span class="tag tag-ended">&#32066;&#20102;</span></div></div>
+<div class="client-card ended" data-category="ended"><div class="cc-header"><div><div class="cc-name">&#12456;&#12540;&#12524;&#12473;&#12479;&#12452;&#12523;</div></div><span class="tag tag-ended">&#32066;&#20102;</span></div></div>
+<div class="client-card ended" data-category="ended"><div class="cc-header"><div><div class="cc-name">&#12400;&#12406;&#12400;&#12406;&#12473;&#12488;&#12450;</div></div><span class="tag tag-ended">&#32066;&#20102;</span></div></div>
+<div class="client-card ended" data-category="ended"><div class="cc-header"><div><div class="cc-name">&#28608;&#23433;&#20175;&#22727;&#24215;</div></div><span class="tag tag-ended">&#32066;&#20102;</span></div></div>
+<div class="client-card ended" data-category="ended"><div class="cc-header"><div><div class="cc-name">&#12513;&#12531;&#12510;&#23627;&#22823;&#38272;</div></div><span class="tag tag-ended">&#32066;&#20102;</span></div></div>
+<div class="client-card ended" data-category="ended"><div class="cc-header"><div><div class="cc-name">&#12501;&#12449;&#12540;&#12510;&#12501;&#12540;&#12474;</div></div><span class="tag tag-ended">&#32066;&#20102;</span></div></div>
+<div class="client-card ended" data-category="ended"><div class="cc-header"><div><div class="cc-name">&#20013;&#23798;&#22823;&#31077;&#22530;</div></div><span class="tag tag-ended">&#32066;&#20102;</span></div></div>
+<div class="client-card ended" data-category="ended"><div class="cc-header"><div><div class="cc-name">&#35282;&#12398;&#36947;&#20855;&#23627;</div></div><span class="tag tag-ended">&#32066;&#20102;</span></div></div>
+</div>
+</div>
+</div>
+
+<!-- Team -->
+<div id="team" class="section">
+<h2 class="section-title" onclick="toggleSection(this)">&#128101; 担当者一覧<span class="toggle-arrow">&#9660;</span></h2>
+<div class="section-content">
+<div class="table-wrapper">
+<table><thead><tr><th>No</th><th>クライアント</th><th>業務範囲</th><th>媒体</th><th>管理者</th><th>コンサル</th><th>広告運用</th><th>アシスタント</th></tr></thead>
+<tbody>
+<tr><td colspan="8" style="background:#e3f2fd;font-weight:700;color:var(--accent)">&#12405;&#12427;&#12373;&#12392;&#32013;&#31246;&#26696;&#20214;</td></tr>
+<tr><td>1</td><td>&#30333;&#31968;&#30010;</td><td>コンサル&広告運用</td><td><span class="tag tag-rakuten">Rakuten</span></td><td></td><td>&#21315;&#33865;&#24910;</td><td>&#21315;&#33865;&#24910;</td><td>&#27159;&#20117;</td></tr>
+<tr><td>2</td><td>&#19968;&#38306;&#24066;</td><td>コンサル&広告運用</td><td><span class="tag tag-rakuten">Rakuten</span></td><td></td><td>&#21315;&#33865;&#24910;</td><td>&#21315;&#33865;&#24910;</td><td>&#27159;&#20117;</td></tr>
+<tr><td>3</td><td>&#35282;&#30000;&#24066;</td><td>コンサル&広告運用</td><td><span class="tag tag-rakuten">Rakuten</span></td><td></td><td>&#21315;&#33865;&#24910;</td><td>&#21315;&#33865;&#24910;</td><td>&#27159;&#20117;</td></tr>
+<tr><td>4</td><td>&#30331;&#21029;&#30010;</td><td>コンサル&広告運用</td><td><span class="tag tag-amazon">Amazon</span></td><td></td><td>&#23614;&#23822;</td><td>&#23614;&#23822;</td><td>&#26494;&#19979;</td></tr>
+<tr><td>5</td><td>&#24120;&#32207;&#24066;</td><td>コンサル&運用代行</td><td><span class="tag tag-rakuten">Rakuten</span></td><td>&#19978;&#21407;</td><td>&#21315;&#33865;</td><td>&#21315;&#33865;</td><td>&#31179;&#33865;</td></tr>
+<tr><td colspan="8" style="background:#e8f5e9;font-weight:700;color:var(--accent)">&#36890;&#24120;&#26696;&#20214;</td></tr>
+<tr><td>6</td><td>Herz Skin</td><td>コンサル&運用代行</td><td><span class="tag tag-rakuten">Rakuten</span></td><td>&#29503;&#24029;(&#21644;)</td><td>&#20869;&#30000;</td><td>&#20869;&#30000;</td><td>&#20304;&#34276;</td></tr>
+<tr><td>7</td><td>&#38306;&#35199;&#37237;&#32032;</td><td>コンサル&運用代行</td><td><span class="tag tag-rakuten">Rakuten</span></td><td>&#29503;&#24029;(&#21644;)</td><td>&#20869;&#30000;</td><td>&#20869;&#30000;</td><td>&#19978;&#21407;</td></tr>
+<tr><td>8</td><td>HLT BEAUTY</td><td>コンサル&運用代行</td><td><span class="tag tag-rakuten">Rakuten</span></td><td>&#29503;&#24029;(&#21644;)</td><td>&#31179;&#33865;</td><td>&#31179;&#33865;</td><td>&#20304;&#34276;</td></tr>
+<tr><td>9</td><td>HLT ROSIER</td><td>コンサル&運用代行</td><td><span class="tag tag-rakuten">Rakuten</span></td><td>&#29503;&#24029;(&#21644;)</td><td>&#31179;&#33865;</td><td>&#31179;&#33865;</td><td>&#20304;&#34276;</td></tr>
+<tr><td>10</td><td>&#12452;&#12456;&#12522;&#12458;</td><td>コンサル&運用代行</td><td><span class="tag tag-rakuten">Rakuten</span></td><td>&#29503;&#24029;(&#21644;)</td><td>&#39131;&#40165;&#38291;</td><td>&#39131;&#40165;&#38291;</td><td>&#20304;&#34276;</td></tr>
+<tr><td>11</td><td>yu'now</td><td>コンサル&運用代行</td><td><span class="tag tag-rakuten">Rakuten</span></td><td>&#29503;&#24029;(&#21644;)</td><td>&#39131;&#40165;&#38291;</td><td>&#39131;&#40165;&#38291;</td><td>&#20013;&#28716;</td></tr>
+<tr><td>12</td><td>&#12473;&#12500;&#12483;&#12463;</td><td>コンサル</td><td><span class="tag tag-rakuten">Rakuten</span></td><td>&#29503;&#24029;(&#21644;)</td><td>&#20869;&#30000;</td><td>&#20869;&#30000;</td><td>&#20304;&#34276;</td></tr>
+<tr><td>13</td><td>LOVE CHORME</td><td>コンサル&運用代行</td><td><span class="tag tag-rakuten">Rakuten</span></td><td>&#29503;&#24029;(&#21644;)</td><td>&#31179;&#33865;</td><td>&#27704;&#20117;</td><td>&#27159;&#20117;</td></tr>
+<tr><td>14</td><td>in sky</td><td>コンサル&運用代行</td><td><span class="tag tag-rakuten">Rakuten</span></td><td>&#29503;&#24029;(&#21644;)</td><td>&#31179;&#33865;</td><td>&#31179;&#33865;</td><td>&#27159;&#20117;</td></tr>
+<tr><td>15</td><td>Nelse</td><td>コンサル&運用代行</td><td><span class="tag tag-rakuten">Rakuten</span></td><td>&#29503;&#24029;(&#21644;)</td><td>&#29503;&#24029;(&#21644;)</td><td>&#29503;&#24029;(&#21644;)</td><td>&#20304;&#34276;</td></tr>
+<tr><td>16</td><td>KATAN</td><td>コンサル&運用代行</td><td><span class="tag tag-rakuten">Rakuten</span></td><td>&#29503;&#24029;(&#21644;)</td><td>&#20869;&#30000;</td><td>&#20869;&#30000;</td><td>&#20013;&#28716;</td></tr>
+<tr><td>23</td><td>&#21644;&#29275;&#12475;&#12524;&#12502;</td><td>コンサル&運用代行</td><td><span class="tag tag-rakuten">Rakuten</span></td><td>&#29503;&#24029;(&#21644;)</td><td>&#29503;&#24029;(&#21644;)</td><td>&#31179;&#33865;</td><td>&#20013;&#28716;</td></tr>
+<tr><td colspan="8" style="background:#fff3e0;font-weight:700;color:var(--accent)">Amazon&#26696;&#20214;</td></tr>
+<tr><td>17</td><td>KATAN</td><td>コンサル&運用代行</td><td><span class="tag tag-amazon">Amazon</span></td><td>&#29503;&#24029;(&#21644;)</td><td>&#23567;&#31558;</td><td>&#23567;&#31558;</td><td>&#20013;&#28716;</td></tr>
+<tr><td>18</td><td>&#12456;&#12478;&#12508;&#12522;&#12483;&#12463;</td><td>コンサル&運用代行</td><td><span class="tag tag-amazon">Amazon</span></td><td>&#29503;&#24029;(&#21644;)</td><td>&#27387;&#20117;</td><td>&#23665;&#21475;</td><td>&#20013;&#28716;</td></tr>
+<tr><td>19</td><td>&#12491;&#12483;&#12475;&#12452;&#12456;&#12467;</td><td>コンサル&運用代行</td><td><span class="tag tag-amazon">Amazon</span></td><td>&#29503;&#24029;(&#21644;)</td><td>&#27387;&#20117;</td><td>&#23665;&#21475;</td><td>&#20013;&#28716;</td></tr>
+<tr><td>20</td><td>NOCK WOOD</td><td>コンサル&運用代行</td><td><span class="tag tag-amazon">Amazon</span></td><td>&#29503;&#24029;(&#21644;)</td><td>&#23567;&#31558;</td><td>&#23567;&#31558;</td><td>&#26494;&#19979;</td></tr>
+<tr><td>21</td><td>silk the rich</td><td>コンサル&運用代行</td><td><span class="tag tag-amazon">Amazon</span></td><td>&#29503;&#24029;(&#21644;)</td><td>&#24179;&#23614;</td><td>&#24179;&#23614;</td><td>&#22679;&#30000;</td></tr>
+<tr><td>22</td><td>&#21644;&#29275;&#12475;&#12524;&#12502;</td><td>コンサル&運用代行</td><td><span class="tag tag-amazon">Amazon</span></td><td>&#29503;&#24029;(&#21644;)</td><td>&#23567;&#31558;</td><td>&#23567;&#31558;</td><td>&#20013;&#28716;</td></tr>
+<tr><td>29</td><td>&#26862;&#27704;&#20083;&#26989;</td><td>コンサル&運用代行</td><td><span class="tag tag-amazon">Amazon</span></td><td>&#29503;&#24029;</td><td>&#23567;&#31558;/&#23614;&#23822;/&#23567;&#26647;</td><td>&#23567;&#31558;/&#23614;&#23822;/&#23567;&#26647;</td><td>&#20013;&#28716;/&#26494;&#19979;</td></tr>
+<tr><td colspan="8" style="background:#fce4ec;font-weight:700;color:var(--accent)">BP&#26696;&#20214;</td></tr>
+<tr><td>39</td><td>&#37504;&#24231;&#33775;&#33590;</td><td>コンサル&運用代行</td><td><span class="tag tag-rakuten">Rakuten</span></td><td>&#29503;&#24029;</td><td>&#40667;</td><td>&#40667;</td><td>&#20304;&#34276;</td></tr>
+<tr><td>40</td><td>&#30334;&#31119;&#22530;</td><td>コンサル&運用代行</td><td><span class="tag tag-rakuten">Rakuten</span></td><td>&#29503;&#24029;</td><td>&#40667;</td><td>&#40667;</td><td>&#20304;&#34276;</td></tr>
+</tbody></table>
+</div>
+</div>
+</div>
+
+<!-- Drive -->
+<div id="drive" class="section">
+<h2 class="section-title" onclick="toggleSection(this)">&#128193; 共有ドライブ<span class="toggle-arrow">&#9660;</span></h2>
+<div class="section-content">
+<div class="rules-card" style="margin-bottom:1.5rem">
+<a class="rule-link" href="https://drive.google.com/drive/u/0/folders/0AAzV1tr-WUzVUk9PVA" target="_blank">&#128193; CARDS共有ドライブ</a>
+<p style="color:var(--text-light);font-size:.85rem;margin-top:1rem">全クライアントのフォルダとドキュメントはこの共有ドライブ内に整理されています。</p>
+</div>
+<div class="table-wrapper">
+<h3>&#128194; クライアント別ドライブフォルダ</h3>
+<table><thead><tr><th>クライアント</th><th>共有ドライブ</th><th>共有シート</th><th>タスクシート</th><th>その他</th></tr></thead>
+<tbody>
+<tr><td>白糠町</td><td><a href="https://drive.google.com/drive/folders/1Ro1lpi-WVwiTdYnAJCjvOQy_9ZeLmjRm" target="_blank" class="external-link">白糠町</a></td><td><a href="https://docs.google.com/spreadsheets/d/1GyzKyRGdA4Vzyf1ubGNbZX35APadv-HV76IVTQxUyIM/edit?gid=94749795#gid=94749795" target="_blank" class="external-link">白糠町様_共有シート</a></td><td>白糠町様_タスクシート</td><td>日次レポート</td></tr>
+<tr><td>一関市</td><td>-</td><td><a href="https://docs.google.com/spreadsheets/d/1fO2hOxXtFeUwAVcjHFEFlK6wLacivYyP8HX2MkV1kEc/edit?gid=94749795#gid=94749795" target="_blank" class="external-link">一関市様_共有シート</a></td><td>一関市様_タスクシート</td><td>日次レポート</td></tr>
+<tr><td>常総市</td><td><a href="https://drive.google.com/drive/folders/1sNRyUGVXxZeR8JnCtC23cB-7E_97G6n7" target="_blank" class="external-link">★定例報告書_CARDS様</a></td><td><a href="https://docs.google.com/spreadsheets/d/1aD-0MtT2UUylvp1n1K66gc1zLIb9XvVJw_vBltTBLoQ/edit?gid=608843951#gid=608843951" target="_blank" class="external-link">茨城県常総市様_共有シート</a></td><td>常総市様_タスクシート</td><td>日次レポート</td></tr>
+<tr><td>Herzskin（LIENA）</td><td><a href="https://drive.google.com/drive/u/0/folders/1SSjOumammU6_7RyZePtIkOmnTy8v6ddL" target="_blank" class="external-link">MTG資料</a></td><td><a href="https://docs.google.com/spreadsheets/d/1QrhRZQghlQGJyg1w2mQaVddmRsQmCg1xwH4KR0mcN6s/edit?gid=899642865#gid=899642865" target="_blank" class="external-link">liena_共有シート</a></td><td>liena様_タスクシート</td><td>利益算出管理 / SEO確認</td></tr>
+<tr><td>HLT BEAUTY</td><td><a href="https://drive.google.com/drive/folders/1oJWJ_xMzl-iBnzbCEWjQKxR9AK_CTpIF" target="_blank" class="external-link">her lip to様</a></td><td><a href="https://docs.google.com/spreadsheets/d/16npd1yYLYxMfqtMTJXnKTolAQ1EaXjO9tgeKgeNkdnQ/edit?gid=933051276#gid=933051276" target="_blank" class="external-link">Beauty_HLT様_共有シート</a></td><td>BEAUTY様_タスクシート</td><td>利益算出 / 画像構成案</td></tr>
+<tr><td>HLT ROSIER</td><td><a href="https://drive.google.com/drive/folders/1oJWJ_xMzl-iBnzbCEWjQKxR9AK_CTpIF" target="_blank" class="external-link">her lip to様</a></td><td><a href="https://docs.google.com/spreadsheets/d/1jpkxP-K2cFNUN0YJgH7Rm_B7pmHK8eB-FpaVn2N0Ic8/edit?gid=1542062845#gid=1542062845" target="_blank" class="external-link">her_lip_to_ROSIER様_共有シート</a></td><td>ROSIER様_タスクシート</td><td>利益算出 / SEO推移</td></tr>
+<tr><td>イエリオ</td><td><a href="https://drive.google.com/drive/folders/1ZeegMvEmINhrafBZ9YGaph2xxe5hf6sE" target="_blank" class="external-link">ベルーナ様</a></td><td><a href="https://docs.google.com/spreadsheets/d/1QIQK28PHJ8EIfAYj_VXTgXdreeFWxwyj4wne0hWygNQ/edit?gid=933051276#gid=933051276" target="_blank" class="external-link">ベルーナ様_共有シート</a></td><td>ベルーナ様_タスクシート</td><td>SEO推移 / TDA / 施策管理</td></tr>
+<tr><td>スピック</td><td><a href="https://drive.google.com/drive/u/0/folders/1YeL-SilatDfQeNwF7nE1xYOSfmUSuAHy" target="_blank" class="external-link">スピック様</a></td><td><a href="https://docs.google.com/spreadsheets/d/1z6k5ZEj0w97ioRBz8YT9mQBSsBq6Y7MEWM64XqFW16w/edit?usp=sharing" target="_blank" class="external-link">Lypo-C様_共有シート</a></td><td>スピック様_タスクシート</td><td></td></tr>
+<tr><td>関西酵素</td><td><a href="https://drive.google.com/drive/folders/1aeAjsw1gPg75T8YSBmRjHfFtGbknbiJ6" target="_blank" class="external-link">関西酵素様</a></td><td><a href="https://docs.google.com/spreadsheets/d/1UGVuThVQ9eUNgFQ0HXDk2RPiaNiN_P-Amm6_2s24PcM/edit?gid=94749795#gid=94749795" target="_blank" class="external-link">関西酵素様_共有シート</a></td><td>関西酵素様_タスクシート</td><td>運用進行管理</td></tr>
+<tr><td>中島大祥堂</td><td><a href="https://drive.google.com/drive/folders/1PHDKh-Hieaus7CKl0RpBnnlW0MoxhO5z" target="_blank" class="external-link">中島大祥堂様</a></td><td><a href="https://docs.google.com/spreadsheets/d/1gRcHYBfIgrHzSPgMR1SY5Ds_7IBtRIK755rp3zrhc5k/edit?usp=sharing" target="_blank" class="external-link">中島大祥堂様_共有シート</a></td><td>中島大祥堂様_タスクシート</td><td>利益算出 / 構成案</td></tr>
+<tr><td>ファーマフーズ</td><td>-</td><td><a href="https://docs.google.com/spreadsheets/d/1Gzy2uAcDZI91lpyb8E2XbNMZdGquoAxYDG4ajEh0_GE/edit?gid=325956523#gid=325956523" target="_blank" class="external-link">たまご基地様_共有シート</a></td><td>ファーマフーズ様_タスクシート</td><td>構成案 / TDA / PL&amp;KPI</td></tr>
+<tr><td>ラブクロム</td><td>-</td><td><a href="https://docs.google.com/spreadsheets/d/1hKYMx5gIUTFKBGyTMV3MvtCRGlPeQ0eovZ-qdyo1_kI/edit?gid=608843951#gid=608843951" target="_blank" class="external-link">lovechorme様_共有シート</a></td><td>-</td><td>利益算出 / SEO / 構成案</td></tr>
+<tr><td>in sky</td><td>-</td><td><a href="https://docs.google.com/spreadsheets/d/1hKUbnSoX9G16p1gyYUL21X3KBAzUV5upcdUU2LiKsiY/edit?gid=917834333#gid=917834333" target="_blank" class="external-link">insky様_共有シート</a></td><td>-</td><td></td></tr>
+<tr><td>ユナウ</td><td>-</td><td><a href="https://docs.google.com/spreadsheets/d/1FuNY8JcS3elJnXDFBHgLvxzHZSqow3tWPNGm5S3-Ggg/edit?gid=1309004952#gid=1309004952" target="_blank" class="external-link">ユナウ様_共有シート</a></td><td>-</td><td></td></tr>
+<tr><td>銀座華茶</td><td>-</td><td><a href="https://docs.google.com/spreadsheets/d/11gDB8XgmYEsnMe7DfasTinFD_j0Ot2XFZ9uBHf4kinI/edit?gid=1515846618#gid=1515846618" target="_blank" class="external-link">シェリーブラン_共有シート</a></td><td>-</td><td></td></tr>
+<tr><td>百福堂</td><td>-</td><td><a href="https://docs.google.com/spreadsheets/d/1TadidwLQ4EOaFAyr3kIMAPXAKaeoNhQFPcGNQHBL_fU/edit?gid=1022366051#gid=1022366051" target="_blank" class="external-link">百福堂様_共有シート</a></td><td>-</td><td></td></tr>
+<tr><td>KATAN</td><td>-</td><td><a href="https://docs.google.com/spreadsheets/d/1fYHZqtfAF8h9BdUFwiJNCWx_A5aH2tOB9jXSqVz6wZ4/edit?gid=822176252#gid=822176252" target="_blank" class="external-link">KATAN公式ストア様_共有シート</a></td><td>-</td><td></td></tr>
+<tr><td>Nelse</td><td>-</td><td><a href="https://docs.google.com/spreadsheets/d/10wy7bTVdr1iRd2oWlPypJQSpf504bfsqs5pzvao8UwE/edit?gid=2056891893#gid=2056891893" target="_blank" class="external-link">Mydiine様_共有シート</a></td><td>-</td><td></td></tr>
+<tr><td>和牛セレブ</td><td>-</td><td>-</td><td>-</td><td></td></tr>
+</tbody></table>
+</div>
+</div>
+</div>
+
+<!-- Rules -->
+<div id="rules" class="section">
+<h2 class="section-title" onclick="toggleSection(this)">&#128214; 社内ルール<span class="toggle-arrow">&#9660;</span></h2>
+<div class="section-content">
+<div class="rules-card">
+<a class="rule-link" href="https://docs.google.com/document/d/1PGR9s93pvMIeGDAb-RUOYZJdMFoGQO-5nLUEKdzUJ4o/edit?tab=t.lbkaqwca49ye#heading=h.67g2qsqntdz7" target="_blank">&#128196; 社内ルールドキュメントを開く</a>
+<p style="color:var(--text-light);font-size:.85rem;margin-top:1rem">※ Google Docsで管理しています</p>
+</div>
+</div>
+</div>
+
+<!-- Org Chart -->
+<div id="org" class="section">
+<h2 class="section-title" onclick="toggleSection(this)">&#127963; 組織図<span class="toggle-arrow">&#9660;</span></h2>
+<div class="section-content">
+<div class="org-chart">
+<div class="org-tree">
+<ul>
+<li><span class="org-node org-ceo">&#128081; 代表 猿川哲朗</span>
+<ul>
+<li><span class="org-node org-div">EC運用代行事業</span>
+<ul>
+<li><span class="org-node org-dept">&#128722; 楽天市場運用代行事業 / 猿川和明</span>
+<ul>
+<li><span class="org-node org-person"><span class="org-name">内田</span><span class="org-clients">Herz Skin, 関西酵素, スピック, KATAN</span></span></li>
+<li><span class="org-node org-person"><span class="org-name">秋葉</span><span class="org-clients">HLT BEAUTY, HLT ROSIER, LOVE CHORME, in sky</span></span></li>
+<li><span class="org-node org-person"><span class="org-name">飛鳥間</span><span class="org-clients">イエリオ, yu&apos;now</span></span></li>
+<li><span class="org-node org-person"><span class="org-name">千葉慎</span><span class="org-clients">白糠町, 一関市, 角田市</span></span></li>
+<li><span class="org-node org-person"><span class="org-name">千葉</span><span class="org-clients">常総市</span></span></li>
+<li><span class="org-node org-person"><span class="org-name">猿川(和)</span><span class="org-clients">Nelse, 和牛セレブ</span></span></li>
+<li><span class="org-node org-person"><span class="org-name">麹</span><span class="org-clients">銀座華茶, 百福堂</span></span></li>
+<li><span class="org-node org-person"><span class="org-name">尾崎</span><span class="org-clients">登別町</span></span></li>
+</ul>
+</li>
+<li><span class="org-node org-dept">&#128230; Amazon運用代行事業 / 猿川和明</span>
+<ul>
+<li><span class="org-node org-person"><span class="org-name">小筆</span><span class="org-clients">KATAN, NOCK WOOD, 和牛セレブ, 森永乳業</span></span></li>
+<li><span class="org-node org-person"><span class="org-name">櫻井</span><span class="org-clients">エゾボリック, ニッセイエコ</span></span></li>
+<li><span class="org-node org-person"><span class="org-name">平尾</span><span class="org-clients">silk the rich</span></span></li>
+</ul>
+</li>
+<li><span class="org-node org-dept">&#127968; 自社ブランド</span>
+<ul>
+<li><span class="org-node org-team">楽天運用</span></li>
+<li><span class="org-node org-team">Amazon運用</span></li>
+<li><span class="org-node org-team">SCM/CS統括 / 上原</span>
+<ul>
+<li><span class="org-node org-person"><span class="org-name">松下</span><span class="org-clients">SCM</span></span></li>
+<li><span class="org-node org-person"><span class="org-name">伊藤</span><span class="org-clients">CS担当</span></span></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><span class="org-node org-div">&#128101; アシスタント組織 / 上原</span>
+<ul>
+<li><span class="org-node org-person"><span class="org-name">佐藤</span><span class="org-clients">Herz Skin, HLT BEAUTY, HLT ROSIER, イエリオ, スピック, Nelse, 銀座華茶, 百福堂</span></span></li>
+<li><span class="org-node org-person"><span class="org-name">中瀬</span><span class="org-clients">yu&apos;now, KATAN, 和牛セレブ, エゾボリック, ニッセイエコ, 森永乳業</span></span></li>
+<li><span class="org-node org-person"><span class="org-name">櫻井</span><span class="org-clients">白糠町, 一関市, 角田市, LOVE CHORME, in sky</span></span></li>
+<li><span class="org-node org-person"><span class="org-name">秋葉</span><span class="org-clients">常総市</span></span></li>
+<li><span class="org-node org-person"><span class="org-name">松下</span><span class="org-clients">登別町, NOCK WOOD, 森永乳業</span></span></li>
+<li><span class="org-node org-person"><span class="org-name">増田</span><span class="org-clients">silk the rich</span></span></li>
+<li><span class="org-node org-person"><span class="org-name">上原</span><span class="org-clients">関西酵素</span></span></li>
+</ul>
+</li>
+<li><span class="org-node org-div">&#128640; 新規事業/営業戦略室 / 上原</span></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Links -->
+<div id="links" class="section">
+<h2 class="section-title" onclick="toggleSection(this)">&#128279; リンク集 / マニュアル<span class="toggle-arrow">&#9660;</span></h2>
+<div class="section-content">
+<div class="info-grid">
+<div class="info-card"><h3>&#128218; スプレッドシート</h3><ul>
+<li><a href="https://docs.google.com/spreadsheets/d/11Cui2lS6SZxyMuerL3lc6FfMU_NKFakwYGgtNEXpfpg/edit?gid=1904162674#gid=1904162674" target="_blank" class="external-link">ツール/アカウント管理台帳</a></li>
+<li><a href="https://docs.google.com/spreadsheets/d/11Cui2lS6SZxyMuerL3lc6FfMU_NKFakwYGgtNEXpfpg/edit?gid=1032381051#gid=1032381051" target="_blank" class="external-link">各種ログイン情報</a></li>
+<li><a href="https://docs.google.com/spreadsheets/d/11Cui2lS6SZxyMuerL3lc6FfMU_NKFakwYGgtNEXpfpg/edit" target="_blank" class="external-link">施策管理表</a></li>
+<li><a href="https://docs.google.com/spreadsheets/d/11Cui2lS6SZxyMuerL3lc6FfMU_NKFakwYGgtNEXpfpg/edit" target="_blank" class="external-link">ルーティンタスク</a></li>
+</ul></div>
+<div class="info-card"><h3>&#128736; ツール</h3><ul>
+<li><a href="https://app.teps.io/" target="_blank" class="external-link">Teps</a></li>
+<li><a href="https://client.automatic.co.jp/" target="_blank" class="external-link">Automatic（広告）</a></li>
+<li><a href="https://aun-mypage.tools/folder/list" target="_blank" class="external-link">aun</a></li>
+<li><a href="https://tool.ec-masters.net/" target="_blank" class="external-link">EC Masters</a></li>
+<li><a href="https://rakutenkoqml.formstack.com/forms/room_promotion_new" target="_blank" class="external-link">ROOM申請フォーム</a></li>
+<li><a href="https://coupon.ultra-cloud.com/login" target="_blank" class="external-link">Rakura Coupon</a></li>
+<li><a href="https://boss-oms.jp/BOSSWeb/Auth/Login" target="_blank" class="external-link">BOSS</a></li>
+<li><a href="https://www.compass-next.com/menu" target="_blank" class="external-link">Compass</a></li>
+</ul></div>
+<div class="info-card"><h3>&#128587; コミュニケーション</h3><ul>
+<li><a href="https://zoom.us/myhome" target="_blank" class="external-link">Zoom</a></li>
+<li><a href="https://manager.line.biz/" target="_blank" class="external-link">LINE Business</a></li>
+<li>Chrome共有アカウント</li>
+</ul></div>
+<div class="info-card"><h3>&#128214; オンボーディング</h3><ul>
+<li><a href="https://docs.google.com/spreadsheets/d/11Cui2lS6SZxyMuerL3lc6FfMU_NKFakwYGgtNEXpfpg/edit" target="_blank" class="external-link">立ち上げチェック項目</a></li>
+<li><a href="https://docs.google.com/spreadsheets/d/11Cui2lS6SZxyMuerL3lc6FfMU_NKFakwYGgtNEXpfpg/edit" target="_blank" class="external-link">Yahooショッピング開設方法</a></li>
+<li><a href="https://docs.google.com/spreadsheets/d/11Cui2lS6SZxyMuerL3lc6FfMU_NKFakwYGgtNEXpfpg/edit" target="_blank" class="external-link">楽天設定マニュアル</a></li>
+</ul></div>
+</div>
+</div>
+</div>
+
+</div>
+<div id="loading-overlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,.9);z-index:9999;justify-content:center;align-items:center;flex-direction:column"><div style="font-size:2rem;color:var(--accent);margin-bottom:1rem">&#9203;</div><div style="color:var(--text);font-weight:600">データを読み込み中...</div></div>
+<footer style="background:var(--primary);color:rgba(255,255,255,.6);padding:1.5rem;text-align:center;font-size:.8rem;margin-top:2rem">&copy; 2026 CARDS Inc. &mdash; 社内ポータル</footer>
+<script>
+function togglePw(el){var cell=el.closest('.pw-cell');if(cell)cell.classList.toggle('revealed')}
+var copySvg='<svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>';
+var checkSvg='<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+function copyToClipboard(text,btn){
+  navigator.clipboard.writeText(text).then(function(){
+    btn.innerHTML=checkSvg;btn.classList.add('copied');
+    setTimeout(function(){btn.innerHTML=copySvg;btn.classList.remove('copied')},1500);
+  }).catch(function(){
+    var ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+    document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
+    btn.innerHTML=checkSvg;btn.classList.add('copied');
+    setTimeout(function(){btn.innerHTML=copySvg;btn.classList.remove('copied')},1500);
+  });
+}
+function injectCopyButtons(){
+  // PW cells: add copy button after toggle
+  document.querySelectorAll('.pw-cell').forEach(function(cell){
+    if(cell.querySelector('.copy-btn'))return;
+    var real=cell.querySelector('.pw-real');if(!real)return;
+    var btn=document.createElement('button');btn.className='copy-btn';btn.title='PWをコピー';btn.innerHTML=copySvg;
+    btn.addEventListener('click',function(e){e.stopPropagation();copyToClipboard(real.textContent,btn)});
+    cell.appendChild(btn);
+  });
+  // ID cells: column before pw-cell in same row
+  document.querySelectorAll('.pw-cell').forEach(function(pwTd){
+    var idTd=pwTd.previousElementSibling;
+    if(!idTd||idTd.classList.contains('pw-cell')||idTd.querySelector('.copy-btn'))return;
+    var text=idTd.textContent.trim();if(!text||text==='-'||text==='******')return;
+    idTd.classList.add('id-cell');
+    var btn=document.createElement('button');btn.className='copy-btn';btn.title='IDをコピー';btn.innerHTML=copySvg;
+    btn.addEventListener('click',function(e){e.stopPropagation();copyToClipboard(text,btn)});
+    idTd.appendChild(btn);
+  });
+}
+document.addEventListener('click',function(e){var toggle=e.target.closest('.pw-toggle');if(toggle){e.stopPropagation();togglePw(toggle)}})
+function toggleSection(titleEl){var content=titleEl.nextElementSibling;var arrow=titleEl.querySelector('.toggle-arrow');if(content&&content.classList.contains('section-content')){content.classList.toggle('collapsed');if(arrow)arrow.classList.toggle('collapsed')}}
+function filterClients(cat,tab){document.querySelectorAll('.filter-tab').forEach(function(t){t.classList.remove('active')});tab.classList.add('active');document.querySelectorAll('.client-card').forEach(function(c){c.style.display=(cat==='all'||c.dataset.category===cat)?'':'none'})}
+function handleSearch(q){q=q.toLowerCase().trim();var els=document.querySelectorAll('table tbody tr, .client-card');if(!q){els.forEach(function(e){e.style.display=''});return}els.forEach(function(e){e.style.display=e.textContent.toLowerCase().includes(q)?'':'none'})}
+document.querySelectorAll('nav a').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();document.querySelectorAll('nav a').forEach(function(n){n.classList.remove('active')});this.classList.add('active');var t=document.querySelector(this.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})})});
+window.addEventListener('scroll',function(){var secs=document.querySelectorAll('.section'),cur='';secs.forEach(function(s){if(window.scrollY>=s.offsetTop-200)cur=s.id});document.querySelectorAll('nav a').forEach(function(a){a.classList.remove('active');if(a.getAttribute('href')==='#'+cur)a.classList.add('active')})});
+
+/* === GAS連動: スプレッドシートからデータを動的読み込み === */
+function pwCell(pw){return '<td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">'+escHtml(pw)+'</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span><button class="copy-btn" title="PWをコピー" onclick="event.stopPropagation();copyToClipboard(this.parentElement.querySelector(\'.pw-real\').textContent,this)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></button></td>'}
+function escHtml(s){if(!s)return'';return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function tagClass(ch){ch=ch.toLowerCase();if(ch.indexOf('rakuten')>=0||ch.indexOf('楽天')>=0)return'tag-rakuten';if(ch.indexOf('amazon')>=0)return'tag-amazon';if(ch.indexOf('yahoo')>=0)return'tag-yahoo';if(ch.indexOf('line')>=0)return'tag-line';if(ch.indexOf('teps')>=0||ch.indexOf('広告')>=0||ch.indexOf('filezilla')>=0)return'tag-tool';return'tag-other'}
+function linkOrText(url,text){if(url)return'<a href="'+escHtml(url)+'" target="_blank" class="external-link">'+escHtml(text||url)+'</a>';return escHtml(text||'-')}
+
+function loadAllData(){
+  console.log('静的HTMLで表示中');return
+  document.getElementById('loading-overlay').style.display='flex';
+  google.script.run.withSuccessHandler(function(d){
+    renderAccounts(d.accounts);
+    renderStoreLogins(d.storeLogins);
+    renderClients(d.clients);
+    renderTeam(d.team);
+    renderDrive(d.clients);
+    renderRules(d.rules);
+    document.getElementById('loading-overlay').style.display='none';
+    injectCopyButtons();
+    document.querySelector('header p').textContent='社内ポータルサイト — データ: スプレッドシート連動中';
+  }).withFailureHandler(function(e){
+    document.getElementById('loading-overlay').style.display='none';
+    console.error('データ読み込みエラー:',e);
+  }).getAllData();
+}
+
+function renderAccounts(acc){
+  if(!acc)return;
+  if(acc.ecAccounts&&acc.ecAccounts.length){
+    var html='';
+    acc.ecAccounts.forEach(function(a){
+      html+='<tr><td><span class="tag '+tagClass(a.channel)+'">'+escHtml(a.channel)+'</span></td>';
+      html+='<td>'+linkOrText(a.loginUrl,a.loginText)+'</td>';
+      html+='<td>'+escHtml(a.id)+'</td>';
+      html+=pwCell(a.pw);
+      html+='<td>'+escHtml(a.note)+'</td></tr>';
+    });
+    var ecTable=document.querySelector('#accounts .table-wrapper:first-of-type tbody');
+    if(ecTable)ecTable.innerHTML=html;
+  }
+  if(acc.toolAccounts&&acc.toolAccounts.length){
+    var html2='';
+    acc.toolAccounts.forEach(function(a){
+      html2+='<tr><td><span class="tag '+tagClass(a.tool)+'">'+escHtml(a.tool)+'</span></td>';
+      html2+='<td>'+linkOrText(a.loginUrl,a.loginText)+'</td>';
+      html2+='<td>'+escHtml(a.id)+'</td>';
+      html2+=pwCell(a.pw);
+      html2+='<td>'+escHtml(a.note)+'</td></tr>';
+    });
+    var toolTable=document.querySelector('#accounts .table-wrapper:nth-of-type(2) tbody');
+    if(toolTable)toolTable.innerHTML=html2;
+  }
+}
+
+function renderStoreLogins(sl){
+  if(!sl)return;
+  // RMS
+  if(sl.rms&&sl.rms.length){
+    var h='';
+    sl.rms.forEach(function(r){h+='<tr><td>'+escHtml(r.store)+'</td><td>'+escHtml(r.id)+'</td>'+pwCell(r.pw)+'<td>'+escHtml(r.note)+'</td></tr>'});
+    var t=document.querySelector('#store-logins .sub-section:nth-of-type(1) tbody');if(t)t.innerHTML=h;
+  }
+  // SFTP
+  if(sl.sftp&&sl.sftp.length){
+    var h='';
+    sl.sftp.forEach(function(r){h+='<tr><td>'+escHtml(r.store)+'</td><td>'+escHtml(r.id)+'</td>'+pwCell(r.pw)+'<td>'+escHtml(r.note||r.updated||'')+'</td></tr>'});
+    var t=document.querySelector('#store-logins .sub-section:nth-of-type(2) tbody');if(t)t.innerHTML=h;
+  }
+  // Coupon
+  if(sl.coupon&&sl.coupon.length){
+    var h='';
+    sl.coupon.forEach(function(r){
+      var parts=(r.id||'').split('/');
+      var compId=parts[0]||'';var userId=parts[1]||'admin';
+      h+='<tr><td>'+escHtml(r.store)+'</td><td>'+escHtml(compId)+'</td><td>'+escHtml(userId)+'</td>'+pwCell(r.pw)+'<td>'+escHtml(r.note)+'</td></tr>';
+    });
+    var t=document.querySelector('#store-logins .sub-section:nth-of-type(3) tbody');if(t)t.innerHTML=h;
+  }
+  // BOSS
+  if(sl.boss&&sl.boss.length){
+    var h='';
+    sl.boss.forEach(function(r){h+='<tr><td>'+escHtml(r.store)+'</td><td>'+linkOrText('',''+escHtml(r.tool))+'</td><td>'+escHtml(r.id)+'</td>'+pwCell(r.pw)+'</tr>'});
+    var t=document.querySelector('#store-logins .sub-section:nth-of-type(4) tbody');if(t)t.innerHTML=h;
+  }
+  // Teps
+  if(sl.teps&&sl.teps.length){
+    var h='';
+    sl.teps.forEach(function(r){h+='<tr><td>'+escHtml(r.store)+'</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">'+escHtml(r.id)+'</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">'+escHtml(r.pw)+'</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>'+escHtml(r.note)+'</td><td>'+escHtml(r.updated)+'</td></tr>'});
+    var t=document.querySelector('#store-logins .sub-section:nth-of-type(5) tbody');if(t)t.innerHTML=h;
+  }
+  // Logins (個別)
+  if(sl.logins&&sl.logins.length){
+    var h='';
+    sl.logins.forEach(function(r){h+='<tr><td>'+escHtml(r.store)+'</td><td>'+escHtml(r.id)+'</td>'+pwCell(r.pw)+'<td>'+escHtml(r.note)+'</td></tr>'});
+    var t=document.querySelector('#logins .table-wrapper tbody');if(t)t.innerHTML=h;
+  }
+}
+
+function catClass(cat){
+  if(cat==='furusato')return'tag-furusato';if(cat==='active')return'tag-active';
+  if(cat==='bp')return'tag-bp';if(cat==='open')return'tag-open';
+  if(cat==='ended')return'tag-ended';return'tag-other';
+}
+function catLabel(cat){
+  if(cat==='furusato')return'ふるさと納税';if(cat==='active')return'通常';
+  if(cat==='bp')return'BP';if(cat==='open')return'OPEN';
+  if(cat==='ended')return'終了';return cat;
+}
+
+function renderClients(clients){
+  if(!clients||!clients.length)return;
+  var grid=document.getElementById('clientGrid');if(!grid)return;
+  var html='';
+  clients.forEach(function(c){
+    var cat=c.category||'';
+    var ended=cat==='ended'?' ended':'';
+    html+='<div class="client-card'+ended+'" data-category="'+escHtml(cat)+'">';
+    html+='<div class="cc-header"><div><div class="cc-name">'+escHtml(c.name)+'</div>';
+    if(c.store)html+='<div class="cc-store">'+escHtml(c.store)+'</div>';
+    html+='</div><span class="tag '+catClass(cat)+'">'+catLabel(cat)+'</span></div>';
+    if(c.teamInfo){html+='<div class="cc-details">'+escHtml(c.teamInfo)+'</div>';}
+    html+='</div>';
+  });
+  grid.innerHTML=html;
+}
+
+function renderTeam(team){
+  if(!team||!team.length)return;
+  var tbody=document.querySelector('#team .table-wrapper tbody');if(!tbody)return;
+  var html='';var lastSection='';
+  var sectionColors={'ふるさと納税案件':'#e3f2fd','通常案件':'#e8f5e9','Amazon案件':'#fff3e0','BP案件':'#fce4ec'};
+  team.forEach(function(t){
+    if(t.section&&t.section!==lastSection){
+      var bg=sectionColors[t.section]||'#f5f5f5';
+      html+='<tr><td colspan="8" style="background:'+bg+';font-weight:700;color:var(--accent)">'+escHtml(t.section)+'</td></tr>';
+      lastSection=t.section;
+    }
+    var platformTag='';
+    if(t.platform){
+      var p=t.platform.toLowerCase();
+      var tc=p.indexOf('amazon')>=0?'tag-amazon':p.indexOf('yahoo')>=0?'tag-yahoo':'tag-rakuten';
+      platformTag='<span class="tag '+tc+'">'+escHtml(t.platform)+'</span>';
+    }
+    html+='<tr><td>'+escHtml(t.no)+'</td><td>'+escHtml(t.client)+'</td><td>'+escHtml(t.scope)+'</td>';
+    html+='<td>'+platformTag+'</td><td>'+escHtml(t.manager)+'</td><td>'+escHtml(t.consultant)+'</td>';
+    html+='<td>'+escHtml(t.adOps)+'</td><td></td></tr>';
+  });
+  tbody.innerHTML=html;
+}
+
+function renderDrive(clients){
+  if(!clients||!clients.length)return;
+  var driveTable=document.querySelector('#drive .table-wrapper tbody');if(!driveTable)return;
+  var html='';
+  clients.forEach(function(c){
+    if(c.category==='ended')return;
+    var driveLink=c.driveUrl?'<a href="'+escHtml(c.driveUrl)+'" target="_blank" class="external-link">'+escHtml(c.name)+'</a>':'-';
+    var sheetLink=c.sheetUrl?'<a href="'+escHtml(c.sheetUrl)+'" target="_blank" class="external-link">'+escHtml(c.name)+'様_共有シート</a>':'-';
+    var taskText=c.taskSheet?escHtml(c.taskSheet):'-';
+    var otherText=c.other?escHtml(c.other):'';
+    html+='<tr><td>'+escHtml(c.name)+'</td><td>'+driveLink+'</td><td>'+sheetLink+'</td><td>'+taskText+'</td><td>'+otherText+'</td></tr>';
+  });
+  driveTable.innerHTML=html;
+}
+
+function renderRules(rulesHtml){
+  if(!rulesHtml)return;
+  var rulesSection=document.querySelector('#rules .section-content');
+  if(rulesSection){
+    rulesSection.innerHTML='<div class="rules-card" style="max-height:80vh;overflow-y:auto;font-size:.9rem;line-height:1.8">'+rulesHtml+'</div>';
+  }
+}
+
+document.addEventListener('DOMContentLoaded',function(){injectCopyButtons();loadAllData()});
+</script>
+</body>
+</html>
