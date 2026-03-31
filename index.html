@@ -1145,7 +1145,7 @@ function loadAllData(){
   ['login-ec-tbody','login-tool-tbody','login-store-tbody','login-coupon-tbody','login-boss-tbody','login-teps-tbody','login-individual-tbody'].forEach(function(id){var el=document.getElementById(id);if(el)el.innerHTML=loading;});
   var el;
   el=document.getElementById('clientGrid');if(el)el.innerHTML=loadingDiv;
-  el=document.getElementById('org-tree-container');if(el)el.innerHTML=loadingDiv;
+  /* org-tree-container is static HTML with Slack photos - do not overwrite */
   el=document.getElementById('team-consultant-cards');if(el)el.innerHTML=loadingDiv;
   el=document.getElementById('team-assistant-cards');if(el)el.innerHTML=loadingDiv;
   el=document.getElementById('manual-grid');if(el)el.innerHTML=loadingDiv;
