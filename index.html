@@ -638,7 +638,7 @@ AIチャットボット
 <h2 class="page-title">社内規則</h2>
 <div class="rules-tabs">
 <button class="rules-tab active" onclick="switchRulesTab('comm',this)">コミュニケーションポリシー</button>
-<button class="rules-tab" onclick="switchRulesTab('procedures',this)">業務手続き・請求ルール</button>
+<button class="rules-tab" onclick="switchRulesTab('procedures',this)">業務管理ルール</button>
 </div>
 
 <div id="rules-comm" class="rules-panel active">
@@ -705,49 +705,51 @@ AIチャットボット
 </div>
 
 <div id="rules-procedures" class="rules-panel">
-<div class="procedure-card">
-<h3>① BP案件比率の工数管理</h3>
-<div class="proc-meta">対象：BP該当者</div>
-<div class="proc-body">
-<p>BP案件の工数比率を管理するため、下記スプレッドシートを更新してください。</p>
-<ul>
-<li>更新対象：<a href="https://docs.google.com/spreadsheets/" target="_blank">【CARDS】BP案件工数管理表</a></li>
+<div class="rules-content" style="padding:0;background:none;box-shadow:none">
+<div style="display:grid;gap:1.2rem">
+
+<div style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem 1.8rem;border-left:4px solid var(--highlight)">
+<div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem"><span style="background:var(--highlight);color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:4px">01</span><h3 style="font-size:1rem;color:var(--primary);margin:0">BP案件比率の工数管理</h3></div>
+<div style="display:inline-block;background:var(--bg);font-size:.75rem;font-weight:600;color:var(--text-light);padding:.2rem .7rem;border-radius:4px;margin-bottom:.8rem">対象：BP該当者</div>
+<p>BP案件における工数比率を適切に管理するため、以下のスプレッドシートを定期的に更新すること。</p>
+<ul style="margin-top:.5rem">
+<li>更新先：<a href="https://docs.google.com/spreadsheets/" target="_blank" style="color:var(--highlight);font-weight:600;text-decoration:none">【CARDS】BP案件工数管理表</a></li>
 <li>該当者は自身の工数を定期的に記録・更新すること</li>
 </ul>
 </div>
-</div>
-<div class="procedure-card">
-<h3>② 制作物依頼・オプション請求</h3>
-<div class="proc-meta">対象：制作物依頼が必要なメンバー / コンサルタント</div>
-<div class="proc-body">
-<p>制作物の依頼およびオプション請求が必要な場合、下記シートに記入してください。</p>
-<ul>
-<li>記入先：<a href="https://docs.google.com/spreadsheets/" target="_blank">CARDS_オプション請求管理表_第三期</a></li>
-<li>コンサルタントは「クライアントへの請求有無」を必ず確認すること</li>
-<li>請求月の請求分について漏れなく記入すること</li>
+
+<div style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem 1.8rem;border-left:4px solid var(--highlight)">
+<div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem"><span style="background:var(--highlight);color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:4px">02</span><h3 style="font-size:1rem;color:var(--primary);margin:0">制作物依頼・オプション請求</h3></div>
+<div style="display:inline-block;background:var(--bg);font-size:.75rem;font-weight:600;color:var(--text-light);padding:.2rem .7rem;border-radius:4px;margin-bottom:.8rem">対象：制作物依頼が必要なメンバー／コンサルタント</div>
+<p>制作物の依頼、またはオプション請求が必要な場合は、以下のシートに記入すること。</p>
+<ul style="margin-top:.5rem">
+<li>記入先：<a href="https://docs.google.com/spreadsheets/" target="_blank" style="color:var(--highlight);font-weight:600;text-decoration:none">CARDS_オプション請求管理表_第三期</a></li>
+<li>コンサルタントは「クライアントへの請求有無」を必ず確認してから記入すること</li>
+<li>請求月分の記入漏れがないよう、<strong>月末までに入力を完了</strong>すること</li>
 </ul>
 </div>
-</div>
-<div class="procedure-card">
-<h3>③ 成果報酬の記録</h3>
-<div class="proc-meta">対象：成果報酬発生店舗の担当者</div>
-<div class="proc-body">
-<p>成果報酬が発生する店舗について、報酬額を記録してください。</p>
-<ul>
-<li>記入先：<a href="https://docs.google.com/spreadsheets/" target="_blank">CARDS_オプション請求管理表_第三期</a></li>
-<li>成果報酬額は<strong>税抜</strong>で記載すること</li>
-<li>仕様変更が行われた場合は更新内容を必ず確認すること</li>
+
+<div style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem 1.8rem;border-left:4px solid var(--warning)">
+<div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem"><span style="background:var(--warning);color:var(--primary);font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:4px">03</span><h3 style="font-size:1rem;color:var(--primary);margin:0">成果報酬の記録</h3></div>
+<div style="display:inline-block;background:var(--bg);font-size:.75rem;font-weight:600;color:var(--text-light);padding:.2rem .7rem;border-radius:4px;margin-bottom:.8rem">対象：成果報酬発生店舗の担当者</div>
+<p>成果報酬が発生した店舗については、以下のシートに報酬額を記録すること。</p>
+<ul style="margin-top:.5rem">
+<li>記入先：<a href="https://docs.google.com/spreadsheets/" target="_blank" style="color:var(--highlight);font-weight:600;text-decoration:none">CARDS_オプション請求管理表_第三期</a></li>
+<li>報酬額は<strong>税抜金額</strong>で記載すること</li>
+<li>仕様変更が発生した場合は、必ず更新内容を確認してから記入すること</li>
 </ul>
 </div>
-</div>
-<div class="procedure-card">
-<h3>④ 請求書に関するルール</h3>
-<div class="proc-meta">対象：全メンバー</div>
-<div class="proc-body">
-<p>請求書の取り扱いについては、下記ドキュメントを参照してください。</p>
-<ul>
-<li>参照先：<a href="https://docs.google.com/document/d/1PGR9s93pvMIeGDAb-RUOYZJdMFoGQO-5nLUEKdzUJ4o/edit" target="_blank">社内規則ドキュメント（請求書ルール）</a></li>
+
+<div style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.5rem 1.8rem;border-left:4px solid #00b894">
+<div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem"><span style="background:#00b894;color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:4px">04</span><h3 style="font-size:1rem;color:var(--primary);margin:0">請求書に関するルール</h3></div>
+<div style="display:inline-block;background:var(--bg);font-size:.75rem;font-weight:600;color:var(--text-light);padding:.2rem .7rem;border-radius:4px;margin-bottom:.8rem">対象：全メンバー</div>
+<p>請求書の取り扱いについては、社内規則ドキュメントを参照すること。</p>
+<ul style="margin-top:.5rem">
+<li>参照先：<a href="https://docs.google.com/document/d/1PGR9s93pvMIeGDAb-RUOYZJdMFoGQO-5nLUEKdzUJ4o/edit" target="_blank" style="color:var(--highlight);font-weight:600;text-decoration:none">社内規則ドキュメント（請求書ルール）</a></li>
+<li>不明点がある場合は、担当者へ確認してから対応すること</li>
 </ul>
+</div>
+
 </div>
 </div>
 </div>
