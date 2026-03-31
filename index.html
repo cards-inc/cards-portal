@@ -324,23 +324,19 @@ AIチャットボット
 <div class="home-card-header">お知らせ <span class="badge">NEW</span></div>
 <div class="home-card-body">
 <ul class="news-list">
-<li><span class="news-date">2026年3月31日</span><span class="news-tag news-tag-update">更新</span><span class="news-text">CARDS Portal をリニューアルしました</span></li>
-<li><span class="news-date">2026年3月31日</span><span class="news-tag news-tag-info">情報</span><span class="news-text">楽天アカウント店舗情報（R-Login/FTP）を統合しました</span></li>
-<li><span class="news-date">2026年3月31日</span><span class="news-tag news-tag-info">情報</span><span class="news-text">Teps APIキーを最新データに更新しました（15店舗）</span></li>
-<li><span class="news-date">2026年3月31日</span><span class="news-tag news-tag-important">重要</span><span class="news-text">品質管理ガイドライン / コミュニケーションポリシーを確認してください</span></li>
+<li style="color:var(--text-light);padding:1rem 0">読み込み中...</li>
 </ul>
 </div>
 </div>
 
 <div class="home-card">
-<div class="home-card-header">管理状況</div>
+<div class="home-card-header">クライアント数</div>
 <div class="home-card-body">
-<div class="stat-grid">
-<div class="stat-item"><div class="stat-num">27</div><div class="stat-label">管理店舗数</div></div>
-<div class="stat-item"><div class="stat-num">15</div><div class="stat-label">Teps連携店舗</div></div>
-<div class="stat-item"><div class="stat-num">30</div><div class="stat-label">クライアント数</div></div>
+<div class="stat-grid" id="client-count-grid">
+<div class="stat-item"><div class="stat-num" id="count-rakuten">-</div><div class="stat-label">楽天</div></div>
+<div class="stat-item"><div class="stat-num" id="count-amazon">-</div><div class="stat-label">Amazon</div></div>
+<div class="stat-item"><div class="stat-num" id="count-yahoo">-</div><div class="stat-label">Yahoo!</div></div>
 </div>
-<p style="margin-top:1rem;font-size:.78rem;color:var(--text-light)">ふるさと納税 5件 / 通常案件 12件 / Amazon 8件 / BP 2件 / OPEN 2件</p>
 </div>
 </div>
 </div>
@@ -617,22 +613,22 @@ AIチャットボット
 <li>
 <div class="node node-dept">楽天市場運用代行<br><small>猿川和明</small></div>
 <ul>
-<li><div class="node node-member"><div class="m-name">内田</div><div class="m-clients">Herz Skin / 関西酵素<br>スピック / KATAN</div></div></li>
-<li><div class="node node-member"><div class="m-name">秋葉</div><div class="m-clients">HLT BEAUTY / HLT ROSIER<br>LOVE CHORME / in sky</div></div></li>
-<li><div class="node node-member"><div class="m-name">飛鳥間</div><div class="m-clients">イエリオ / yu'now</div></div></li>
-<li><div class="node node-member"><div class="m-name">千葉慎</div><div class="m-clients">白糠町 / 一関市<br>角田市</div></div></li>
-<li><div class="node node-member"><div class="m-name">千葉</div><div class="m-clients">常総市</div></div></li>
-<li><div class="node node-member"><div class="m-name">猿川(和)</div><div class="m-clients">Nelse / 和牛セレブ</div></div></li>
-<li><div class="node node-member"><div class="m-name">麹</div><div class="m-clients">銀座華茶 / 百福堂</div></div></li>
-<li><div class="node node-member"><div class="m-name">尾崎</div><div class="m-clients">登別町</div></div></li>
+<li><div class="node node-member"><div class="m-name">内田</div></div></li>
+<li><div class="node node-member"><div class="m-name">秋葉</div></div></li>
+<li><div class="node node-member"><div class="m-name">飛鳥間</div></div></li>
+<li><div class="node node-member"><div class="m-name">千葉慎</div></div></li>
+<li><div class="node node-member"><div class="m-name">千葉</div></div></li>
+<li><div class="node node-member"><div class="m-name">猿川(和)</div></div></li>
+<li><div class="node node-member"><div class="m-name">麹</div></div></li>
+<li><div class="node node-member"><div class="m-name">尾崎</div></div></li>
 </ul>
 </li>
 <li>
 <div class="node node-dept">Amazon運用代行<br><small>猿川和明</small></div>
 <ul>
-<li><div class="node node-member"><div class="m-name">小筆</div><div class="m-clients">KATAN / NOCK WOOD<br>和牛セレブ / 森永乳業</div></div></li>
-<li><div class="node node-member"><div class="m-name">櫻井</div><div class="m-clients">エゾボリック<br>ニッセイエコ</div></div></li>
-<li><div class="node node-member"><div class="m-name">平尾</div><div class="m-clients">silk the rich</div></div></li>
+<li><div class="node node-member"><div class="m-name">小筆</div></div></li>
+<li><div class="node node-member"><div class="m-name">櫻井</div></div></li>
+<li><div class="node node-member"><div class="m-name">平尾</div></div></li>
 </ul>
 </li>
 <li>
@@ -641,7 +637,7 @@ AIチャットボット
 <li>
 <div class="node node-dept">自社ブランド</div>
 <ul>
-<li><div class="node node-member"><div class="m-name">上原</div><div class="m-clients">SCM/CS統括<br>松下(SCM) / 伊藤(CS)</div></div></li>
+<li><div class="node node-member"><div class="m-name">上原</div></div></li>
 <li><div class="node node-member"><div class="m-name">黛</div></div></li>
 <li><div class="node node-member"><div class="m-name">尾崎</div></div></li>
 </ul>
@@ -974,8 +970,8 @@ function loadAllData(){
     .then(function(d){
       if(d.accounts) renderAccounts(d.accounts);
       if(d.storeLogins) renderStoreLogins(d.storeLogins);
-      if(d.clients){ renderClients(d.clients); renderDrive(d.clients); }
-      if(d.team){ renderTeam(d.team); renderTeamCards(d.team); }
+      if(d.clients){ renderClients(d.clients,d.drive); renderDrive(d.clients); }
+      if(d.team){ renderTeam(d.team); renderTeamCards(d.team); renderClientCounts(d.team); }
       if(d.rules) renderRules(d.rules);
       if(d.news) renderNews(d.news);
       if(d.company) renderCompany(d.company);
@@ -1064,6 +1060,23 @@ function renderStoreLogins(sl){
   }
 }
 
+function renderClientCounts(team){
+  if(!team||!team.length)return;
+  var counts={rakuten:0,amazon:0,yahoo:0};
+  var seen={rakuten:{},amazon:{},yahoo:{}};
+  team.forEach(function(t){
+    var p=(t.platform||'').toLowerCase();
+    var client=t.client||'';
+    if(p.indexOf('rakuten')>=0&&!seen.rakuten[client]){counts.rakuten++;seen.rakuten[client]=1;}
+    if(p.indexOf('amazon')>=0&&!seen.amazon[client]){counts.amazon++;seen.amazon[client]=1;}
+    if(p.indexOf('yahoo')>=0&&!seen.yahoo[client]){counts.yahoo++;seen.yahoo[client]=1;}
+  });
+  var el;
+  el=document.getElementById('count-rakuten');if(el)el.textContent=counts.rakuten;
+  el=document.getElementById('count-amazon');if(el)el.textContent=counts.amazon;
+  el=document.getElementById('count-yahoo');if(el)el.textContent=counts.yahoo;
+}
+
 function catClass(cat){
   if(cat==='furusato')return'tag-furusato';if(cat==='active')return'tag-active';
   if(cat==='bp')return'tag-bp';if(cat==='open')return'tag-open';
@@ -1075,18 +1088,27 @@ function catLabel(cat){
   if(cat==='ended')return'終了';return cat;
 }
 
-function renderClients(clients){
+function renderClients(clients,driveData){
   if(!clients||!clients.length)return;
   var grid=document.getElementById('clientGrid');if(!grid)return;
+  var driveMap={};
+  if(driveData&&driveData.length){driveData.forEach(function(d){driveMap[d.client]=d;});}
   var html='';
   clients.forEach(function(c){
     var cat=c.category||'';
     var ended=cat==='ended'?' ended':'';
+    var dr=driveMap[c.name]||driveMap[c.store]||{};
     html+='<div class="client-card'+ended+'" data-category="'+escHtml(cat)+'">';
     html+='<div class="cc-header"><div><div class="cc-name">'+escHtml(c.name)+'</div>';
     if(c.store)html+='<div class="cc-store">'+escHtml(c.store)+'</div>';
     html+='</div><span class="tag '+catClass(cat)+'">'+catLabel(cat)+'</span></div>';
     if(c.teamInfo){html+='<div class="cc-details">'+escHtml(c.teamInfo)+'</div>';}
+    var links=[];
+    if(dr.driveUrl)links.push('<a href="'+escHtml(dr.driveUrl)+'" target="_blank" class="external-link" title="共有ドライブ">&#128193; ドライブ</a>');
+    if(dr.sheetUrl)links.push('<a href="'+escHtml(dr.sheetUrl)+'" target="_blank" class="external-link" title="共有シート">&#128196; シート</a>');
+    if(dr.seoSheet)links.push('<a href="'+escHtml(dr.seoSheet)+'" target="_blank" class="external-link" title="SEO">&#128200; SEO</a>');
+    if(dr.taskSheet)links.push('<a href="'+escHtml(dr.taskSheet)+'" target="_blank" class="external-link" title="タスク">&#9745; タスク</a>');
+    if(links.length){html+='<div class="cc-links" style="display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.5rem;padding-top:.5rem;border-top:1px solid var(--border);font-size:.75rem">'+links.join('')+'</div>';}
     html+='</div>';
   });
   grid.innerHTML=html;
