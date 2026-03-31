@@ -674,11 +674,10 @@ AIチャットボット
 <h2 class="page-title">社内コミュニケーション・業務管理規則</h2>
 <div class="rules-tabs">
 <button class="rules-tab active" onclick="switchRulesTab('comm',this)">I. コミュニケーションルール</button>
-<button class="rules-tab" onclick="switchRulesTab('procedures',this)">II. 業務管理ルール</button>
-<button class="rules-tab" onclick="switchRulesTab('billing',this)">III. 月末締め・請求ルール</button>
+<button class="rules-tab" onclick="switchRulesTab('procedures',this)">II. 業務・請求管理ルール</button>
 </div>
 
-<!-- ===== Chapter I ===== -->
+<!-- ===== Chapter I: コミュニケーションルール ===== -->
 <div id="rules-comm" class="rules-panel active">
 <div class="rule-cards">
 
@@ -739,57 +738,8 @@ AIチャットボット
 </div>
 </div>
 
-<!-- ===== Chapter II ===== -->
+<!-- ===== Chapter II: 業務・請求管理ルール ===== -->
 <div id="rules-procedures" class="rules-panel">
-<div class="rule-cards">
-
-<div class="rule-card" style="border-left-color:#6C3CE0">
-<div class="rule-card-head"><span class="rule-num">01</span><h3>BP案件比率の工数管理</h3></div>
-<div class="proc-badge">対象：BP該当者</div>
-<p>BP案件における工数比率を適切に管理するため、以下のスプレッドシートを定期的に更新すること。</p>
-<ul>
-<li>該当者は自身の工数を定期的に記録・更新すること</li>
-<li>更新先：<a href="https://docs.google.com/spreadsheets/" target="_blank" class="rule-link-inline">【CARDS】BP案件工数管理表</a></li>
-</ul>
-</div>
-
-<div class="rule-card" style="border-left-color:#6C3CE0">
-<div class="rule-card-head"><span class="rule-num">02</span><h3>制作物依頼・オプション請求</h3></div>
-<div class="proc-badge">対象：制作物依頼が必要なメンバー／コンサルタント</div>
-<p>制作物の依頼、またはオプション請求が必要な場合は以下のシートに記入すること。</p>
-<ul>
-<li>コンサルタントは「クライアントへの請求有無」を必ず確認してから記入すること</li>
-<li>請求月分の記入漏れがないよう、<strong>月末までに入力を完了</strong>すること</li>
-<li>記入先：<a href="https://docs.google.com/spreadsheets/" target="_blank" class="rule-link-inline">CARDS_オプション請求管理表_第三期</a></li>
-</ul>
-</div>
-
-<div class="rule-card" style="border-left-color:#fdcb6e">
-<div class="rule-card-head"><span class="rule-num" style="background:#fdcb6e;color:#0E043A">03</span><h3>成果報酬の記録</h3></div>
-<div class="proc-badge">対象：成果報酬発生店舗の担当者</div>
-<p>成果報酬が発生した店舗について、以下のシートに報酬額を記録すること。</p>
-<ul>
-<li>報酬額は<strong>税抜金額</strong>で記載すること</li>
-<li>仕様変更が発生した場合は、必ず更新内容を確認してから記入すること</li>
-<li>記入先：<a href="https://docs.google.com/spreadsheets/" target="_blank" class="rule-link-inline">CARDS_オプション請求管理表_第三期 ＞「成果報酬」タブ</a></li>
-</ul>
-</div>
-
-<div class="rule-card" style="border-left-color:#00b894">
-<div class="rule-card-head"><span class="rule-num" style="background:#00b894">04</span><h3>請求書に関するルール</h3></div>
-<div class="proc-badge">対象：全メンバー</div>
-<p>請求書の取り扱いについては、社内規則ドキュメントを参照すること。</p>
-<ul>
-<li>不明点がある場合は、担当者へ確認してから対応すること</li>
-<li>参照先：<a href="https://docs.google.com/document/d/1PGR9s93pvMIeGDAb-RUOYZJdMFoGQO-5nLUEKdzUJ4o/edit" target="_blank" class="rule-link-inline">社内規則ドキュメント（請求書ルール）</a></li>
-</ul>
-</div>
-
-</div>
-</div>
-
-<!-- ===== Chapter III ===== -->
-<div id="rules-billing" class="rules-panel">
 <div class="rule-cards">
 
 <div class="rule-card" style="border-left-color:#6C3CE0">
@@ -807,41 +757,50 @@ AIチャットボット
 </div>
 
 <div class="rule-card" style="border-left-color:#6C3CE0">
-<div class="rule-card-head"><span class="rule-num">02</span><h3>取引先への請求書発行における前提条件</h3></div>
-<p>制作物・成果報酬・立替経費（広告枠）・バイイングなど、クライアントへ請求すべき情報を<strong>月初2営業日まで</strong>にバックオフィスへ連携すること。</p>
-</div>
+<div class="rule-card-head"><span class="rule-num">02</span><h3>場面別の記録・対応ルール</h3></div>
 
-<div class="rule-card" style="border-left-color:#6C3CE0">
-<div class="rule-card-head"><span class="rule-num">03</span><h3>場面別の対応ルール</h3></div>
+<div class="rule-section-title">BP案件の工数管理</div>
+<div class="proc-badge">対象：BP該当者</div>
+<ul>
+<li>自身のBP案件工数を定期的に記録・更新すること</li>
+<li><a href="https://docs.google.com/spreadsheets/" target="_blank" class="rule-link-inline">【CARDS】BP案件工数管理表</a></li>
+</ul>
+
+<div class="rule-section-title">制作物依頼・オプション請求</div>
+<div class="proc-badge">対象：制作物依頼が必要なメンバー／コンサルタント</div>
+<ul>
+<li>コンサルタントは「クライアントへの請求有無」を必ず確認してから記入すること</li>
+<li>請求月分の記入漏れがないよう、<strong>月末までに入力を完了</strong>すること</li>
+<li>楽天・Amazon問わず本シートに一元管理。記入は<strong>請求者本人</strong>が行うこと</li>
+<li><a href="https://docs.google.com/spreadsheets/" target="_blank" class="rule-link-inline">CARDS_オプション請求管理表_第三期</a></li>
+</ul>
+
+<div class="rule-section-title">成果報酬の記録</div>
+<div class="proc-badge">対象：成果報酬発生店舗の担当者</div>
+<ul>
+<li>成果報酬が発生した店舗について、報酬額を<strong>税抜</strong>で記載すること</li>
+<li>仕様変更が発生した場合は、必ず更新内容を確認してから記入すること</li>
+<li><a href="https://docs.google.com/spreadsheets/" target="_blank" class="rule-link-inline">CARDS_オプション請求管理表_第三期 ＞「成果報酬」タブ</a></li>
+</ul>
+
+<div class="rule-section-title">クライアント広告枠のクレカ立替請求</div>
+<ul>
+<li>CARDSのクレカで決裁したタイミングで、案件担当コンサルタントが更新すること</li>
+<li><a href="https://docs.google.com/spreadsheets/" target="_blank" class="rule-link-inline">CARDS_オプション請求管理表_第三期 ＞「クレカ立替」タブ</a></li>
+</ul>
 
 <div class="rule-section-title">新規案件発生時</div>
 <ul>
 <li>確定新規案件台帳に必要事項を月末までに記入すること</li>
 <li>請求発生月は契約書に準ずる／納品後を基準とする</li>
-</ul>
-
-<div class="rule-section-title">バックオフィスによる月初請求案件の把握</div>
-<ul>
-<li>Active案件・候補案件一覧の「active案件リスト」タブを使用</li>
-<li>R列の契約書リンク欄に、Driveへの格納時に契約締結担当者がリンクを貼付すること</li>
+<li>Driveへの格納時に、R列の契約書リンク欄へ契約締結担当者がリンクを貼付すること</li>
+<li><a href="https://docs.google.com/spreadsheets/" target="_blank" class="rule-link-inline">Active案件・候補案件一覧 ＞「active案件リスト」タブ</a></li>
 </ul>
 <div class="rule-note">新規契約初月は誤請求リスクが高いため、請求時に契約書原本をすぐ確認できる体制を整えるためのルール。</div>
-
-<div class="rule-section-title">クライアント広告枠のCARDSクレカ立替請求</div>
-<ul>
-<li><a href="https://docs.google.com/spreadsheets/" target="_blank" class="rule-link-inline">CARDS_オプション請求管理表_第三期</a> の「クレカ立替」タブを使用</li>
-<li>CARDSのクレカで決裁したタイミングで、案件担当コンサルタントが更新すること</li>
-</ul>
-
-<div class="rule-section-title">成果報酬の記録</div>
-<ul>
-<li><a href="https://docs.google.com/spreadsheets/" target="_blank" class="rule-link-inline">CARDS_オプション請求管理表_第三期</a> の「成果報酬」タブを使用</li>
-<li>成果報酬が発生した店舗について、報酬額を<strong>税抜</strong>で記載すること</li>
-</ul>
 </div>
 
 <div class="rule-card" style="border-left-color:#e94560">
-<div class="rule-card-head"><span class="rule-num" style="background:#e94560">04</span><h3>CARDSへの請求書送付</h3></div>
+<div class="rule-card-head"><span class="rule-num" style="background:#e94560">03</span><h3>CARDSへの請求書送付</h3></div>
 <div style="display:grid;grid-template-columns:auto 1fr;gap:.3rem .8rem;font-size:.88rem;margin-bottom:.8rem">
 <strong>期日</strong><span>月初2営業日以内</span>
 <strong>送付先</strong><span><span class="rule-email">keiri@cd-s.co.jp</span></span>
@@ -856,7 +815,7 @@ AIチャットボット
 </div>
 
 <div class="rule-card" style="border-left-color:#fdcb6e">
-<div class="rule-card-head"><span class="rule-num" style="background:#fdcb6e;color:#0E043A">05</span><h3>バイイング施策の適格請求書 取得方法</h3></div>
+<div class="rule-card-head"><span class="rule-num" style="background:#fdcb6e;color:#0E043A">04</span><h3>バイイング施策の適格請求書 取得方法</h3></div>
 <div class="rule-table-wrap">
 <table class="rule-table">
 <thead><tr><th>媒体</th><th>取得方法</th></tr></thead>
@@ -869,12 +828,12 @@ AIチャットボット
 </div>
 
 <div class="rule-card" style="border-left-color:#00b894">
-<div class="rule-card-head"><span class="rule-num" style="background:#00b894">06</span><h3>デザイン関係の請求管理</h3></div>
+<div class="rule-card-head"><span class="rule-num" style="background:#00b894">05</span><h3>請求書に関するルール</h3></div>
+<div class="proc-badge">対象：全メンバー</div>
+<p>請求書の取り扱いについては、社内規則ドキュメントを参照すること。</p>
 <ul>
-<li><a href="https://docs.google.com/spreadsheets/" target="_blank" class="rule-link-inline">CARDS_オプション請求管理表_第三期</a> に一元管理（楽天・Amazon問わず）</li>
-<li>記入は<strong>請求者本人</strong>が行うこと</li>
-<li>クライアントへの請求有無が不明な場合は、担当コンサルタントへ確認してから記入すること</li>
-<li>請求時も本シートを参照すること</li>
+<li>不明点がある場合は、担当者へ確認してから対応すること</li>
+<li>参照先：<a href="https://docs.google.com/document/d/1PGR9s93pvMIeGDAb-RUOYZJdMFoGQO-5nLUEKdzUJ4o/edit" target="_blank" class="rule-link-inline">社内規則ドキュメント（請求書ルール）</a></li>
 </ul>
 </div>
 
