@@ -139,15 +139,17 @@ tbody tr:nth-child(even){background:#fafbfc}
 <div class="tab-bar" id="tabBar">
 <button class="active" data-tab="dashboard" onclick="switchTab('dashboard',this)">ダッシュボード</button>
 <button data-tab="portal_news" onclick="switchTab('portal_news',this)">お知らせ</button>
-<button data-tab="portal_accounts" onclick="switchTab('portal_accounts',this)">アカウント</button>
+<button data-tab="portal_accounts" onclick="switchTab('portal_accounts',this)">アカウント情報</button>
 <button data-tab="portal_store_logins" onclick="switchTab('portal_store_logins',this)">店舗ログイン</button>
 <button data-tab="portal_logins" onclick="switchTab('portal_logins',this)">個別ログイン</button>
 <button data-tab="portal_clients" onclick="switchTab('portal_clients',this)">クライアント</button>
+<button data-tab="portal_drive" onclick="switchTab('portal_drive',this)">共有ドライブ</button>
 <button data-tab="portal_team" onclick="switchTab('portal_team',this)">担当者</button>
 <button data-tab="portal_org" onclick="switchTab('portal_org',this)">組織図</button>
 <button data-tab="portal_company" onclick="switchTab('portal_company',this)">会社情報</button>
-<button data-tab="portal_drive" onclick="switchTab('portal_drive',this)">共有ドライブ</button>
 <button data-tab="portal_links" onclick="switchTab('portal_links',this)">リンク集</button>
+<button data-tab="portal_manual" onclick="switchTab('portal_manual',this)">社内マニュアル</button>
+<button data-tab="portal_ai" onclick="switchTab('portal_ai',this)">AIチャットボット</button>
 </div>
 
 <div class="admin-content">
@@ -218,11 +220,13 @@ var SHEETS = [
   { id: 'portal_store_logins', label: '店舗別ログイン' },
   { id: 'portal_logins', label: '個別ログイン' },
   { id: 'portal_clients', label: 'クライアント一覧' },
+  { id: 'portal_drive', label: '共有ドライブ' },
   { id: 'portal_team', label: '担当者一覧' },
   { id: 'portal_org', label: '組織図' },
   { id: 'portal_company', label: '会社情報' },
-  { id: 'portal_drive', label: '共有ドライブ' },
-  { id: 'portal_links', label: 'リンク集' }
+  { id: 'portal_links', label: 'リンク集' },
+  { id: 'portal_manual', label: '社内マニュアル' },
+  { id: 'portal_ai', label: 'AIチャットボット' }
 ];
 
 var password = '';
