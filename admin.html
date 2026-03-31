@@ -138,18 +138,13 @@ tbody tr:nth-child(even){background:#fafbfc}
 
 <div class="tab-bar" id="tabBar">
 <button class="active" data-tab="dashboard" onclick="switchTab('dashboard',this)">ダッシュボード</button>
-<button data-tab="お知らせ" onclick="switchTab('お知らせ',this)">お知らせ</button>
-<button data-tab="アカウント情報" onclick="switchTab('アカウント情報',this)">アカウント情報</button>
-<button data-tab="店舗別ログイン" onclick="switchTab('店舗別ログイン',this)">店舗別ログイン</button>
-<button data-tab="個別ログイン" onclick="switchTab('個別ログイン',this)">個別ログイン</button>
+<button data-tab="ホーム" onclick="switchTab('ホーム',this)">ホーム</button>
+<button data-tab="ログイン情報" onclick="switchTab('ログイン情報',this)">ログイン情報</button>
 <button data-tab="クライアント一覧" onclick="switchTab('クライアント一覧',this)">クライアント一覧</button>
-<button data-tab="共有ドライブ" onclick="switchTab('共有ドライブ',this)">共有ドライブ</button>
-<button data-tab="担当者一覧" onclick="switchTab('担当者一覧',this)">担当者一覧</button>
 <button data-tab="組織図" onclick="switchTab('組織図',this)">組織図</button>
-<button data-tab="会社情報" onclick="switchTab('会社情報',this)">会社情報</button>
-<button data-tab="リンク集" onclick="switchTab('リンク集',this)">リンク集</button>
 <button data-tab="業務マニュアル" onclick="switchTab('業務マニュアル',this)">業務マニュアル</button>
 <button data-tab="AIチャットボット" onclick="switchTab('AIチャットボット',this)">AIチャットボット</button>
+<button data-tab="リンク集" onclick="switchTab('リンク集',this)">リンク集</button>
 </div>
 
 <div class="admin-content">
@@ -214,20 +209,20 @@ tbody tr:nth-child(even){background:#fafbfc}
 /* ========== Config ========== */
 var GAS_URL = 'https://script.google.com/macros/s/AKfycbxUxm3HCosAwW4EImmGzFnW-g8svH-NKaquJ1a1G2kBrLLVQwhBZGgjGEpZxiw-Cj9h/exec';
 
-var SHEETS = [
-  { id: 'お知らせ', label: 'お知らせ' },
-  { id: 'アカウント情報', label: 'アカウント情報' },
-  { id: '店舗別ログイン', label: '店舗別ログイン' },
-  { id: '個別ログイン', label: '個別ログイン' },
-  { id: 'クライアント一覧', label: 'クライアント一覧' },
-  { id: '共有ドライブ', label: '共有ドライブ' },
-  { id: '担当者一覧', label: '担当者一覧' },
-  { id: '組織図', label: '組織図' },
-  { id: '会社情報', label: '会社情報' },
-  { id: 'リンク集', label: 'リンク集' },
-  { id: '業務マニュアル', label: '業務マニュアル' },
-  { id: 'AIチャットボット', label: 'AIチャットボット' }
-];
+// ポータルのページ構成に合わせたタブ→シートマッピング
+var TAB_SHEETS = {
+  'ホーム': ['お知らせ', '会社情報'],
+  'ログイン情報': ['アカウント情報', '店舗別ログイン', '個別ログイン'],
+  'クライアント一覧': ['クライアント一覧', '共有ドライブ', '担当者一覧'],
+  '組織図': ['組織図'],
+  '業務マニュアル': ['業務マニュアル'],
+  'AIチャットボット': ['AIチャットボット'],
+  'リンク集': ['リンク集']
+};
+var SHEETS = [];
+Object.keys(TAB_SHEETS).forEach(function(tab) {
+  TAB_SHEETS[tab].forEach(function(s) { SHEETS.push({ id: s, label: s }); });
+});
 
 var password = '';
 var sheetDataCache = {};
@@ -326,7 +321,7 @@ function renderDashboard() {
   tbody.innerHTML = html;
 
   document.getElementById('statsGrid').innerHTML =
-    '<div class="stat-card"><div class="stat-num">' + SHEETS.length + '</div><div class="stat-label">管理シート数</div></div>' +
+    '<div class="stat-card"><div class="stat-num">' + Object.keys(TAB_SHEETS).length + '</div><div class="stat-label">管理ページ数</div></div>' +
     '<div class="stat-card"><div class="stat-num">' + totalRows + '</div><div class="stat-label">総データ行数</div></div>' +
     '<div class="stat-card"><div class="stat-num">' + (sheetDataCache['クライアント一覧'] ? sheetDataCache['クライアント一覧'].rows.length : 0) + '</div><div class="stat-label">クライアント数</div></div>' +
     '<div class="stat-card"><div class="stat-num">' + (sheetDataCache['お知らせ'] ? sheetDataCache['お知らせ'].rows.length : 0) + '</div><div class="stat-label">お知らせ件数</div></div>';
@@ -345,11 +340,18 @@ function switchTab(tabId, btn) {
     });
   }
 
-  var sec = document.getElementById('sec-' + tabId);
-  if (sec) {
-    sec.classList.add('active');
-  } else if (tabId === 'dashboard') {
+  if (tabId === 'dashboard') {
     document.getElementById('sec-dashboard').classList.add('active');
+    return;
+  }
+
+  // タブに対応する複数シートを全て表示
+  var sheets = TAB_SHEETS[tabId];
+  if (sheets) {
+    sheets.forEach(function(sheetId) {
+      var sec = document.getElementById('sec-' + sheetId);
+      if (sec) sec.classList.add('active');
+    });
   }
 }
 
