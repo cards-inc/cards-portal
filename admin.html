@@ -231,30 +231,19 @@ var currentEditRow = -1;
 var isSaving = false;
 
 /* ========== Auth ========== */
+var ADMIN_PW = 'admin';
 function attemptLogin() {
-  password = document.getElementById('loginPassword').value;
-  if (!password) return;
-  var btn = document.getElementById('loginBtn');
-  btn.disabled = true;
-  btn.innerHTML = '<span class="loading-spinner"></span>認証中...';
-  apiPost({ action: 'getSheet', sheet: 'お知らせ', password: password })
-    .then(function(res) {
-      btn.disabled = false;
-      btn.textContent = 'ログイン';
-      if (res.success) {
-        document.getElementById('loginScreen').style.display = 'none';
-        document.getElementById('app').style.display = 'block';
-        sessionStorage.setItem('cards_admin_pw', password);
-        loadDashboard();
-      } else {
-        document.getElementById('loginError').style.display = 'block';
-      }
-    })
-    .catch(function() {
-      btn.disabled = false;
-      btn.textContent = 'ログイン';
-      document.getElementById('loginError').style.display = 'block';
-    });
+  var input = document.getElementById('loginPassword').value;
+  if (!input) return;
+  if (input !== ADMIN_PW) {
+    document.getElementById('loginError').style.display = 'block';
+    return;
+  }
+  password = input;
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  sessionStorage.setItem('cards_admin_pw', password);
+  loadDashboard();
 }
 
 function logout() {
