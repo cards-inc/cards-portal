@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CARDS Portal - 管理画面</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+:root{--primary:#0E043A;--secondary:#1a0d52;--accent:#2d1b69;--highlight:#6C3CE0;--bg:#f4f3f8;--card-bg:#fff;--text:#1a1a2e;--text-light:#6b6b80;--border:#e2e0ec;--shadow:0 2px 16px rgba(14,4,58,.06);--radius:14px;--danger:#e94560;--success:#00b894;--warning:#fdcb6e}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+
+/* Login */
+.login-wrap{display:flex;align-items:center;justify-content:center;min-height:100vh}
+.login-box{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:3rem;width:380px;max-width:90vw;text-align:center}
+.login-box h1{font-size:1.3rem;color:var(--primary);margin-bottom:.3rem}
+.login-box p{font-size:.8rem;color:var(--text-light);margin-bottom:2rem}
+.login-box input{width:100%;padding:.7rem 1rem;border:1px solid var(--border);border-radius:8px;font-size:.9rem;outline:none;margin-bottom:1rem}
+.login-box input:focus{border-color:var(--highlight)}
+.login-box button{width:100%;padding:.7rem;background:var(--primary);color:#fff;border:none;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer;transition:background .2s}
+.login-box button:hover{background:var(--accent)}
+.login-error{color:var(--danger);font-size:.8rem;margin-top:.5rem;display:none}
+
+/* Layout */
+.app{display:none;min-height:100vh}
+.topbar{background:var(--primary);color:#fff;padding:.8rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.topbar h1{font-size:1rem;font-weight:700;letter-spacing:.05em}
+.topbar .tb-right{display:flex;align-items:center;gap:1rem}
+.topbar .tb-right button{background:rgba(255,255,255,.15);color:#fff;border:none;padding:.4rem .8rem;border-radius:6px;font-size:.78rem;cursor:pointer;transition:background .2s}
+.topbar .tb-right button:hover{background:rgba(255,255,255,.25)}
+
+/* Tabs */
+.tab-bar{background:var(--card-bg);border-bottom:1px solid var(--border);padding:0 1.5rem;display:flex;overflow-x:auto;gap:0}
+.tab-bar button{background:none;border:none;padding:.8rem 1.2rem;font-size:.82rem;font-weight:500;color:var(--text-light);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s}
+.tab-bar button:hover{color:var(--text)}
+.tab-bar button.active{color:var(--highlight);border-bottom-color:var(--highlight);font-weight:600}
+
+/* Content */
+.admin-content{padding:1.5rem;max-width:1400px;margin:0 auto}
+.section{display:none}
+.section.active{display:block}
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:.5rem}
+.section-header h2{font-size:1.1rem;color:var(--primary)}
+.btn{padding:.5rem 1rem;border:none;border-radius:8px;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:.4rem}
+.btn-primary{background:var(--highlight);color:#fff}
+.btn-primary:hover{background:var(--accent)}
+.btn-danger{background:var(--danger);color:#fff}
+.btn-danger:hover{background:#c0392b}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--border)}
+.btn-outline:hover{background:var(--bg)}
+.btn-success{background:var(--success);color:#fff}
+.btn-success:hover{background:#00a381}
+.btn-sm{padding:.3rem .7rem;font-size:.75rem}
+
+/* Table */
+.data-table-wrap{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);overflow-x:auto;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+thead th{background:linear-gradient(135deg,#0E043A,#2d1b69);color:#fff;padding:.6rem .8rem;text-align:left;font-weight:600;white-space:nowrap;position:sticky;top:0}
+tbody tr{border-bottom:1px solid var(--border);transition:background .15s}
+tbody tr:hover{background:#f0ecfa}
+tbody td{padding:.5rem .8rem;vertical-align:top;max-width:250px;overflow:hidden;text-overflow:ellipsis}
+tbody tr:nth-child(even){background:#fafbfc}
+.td-actions{white-space:nowrap;display:flex;gap:.3rem}
+.pw-hidden{font-family:monospace;color:var(--text-light)}
+
+/* Modal */
+.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:500;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:var(--card-bg);border-radius:var(--radius);box-shadow:0 20px 60px rgba(0,0,0,.2);width:700px;max-width:95vw;max-height:85vh;overflow-y:auto}
+.modal-header{padding:1.2rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.modal-header h3{font-size:1rem;color:var(--primary)}
+.modal-close{background:none;border:none;font-size:1.2rem;cursor:pointer;color:var(--text-light);padding:.3rem}
+.modal-body{padding:1.5rem}
+.modal-footer{padding:1rem 1.5rem;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:.5rem}
+
+/* Form */
+.form-group{margin-bottom:1rem}
+.form-group label{display:block;font-size:.8rem;font-weight:600;color:var(--accent);margin-bottom:.3rem}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:.6rem .8rem;border:1px solid var(--border);border-radius:8px;font-size:.85rem;outline:none;font-family:inherit}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--highlight);box-shadow:0 0 0 3px rgba(108,60,224,.1)}
+.form-group textarea{min-height:60px;resize:vertical}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+
+/* Status */
+.status-bar{position:fixed;bottom:0;left:0;right:0;background:var(--primary);color:#fff;padding:.6rem 1.5rem;font-size:.8rem;display:none;z-index:200;text-align:center;animation:slideUp .3s ease}
+.status-bar.show{display:block}
+.status-bar.error{background:var(--danger)}
+.status-bar.success{background:var(--success)}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+
+/* Stats cards */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-bottom:1.5rem}
+.stat-card{background:var(--card-bg);border-radius:var(--radius);padding:1.2rem;box-shadow:var(--shadow);border-left:4px solid var(--highlight)}
+.stat-card .stat-num{font-size:1.8rem;font-weight:700;color:var(--primary)}
+.stat-card .stat-label{font-size:.78rem;color:var(--text-light);margin-top:.2rem}
+
+/* Responsive */
+@media(max-width:768px){
+  .form-row{grid-template-columns:1fr}
+  .admin-content{padding:1rem}
+  .tab-bar{padding:0 .5rem}
+  .tab-bar button{padding:.6rem .8rem;font-size:.75rem}
+}
+</style>
+</head>
+<body>
+
+<!-- Login Screen -->
+<div class="login-wrap" id="loginScreen">
+<div class="login-box">
+<h1>CARDS Portal</h1>
+<p>管理画面ログイン</p>
+<input type="password" id="loginPassword" placeholder="パスワードを入力" onkeypress="if(event.key==='Enter')attemptLogin()">
+<button onclick="attemptLogin()">ログイン</button>
+<div class="login-error" id="loginError">パスワードが正しくありません</div>
+</div>
+</div>
+
+<!-- App -->
+<div class="app" id="app">
+<div class="topbar">
+<h1>CARDS Portal 管理画面</h1>
+<div class="tb-right">
+<button onclick="clearServerCache()">キャッシュクリア</button>
+<a href="index.html" style="color:#fff;font-size:.78rem;text-decoration:none;opacity:.7">ポータルへ</a>
+<button onclick="logout()">ログアウト</button>
+</div>
+</div>
+
+<div class="tab-bar" id="tabBar">
+<button class="active" data-tab="dashboard" onclick="switchTab('dashboard',this)">ダッシュボード</button>
+<button data-tab="portal_news" onclick="switchTab('portal_news',this)">お知らせ</button>
+<button data-tab="portal_accounts" onclick="switchTab('portal_accounts',this)">アカウント</button>
+<button data-tab="portal_store_logins" onclick="switchTab('portal_store_logins',this)">店舗ログイン</button>
+<button data-tab="portal_logins" onclick="switchTab('portal_logins',this)">個別ログイン</button>
+<button data-tab="portal_clients" onclick="switchTab('portal_clients',this)">クライアント</button>
+<button data-tab="portal_team" onclick="switchTab('portal_team',this)">担当者</button>
+<button data-tab="portal_org" onclick="switchTab('portal_org',this)">組織図</button>
+<button data-tab="portal_company" onclick="switchTab('portal_company',this)">会社情報</button>
+<button data-tab="portal_drive" onclick="switchTab('portal_drive',this)">共有ドライブ</button>
+<button data-tab="portal_links" onclick="switchTab('portal_links',this)">リンク集</button>
+</div>
+
+<div class="admin-content">
+<!-- Dashboard -->
+<div id="sec-dashboard" class="section active">
+<h2 style="color:var(--primary);margin-bottom:1rem">ダッシュボード</h2>
+<div class="stats-grid" id="statsGrid"></div>
+<div class="data-table-wrap" style="margin-top:1rem">
+<table>
+<thead><tr><th>シート名</th><th>行数</th><th>最終操作</th><th>アクション</th></tr></thead>
+<tbody id="sheetList"></tbody>
+</table>
+</div>
+</div>
+
+<!-- Dynamic sections will be rendered here -->
+<div id="dynamicSections"></div>
+</div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal-overlay" id="editModal">
+<div class="modal">
+<div class="modal-header">
+<h3 id="modalTitle">行を編集</h3>
+<button class="modal-close" onclick="closeModal()">&times;</button>
+</div>
+<div class="modal-body" id="modalBody"></div>
+<div class="modal-footer">
+<button class="btn btn-outline" onclick="closeModal()">キャンセル</button>
+<button class="btn btn-primary" id="modalSaveBtn" onclick="saveModalData()">保存</button>
+</div>
+</div>
+</div>
+
+<!-- Delete Confirm Modal -->
+<div class="modal-overlay" id="deleteModal">
+<div class="modal" style="width:400px">
+<div class="modal-header">
+<h3>削除確認</h3>
+<button class="modal-close" onclick="closeDeleteModal()">&times;</button>
+</div>
+<div class="modal-body">
+<p>この行を削除しますか？この操作は元に戻せません。</p>
+</div>
+<div class="modal-footer">
+<button class="btn btn-outline" onclick="closeDeleteModal()">キャンセル</button>
+<button class="btn btn-danger" id="deleteConfirmBtn">削除する</button>
+</div>
+</div>
+</div>
+
+<!-- Status Bar -->
+<div class="status-bar" id="statusBar"></div>
+
+<script>
+/* ========== Config ========== */
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbyKIhSYIqbLlsvw-uAcVH5x2kvOvXe1EwRKQIo1gIVCpqxSPjcPKhLiC5mbZCVFAqJE/exec';
+
+const SHEETS = [
+  { id: 'portal_news', label: 'お知らせ', icon: 'bell' },
+  { id: 'portal_accounts', label: 'アカウント情報', icon: 'user' },
+  { id: 'portal_store_logins', label: '店舗別ログイン', icon: 'lock' },
+  { id: 'portal_logins', label: '個別ログイン', icon: 'key' },
+  { id: 'portal_clients', label: 'クライアント一覧', icon: 'users' },
+  { id: 'portal_team', label: '担当者一覧', icon: 'briefcase' },
+  { id: 'portal_org', label: '組織図', icon: 'git-branch' },
+  { id: 'portal_company', label: '会社情報', icon: 'building' },
+  { id: 'portal_drive', label: '共有ドライブ', icon: 'folder' },
+  { id: 'portal_links', label: 'リンク集', icon: 'link' }
+];
+
+let password = '';
+let sheetDataCache = {};
+let currentEditSheet = '';
+let currentEditRow = -1;
+
+/* ========== Auth ========== */
+function attemptLogin() {
+  password = document.getElementById('loginPassword').value;
+  if (!password) return;
+  // Verify by trying to fetch a sheet
+  showStatus('認証中...', '');
+  apiPost({ action: 'getSheet', sheet: 'portal_news', password: password })
+    .then(function(res) {
+      if (res.success) {
+        document.getElementById('loginScreen').style.display = 'none';
+        document.getElementById('app').style.display = 'block';
+        sessionStorage.setItem('cards_admin_pw', password);
+        loadDashboard();
+        showStatus('ログインしました', 'success');
+      } else {
+        document.getElementById('loginError').style.display = 'block';
+        showStatus('認証エラー', 'error');
+      }
+    })
+    .catch(function() {
+      document.getElementById('loginError').style.display = 'block';
+      showStatus('接続エラー', 'error');
+    });
+}
+
+function logout() {
+  sessionStorage.removeItem('cards_admin_pw');
+  password = '';
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('loginPassword').value = '';
+}
+
+/* ========== API ========== */
+function apiPost(body) {
+  return fetch(GAS_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain' },
+    body: JSON.stringify(body)
+  }).then(function(r) { return r.json(); });
+}
+
+function apiGet(params) {
+  var qs = Object.keys(params).map(function(k) { return k + '=' + encodeURIComponent(params[k]); }).join('&');
+  return fetch(GAS_URL + '?' + qs).then(function(r) { return r.json(); });
+}
+
+/* ========== Dashboard ========== */
+function loadDashboard() {
+  var tbody = document.getElementById('sheetList');
+  tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;padding:2rem;color:var(--text-light)">読み込み中...</td></tr>';
+
+  var promises = SHEETS.map(function(s) {
+    return apiPost({ action: 'getSheet', sheet: s.id, password: password })
+      .then(function(res) {
+        if (res.success) {
+          sheetDataCache[s.id] = res.data;
+          return { id: s.id, label: s.label, rows: res.data.rows.length, headers: res.data.headers.length };
+        }
+        return { id: s.id, label: s.label, rows: 0, headers: 0 };
+      })
+      .catch(function() { return { id: s.id, label: s.label, rows: 0, headers: 0 }; });
+  });
+
+  Promise.all(promises).then(function(results) {
+    var totalRows = 0;
+    var html = '';
+    results.forEach(function(r) {
+      totalRows += r.rows;
+      html += '<tr>';
+      html += '<td style="font-weight:600">' + esc(r.label) + '</td>';
+      html += '<td>' + r.rows + ' 行</td>';
+      html += '<td style="color:var(--text-light)">-</td>';
+      html += '<td><button class="btn btn-outline btn-sm" onclick="switchTab(\'' + r.id + '\',null)">編集</button></td>';
+      html += '</tr>';
+    });
+    tbody.innerHTML = html;
+
+    // Stats
+    document.getElementById('statsGrid').innerHTML =
+      '<div class="stat-card"><div class="stat-num">' + SHEETS.length + '</div><div class="stat-label">管理シート数</div></div>' +
+      '<div class="stat-card"><div class="stat-num">' + totalRows + '</div><div class="stat-label">総データ行数</div></div>' +
+      '<div class="stat-card"><div class="stat-num">' + (sheetDataCache['portal_clients'] ? sheetDataCache['portal_clients'].rows.length : 0) + '</div><div class="stat-label">クライアント数</div></div>' +
+      '<div class="stat-card"><div class="stat-num">' + (sheetDataCache['portal_news'] ? sheetDataCache['portal_news'].rows.length : 0) + '</div><div class="stat-label">お知らせ件数</div></div>';
+
+    // Build dynamic sections
+    buildAllSections();
+  });
+}
+
+/* ========== Tab Switching ========== */
+function switchTab(tabId, btn) {
+  document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
+  document.querySelectorAll('.tab-bar button').forEach(function(b) { b.classList.remove('active'); });
+
+  if (btn) {
+    btn.classList.add('active');
+  } else {
+    document.querySelectorAll('.tab-bar button').forEach(function(b) {
+      if (b.dataset.tab === tabId) b.classList.add('active');
+    });
+  }
+
+  var sec = document.getElementById('sec-' + tabId);
+  if (sec) {
+    sec.classList.add('active');
+  } else if (tabId === 'dashboard') {
+    document.getElementById('sec-dashboard').classList.add('active');
+  }
+}
+
+/* ========== Build Sections ========== */
+function buildAllSections() {
+  var container = document.getElementById('dynamicSections');
+  container.innerHTML = '';
+
+  SHEETS.forEach(function(s) {
+    var data = sheetDataCache[s.id];
+    if (!data) return;
+
+    var div = document.createElement('div');
+    div.id = 'sec-' + s.id;
+    div.className = 'section';
+
+    var html = '<div class="section-header">';
+    html += '<h2>' + esc(s.label) + ' <span style="font-size:.8rem;color:var(--text-light);font-weight:400">(' + data.rows.length + '行)</span></h2>';
+    html += '<div><button class="btn btn-primary" onclick="openAddModal(\'' + s.id + '\')">+ 新規追加</button> ';
+    html += '<button class="btn btn-outline" onclick="refreshSheet(\'' + s.id + '\')">更新</button></div>';
+    html += '</div>';
+
+    html += '<div class="data-table-wrap"><table>';
+    html += '<thead><tr>';
+    html += '<th style="width:50px">#</th>';
+    data.headers.forEach(function(h) {
+      html += '<th>' + esc(h) + '</th>';
+    });
+    html += '<th style="width:120px">操作</th>';
+    html += '</tr></thead>';
+    html += '<tbody>';
+    data.rows.forEach(function(row, idx) {
+      html += '<tr>';
+      html += '<td style="color:var(--text-light)">' + (idx + 1) + '</td>';
+      row.forEach(function(cell, ci) {
+        var hdr = (data.headers[ci] || '').toLowerCase();
+        if (hdr.indexOf('pw') >= 0 || hdr.indexOf('password') >= 0 || hdr.indexOf('secret') >= 0 || hdr.indexOf('licensekey') >= 0 || hdr === 'pw') {
+          html += '<td class="pw-hidden" title="クリックで表示" onclick="this.textContent=this.dataset.v;this.style.color=\'inherit\'" data-v="' + escAttr(cell) + '">******</td>';
+        } else if (cell && (cell.startsWith('http://') || cell.startsWith('https://'))) {
+          html += '<td><a href="' + escAttr(cell) + '" target="_blank" style="color:var(--accent);font-size:.78rem;word-break:break-all">' + esc(cell.length > 50 ? cell.substring(0, 50) + '...' : cell) + '</a></td>';
+        } else {
+          html += '<td>' + esc(cell) + '</td>';
+        }
+      });
+      html += '<td class="td-actions">';
+      html += '<button class="btn btn-outline btn-sm" onclick="openEditModal(\'' + s.id + '\',' + idx + ')">編集</button>';
+      html += '<button class="btn btn-danger btn-sm" onclick="openDeleteModal(\'' + s.id + '\',' + idx + ')">削除</button>';
+      html += '</td>';
+      html += '</tr>';
+    });
+    if (data.rows.length === 0) {
+      html += '<tr><td colspan="' + (data.headers.length + 2) + '" style="text-align:center;padding:2rem;color:var(--text-light)">データがありません</td></tr>';
+    }
+    html += '</tbody></table></div>';
+
+    div.innerHTML = html;
+    container.appendChild(div);
+  });
+}
+
+/* ========== Modal: Add ========== */
+function openAddModal(sheetId) {
+  currentEditSheet = sheetId;
+  currentEditRow = -1;
+  var data = sheetDataCache[sheetId];
+  if (!data) return;
+
+  document.getElementById('modalTitle').textContent = '新規追加 - ' + getSheetLabel(sheetId);
+
+  var html = '';
+  data.headers.forEach(function(h, i) {
+    html += '<div class="form-group">';
+    html += '<label>' + esc(h) + '</label>';
+    html += '<input type="text" id="modal-field-' + i + '" placeholder="' + escAttr(h) + '">';
+    html += '</div>';
+  });
+
+  document.getElementById('modalBody').innerHTML = html;
+  document.getElementById('modalSaveBtn').textContent = '追加';
+  document.getElementById('editModal').classList.add('open');
+}
+
+/* ========== Modal: Edit ========== */
+function openEditModal(sheetId, rowIdx) {
+  currentEditSheet = sheetId;
+  currentEditRow = rowIdx;
+  var data = sheetDataCache[sheetId];
+  if (!data) return;
+
+  document.getElementById('modalTitle').textContent = '編集 - ' + getSheetLabel(sheetId) + ' (行 ' + (rowIdx + 1) + ')';
+
+  var row = data.rows[rowIdx];
+  var html = '';
+  data.headers.forEach(function(h, i) {
+    html += '<div class="form-group">';
+    html += '<label>' + esc(h) + '</label>';
+    html += '<input type="text" id="modal-field-' + i + '" value="' + escAttr(row[i] || '') + '">';
+    html += '</div>';
+  });
+
+  document.getElementById('modalBody').innerHTML = html;
+  document.getElementById('modalSaveBtn').textContent = '更新';
+  document.getElementById('editModal').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('editModal').classList.remove('open');
+}
+
+/* ========== Modal: Save ========== */
+function saveModalData() {
+  var data = sheetDataCache[currentEditSheet];
+  if (!data) return;
+
+  var values = [];
+  data.headers.forEach(function(h, i) {
+    values.push(document.getElementById('modal-field-' + i).value);
+  });
+
+  var action = currentEditRow === -1 ? 'add' : 'update';
+  var body = {
+    password: password,
+    action: action,
+    sheet: currentEditSheet,
+    data: values
+  };
+  if (action === 'update') body.rowIndex = currentEditRow;
+
+  showStatus('保存中...', '');
+  apiPost(body).then(function(res) {
+    if (res.success) {
+      showStatus(action === 'add' ? '追加しました' : '更新しました', 'success');
+      closeModal();
+      refreshSheet(currentEditSheet);
+    } else {
+      showStatus('エラー: ' + (res.error || '不明'), 'error');
+    }
+  }).catch(function(e) {
+    showStatus('通信エラー: ' + e.message, 'error');
+  });
+}
+
+/* ========== Modal: Delete ========== */
+function openDeleteModal(sheetId, rowIdx) {
+  document.getElementById('deleteModal').classList.add('open');
+  document.getElementById('deleteConfirmBtn').onclick = function() {
+    confirmDelete(sheetId, rowIdx);
+  };
+}
+
+function closeDeleteModal() {
+  document.getElementById('deleteModal').classList.remove('open');
+}
+
+function confirmDelete(sheetId, rowIdx) {
+  showStatus('削除中...', '');
+  apiPost({
+    password: password,
+    action: 'delete',
+    sheet: sheetId,
+    rowIndex: rowIdx
+  }).then(function(res) {
+    if (res.success) {
+      showStatus('削除しました', 'success');
+      closeDeleteModal();
+      refreshSheet(sheetId);
+    } else {
+      showStatus('エラー: ' + (res.error || '不明'), 'error');
+    }
+  }).catch(function(e) {
+    showStatus('通信エラー: ' + e.message, 'error');
+  });
+}
+
+/* ========== Refresh Sheet ========== */
+function refreshSheet(sheetId) {
+  showStatus(getSheetLabel(sheetId) + ' を読み込み中...', '');
+  apiPost({ action: 'getSheet', sheet: sheetId, password: password })
+    .then(function(res) {
+      if (res.success) {
+        sheetDataCache[sheetId] = res.data;
+        buildAllSections();
+        // Re-activate current tab
+        switchTab(sheetId, null);
+        showStatus('更新完了', 'success');
+      } else {
+        showStatus('エラー: ' + (res.error || '不明'), 'error');
+      }
+    });
+}
+
+/* ========== Cache Clear ========== */
+function clearServerCache() {
+  apiGet({ action: 'clearCache' }).then(function() {
+    showStatus('サーバーキャッシュをクリアしました', 'success');
+  }).catch(function() {
+    showStatus('キャッシュクリアに失敗', 'error');
+  });
+}
+
+/* ========== Status Bar ========== */
+function showStatus(msg, type) {
+  var bar = document.getElementById('statusBar');
+  bar.textContent = msg;
+  bar.className = 'status-bar show' + (type ? ' ' + type : '');
+  if (type) {
+    setTimeout(function() { bar.classList.remove('show'); }, 3000);
+  }
+}
+
+/* ========== Helpers ========== */
+function getSheetLabel(id) {
+  for (var i = 0; i < SHEETS.length; i++) {
+    if (SHEETS[i].id === id) return SHEETS[i].label;
+  }
+  return id;
+}
+
+function esc(s) {
+  if (!s) return '';
+  return s.toString().replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function escAttr(s) {
+  if (!s) return '';
+  return s.toString().replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+/* ========== Init ========== */
+(function() {
+  var saved = sessionStorage.getItem('cards_admin_pw');
+  if (saved) {
+    password = saved;
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    loadDashboard();
+  }
+})();
+</script>
+</body>
+</html>

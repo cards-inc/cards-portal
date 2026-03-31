@@ -280,7 +280,7 @@ tbody tr:nth-child(even){background:#fafbfc}
 <!-- MVV -->
 <div class="mvv-box">
 <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem">
-<img src="https://cd-s.co.jp/wp-content/themes/%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BEcards/assets/images/common/logo.webp" alt="CARDS" style="height:36px;filter:brightness(0) invert(1)">
+<img src="https://cd-s.co.jp/wp-content/themes/%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BEcards/assets/images/common/logo.webp" alt="CARDS" style="height:40px;max-width:160px;object-fit:contain;filter:brightness(0) invert(1)">
 <h3 style="margin:0">Mission / Vision / Values</h3>
 </div>
 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:.5rem">
@@ -296,11 +296,6 @@ tbody tr:nth-child(even){background:#fafbfc}
 <div style="font-size:.7rem;opacity:.6;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.3rem">Values</div>
 <div style="font-size:1.1rem;font-weight:700;line-height:1.5">お客様第一で最善を尽くすプロ集団である</div>
 </div>
-</div>
-<div class="mvv-values">
-<div class="mvv-value">ECモール運用支援&コンサルティング</div>
-<div class="mvv-value">EC専売商品企画</div>
-<div class="mvv-value">ECブランド戦略サポート</div>
 </div>
 </div>
 
@@ -808,7 +803,7 @@ tbody tr:nth-child(even){background:#fafbfc}
 <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:2rem">
 <div style="flex:1;min-width:320px;background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden">
 <div style="background:linear-gradient(135deg,#0E043A 0%,#2d1b69 50%,#4a2d8a 100%);padding:2rem;text-align:center">
-<img src="https://cd-s.co.jp/wp-content/themes/%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BEcards/assets/images/common/logo.webp" alt="CARDS" style="height:48px;filter:brightness(0) invert(1)">
+<img src="https://cd-s.co.jp/wp-content/themes/%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BEcards/assets/images/common/logo.webp" alt="CARDS" style="height:50px;max-width:200px;object-fit:contain;filter:brightness(0) invert(1)">
 <p style="color:rgba(255,255,255,.7);font-size:.8rem;margin-top:.5rem">株式会社CARDS</p>
 </div>
 <div style="padding:1.5rem">
@@ -985,7 +980,22 @@ function escHtml(s){if(!s)return'';return s.replace(/&/g,'&amp;').replace(/</g,'
 function tagClass(ch){ch=ch.toLowerCase();if(ch.indexOf('rakuten')>=0||ch.indexOf('楽天')>=0)return'tag-rakuten';if(ch.indexOf('amazon')>=0)return'tag-amazon';if(ch.indexOf('yahoo')>=0)return'tag-yahoo';if(ch.indexOf('line')>=0)return'tag-line';if(ch.indexOf('teps')>=0||ch.indexOf('広告')>=0||ch.indexOf('filezilla')>=0)return'tag-tool';return'tag-other'}
 function linkOrText(url,text){if(url)return'<a href="'+escHtml(url)+'" target="_blank" class="external-link">'+escHtml(text||url)+'</a>';return escHtml(text||'-')}
 
+var GAS_API = 'https://script.google.com/macros/s/AKfycbyKIhSYIqbLlsvw-uAcVH5x2kvOvXe1EwRKQIo1gIVCpqxSPjcPKhLiC5mbZCVFAqJE/exec';
+
 function loadAllData(){
+  fetch(GAS_API + '?action=getAllData')
+    .then(function(r){return r.json()})
+    .then(function(d){
+      if(d.news) renderNews(d.news);
+      if(d.links) renderLinksFromApi(d.links);
+      if(d.drive) renderDriveFromApi(d.drive);
+      if(d.logins) renderLoginsFromApi(d.logins);
+      console.log('APIデータ読み込み完了');
+      injectCopyButtons();
+    })
+    .catch(function(e){console.log('API接続なし - 静的表示を維持:',e)});
+  return;
+  // Legacy GAS-hosted code below
   console.log('静的HTMLで表示中');return;
   document.getElementById('loading-overlay').style.display='flex';
   google.script.run.withSuccessHandler(function(d){
@@ -1142,6 +1152,72 @@ function renderRules(rulesHtml){
   if(rulesSection){
     rulesSection.innerHTML=rulesHtml;
   }
+}
+
+/* API render functions */
+function renderNews(news){
+  if(!news||!news.length)return;
+  var list=document.querySelector('.news-list');if(!list)return;
+  var html='';
+  news.forEach(function(n){
+    var tagClass='news-tag-info';
+    if(n.category==='important')tagClass='news-tag-important';
+    else if(n.category==='update')tagClass='news-tag-update';
+    html+='<li><span class="news-date">'+escHtml(n.date)+'</span>';
+    html+='<span class="news-tag '+tagClass+'">'+escHtml(n.tag)+'</span>';
+    html+='<span class="news-text">'+escHtml(n.text)+'</span></li>';
+  });
+  list.innerHTML=html;
+}
+
+function renderLinksFromApi(links){
+  if(!links||!links.length)return;
+  var grid=document.querySelector('#page-links .info-grid');if(!grid)return;
+  var cats={};
+  links.forEach(function(l){
+    if(!cats[l.category])cats[l.category]=[];
+    cats[l.category].push(l);
+  });
+  var html='';
+  Object.keys(cats).forEach(function(cat){
+    html+='<div class="info-card"><h3>'+escHtml(cat)+'</h3><ul>';
+    cats[cat].forEach(function(l){
+      if(l.url){
+        html+='<li><a href="'+escHtml(l.url)+'" target="_blank" class="external-link">'+escHtml(l.name)+'</a></li>';
+      } else {
+        html+='<li>'+escHtml(l.name)+'</li>';
+      }
+    });
+    html+='</ul></div>';
+  });
+  grid.innerHTML=html;
+}
+
+function renderDriveFromApi(drive){
+  if(!drive||!drive.length)return;
+  var tbody=document.querySelector('#page-drive .table-wrapper tbody');if(!tbody)return;
+  var html='';
+  drive.forEach(function(d){
+    html+='<tr><td>'+escHtml(d.client)+'</td>';
+    html+='<td>'+(d.driveUrl?'<a href="'+escHtml(d.driveUrl)+'" target="_blank" class="external-link">'+escHtml(d.driveName||d.client)+'</a>':'-')+'</td>';
+    html+='<td>'+(d.sheetUrl?'<a href="'+escHtml(d.sheetUrl)+'" target="_blank" class="external-link">'+escHtml(d.client)+'様_共有シート</a>':'-')+'</td>';
+    html+='<td>'+escHtml(d.taskSheet||'-')+'</td>';
+    html+='<td>'+escHtml(d.other||'')+'</td></tr>';
+  });
+  tbody.innerHTML=html;
+}
+
+function renderLoginsFromApi(logins){
+  if(!logins||!logins.length)return;
+  var tbody=document.querySelector('#page-logins .table-wrapper tbody');if(!tbody)return;
+  var html='';
+  logins.forEach(function(l){
+    html+='<tr><td>'+escHtml(l.service)+'</td>';
+    html+='<td>'+escHtml(l.id)+'</td>';
+    html+=pwCell(l.pw);
+    html+='<td>'+escHtml(l.note)+'</td></tr>';
+  });
+  tbody.innerHTML=html;
 }
 
 document.addEventListener('DOMContentLoaded',function(){injectCopyButtons();loadAllData()});
