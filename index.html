@@ -40,6 +40,38 @@ body{font-family:'Segoe UI','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-seri
 .page.active{display:block}
 .page-title{font-size:1.4rem;font-weight:700;color:var(--primary);margin-bottom:1.5rem;padding-bottom:.5rem;border-bottom:3px solid var(--highlight)}
 
+/* Home dashboard grid */
+.home-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem}
+@media(max-width:1024px){.home-grid{grid-template-columns:1fr}}
+.home-card{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);overflow:hidden}
+.home-card-header{padding:.8rem 1.2rem;font-weight:700;font-size:.9rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.5rem}
+.home-card-header .badge{background:var(--highlight);color:#fff;font-size:.65rem;padding:.15rem .5rem;border-radius:10px;font-weight:600}
+.home-card-body{padding:1rem 1.2rem;font-size:.85rem}
+
+/* MVV */
+.mvv-box{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;border-radius:var(--radius);padding:2rem;margin-bottom:2rem;box-shadow:0 4px 20px rgba(0,0,0,.15)}
+.mvv-box h3{font-size:1.1rem;margin-bottom:.8rem;letter-spacing:.05em;opacity:.9}
+.mvv-box .mvv-mission{font-size:1.3rem;font-weight:700;line-height:1.6;margin-bottom:1rem}
+.mvv-box .mvv-values{display:flex;gap:1rem;flex-wrap:wrap;margin-top:.8rem}
+.mvv-box .mvv-value{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:.5rem 1rem;font-size:.82rem;font-weight:500}
+
+/* News */
+.news-list{list-style:none;padding:0;margin:0}
+.news-list li{padding:.6rem 0;border-bottom:1px solid var(--border);display:flex;gap:.8rem;align-items:flex-start;font-size:.84rem}
+.news-list li:last-child{border-bottom:none}
+.news-date{color:var(--text-light);font-size:.75rem;white-space:nowrap;min-width:80px;font-weight:500}
+.news-tag{font-size:.65rem;padding:.15rem .45rem;border-radius:3px;font-weight:600;white-space:nowrap}
+.news-tag-info{background:#0984e3;color:#fff}
+.news-tag-important{background:var(--highlight);color:#fff}
+.news-tag-update{background:#00b894;color:#fff}
+.news-text{flex:1}
+
+/* Stats */
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
+.stat-item{text-align:center;padding:.6rem;background:var(--bg);border-radius:8px}
+.stat-num{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.stat-label{font-size:.72rem;color:var(--text-light);margin-top:.2rem}
+
 /* Quick links */
 .quick-links{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;margin-bottom:2rem}
 .quick-link{background:var(--card-bg);border-radius:var(--radius);padding:1.5rem;text-align:center;box-shadow:var(--shadow);transition:var(--transition);cursor:pointer;text-decoration:none;color:var(--text);border:2px solid transparent}
@@ -238,7 +270,49 @@ tbody tr:nth-child(even){background:#fafbfc}
 
 <!-- ===== HOME ===== -->
 <div id="page-home" class="page active">
-<h2 class="page-title">クイックアクセス</h2>
+<h2 class="page-title">ホーム</h2>
+
+<!-- MVV -->
+<div class="mvv-box">
+<h3>Mission / Vision / Values</h3>
+<div class="mvv-mission">EC運用のプロフェッショナル集団として、<br>クライアントの売上最大化と持続的成長を実現する</div>
+<div class="mvv-values">
+<div class="mvv-value">品質へのこだわり</div>
+<div class="mvv-value">スピード感のある対応</div>
+<div class="mvv-value">データドリブンな意思決定</div>
+<div class="mvv-value">チームワーク</div>
+</div>
+</div>
+
+<!-- News + Stats -->
+<div class="home-grid">
+<div class="home-card">
+<div class="home-card-header">お知らせ <span class="badge">NEW</span></div>
+<div class="home-card-body">
+<ul class="news-list">
+<li><span class="news-date">2026/03/31</span><span class="news-tag news-tag-update">更新</span><span class="news-text">CARDS Portal をリニューアルしました</span></li>
+<li><span class="news-date">2026/03/31</span><span class="news-tag news-tag-info">情報</span><span class="news-text">楽天アカウント店舗情報（R-Login/FTP）を統合しました</span></li>
+<li><span class="news-date">2026/03/31</span><span class="news-tag news-tag-info">情報</span><span class="news-text">Teps APIキーを最新データに更新しました（15店舗）</span></li>
+<li><span class="news-date">2026/03/31</span><span class="news-tag news-tag-important">重要</span><span class="news-text">品質管理ガイドライン / コミュニケーションポリシーを確認してください</span></li>
+</ul>
+</div>
+</div>
+
+<div class="home-card">
+<div class="home-card-header">管理状況</div>
+<div class="home-card-body">
+<div class="stat-grid">
+<div class="stat-item"><div class="stat-num">27</div><div class="stat-label">管理店舗数</div></div>
+<div class="stat-item"><div class="stat-num">15</div><div class="stat-label">Teps連携店舗</div></div>
+<div class="stat-item"><div class="stat-num">30</div><div class="stat-label">クライアント数</div></div>
+</div>
+<p style="margin-top:1rem;font-size:.78rem;color:var(--text-light)">ふるさと納税 5件 / 通常案件 12件 / Amazon 8件 / BP 2件 / OPEN 2件</p>
+</div>
+</div>
+</div>
+
+<!-- Quick Access -->
+<h3 style="font-size:1rem;font-weight:700;color:var(--primary);margin-bottom:1rem">クイックアクセス</h3>
 <div class="quick-links">
 <a class="quick-link" href="https://mainmenu.rms.rakuten.co.jp/" target="_blank"><div class="ql-title">楽天 RMS</div><div class="ql-desc">店舗管理システム</div></a>
 <a class="quick-link" href="https://sellercentral.amazon.co.jp/home" target="_blank"><div class="ql-title">Amazon セラーセントラル</div><div class="ql-desc">セラーセントラル</div></a>
