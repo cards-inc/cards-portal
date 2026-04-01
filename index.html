@@ -207,12 +207,8 @@ tbody tr:nth-child(even){background:#fafbfc}
 .search-no-result{padding:1rem;text-align:center;color:var(--text-light);font-size:.85rem}
 
 /* Org chart - Tree style */
-.org-tree{background:var(--card-bg);border-radius:var(--radius);padding:2.5rem 1.5rem;box-shadow:var(--shadow);overflow-x:scroll;max-width:100%;-webkit-overflow-scrolling:touch}
-.org-tree::-webkit-scrollbar{height:10px}
-.org-tree::-webkit-scrollbar-track{background:var(--bg);border-radius:5px}
-.org-tree::-webkit-scrollbar-thumb{background:var(--accent);border-radius:5px}
-.org-tree::-webkit-scrollbar-thumb:hover{background:var(--highlight)}
-.org-tree .tree{min-width:1600px}
+.org-tree{background:var(--card-bg);border-radius:var(--radius);padding:2.5rem 1.5rem;box-shadow:var(--shadow);overflow:hidden;max-width:100%}
+.org-tree .tree{min-width:auto}
 .tree{display:flex;flex-direction:column;align-items:center}
 .tree ul{display:flex;justify-content:center;padding-top:24px;position:relative;list-style:none;margin:0;padding-left:0}
 .tree li{display:flex;flex-direction:column;align-items:center;position:relative;padding:24px 6px 0}
