@@ -89,6 +89,13 @@ tbody tr:hover{background:#f0ecfa}
 tbody td{padding:.75rem 1.2rem;vertical-align:top;line-height:1.6}
 tbody tr:nth-child(even){background:#fafbfc}
 
+/* Team table compact */
+.team-table{font-size:.76rem;table-layout:fixed;width:100%}
+.team-table thead th{padding:.5rem .5rem;font-size:.72rem;letter-spacing:0}
+.team-table tbody td{padding:.4rem .5rem;line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.team-table colgroup col:nth-child(1){width:36px}
+.team-table thead th:first-child,.team-table tbody td:first-child{width:36px;text-align:center}
+
 /* Tags */
 .tag{display:inline-block;padding:.2rem .6rem;border-radius:4px;font-size:.7rem;font-weight:600;white-space:nowrap}
 .tag-rakuten{background:#bf0000;color:#fff}
@@ -764,8 +771,8 @@ AIチャットボット
 
 <div class="sub-title" style="margin-top:2.5rem">担当者一覧</div>
 <div class="table-wrapper" style="overflow:visible">
-<table>
-<thead><tr><th>No.</th><th>クライアント</th><th>対応範囲</th><th>媒体</th><th>マネージャー</th><th>コンサルタント</th><th>広告運用</th></tr></thead>
+<table class="team-table">
+<thead><tr><th>No.</th><th>クライアント</th><th>対応範囲</th><th>媒体</th><th>MGR</th><th>コンサル</th><th>広告運用</th></tr></thead>
 <tbody id="team-table-tbody"><tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--text-light)">読み込み中...</td></tr></tbody>
 </table>
 </div>
