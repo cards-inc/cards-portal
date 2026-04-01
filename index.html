@@ -281,8 +281,9 @@ tbody tr:nth-child(even){background:#fafbfc}
 .admin-logout-btn:hover{background:#e94560!important}
 
 /* Admin edit buttons on tables */
-.admin-edit-btn{background:none;border:1px solid var(--border);border-radius:4px;padding:.2rem .5rem;font-size:.7rem;cursor:pointer;color:var(--accent);transition:all .15s}
-.admin-edit-btn:hover{background:var(--highlight);color:#fff;border-color:var(--highlight)}
+.admin-edit-btn{background:var(--highlight);color:#fff;border:none;border-radius:5px;padding:.3rem .7rem;font-size:.72rem;font-weight:600;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:.3rem}
+.admin-edit-btn:hover{background:#5a2dcf;box-shadow:0 2px 8px rgba(108,60,224,.3)}
+.admin-edit-btn svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2}
 .admin-delete-btn{background:none;border:1px solid #e94560;border-radius:4px;padding:.2rem .5rem;font-size:.7rem;cursor:pointer;color:#e94560;transition:all .15s}
 .admin-delete-btn:hover{background:#e94560;color:#fff}
 .admin-add-btn{display:inline-flex;align-items:center;gap:.3rem;background:var(--highlight);color:#fff;border:none;border-radius:6px;padding:.4rem .8rem;font-size:.78rem;font-weight:600;cursor:pointer;margin-bottom:.8rem}
@@ -368,14 +369,9 @@ body.admin-mode .admin-only{display:inline-flex}
 <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M12 2a2 2 0 012 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 017 7h1a2 2 0 110 4h-1a7 7 0 01-7 7H9a7 7 0 01-7-7H1a2 2 0 110-4h1a7 7 0 017-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 012-2z"/><circle cx="9" cy="13" r="1.25"/><circle cx="15" cy="13" r="1.25"/><path d="M10 17h4" stroke-linecap="round"/></svg></span>
 AIチャットボット
 </a>
-<a href="https://cards-inc.github.io/cards-portal/admin.html" target="_blank">
-<span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg></span>
-管理画面 <svg style="width:10px;height:10px;margin-left:2px;opacity:.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-</a>
 </nav>
 <div class="admin-login-area" id="adminLoginArea">
-<input type="password" id="adminPwInput" placeholder="管理者パスワード" onkeypress="if(event.key==='Enter')adminLogin()">
-<button onclick="adminLogin()">管理者ログイン</button>
+<button onclick="adminOpenLoginModal()" style="width:100%;padding:.45rem;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.15);border-radius:6px;font-size:.78rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:.4rem"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>管理者ログイン</button>
 </div>
 <div class="admin-login-area" id="adminLoggedIn" style="display:none">
 <div style="font-size:.75rem;color:rgba(255,255,255,.8);margin-bottom:.4rem">管理者モード<span class="admin-badge">ON</span></div>
@@ -1530,6 +1526,25 @@ function renderAiFromApi(ai){
 document.addEventListener('DOMContentLoaded',function(){injectCopyButtons();loadAllData();adminCheckSession()});
 </script>
 
+<!-- Admin Login Modal -->
+<div class="admin-modal-overlay" id="adminLoginModal">
+<div class="admin-modal" style="width:380px">
+<div class="admin-modal-header">
+<h3>管理者ログイン</h3>
+<button class="admin-modal-close" onclick="document.getElementById('adminLoginModal').classList.remove('open')">&times;</button>
+</div>
+<div class="admin-modal-body" style="text-align:center">
+<p style="font-size:.85rem;color:var(--text-light);margin-bottom:1rem">管理者パスワードを入力してください</p>
+<input type="password" id="adminPwInput" placeholder="パスワード" style="width:100%;padding:.6rem .8rem;border:1px solid var(--border);border-radius:8px;font-size:.9rem;outline:none;margin-bottom:.5rem" onkeypress="if(event.key==='Enter')adminLogin()">
+<div id="adminLoginError" style="color:#e94560;font-size:.8rem;margin-bottom:.5rem;display:none">パスワードが正しくありません</div>
+<button class="admin-btn admin-btn-primary" onclick="adminLogin()" style="width:100%;padding:.6rem">ログイン</button>
+<div style="margin-top:1rem;border-top:1px solid var(--border);padding-top:.8rem">
+<a href="https://cards-inc.github.io/cards-portal/admin.html" target="_blank" style="font-size:.78rem;color:var(--accent);text-decoration:none">管理画面を別タブで開く <svg style="width:10px;height:10px;vertical-align:-1px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+</div>
+</div>
+</div>
+</div>
+
 <!-- Admin Modal -->
 <div class="admin-modal-overlay" id="adminModal">
 <div class="admin-modal">
@@ -1586,11 +1601,19 @@ var SHEET_MAP={
 
 var ALL_SHEETS=['お知らせ','会社情報','アカウント情報','店舗別ログイン','個別ログイン','クライアント一覧','共有ドライブ','担当者一覧','組織図','業務マニュアル','AIチャットボット','リンク集'];
 
+function adminOpenLoginModal(){
+  document.getElementById('adminLoginModal').classList.add('open');
+  document.getElementById('adminLoginError').style.display='none';
+  document.getElementById('adminPwInput').value='';
+  setTimeout(function(){document.getElementById('adminPwInput').focus()},100);
+}
+
 function adminLogin(){
   var input=document.getElementById('adminPwInput').value;
-  if(input!==ADMIN_PW){adminShowStatus('パスワードが正しくありません','error');return;}
+  if(input!==ADMIN_PW){document.getElementById('adminLoginError').style.display='block';return;}
   _adminPw=input;
   sessionStorage.setItem('cards_admin_pw',_adminPw);
+  document.getElementById('adminLoginModal').classList.remove('open');
   adminActivate();
 }
 
@@ -1825,7 +1848,7 @@ function adminInjectButtons(){
     if(title.querySelector('.admin-only'))return;
     var btns='';
     m.sheets.forEach(function(s){
-      btns+=' <button class="admin-edit-btn admin-only" onclick="adminOpenSheet(\''+s+'\')" style="font-size:.72rem;vertical-align:middle">'+s+' を編集</button>';
+      btns+=' <button class="admin-edit-btn admin-only" onclick="adminOpenSheet(\''+s+'\')" style="vertical-align:middle"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>'+s+'</button>';
     });
     title.insertAdjacentHTML('beforeend',btns);
   });
