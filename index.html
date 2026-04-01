@@ -269,6 +269,54 @@ tbody tr:nth-child(even){background:#fafbfc}
   tbody td{padding:.5rem .6rem}
   .mvv-box .mvv-grid-3{grid-template-columns:1fr!important}
 }
+
+/* ========== Admin Mode ========== */
+.admin-login-area{padding:.8rem 1.2rem;border-top:1px solid rgba(255,255,255,.1)}
+.admin-login-area input{width:100%;padding:.4rem .6rem;border:1px solid rgba(255,255,255,.2);border-radius:6px;background:rgba(255,255,255,.1);color:#fff;font-size:.78rem;outline:none;margin-bottom:.4rem}
+.admin-login-area input::placeholder{color:rgba(255,255,255,.4)}
+.admin-login-area button{width:100%;padding:.35rem;background:var(--highlight);color:#fff;border:none;border-radius:6px;font-size:.75rem;font-weight:600;cursor:pointer}
+.admin-login-area button:hover{background:#5a2dcf}
+.admin-badge{display:inline-block;background:#00b894;color:#fff;font-size:.6rem;padding:.1rem .4rem;border-radius:8px;margin-left:.4rem;font-weight:600}
+.admin-logout-btn{background:rgba(233,69,96,.8)!important}
+.admin-logout-btn:hover{background:#e94560!important}
+
+/* Admin edit buttons on tables */
+.admin-edit-btn{background:none;border:1px solid var(--border);border-radius:4px;padding:.2rem .5rem;font-size:.7rem;cursor:pointer;color:var(--accent);transition:all .15s}
+.admin-edit-btn:hover{background:var(--highlight);color:#fff;border-color:var(--highlight)}
+.admin-delete-btn{background:none;border:1px solid #e94560;border-radius:4px;padding:.2rem .5rem;font-size:.7rem;cursor:pointer;color:#e94560;transition:all .15s}
+.admin-delete-btn:hover{background:#e94560;color:#fff}
+.admin-add-btn{display:inline-flex;align-items:center;gap:.3rem;background:var(--highlight);color:#fff;border:none;border-radius:6px;padding:.4rem .8rem;font-size:.78rem;font-weight:600;cursor:pointer;margin-bottom:.8rem}
+.admin-add-btn:hover{background:#5a2dcf}
+.admin-only{display:none}
+body.admin-mode .admin-only{display:inline-flex}
+
+/* Admin Modal */
+.admin-modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:500;align-items:center;justify-content:center}
+.admin-modal-overlay.open{display:flex}
+.admin-modal{background:var(--card-bg);border-radius:var(--radius);box-shadow:0 20px 60px rgba(0,0,0,.2);width:650px;max-width:95vw;max-height:85vh;overflow-y:auto}
+.admin-modal-header{padding:1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.admin-modal-header h3{font-size:1rem;color:var(--primary)}
+.admin-modal-close{background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--text-light);padding:.3rem}
+.admin-modal-body{padding:1.2rem 1.5rem}
+.admin-modal-footer{padding:.8rem 1.5rem;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:.5rem}
+.admin-form-group{margin-bottom:.8rem}
+.admin-form-group label{display:block;font-size:.78rem;font-weight:600;color:var(--accent);margin-bottom:.2rem}
+.admin-form-group input,.admin-form-group textarea{width:100%;padding:.5rem .7rem;border:1px solid var(--border);border-radius:6px;font-size:.85rem;outline:none;font-family:inherit}
+.admin-form-group input:focus,.admin-form-group textarea:focus{border-color:var(--highlight);box-shadow:0 0 0 3px rgba(108,60,224,.1)}
+.admin-btn{padding:.45rem .9rem;border:none;border-radius:6px;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s}
+.admin-btn-primary{background:var(--highlight);color:#fff}
+.admin-btn-primary:hover{background:#5a2dcf}
+.admin-btn-danger{background:#e94560;color:#fff}
+.admin-btn-danger:hover{background:#c0392b}
+.admin-btn-outline{background:transparent;color:var(--text);border:1px solid var(--border)}
+.admin-btn-outline:hover{background:var(--bg)}
+
+/* Admin status bar */
+.admin-status{position:fixed;bottom:0;left:0;right:0;background:var(--primary);color:#fff;padding:.5rem 1.5rem;font-size:.8rem;display:none;z-index:600;text-align:center;animation:adminSlideUp .3s ease}
+.admin-status.show{display:block}
+.admin-status.success{background:#00b894}
+.admin-status.error{background:#e94560}
+@keyframes adminSlideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
 </style>
 </head>
 <body>
@@ -321,6 +369,14 @@ tbody tr:nth-child(even){background:#fafbfc}
 AIチャットボット
 </a>
 </nav>
+<div class="admin-login-area" id="adminLoginArea">
+<input type="password" id="adminPwInput" placeholder="管理者パスワード" onkeypress="if(event.key==='Enter')adminLogin()">
+<button onclick="adminLogin()">管理者ログイン</button>
+</div>
+<div class="admin-login-area" id="adminLoggedIn" style="display:none">
+<div style="font-size:.75rem;color:rgba(255,255,255,.8);margin-bottom:.4rem">管理者モード<span class="admin-badge">ON</span></div>
+<button class="admin-logout-btn" onclick="adminLogout()">ログアウト</button>
+</div>
 <div class="sidebar-footer">&copy; 2026 CARDS Inc.</div>
 </aside>
 
@@ -1467,7 +1523,312 @@ function renderAiFromApi(ai){
   grid.innerHTML=html;
 }
 
-document.addEventListener('DOMContentLoaded',function(){injectCopyButtons();loadAllData()});
+document.addEventListener('DOMContentLoaded',function(){injectCopyButtons();loadAllData();adminCheckSession()});
+</script>
+
+<!-- Admin Modal -->
+<div class="admin-modal-overlay" id="adminModal">
+<div class="admin-modal">
+<div class="admin-modal-header">
+<h3 id="adminModalTitle">編集</h3>
+<button class="admin-modal-close" onclick="adminCloseModal()">&times;</button>
+</div>
+<div class="admin-modal-body" id="adminModalBody"></div>
+<div class="admin-modal-footer">
+<button class="admin-btn admin-btn-outline" onclick="adminCloseModal()">キャンセル</button>
+<button class="admin-btn admin-btn-primary" id="adminModalSaveBtn" onclick="adminSave()">保存</button>
+</div>
+</div>
+</div>
+
+<!-- Admin Delete Confirm -->
+<div class="admin-modal-overlay" id="adminDeleteModal">
+<div class="admin-modal" style="width:400px">
+<div class="admin-modal-header">
+<h3>削除確認</h3>
+<button class="admin-modal-close" onclick="adminCloseDeleteModal()">&times;</button>
+</div>
+<div class="admin-modal-body"><p>この行を削除しますか？この操作は元に戻せません。</p></div>
+<div class="admin-modal-footer">
+<button class="admin-btn admin-btn-outline" onclick="adminCloseDeleteModal()">キャンセル</button>
+<button class="admin-btn admin-btn-danger" id="adminDeleteConfirmBtn">削除する</button>
+</div>
+</div>
+</div>
+
+<!-- Admin Status Bar -->
+<div class="admin-status" id="adminStatus"></div>
+
+<script>
+/* ========== Admin System ========== */
+var _adminPw='';
+var _adminSheetCache={};
+var _adminCurrentSheet='';
+var _adminCurrentRow=-1;
+var _adminSaving=false;
+var ADMIN_PW='admin';
+
+// シート名マッピング：ポータルのtbody IDからシート名を逆引き
+var SHEET_MAP={
+  'login-ec-tbody':{sheet:'アカウント情報',filter:'ec'},
+  'login-tool-tbody':{sheet:'アカウント情報',filter:'tool'},
+  'login-store-tbody':{sheet:'店舗別ログイン',filter:'rms'},
+  'login-coupon-tbody':{sheet:'店舗別ログイン',filter:'coupon'},
+  'login-boss-tbody':{sheet:'店舗別ログイン',filter:'boss'},
+  'login-teps-tbody':{sheet:'店舗別ログイン',filter:'teps'},
+  'login-individual-tbody':{sheet:'個別ログイン'},
+  'team-table-tbody':{sheet:'担当者一覧'}
+};
+
+var ALL_SHEETS=['お知らせ','会社情報','アカウント情報','店舗別ログイン','個別ログイン','クライアント一覧','共有ドライブ','担当者一覧','組織図','業務マニュアル','AIチャットボット','リンク集'];
+
+function adminLogin(){
+  var input=document.getElementById('adminPwInput').value;
+  if(input!==ADMIN_PW){adminShowStatus('パスワードが正しくありません','error');return;}
+  _adminPw=input;
+  sessionStorage.setItem('cards_admin_pw',_adminPw);
+  adminActivate();
+}
+
+function adminLogout(){
+  _adminPw='';
+  _adminSheetCache={};
+  sessionStorage.removeItem('cards_admin_pw');
+  document.body.classList.remove('admin-mode');
+  document.getElementById('adminLoginArea').style.display='';
+  document.getElementById('adminLoggedIn').style.display='none';
+  document.getElementById('adminPwInput').value='';
+  adminShowStatus('ログアウトしました','success');
+}
+
+function adminCheckSession(){
+  var saved=sessionStorage.getItem('cards_admin_pw');
+  if(saved&&saved===ADMIN_PW){_adminPw=saved;adminActivate();}
+}
+
+function adminActivate(){
+  document.body.classList.add('admin-mode');
+  document.getElementById('adminLoginArea').style.display='none';
+  document.getElementById('adminLoggedIn').style.display='';
+  adminShowStatus('管理者モードON','success');
+  // シートデータをバックグラウンドでロード
+  adminLoadAllSheets();
+}
+
+function adminLoadAllSheets(){
+  ALL_SHEETS.forEach(function(s){
+    fetch(GAS_API+'?action=getSheet&sheet='+encodeURIComponent(s))
+      .then(function(r){return r.json()})
+      .then(function(d){_adminSheetCache[s]=d;})
+      .catch(function(){});
+  });
+}
+
+/* ========== Admin API ========== */
+function adminApiPost(body){
+  return fetch(GAS_API,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(body)}).then(function(r){return r.json()});
+}
+
+/* ========== Admin Status ========== */
+function adminShowStatus(msg,type){
+  var bar=document.getElementById('adminStatus');
+  bar.textContent=msg;
+  bar.className='admin-status show'+(type?' '+type:'');
+  if(type)setTimeout(function(){bar.classList.remove('show')},2500);
+}
+
+/* ========== Admin Sheet Editor ========== */
+function adminOpenSheet(sheetName){
+  _adminCurrentSheet=sheetName;
+  var data=_adminSheetCache[sheetName];
+  if(!data){adminShowStatus(sheetName+'を読み込み中...','');
+    fetch(GAS_API+'?action=getSheet&sheet='+encodeURIComponent(sheetName))
+      .then(function(r){return r.json()})
+      .then(function(d){_adminSheetCache[sheetName]=d;adminRenderSheetEditor(sheetName,d);})
+      .catch(function(){adminShowStatus('読み込みエラー','error')});
+    return;
+  }
+  adminRenderSheetEditor(sheetName,data);
+}
+
+function adminRenderSheetEditor(sheetName,data){
+  document.getElementById('adminModalTitle').textContent=sheetName+' を編集';
+  var html='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem">';
+  html+='<span style="font-size:.85rem;color:var(--text-light)">'+data.rows.length+'行</span>';
+  html+='<button class="admin-add-btn" onclick="adminOpenAddRow(\''+escHtml(sheetName)+'\')">+ 新規追加</button>';
+  html+='</div>';
+  html+='<div style="overflow-x:auto;max-height:60vh"><table style="font-size:.8rem"><thead><tr><th>#</th>';
+  data.headers.forEach(function(h){html+='<th>'+escHtml(h)+'</th>';});
+  html+='<th>操作</th></tr></thead><tbody>';
+  data.rows.forEach(function(row,idx){
+    html+='<tr><td>'+(idx+1)+'</td>';
+    row.forEach(function(cell,ci){
+      var hdr=(data.headers[ci]||'').toLowerCase();
+      if(hdr.indexOf('pw')>=0||hdr==='password'){
+        html+='<td style="font-family:monospace;color:var(--text-light)">******</td>';
+      }else{
+        var v=cell||'';
+        html+='<td>'+escHtml(v.length>40?v.substring(0,40)+'...':v)+'</td>';
+      }
+    });
+    html+='<td style="white-space:nowrap"><button class="admin-edit-btn" onclick="adminOpenEditRow(\''+escHtml(sheetName)+'\','+idx+')">編集</button> ';
+    html+='<button class="admin-delete-btn" onclick="adminOpenDeleteRow(\''+escHtml(sheetName)+'\','+idx+')">削除</button></td></tr>';
+  });
+  if(!data.rows.length)html+='<tr><td colspan="'+(data.headers.length+2)+'" style="text-align:center;padding:1.5rem;color:var(--text-light)">データなし</td></tr>';
+  html+='</tbody></table></div>';
+  document.getElementById('adminModalBody').innerHTML=html;
+  document.getElementById('adminModalSaveBtn').style.display='none';
+  document.getElementById('adminModal').classList.add('open');
+}
+
+/* ========== Add Row ========== */
+function adminOpenAddRow(sheetName){
+  _adminCurrentSheet=sheetName;
+  _adminCurrentRow=-1;
+  var data=_adminSheetCache[sheetName];if(!data)return;
+  document.getElementById('adminModalTitle').textContent='新規追加 - '+sheetName;
+  var html='';
+  data.headers.forEach(function(h,i){
+    html+='<div class="admin-form-group"><label>'+escHtml(h)+'</label><input type="text" id="admin-field-'+i+'" placeholder="'+escHtml(h)+'"></div>';
+  });
+  document.getElementById('adminModalBody').innerHTML=html;
+  document.getElementById('adminModalSaveBtn').style.display='';
+  document.getElementById('adminModalSaveBtn').textContent='追加';
+  document.getElementById('adminModal').classList.add('open');
+}
+
+/* ========== Edit Row ========== */
+function adminOpenEditRow(sheetName,rowIdx){
+  _adminCurrentSheet=sheetName;
+  _adminCurrentRow=rowIdx;
+  var data=_adminSheetCache[sheetName];if(!data)return;
+  var row=data.rows[rowIdx];
+  document.getElementById('adminModalTitle').textContent='編集 - '+sheetName+' (行'+(rowIdx+1)+')';
+  var html='';
+  data.headers.forEach(function(h,i){
+    html+='<div class="admin-form-group"><label>'+escHtml(h)+'</label><input type="text" id="admin-field-'+i+'" value="'+escHtml(row[i]||'').replace(/"/g,'&quot;')+'"></div>';
+  });
+  document.getElementById('adminModalBody').innerHTML=html;
+  document.getElementById('adminModalSaveBtn').style.display='';
+  document.getElementById('adminModalSaveBtn').textContent='更新';
+  document.getElementById('adminModal').classList.add('open');
+}
+
+/* ========== Save ========== */
+function adminSave(){
+  if(_adminSaving)return;
+  var data=_adminSheetCache[_adminCurrentSheet];if(!data)return;
+  var values=[];
+  data.headers.forEach(function(h,i){values.push(document.getElementById('admin-field-'+i).value);});
+  var action=_adminCurrentRow===-1?'add':'update';
+  var body={password:_adminPw,action:action,sheet:_adminCurrentSheet,data:values};
+  if(action==='update')body.rowIndex=_adminCurrentRow;
+
+  // Optimistic update
+  if(action==='add'){data.rows.push(values);}else{data.rows[_adminCurrentRow]=values;}
+  adminCloseModal();
+  adminShowStatus('保存中...','');
+  _adminSaving=true;
+
+  adminApiPost(body).then(function(res){
+    _adminSaving=false;
+    if(res.success){
+      adminShowStatus(action==='add'?'追加しました':'更新しました','success');
+      adminRefreshPortalData();
+    }else{
+      adminShowStatus('エラー: '+(res.error||'不明'),'error');
+      adminRefreshSheet(_adminCurrentSheet);
+    }
+  }).catch(function(){
+    _adminSaving=false;
+    adminShowStatus('通信エラー','error');
+    adminRefreshSheet(_adminCurrentSheet);
+  });
+}
+
+/* ========== Delete ========== */
+function adminOpenDeleteRow(sheetName,rowIdx){
+  document.getElementById('adminDeleteModal').classList.add('open');
+  document.getElementById('adminDeleteConfirmBtn').onclick=function(){adminConfirmDelete(sheetName,rowIdx)};
+}
+
+function adminConfirmDelete(sheetName,rowIdx){
+  adminCloseDeleteModal();
+  var data=_adminSheetCache[sheetName];
+  if(data)data.rows.splice(rowIdx,1);
+  adminShowStatus('削除中...','');
+
+  adminApiPost({password:_adminPw,action:'delete',sheet:sheetName,rowIndex:rowIdx}).then(function(res){
+    if(res.success){
+      adminShowStatus('削除しました','success');
+      adminRefreshPortalData();
+    }else{
+      adminShowStatus('エラー: '+(res.error||'不明'),'error');
+      adminRefreshSheet(sheetName);
+    }
+  }).catch(function(){
+    adminShowStatus('通信エラー','error');
+    adminRefreshSheet(sheetName);
+  });
+}
+
+/* ========== Refresh ========== */
+function adminRefreshSheet(sheetName){
+  fetch(GAS_API+'?action=getSheet&sheet='+encodeURIComponent(sheetName))
+    .then(function(r){return r.json()})
+    .then(function(d){_adminSheetCache[sheetName]=d;})
+    .catch(function(){});
+}
+
+function adminRefreshPortalData(){
+  // セッションキャッシュクリアしてポータルデータ再読み込み
+  try{Object.keys(sessionStorage).forEach(function(k){if(k.indexOf('portal_')===0)sessionStorage.removeItem(k)});}catch(e){}
+  cachedFetch(GAS_API+'?action=getAllData','all').then(function(d){
+    _apiData=d;
+    if(d.accounts)renderAccounts(d.accounts);
+    if(d.storeLogins)renderStoreLogins(d.storeLogins);
+    if(d.clients)renderClients(d.clients,d.drive);
+    if(d.team){renderTeamCards(d.team);renderClientCounts(d.team);}
+    if(d.news)renderNews(d.news);
+    if(d.company)renderCompany(d.company);
+    if(d.logins)renderLoginsFromApi(d.logins);
+    if(d.manual)renderManualFromApi(d.manual);
+    if(d.ai)renderAiFromApi(d.ai);
+    injectCopyButtons();
+  }).catch(function(){});
+}
+
+/* ========== Modal Controls ========== */
+function adminCloseModal(){document.getElementById('adminModal').classList.remove('open');}
+function adminCloseDeleteModal(){document.getElementById('adminDeleteModal').classList.remove('open');}
+
+/* ========== Admin Inline Buttons ========== */
+// ページごとに管理ボタンを配置するため、各page-titleの横にシート編集ボタンを追加
+function adminInjectButtons(){
+  var mappings=[
+    {page:'page-home',sheets:['お知らせ','会社情報']},
+    {page:'page-logins',sheets:['アカウント情報','店舗別ログイン','個別ログイン']},
+    {page:'page-clients',sheets:['クライアント一覧','共有ドライブ','担当者一覧']},
+    {page:'page-org',sheets:['組織図','担当者一覧']},
+    {page:'page-manual',sheets:['業務マニュアル']},
+    {page:'page-ai',sheets:['AIチャットボット']},
+    {page:'page-rules',sheets:['リンク集']}
+  ];
+  mappings.forEach(function(m){
+    var page=document.getElementById(m.page);if(!page)return;
+    var title=page.querySelector('.page-title');if(!title)return;
+    // 既に追加済みなら skip
+    if(title.querySelector('.admin-only'))return;
+    var btns='';
+    m.sheets.forEach(function(s){
+      btns+=' <button class="admin-edit-btn admin-only" onclick="adminOpenSheet(\''+s+'\')" style="font-size:.72rem;vertical-align:middle">'+s+' を編集</button>';
+    });
+    title.insertAdjacentHTML('beforeend',btns);
+  });
+}
+
+// DOMContentLoaded後に実行
+setTimeout(adminInjectButtons,100);
 </script>
 </body>
 </html>
