@@ -691,20 +691,13 @@ AIチャットボット
 </div>
 </div>
 
-<div class="sub-title" style="margin-top:2.5rem">担当者一覧 - コンサルタント</div>
-<div id="team-consultant-cards" class="team-cards"></div>
-
-<div class="sub-title" style="margin-top:2rem">担当者一覧 - アシスタント</div>
-<div id="team-assistant-cards" class="team-cards"></div>
-
-<div class="sub-title" style="margin-top:2rem">担当者一覧 - 広告運用担当者</div>
-<div id="team-adops-cards" class="team-cards"></div>
-
-<div class="sub-title" style="margin-top:2rem">担当者一覧 - デザイナー</div>
-<div id="team-designer-cards" class="team-cards"></div>
-
-<div class="sub-title" style="margin-top:2rem">担当者一覧 - BRAND PORT</div>
-<div id="team-bp-cards" class="team-cards"></div>
+<div class="sub-title" style="margin-top:2.5rem">担当者一覧</div>
+<div class="table-wrapper">
+<table>
+<thead><tr><th>No.</th><th>クライアント</th><th>対応範囲</th><th>媒体</th><th>マネージャー</th><th>コンサルタント</th><th>広告運用</th></tr></thead>
+<tbody id="team-table-tbody"><tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--text-light)">読み込み中...</td></tr></tbody>
+</table>
+</div>
 </div>
 
 <!-- ===== RULES ===== -->
@@ -1143,11 +1136,9 @@ function loadAllData(){
   var el;
   el=document.getElementById('clientGrid');if(el)el.innerHTML=loadingDiv;
   /* org-tree-container is static HTML with Slack photos - do not overwrite */
-  el=document.getElementById('team-consultant-cards');if(el)el.innerHTML=loadingDiv;
-  el=document.getElementById('team-assistant-cards');if(el)el.innerHTML=loadingDiv;
+  el=document.getElementById('team-table-tbody');if(el)el.innerHTML=loading;
   el=document.getElementById('manual-grid');if(el)el.innerHTML=loadingDiv;
   el=document.getElementById('ai-cards-grid');if(el)el.innerHTML=loadingDiv;
-  el=document.querySelector('#page-team .table-wrapper tbody');if(el)el.innerHTML=loading;
 
   /* 並列読み込み: getAllDataを1回で取得（GASキャッシュ有効時は高速） */
   cachedFetch(GAS_API + '?action=getAllData','all')
@@ -1156,7 +1147,7 @@ function loadAllData(){
       if(d.accounts) renderAccounts(d.accounts);
       if(d.storeLogins) renderStoreLogins(d.storeLogins);
       if(d.clients){ renderClients(d.clients,d.drive); }
-      if(d.team){ renderTeam(d.team); renderTeamCards(d.team); renderClientCounts(d.team); }
+      if(d.team){ renderTeamCards(d.team); renderClientCounts(d.team); }
       if(d.news) renderNews(d.news);
       if(d.company) renderCompany(d.company);
       if(d.org) renderOrg(d.org);
@@ -1297,29 +1288,6 @@ function renderClients(clients,driveData){
   grid.innerHTML=html;
 }
 
-function renderTeam(team){
-  if(!team||!team.length)return;
-  var tbody=document.querySelector('#page-team .table-wrapper tbody');if(!tbody)return;
-  var html='';var lastSection='';
-  var sectionColors={'ふるさと納税案件':'#e3f2fd','通常案件':'#e8f5e9','Amazon案件':'#fff3e0','BP案件':'#fce4ec'};
-  team.forEach(function(t){
-    if(t.section&&t.section!==lastSection){
-      var bg=sectionColors[t.section]||'#f5f5f5';
-      html+='<tr><td colspan="8" style="background:'+bg+';font-weight:700;color:var(--accent)">'+escHtml(t.section)+'</td></tr>';
-      lastSection=t.section;
-    }
-    var platformTag='';
-    if(t.platform){
-      var p=t.platform.toLowerCase();
-      var tc=p.indexOf('amazon')>=0?'tag-amazon':p.indexOf('yahoo')>=0?'tag-yahoo':'tag-rakuten';
-      platformTag='<span class="tag '+tc+'">'+escHtml(t.platform)+'</span>';
-    }
-    html+='<tr><td>'+escHtml(t.no)+'</td><td>'+escHtml(t.client)+'</td><td>'+escHtml(t.scope)+'</td>';
-    html+='<td>'+platformTag+'</td><td>'+escHtml(t.manager)+'</td><td>'+escHtml(t.consultant)+'</td>';
-    html+='<td>'+escHtml(t.adOps)+'</td><td></td></tr>';
-  });
-  tbody.innerHTML=html;
-}
 
 
 function switchRulesTab(tabId,btn){
@@ -1379,34 +1347,26 @@ function renderOrg(org){
 
 function renderTeamCards(team){
   if(!team||!team.length)return;
-  var consultants={};var assistants={};
+  var tbody=document.getElementById('team-table-tbody');if(!tbody)return;
+  var html='';var lastSection='';
+  var sectionColors={'ふるさと納税案件':'#e3f2fd','通常案件':'#e8f5e9','Amazon案件':'#fff3e0','BP案件':'#fce4ec'};
   team.forEach(function(t){
-    var p=t.platform?t.platform.toLowerCase():'';
-    var tc=p.indexOf('amazon')>=0?'tag-amazon':p.indexOf('yahoo')>=0?'tag-yahoo':'tag-rakuten';
-    var entry={client:t.client,platform:t.platform,tagClass:tc,adOps:t.adOps||''};
-    // Group by consultant
-    if(t.consultant){
-      t.consultant.split('/').forEach(function(name){
-        name=name.trim();if(!name)return;
-        if(!consultants[name])consultants[name]=[];
-        consultants[name].push(entry);
-      });
+    if(t.section&&t.section!==lastSection){
+      var bg=sectionColors[t.section]||'#f5f5f5';
+      html+='<tr><td colspan="7" style="background:'+bg+';font-weight:700;color:var(--accent);padding:.6rem 1.2rem">'+escHtml(t.section)+'</td></tr>';
+      lastSection=t.section;
     }
+    var platformTag='';
+    if(t.platform){
+      var p=t.platform.toLowerCase();
+      var tc=p.indexOf('amazon')>=0?'tag-amazon':p.indexOf('yahoo')>=0?'tag-yahoo':'tag-rakuten';
+      platformTag='<span class="tag '+tc+'">'+escHtml(t.platform)+'</span>';
+    }
+    html+='<tr><td>'+escHtml(t.no)+'</td><td>'+escHtml(t.client)+'</td><td>'+escHtml(t.scope)+'</td>';
+    html+='<td>'+platformTag+'</td><td>'+escHtml(t.manager)+'</td><td>'+escHtml(t.consultant)+'</td>';
+    html+='<td>'+escHtml(t.adOps)+'</td></tr>';
   });
-  // Consultant cards
-  var cHtml='';
-  Object.keys(consultants).forEach(function(name){
-    cHtml+='<div class="team-card"><div class="team-card-header"><span class="tc-name">'+escHtml(name)+'</span><span class="tc-role">コンサル&広告運用</span></div><div class="team-card-body"><table>';
-    consultants[name].forEach(function(e){
-      cHtml+='<tr><td>'+escHtml(e.client)+'</td><td><span class="tag '+e.tagClass+'">'+escHtml(e.platform)+'</span></td><td></td></tr>';
-    });
-    cHtml+='</table></div></div>';
-  });
-  var cContainer=document.getElementById('team-consultant-cards');
-  if(cContainer)cContainer.innerHTML=cHtml;
-  // Assistant cards - currently no separate assistant data in team sheet, leave empty
-  var aContainer=document.getElementById('team-assistant-cards');
-  if(aContainer&&!aContainer.innerHTML)aContainer.innerHTML='<p style="color:var(--text-light);font-size:.85rem">アシスタントデータは担当者一覧シートに追加してください</p>';
+  tbody.innerHTML=html;
 }
 
 /* API render functions */
