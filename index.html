@@ -555,11 +555,19 @@ AIチャットボット
 </div>
 
 <div class="login-section" data-login-cat="store">
-<div class="sub-title st-store" style="margin-top:2rem"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>店舗別ログイン（R-Login / FTP）</div>
+<div class="sub-title st-store" style="margin-top:2rem"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>店舗別ログイン（R-Login）</div>
 <div class="table-wrapper">
-<table><thead><tr><th>店舗</th><th>R-Login ID</th><th>R-Login PW</th><th>FTPユーザー名</th><th>FTP PW</th><th>次回更新</th></tr></thead>
-<tbody id="login-store-tbody">
-<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--text-light)">読み込み中...</td></tr>
+<table><thead><tr><th>店舗</th><th>ID</th><th>PW</th><th>次回更新</th></tr></thead>
+<tbody id="login-rms-tbody">
+<tr><td colspan="4" style="text-align:center;padding:2rem;color:var(--text-light)">読み込み中...</td></tr>
+</tbody></table>
+</div>
+
+<div class="sub-title st-store" style="margin-top:2rem"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>店舗別ログイン（FTP）</div>
+<div class="table-wrapper">
+<table><thead><tr><th>店舗</th><th>ユーザー名</th><th>PW</th><th>次回更新</th></tr></thead>
+<tbody id="login-sftp-tbody">
+<tr><td colspan="4" style="text-align:center;padding:2rem;color:var(--text-light)">読み込み中...</td></tr>
 </tbody></table>
 </div>
 
@@ -1379,7 +1387,12 @@ function renderStoreLogins(sl){
   if(sl.rms&&sl.rms.length){
     var h='';
     sl.rms.forEach(function(r){h+='<tr><td>'+escHtml(r.store)+'</td><td>'+escHtml(r.id)+'</td>'+pwCell(r.pw)+'<td>'+escHtml(r.note)+'</td></tr>'});
-    var t=document.getElementById('login-store-tbody');if(t)t.innerHTML=h;
+    var t=document.getElementById('login-rms-tbody');if(t)t.innerHTML=h;
+  }
+  if(sl.sftp&&sl.sftp.length){
+    var h='';
+    sl.sftp.forEach(function(r){h+='<tr><td>'+escHtml(r.store)+'</td><td>'+escHtml(r.id)+'</td>'+pwCell(r.pw)+'<td>'+escHtml(r.note)+'</td></tr>'});
+    var t=document.getElementById('login-sftp-tbody');if(t)t.innerHTML=h;
   }
   if(sl.coupon&&sl.coupon.length){
     var h='';
