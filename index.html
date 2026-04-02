@@ -153,6 +153,17 @@ tbody tr:nth-child(even){background:#fafbfc}
 .cc-no-link{padding:.8rem 1.2rem;font-size:.75rem;color:var(--text-light)}
 .cc-details{font-size:.78rem;color:var(--text-light);margin-top:.5rem}
 .cc-details span{display:inline-block;margin-right:1rem}
+/* Learning / YouTube cards */
+.yt-card{background:var(--card-bg);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--border);transition:var(--transition)}
+.yt-card:hover{box-shadow:0 6px 24px rgba(14,4,58,.12);transform:translateY(-2px)}
+.yt-thumb{position:relative;width:100%;padding-top:56.25%;background:#000}
+.yt-thumb iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+.yt-thumb img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;cursor:pointer}
+.yt-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;background:rgba(255,0,0,.85);border-radius:12px;display:flex;align-items:center;justify-content:center;pointer-events:none}
+.yt-play::after{content:'';border-style:solid;border-width:10px 0 10px 18px;border-color:transparent transparent transparent #fff}
+.yt-info{padding:.8rem 1rem}
+.yt-info .yt-title{font-weight:700;font-size:.88rem;color:var(--primary);margin-bottom:.3rem}
+.yt-info .yt-cat{display:inline-block;font-size:.7rem;padding:.15rem .5rem;border-radius:10px;background:var(--highlight);color:#fff;font-weight:600}
 /* Date badges */
 .date-badge{display:inline-block;padding:.2rem .6rem;border-radius:10px;font-size:.72rem;font-weight:600;white-space:nowrap}
 .date-badge.danger{background:#ffebee;color:#c62828}
@@ -397,6 +408,10 @@ body.admin-mode .admin-only{display:inline-flex}
 <a href="#" data-page="ai" onclick="switchPage('ai',this);return false">
 <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M12 2a2 2 0 012 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 017 7h1a2 2 0 110 4h-1a7 7 0 01-7 7H9a7 7 0 01-7-7H1a2 2 0 110-4h1a7 7 0 017-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 012-2z"/><circle cx="9" cy="13" r="1.25"/><circle cx="15" cy="13" r="1.25"/><path d="M10 17h4" stroke-linecap="round"/></svg></span>
 AIチャットボット
+</a>
+<a href="#" data-page="learning" onclick="switchPage('learning',this);return false">
+<span class="nav-icon"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></span>
+学習コンテンツ
 </a>
 </nav>
 <div class="admin-login-area" id="adminLoginArea">
@@ -1005,6 +1020,18 @@ AIチャットボット
 <div id="ai-cards-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.2rem;margin-bottom:2rem"></div>
 </div>
 
+<!-- ===== LEARNING ===== -->
+<div id="page-learning" class="page">
+<h2 class="page-title">学習コンテンツ</h2>
+<p style="color:var(--text-light);margin-bottom:1.5rem;font-size:.9rem">業務に役立つ学習動画・コンテンツ一覧です。</p>
+<div class="filter-tabs" id="learning-tabs">
+<span class="filter-tab active" onclick="filterLearning('all',this)">全て</span>
+</div>
+<div id="learning-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.2rem;margin-bottom:2rem">
+<div style="text-align:center;padding:2rem;color:var(--text-light)">読み込み中...</div>
+</div>
+</div>
+
 <!-- ===== LINKS ===== -->
 </div><!-- /content -->
 </div><!-- /main -->
@@ -1103,7 +1130,8 @@ function buildSearchIndex(){
     {id:'org',label:'組織図',keywords:['組織図','担当者','メンバー']},
     {id:'clients',label:'クライアント一覧',keywords:['クライアント','顧客']},
     {id:'logins',label:'各種リンク/ログイン',keywords:['ログイン','パスワード','アカウント','ID','PW','EC','ツール','RMS','SFTP']},
-    {id:'ai',label:'AIチャットボット',keywords:['AI','チャットボット','ChatGPT','NotebookLM']}
+    {id:'ai',label:'AIチャットボット',keywords:['AI','チャットボット','ChatGPT','NotebookLM']},
+    {id:'learning',label:'学習コンテンツ',keywords:['学習','動画','YouTube','研修']}
   ];
   pages.forEach(function(p){
     p.keywords.forEach(function(kw){
@@ -1269,7 +1297,7 @@ function applyDateBadges(){
 function tagClass(ch){ch=ch.toLowerCase();if(ch.indexOf('rakuten')>=0||ch.indexOf('楽天')>=0)return'tag-rakuten';if(ch.indexOf('amazon')>=0)return'tag-amazon';if(ch.indexOf('yahoo')>=0)return'tag-yahoo';if(ch.indexOf('line')>=0)return'tag-line';if(ch.indexOf('teps')>=0||ch.indexOf('広告')>=0||ch.indexOf('filezilla')>=0)return'tag-tool';return'tag-other'}
 function linkOrText(url,text){if(url)return'<a href="'+escHtml(url)+'" target="_blank" class="external-link">'+escHtml(text||url)+'</a>';return escHtml(text||'-')}
 
-var GAS_API = 'https://script.google.com/macros/s/AKfycbzdyZ5MiG4oeF5MFk7jhIpWtQviHZLs2GVBAONBxtyPrX8SnOAoJ0J4owH12un6B9iB/exec';
+var GAS_API = 'https://script.google.com/macros/s/AKfycbzTM3zrzVUN6ZNEV3KTY55E7oKGvXIRSi7JxgoQTD9AEJC-RpZn8hKJqC8HFoNZc1hG/exec';
 
 var _apiData={};
 var CACHE_TTL=1800000;
@@ -1317,6 +1345,7 @@ function loadAllData(){
       if(d.logins) renderLoginsFromApi(d.logins);
       if(d.manual) renderManualFromApi(d.manual);
       if(d.ai) renderAiFromApi(d.ai);
+      if(d.learning) renderLearning(d.learning);
       console.log('APIデータ読み込み完了');
       buildSearchIndex();
       injectCopyButtons();
@@ -1620,6 +1649,51 @@ function renderAiFromApi(ai){
   grid.innerHTML=html;
 }
 
+function getYouTubeId(url){
+  if(!url)return'';
+  var m=url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/);
+  return m?m[1]:'';
+}
+function renderLearning(items){
+  if(!items||!items.length)return;
+  var grid=document.getElementById('learning-grid');if(!grid)return;
+  var cats={};
+  items.forEach(function(i){if(i.category)cats[i.category]=true;});
+  var tabsEl=document.getElementById('learning-tabs');
+  if(tabsEl){
+    var tabHtml='<span class="filter-tab active" onclick="filterLearning(\'all\',this)">全て</span>';
+    Object.keys(cats).forEach(function(c){
+      tabHtml+='<span class="filter-tab" onclick="filterLearning(\''+escHtml(c)+'\',this)">'+escHtml(c)+'</span>';
+    });
+    tabsEl.innerHTML=tabHtml;
+  }
+  var html='';
+  items.forEach(function(i){
+    var vid=getYouTubeId(i.url);
+    var thumb=vid?'https://img.youtube.com/vi/'+vid+'/mqdefault.jpg':'';
+    html+='<div class="yt-card" data-cat="'+escHtml(i.category)+'">';
+    html+='<div class="yt-thumb">';
+    if(vid){
+      html+='<img src="'+thumb+'" alt="'+escHtml(i.title)+'" onclick="this.parentElement.innerHTML=\'<iframe src=\\\'https://www.youtube.com/embed/'+vid+'?autoplay=1\\\' allowfullscreen></iframe>\'">';
+      html+='<div class="yt-play"></div>';
+    }
+    html+='</div>';
+    html+='<div class="yt-info">';
+    if(i.category)html+='<span class="yt-cat">'+escHtml(i.category)+'</span> ';
+    html+='<div class="yt-title">'+escHtml(i.title)+'</div>';
+    if(i.description)html+='<div style="font-size:.78rem;color:var(--text-light);margin-top:.3rem">'+escHtml(i.description)+'</div>';
+    html+='</div></div>';
+  });
+  grid.innerHTML=html;
+}
+function filterLearning(cat,btn){
+  document.querySelectorAll('#learning-tabs .filter-tab').forEach(function(t){t.classList.remove('active')});
+  if(btn)btn.classList.add('active');
+  document.querySelectorAll('.yt-card').forEach(function(c){
+    c.style.display=(cat==='all'||c.dataset.cat===cat)?'':'none';
+  });
+}
+
 document.addEventListener('DOMContentLoaded',function(){injectCopyButtons();applyDateBadges();loadAllData();adminCheckSession()});
 </script>
 
@@ -1696,7 +1770,7 @@ var SHEET_MAP={
   'team-table-tbody':{sheet:'案件担当一覧'}
 };
 
-var ALL_SHEETS=['お知らせ','会社情報','アカウント情報','店舗別ログイン','個別ログイン','クライアント一覧','共有ドライブ','案件担当一覧','組織図','業務マニュアル','AIチャットボット','リンク集'];
+var ALL_SHEETS=['お知らせ','会社情報','アカウント情報','店舗別ログイン','個別ログイン','クライアント一覧','共有ドライブ','案件担当一覧','組織図','業務マニュアル','AIチャットボット','学習コンテンツ','リンク集'];
 
 function adminOpenLoginModal(){
   document.getElementById('adminLoginModal').classList.add('open');
