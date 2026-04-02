@@ -1242,19 +1242,34 @@ function formatDateBadge(dateStr){
   else{cls='safe';label+=' (あと'+diff+'日)';}
   return '<span class="date-badge '+cls+'">'+label+'</span>';
 }
+function normalizeDate(s){
+  if(!s)return s;
+  // "Sun Apr 20 2025 00:00:00 GMT+0900 (日本標準時)" → "2025/4/20"
+  var gmt=s.match(/^\w{3}\s+(\w{3})\s+(\d{1,2})\s+(\d{4})/);
+  if(gmt){
+    var months={Jan:1,Feb:2,Mar:3,Apr:4,May:5,Jun:6,Jul:7,Aug:8,Sep:9,Oct:10,Nov:11,Dec:12};
+    return gmt[3]+'/'+(months[gmt[1]]||1)+'/'+gmt[2];
+  }
+  // "2025-04-20T..." → "2025/4/20"
+  var iso=s.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if(iso)return iso[1]+'/'+parseInt(iso[2])+'/'+parseInt(iso[3]);
+  return s;
+}
 function applyDateBadges(){
   document.querySelectorAll('table tbody tr').forEach(function(tr){
     var cells=tr.querySelectorAll('td');
     cells.forEach(function(td){
       var t=td.textContent.trim();
-      if(/^\d{4}\/\d{1,2}\/\d{1,2}$/.test(t)){td.innerHTML=formatDateBadge(t);}
+      var n=normalizeDate(t);
+      if(n!==t&&/^\d{4}\/\d{1,2}\/\d{1,2}$/.test(n)){td.innerHTML=formatDateBadge(n);}
+      else if(/^\d{4}\/\d{1,2}\/\d{1,2}$/.test(t)){td.innerHTML=formatDateBadge(t);}
     });
   });
 }
 function tagClass(ch){ch=ch.toLowerCase();if(ch.indexOf('rakuten')>=0||ch.indexOf('楽天')>=0)return'tag-rakuten';if(ch.indexOf('amazon')>=0)return'tag-amazon';if(ch.indexOf('yahoo')>=0)return'tag-yahoo';if(ch.indexOf('line')>=0)return'tag-line';if(ch.indexOf('teps')>=0||ch.indexOf('広告')>=0||ch.indexOf('filezilla')>=0)return'tag-tool';return'tag-other'}
 function linkOrText(url,text){if(url)return'<a href="'+escHtml(url)+'" target="_blank" class="external-link">'+escHtml(text||url)+'</a>';return escHtml(text||'-')}
 
-var GAS_API = 'https://script.google.com/macros/s/AKfycbwriHBkMv6-UeCgbHptNUiKGhcd_cCtdd-aA2PsS15JEcS1uXWJvIpXuvVYMAc1KqRD/exec';
+var GAS_API = 'https://script.google.com/macros/s/AKfycbzdyZ5MiG4oeF5MFk7jhIpWtQviHZLs2GVBAONBxtyPrX8SnOAoJ0J4owH12un6B9iB/exec';
 
 var _apiData={};
 var CACHE_TTL=1800000;
