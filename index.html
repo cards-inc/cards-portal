@@ -179,8 +179,9 @@ tbody tr:nth-child(even){background:#fafbfc}
 
 /* Filter tabs */
 .filter-tabs{display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
-.filter-tab{padding:.4rem 1rem;border:1px solid var(--border);border-radius:20px;font-size:.8rem;cursor:pointer;transition:all .2s;background:#fff}
-.filter-tab:hover,.filter-tab.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.filter-tab{padding:.45rem 1.1rem;border:1px solid var(--border);border-radius:20px;font-size:.8rem;cursor:pointer;transition:all .2s;background:#fff;display:inline-flex;align-items:center;gap:.4rem}
+.filter-tab:hover,.filter-tab.active{background:linear-gradient(135deg,#0E043A,#6C3CE0);color:#fff;border-color:#0E043A;box-shadow:0 2px 8px rgba(108,60,224,.25)}
+.filter-tab .tab-icon{width:14px;height:14px;flex-shrink:0}
 
 /* Sub sections */
 .sub-section{margin-top:1.5rem}
@@ -521,11 +522,11 @@ AIチャットボット
 <h2 class="page-title">各種リンク/ログイン</h2>
 
 <div class="filter-tabs" style="margin-bottom:1.5rem">
-<span class="filter-tab active" onclick="filterLoginSection('all',this)">全て表示</span>
-<span class="filter-tab" onclick="filterLoginSection('ec',this)">ECプラットフォーム</span>
-<span class="filter-tab" onclick="filterLoginSection('tool',this)">ツール</span>
-<span class="filter-tab" onclick="filterLoginSection('store',this)">店舗別ログイン</span>
-<span class="filter-tab" onclick="filterLoginSection('individual',this)">個別ログイン</span>
+<span class="filter-tab active" onclick="filterLoginSection('all',this)"><svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>すべて</span>
+<span class="filter-tab" onclick="filterLoginSection('ec',this)"><svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>EC</span>
+<span class="filter-tab" onclick="filterLoginSection('tool',this)"><svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>ツール</span>
+<span class="filter-tab" onclick="filterLoginSection('store',this)"><svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>店舗別</span>
+<span class="filter-tab" onclick="filterLoginSection('individual',this)"><svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>個別</span>
 </div>
 
 <div class="login-section" data-login-cat="ec">
