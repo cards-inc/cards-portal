@@ -556,7 +556,7 @@ AIチャットボット
 </div>
 
 <div class="login-section" data-login-cat="store">
-<div class="sub-title st-store" style="margin-top:2rem"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>店舗別ログイン（R-Login / FTP）<a href="https://docs.google.com/spreadsheets/d/1aBUwoiPgbuYlMlc0dvo0QcvtiYqposelg54himEGfJs/edit?gid=0#gid=0" target="_blank" class="external-link">元データ</a></div>
+<div class="sub-title st-store" style="margin-top:2rem"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>店舗別ログイン（R-Login / FTP）</div>
 <div class="table-wrapper">
 <table><thead><tr><th>店舗</th><th>R-Login ID</th><th>R-Login PW</th><th>FTPユーザー名</th><th>FTP PW</th><th>次回更新</th></tr></thead>
 <tbody id="login-store-tbody">
@@ -594,6 +594,17 @@ AIチャットボット
 </tbody></table>
 </div>
 </div>
+
+<div class="sub-section">
+<div class="sub-title st-boss"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>受注データ</div>
+<div class="table-wrapper">
+<table><thead><tr><th>店舗</th><th>ID</th><th>PW</th></tr></thead>
+<tbody id="login-orders-tbody">
+<tr><td colspan="3" style="text-align:center;padding:2rem;color:var(--text-light)">読み込み中...</td></tr>
+</tbody></table>
+</div>
+</div>
+
 </div><!-- /login-section store -->
 
 </div><!-- /page-logins -->
@@ -1286,7 +1297,7 @@ function cachedFetch(url,key){
 function loadAllData(){
   var loading='<tr><td colspan="8" style="text-align:center;padding:2rem;color:var(--text-light)">読み込み中...</td></tr>';
   var loadingDiv='<div style="text-align:center;padding:2rem;color:var(--text-light)">読み込み中...</div>';
-  ['login-ec-tbody','login-tool-tbody','login-store-tbody','login-coupon-tbody','login-boss-tbody','login-teps-tbody','login-individual-tbody'].forEach(function(id){var el=document.getElementById(id);if(el)el.innerHTML=loading;});
+  ['login-ec-tbody','login-tool-tbody','login-store-tbody','login-coupon-tbody','login-boss-tbody','login-teps-tbody','login-orders-tbody','login-individual-tbody'].forEach(function(id){var el=document.getElementById(id);if(el)el.innerHTML=loading;});
   var el;
   el=document.getElementById('clientGrid');if(el)el.innerHTML=loadingDiv;
   /* org-tree-container is static HTML with Slack photos - do not overwrite */
@@ -1389,6 +1400,11 @@ function renderStoreLogins(sl){
     var h='';
     sl.teps.forEach(function(r){h+='<tr><td>'+escHtml(r.store)+'</td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">'+escHtml(r.id)+'</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td class="pw-cell"><span class="pw-mask">******</span><span class="pw-real">'+escHtml(r.pw)+'</span><span class="pw-toggle"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></span></td><td>'+escHtml(r.note)+'</td><td>'+escHtml(r.updated)+'</td></tr>'});
     var t=document.getElementById('login-teps-tbody');if(t)t.innerHTML=h;
+  }
+  if(sl.logins&&sl.logins.length){
+    var h='';
+    sl.logins.forEach(function(r){h+='<tr><td>'+escHtml(r.store)+'</td><td>'+escHtml(r.id)+'</td>'+pwCell(r.pw)+'</tr>'});
+    var t=document.getElementById('login-orders-tbody');if(t)t.innerHTML=h;
   }
 }
 
