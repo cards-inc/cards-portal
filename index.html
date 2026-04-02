@@ -395,7 +395,7 @@ body.admin-mode .admin-only{display:inline-flex}
 </a>
 <a href="#" data-page="clients" onclick="switchPage('clients',this);return false">
 <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></span>
-管理シート一覧
+楽天管理シート
 </a>
 <a href="#" data-page="logins" onclick="switchPage('logins',this);return false">
 <span class="nav-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></span>
@@ -663,7 +663,7 @@ AIチャットボット
 
 <!-- ===== CLIENTS ===== -->
 <div id="page-clients" class="page">
-<h2 class="page-title">管理シート一覧</h2>
+<h2 class="page-title">楽天管理シート</h2>
 <div class="filter-tabs">
 <span class="filter-tab active" onclick="filterClients('all',this)">全て</span>
 <span class="filter-tab" onclick="filterClients('furusato',this)">ふるさと納税</span>
@@ -1140,7 +1140,7 @@ function buildSearchIndex(){
     {id:'manual',label:'業務マニュアル',keywords:['マニュアル','手順書','業務']},
     {id:'task',label:'タスク管理',keywords:['タスク','進捗','ダッシュボード','管理']},
     {id:'org',label:'組織図',keywords:['組織図','担当者','メンバー']},
-    {id:'clients',label:'管理シート一覧',keywords:['クライアント','顧客']},
+    {id:'clients',label:'楽天管理シート',keywords:['クライアント','顧客']},
     {id:'logins',label:'各種リンク/ログイン',keywords:['ログイン','パスワード','アカウント','ID','PW','EC','ツール','RMS','SFTP']},
     {id:'learning',label:'学習コンテンツ',keywords:['学習','動画','YouTube','研修']},
     {id:'ai',label:'AIチャットボット',keywords:['AI','チャットボット','Gemini','CARDS AI']}
@@ -1309,7 +1309,7 @@ function applyDateBadges(){
 function tagClass(ch){ch=ch.toLowerCase();if(ch.indexOf('rakuten')>=0||ch.indexOf('楽天')>=0)return'tag-rakuten';if(ch.indexOf('amazon')>=0)return'tag-amazon';if(ch.indexOf('yahoo')>=0)return'tag-yahoo';if(ch.indexOf('line')>=0)return'tag-line';if(ch.indexOf('teps')>=0||ch.indexOf('広告')>=0||ch.indexOf('filezilla')>=0)return'tag-tool';return'tag-other'}
 function linkOrText(url,text){if(url)return'<a href="'+escHtml(url)+'" target="_blank" class="external-link">'+escHtml(text||url)+'</a>';return escHtml(text||'-')}
 
-var GAS_API = 'https://script.google.com/macros/s/AKfycbyyUOzrQtvfLpXqH0elTJczTJcqxHOB0Z1M2iguDneQQuLPXf3kp6l7k_R9PO8T8Zdy/exec';
+var GAS_API = 'https://script.google.com/macros/s/AKfycbzDygkehCVCA8YeFf3vyXunww08FRDhTk3u8TepOYwptjSX2UqNq16CYtsHdyajjcQ2/exec';
 
 var _apiData={};
 var CACHE_TTL=1800000;
@@ -1792,7 +1792,7 @@ var SHEET_MAP={
   'team-table-tbody':{sheet:'案件担当一覧'}
 };
 
-var ALL_SHEETS=['お知らせ','会社情報','アカウント情報','店舗別ログイン','個別ログイン','管理シート一覧','共有ドライブ','案件担当一覧','組織図','業務マニュアル','AIチャットボット','学習コンテンツ','リンク集'];
+var ALL_SHEETS=['お知らせ','会社情報','アカウント情報','店舗別ログイン','個別ログイン','楽天管理シート','共有ドライブ','案件担当一覧','組織図','業務マニュアル','AIチャットボット','学習コンテンツ','リンク集'];
 
 function adminOpenLoginModal(){
   document.getElementById('adminLoginModal').classList.add('open');
@@ -2028,7 +2028,7 @@ function adminInjectButtons(){
   var mappings=[
     {page:'page-home',sheets:['お知らせ','会社情報']},
     {page:'page-logins',sheets:['アカウント情報','店舗別ログイン','個別ログイン']},
-    {page:'page-clients',sheets:['管理シート一覧','共有ドライブ','案件担当一覧']},
+    {page:'page-clients',sheets:['楽天管理シート','共有ドライブ','案件担当一覧']},
     {page:'page-org',sheets:['組織図','案件担当一覧']},
     {page:'page-manual',sheets:['業務マニュアル']},
     {page:'page-ai',sheets:['AIチャットボット']},
