@@ -395,7 +395,7 @@ body.admin-mode .admin-only{display:inline-flex}
 </a>
 <a href="#" data-page="clients" onclick="switchPage('clients',this);return false">
 <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></span>
-クライアント一覧
+管理シート一覧
 </a>
 <a href="#" data-page="logins" onclick="switchPage('logins',this);return false">
 <span class="nav-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></span>
@@ -663,7 +663,7 @@ AIチャットボット
 
 <!-- ===== CLIENTS ===== -->
 <div id="page-clients" class="page">
-<h2 class="page-title">クライアント一覧</h2>
+<h2 class="page-title">管理シート一覧</h2>
 <div class="filter-tabs">
 <span class="filter-tab active" onclick="filterClients('all',this)">全て</span>
 <span class="filter-tab" onclick="filterClients('furusato',this)">ふるさと納税</span>
@@ -1136,7 +1136,7 @@ function buildSearchIndex(){
     {id:'manual',label:'業務マニュアル',keywords:['マニュアル','手順書','業務']},
     {id:'task',label:'タスク管理',keywords:['タスク','進捗','ダッシュボード','管理']},
     {id:'org',label:'組織図',keywords:['組織図','担当者','メンバー']},
-    {id:'clients',label:'クライアント一覧',keywords:['クライアント','顧客']},
+    {id:'clients',label:'管理シート一覧',keywords:['クライアント','顧客']},
     {id:'logins',label:'各種リンク/ログイン',keywords:['ログイン','パスワード','アカウント','ID','PW','EC','ツール','RMS','SFTP']},
     {id:'learning',label:'学習コンテンツ',keywords:['学習','動画','YouTube','研修']},
     {id:'ai',label:'AIチャットボット',keywords:['AI','チャットボット','Gemini','CARDS AI']}
@@ -1305,7 +1305,7 @@ function applyDateBadges(){
 function tagClass(ch){ch=ch.toLowerCase();if(ch.indexOf('rakuten')>=0||ch.indexOf('楽天')>=0)return'tag-rakuten';if(ch.indexOf('amazon')>=0)return'tag-amazon';if(ch.indexOf('yahoo')>=0)return'tag-yahoo';if(ch.indexOf('line')>=0)return'tag-line';if(ch.indexOf('teps')>=0||ch.indexOf('広告')>=0||ch.indexOf('filezilla')>=0)return'tag-tool';return'tag-other'}
 function linkOrText(url,text){if(url)return'<a href="'+escHtml(url)+'" target="_blank" class="external-link">'+escHtml(text||url)+'</a>';return escHtml(text||'-')}
 
-var GAS_API = 'https://script.google.com/macros/s/AKfycbzTM3zrzVUN6ZNEV3KTY55E7oKGvXIRSi7JxgoQTD9AEJC-RpZn8hKJqC8HFoNZc1hG/exec';
+var GAS_API = 'https://script.google.com/macros/s/AKfycbyyUOzrQtvfLpXqH0elTJczTJcqxHOB0Z1M2iguDneQQuLPXf3kp6l7k_R9PO8T8Zdy/exec';
 
 var _apiData={};
 var CACHE_TTL=1800000;
@@ -1665,24 +1665,15 @@ function renderLearning(items){
   var html='';
   items.forEach(function(i){
     var vid=getYouTubeId(i.url);
+    if(!vid) return;
     html+='<div class="yt-card" data-cat="'+escHtml(i.category)+'">';
-    if(vid){
-      html+='<div class="yt-thumb">';
-      html+='<img src="https://img.youtube.com/vi/'+vid+'/mqdefault.jpg" alt="'+escHtml(i.title)+'" onclick="this.parentElement.innerHTML=\'<iframe src=\\\'https://www.youtube.com/embed/'+vid+'?autoplay=1\\\' allowfullscreen></iframe>\'">';
-      html+='<div class="yt-play"></div>';
-      html+='</div>';
-    } else {
-      html+='<div class="yt-thumb" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a1a2e,#16213e);cursor:pointer" onclick="window.open(\''+escHtml(i.url)+'\',\'_blank\')">';
-      html+='<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>';
-      html+='</div>';
-    }
+    html+='<div class="yt-thumb">';
+    html+='<img src="https://img.youtube.com/vi/'+vid+'/mqdefault.jpg" alt="'+escHtml(i.title)+'" onclick="this.parentElement.innerHTML=\'<iframe src=\\\'https://www.youtube.com/embed/'+vid+'?autoplay=1\\\' allowfullscreen></iframe>\'">';
+    html+='<div class="yt-play"></div>';
+    html+='</div>';
     html+='<div class="yt-info">';
     if(i.category)html+='<span class="yt-cat">'+escHtml(i.category)+'</span> ';
-    if(vid){
-      html+='<div class="yt-title">'+escHtml(i.title)+'</div>';
-    } else {
-      html+='<div class="yt-title"><a href="'+escHtml(i.url)+'" target="_blank" style="color:inherit;text-decoration:none">'+escHtml(i.title)+' <svg style="width:12px;height:12px;vertical-align:middle;opacity:.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div>';
-    }
+    html+='<div class="yt-title">'+escHtml(i.title)+'</div>';
     if(i.description)html+='<div style="font-size:.78rem;color:var(--text-light);margin-top:.3rem">'+escHtml(i.description)+'</div>';
     html+='</div></div>';
   });
@@ -1772,7 +1763,7 @@ var SHEET_MAP={
   'team-table-tbody':{sheet:'案件担当一覧'}
 };
 
-var ALL_SHEETS=['お知らせ','会社情報','アカウント情報','店舗別ログイン','個別ログイン','クライアント一覧','共有ドライブ','案件担当一覧','組織図','業務マニュアル','AIチャットボット','学習コンテンツ','リンク集'];
+var ALL_SHEETS=['お知らせ','会社情報','アカウント情報','店舗別ログイン','個別ログイン','管理シート一覧','共有ドライブ','案件担当一覧','組織図','業務マニュアル','AIチャットボット','学習コンテンツ','リンク集'];
 
 function adminOpenLoginModal(){
   document.getElementById('adminLoginModal').classList.add('open');
@@ -2008,7 +1999,7 @@ function adminInjectButtons(){
   var mappings=[
     {page:'page-home',sheets:['お知らせ','会社情報']},
     {page:'page-logins',sheets:['アカウント情報','店舗別ログイン','個別ログイン']},
-    {page:'page-clients',sheets:['クライアント一覧','共有ドライブ','案件担当一覧']},
+    {page:'page-clients',sheets:['管理シート一覧','共有ドライブ','案件担当一覧']},
     {page:'page-org',sheets:['組織図','案件担当一覧']},
     {page:'page-manual',sheets:['業務マニュアル']},
     {page:'page-ai',sheets:['AIチャットボット']},
