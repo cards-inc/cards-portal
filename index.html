@@ -359,7 +359,7 @@ body.admin-mode .admin-only{display:inline-flex}
 
 <!-- Sidebar -->
 <aside class="sidebar" id="sidebar">
-<div class="sidebar-header" style="cursor:pointer" onclick="try{Object.keys(sessionStorage).forEach(function(k){if(k.indexOf('portal_')===0)sessionStorage.removeItem(k)})}catch(e){}location.reload()">
+<div class="sidebar-header" style="cursor:pointer" onclick="try{Object.keys(localStorage).forEach(function(k){if(k.indexOf('portal_')===0)localStorage.removeItem(k)});Object.keys(sessionStorage).forEach(function(k){if(k.indexOf('portal_')===0)sessionStorage.removeItem(k)})}catch(e){}location.reload()">
 <div style="display:flex;align-items:baseline;gap:.5rem">
 <img src="https://cd-s.co.jp/wp-content/themes/%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BEcards/assets/images/common/logo.webp" alt="CARDS" style="height:28px;max-width:140px;object-fit:contain;filter:brightness(0) invert(1);display:block">
 <span style="font-size:1.3rem;font-family:'Arial Black',Impact,'Helvetica Neue',sans-serif;font-weight:900;letter-spacing:.02em;color:#fff">Portal</span>
@@ -1257,14 +1257,22 @@ function linkOrText(url,text){if(url)return'<a href="'+escHtml(url)+'" target="_
 var GAS_API = 'https://script.google.com/macros/s/AKfycbwriHBkMv6-UeCgbHptNUiKGhcd_cCtdd-aA2PsS15JEcS1uXWJvIpXuvVYMAc1KqRD/exec';
 
 var _apiData={};
-var CACHE_TTL=600000;
+var CACHE_TTL=1800000;
 function cachedFetch(url,key){
   try{
-    var c=sessionStorage.getItem('portal_'+key);
-    if(c){var p=JSON.parse(c);if(Date.now()-p.t<CACHE_TTL){return Promise.resolve(p.d);}}
+    var c=localStorage.getItem('portal_'+key);
+    if(c){
+      var p=JSON.parse(c);
+      if(Date.now()-p.t<CACHE_TTL){return Promise.resolve(p.d);}
+      // stale-while-revalidate: 古いデータを即返し、裏で更新
+      fetch(url).then(function(r){return r.json()}).then(function(d){
+        try{localStorage.setItem('portal_'+key,JSON.stringify({t:Date.now(),d:d}));}catch(e){}
+      }).catch(function(){});
+      return Promise.resolve(p.d);
+    }
   }catch(e){}
   return fetch(url).then(function(r){return r.json()}).then(function(d){
-    try{sessionStorage.setItem('portal_'+key,JSON.stringify({t:Date.now(),d:d}));}catch(e){}
+    try{localStorage.setItem('portal_'+key,JSON.stringify({t:Date.now(),d:d}));}catch(e){}
     return d;
   });
 }
