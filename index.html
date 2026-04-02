@@ -410,7 +410,7 @@ body.admin-mode .admin-only{display:inline-flex}
 組織図
 </a>
 <a href="#" data-page="clients" onclick="switchPage('clients',this);return false">
-<span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></span>
+<span class="nav-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>
 楽天管理シート
 </a>
 <a href="#" data-page="logins" onclick="switchPage('logins',this);return false">
@@ -570,7 +570,7 @@ AIチャットボット
 <tbody id="login-coupon-tbody">
 <tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--text-light)">読み込み中...</td></tr>
 </tbody></table>
-<p style="padding:.5rem 1.5rem 1rem;font-size:.8rem;color:var(--text-light)">Login: <a href="https://coupon.ultra-cloud.com/login" target="_blank" class="external-link">coupon.ultra-cloud.com</a></p>
+<p style="padding:.5rem 1.5rem 1rem;font-size:.85rem"><a href="https://coupon.ultra-cloud.com/login" target="_blank" style="display:inline-flex;align-items:center;gap:.4rem;background:linear-gradient(135deg,#6C3CE0,#8B5CF6);color:#fff;padding:.4rem 1rem;border-radius:6px;text-decoration:none;font-weight:600;font-size:.8rem"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>クーポン管理画面にログイン</a></p>
 </div>
 </div>
 
@@ -1492,7 +1492,7 @@ function renderTeamCards(team){
   var tbody=document.getElementById('team-table-tbody');if(!tbody)return;
   var html='';var lastSection='';
   var sectionStyles={
-    'ふるさと納税案件':'background:linear-gradient(135deg,#1a73e8,#4a9afa);color:#fff',
+    'ふるさと納税案件':'background:linear-gradient(135deg,#c0392b,#e74c3c);color:#fff',
     '通常案件':'background:linear-gradient(135deg,#16a085,#1abc9c);color:#fff',
     'Amazon案件':'background:linear-gradient(135deg,#e67e22,#f39c12);color:#fff',
     'BP案件':'background:linear-gradient(135deg,#8e44ad,#9b59b6);color:#fff'
