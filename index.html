@@ -1049,6 +1049,8 @@ function injectCopyButtons(){
   document.querySelectorAll('.pw-cell').forEach(function(pwTd){
     var idTd=pwTd.previousElementSibling;
     if(!idTd||idTd.classList.contains('pw-cell')||idTd.querySelector('.copy-btn'))return;
+    var storeSection=pwTd.closest('[id^="login-store-"],#login-store-tbody,#login-coupon-tbody,#login-boss-tbody,#login-teps-tbody');
+    if(storeSection)return;
     var text=idTd.textContent.trim();if(!text||text==='-'||text==='******')return;
     idTd.classList.add('id-cell');
     var btn=document.createElement('button');btn.className='copy-btn';btn.title='IDをコピー';btn.innerHTML=copySvg;
