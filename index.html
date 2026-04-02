@@ -665,7 +665,6 @@ AIチャットボット
 <span class="filter-tab" onclick="filterClients('active',this)">通常案件</span>
 <span class="filter-tab" onclick="filterClients('bp',this)">BP案件</span>
 <span class="filter-tab" onclick="filterClients('open',this)">OPEN案件</span>
-<span class="filter-tab" onclick="filterClients('ended',this)">終了案件</span>
 </div>
 <div class="client-grid" id="clientGrid">読み込み中...</div>
 </div>
@@ -1410,7 +1409,8 @@ function renderClients(clients,driveData){
   var html='';
   clients.forEach(function(c){
     var cat=c.category||'';
-    var ended=cat==='ended'?' ended':'';
+    if(cat==='ended')return;
+    var ended='';
     var dr=driveMap[c.name]||driveMap[c.store]||{};
     var mainUrl=dr.sheetUrl||c.sheetUrl||dr.driveUrl||c.driveUrl||'';
     html+='<div class="client-card'+ended+'" data-category="'+escHtml(cat)+'"'+(mainUrl?' onclick="window.open(\''+escHtml(mainUrl).replace(/'/g,"\\'")+'\',\'_blank\')"':'')+' >';
