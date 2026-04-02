@@ -1317,7 +1317,7 @@ function applyDateBadges(){
 function tagClass(ch){ch=ch.toLowerCase();if(ch.indexOf('rakuten')>=0||ch.indexOf('楽天')>=0)return'tag-rakuten';if(ch.indexOf('amazon')>=0)return'tag-amazon';if(ch.indexOf('yahoo')>=0)return'tag-yahoo';if(ch.indexOf('line')>=0)return'tag-line';if(ch.indexOf('teps')>=0||ch.indexOf('広告')>=0||ch.indexOf('filezilla')>=0)return'tag-tool';return'tag-other'}
 function linkOrText(url,text){if(url)return'<a href="'+escHtml(url)+'" target="_blank" class="external-link">'+escHtml(text||url)+'</a>';return escHtml(text||'-')}
 
-var GAS_API = 'https://script.google.com/macros/s/AKfycbzDygkehCVCA8YeFf3vyXunww08FRDhTk3u8TepOYwptjSX2UqNq16CYtsHdyajjcQ2/exec';
+var GAS_API = 'https://script.google.com/macros/s/AKfycbwBLSPd7FI9tj986tXAWU_IN8w-1VRmPAg1d986dytJXSDn4v8_U8gErIi3kmYWLdqJ/exec';
 
 var _apiData={};
 var CACHE_TTL=1800000;
@@ -1480,9 +1480,10 @@ function renderClients(clients,driveData){
     var links=[];
     if(dr.sheetUrl||c.sheetUrl)links.push('<a href="'+escHtml(dr.sheetUrl||c.sheetUrl)+'" target="_blank" class="cc-link-btn primary" onclick="event.stopPropagation()">&#128196; シート</a>');
     if(dr.driveUrl||c.driveUrl)links.push('<a href="'+escHtml(dr.driveUrl||c.driveUrl)+'" target="_blank" class="cc-link-btn" onclick="event.stopPropagation()">&#128193; ドライブ</a>');
-    if(dr.seoSheet)links.push('<a href="'+escHtml(dr.seoSheet)+'" target="_blank" class="cc-link-btn" onclick="event.stopPropagation()">&#128200; SEO</a>');
     if(dr.creativeSheet)links.push('<a href="'+escHtml(dr.creativeSheet)+'" target="_blank" class="cc-link-btn" onclick="event.stopPropagation()">&#127912; クリエイティブ</a>');
     if(dr.canva)links.push('<a href="'+escHtml(dr.canva)+'" target="_blank" class="cc-link-btn" onclick="event.stopPropagation()">&#127752; Canva</a>');
+    if(c.passwordUrl)links.push('<a href="'+escHtml(c.passwordUrl)+'" target="_blank" class="cc-link-btn" onclick="event.stopPropagation()">&#128272; パスワード</a>');
+    if(c.seoUrl||dr.seoSheet)links.push('<a href="'+escHtml(c.seoUrl||dr.seoSheet)+'" target="_blank" class="cc-link-btn" onclick="event.stopPropagation()">&#128200; SEO</a>');
     if(c.taskSheet||dr.taskSheet)links.push('<a href="'+escHtml(c.taskSheet||dr.taskSheet)+'" target="_blank" class="cc-link-btn" onclick="event.stopPropagation()">&#9745; タスク</a>');
     if(c.other||dr.other)links.push('<a href="'+escHtml(c.other||dr.other)+'" target="_blank" class="cc-link-btn" onclick="event.stopPropagation()">&#128279; その他</a>');
     if(links.length){html+='<div class="cc-links-area">'+links.join('')+'</div>';}
