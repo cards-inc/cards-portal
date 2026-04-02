@@ -1354,7 +1354,7 @@ function renderAccounts(acc){
       html+='<td>'+linkOrText(a.loginUrl,a.loginText)+'</td>';
       html+='<td>'+escHtml(a.id)+'</td>';
       html+=pwCell(a.pw);
-      var noteHtml=escHtml(a.note).replace(/(Authenticator\u306f\u3053\u3061\u3089)\s+(otpauth:\/\/[^\s\/]+)/g,'<a href="$2" class="external-link">$1</a>');
+      var noteHtml=escHtml(a.note).replace(/Authenticatorはこちら/g,'<a href="otpauth://totp/Amazon%3Aconcierge.cards%40gmail.com?secret=WGHM37J3GR65FJACIDVG7KXJHMZVSOTFNTTQTUZVQ3UJNH4IY6UA&issuer=Amazon" class="external-link">Authenticatorはこちら</a>');
       html+='<td>'+noteHtml+'</td></tr>';
     });
     var ecTable=document.getElementById('login-ec-tbody');
@@ -1512,9 +1512,9 @@ function renderTeamCards(team){
   var html='';var lastSection='';
   var sectionStyles={
     'ふるさと納税':'background:#e74c3c;color:#fff;font-size:.95rem;font-weight:800;padding:.8rem 1.2rem',
-    '通常案件':'background:linear-gradient(135deg,#16a085,#1abc9c);color:#fff',
-    'Amazon案件':'background:linear-gradient(135deg,#e67e22,#f39c12);color:#fff',
-    'BP案件':'background:linear-gradient(135deg,#8e44ad,#9b59b6);color:#fff'
+    '通常案件':'background:#bf0000;color:#fff',
+    'Amazon案件':'background:#ff9900;color:#111',
+    'BP案件':'background:#fdcb6e;color:#333'
   };
   team.forEach(function(t){
     if(t.section&&t.section!==lastSection){
