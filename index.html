@@ -1344,7 +1344,8 @@ function renderAccounts(acc){
       html+='<td>'+linkOrText(a.loginUrl,a.loginText)+'</td>';
       html+='<td>'+escHtml(a.id)+'</td>';
       html+=pwCell(a.pw);
-      html+='<td>'+escHtml(a.note)+'</td></tr>';
+      var noteHtml=escHtml(a.note).replace(/(Authenticator\u306f\u3053\u3061\u3089)\s+(otpauth:\/\/[^\s\/]+)/g,'<a href="$2" class="external-link">$1</a>');
+      html+='<td>'+noteHtml+'</td></tr>';
     });
     var ecTable=document.getElementById('login-ec-tbody');
     if(ecTable)ecTable.innerHTML=html;
