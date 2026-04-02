@@ -471,16 +471,6 @@ AIチャットボット
 </div>
 </div>
 
-<div class="home-card">
-<div class="home-card-header">クライアント数</div>
-<div class="home-card-body">
-<div class="stat-grid" id="client-count-grid">
-<div class="stat-item"><div class="stat-num" id="count-rakuten">-</div><div class="stat-label">楽天</div></div>
-<div class="stat-item"><div class="stat-num" id="count-amazon">-</div><div class="stat-label">Amazon</div></div>
-<div class="stat-item"><div class="stat-num" id="count-yahoo">-</div><div class="stat-label">Yahoo!</div></div>
-</div>
-</div>
-</div>
 </div>
 
 <!-- Quick Access -->
@@ -1028,7 +1018,7 @@ AIチャットボット
 <!-- ===== AI CHATBOT ===== -->
 <div id="page-ai" class="page">
 <h2 class="page-title">AIチャットボット</h2>
-<p style="color:var(--text-light);margin-bottom:1.5rem;font-size:.9rem">CARDS専用AIアシスタントです。業務に関する質問や相談にお使いください。</p>
+<p style="color:var(--text-light);margin-bottom:1.5rem;font-size:.9rem">CARDSの業務知識を学習したAIアシスタントです。EC運用・広告運用・社内ルールなど、業務に関する質問や相談にご活用ください。Google Geminiベースで動作します。</p>
 <div style="display:flex;justify-content:center;margin-top:2rem">
 <a href="https://gemini.google.com/gem/1XVfbeFS2DXz_Y4Ya_RReJlow_pM2p-8X?usp=sharing" target="_blank" style="display:flex;align-items:center;gap:1rem;padding:1.5rem 2.5rem;background:linear-gradient(135deg,#4285f4,#9b72cb,#d96570);border-radius:16px;color:#fff;text-decoration:none;font-size:1.1rem;font-weight:700;box-shadow:0 4px 20px rgba(66,133,244,.3);transition:transform .2s,box-shadow .2s" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 28px rgba(66,133,244,.4)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 20px rgba(66,133,244,.3)'">
 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
@@ -1343,7 +1333,7 @@ function loadAllData(){
       if(d.accounts) renderAccounts(d.accounts);
       if(d.storeLogins) renderStoreLogins(d.storeLogins);
       if(d.clients){ renderClients(d.clients,d.drive); }
-      if(d.team){ renderTeamCards(d.team); renderClientCounts(d.team); }
+      if(d.team){ renderTeamCards(d.team); }
       if(d.news) renderNews(d.news);
       if(d.company) renderCompany(d.company);
       if(d.org) renderOrg(d.org);
@@ -1430,22 +1420,6 @@ function renderStoreLogins(sl){
   }
 }
 
-function renderClientCounts(team){
-  if(!team||!team.length)return;
-  var counts={rakuten:0,amazon:0,yahoo:0};
-  var seen={rakuten:{},amazon:{},yahoo:{}};
-  team.forEach(function(t){
-    var p=(t.platform||'').toLowerCase();
-    var client=t.client||'';
-    if(p.indexOf('rakuten')>=0&&!seen.rakuten[client]){counts.rakuten++;seen.rakuten[client]=1;}
-    if(p.indexOf('amazon')>=0&&!seen.amazon[client]){counts.amazon++;seen.amazon[client]=1;}
-    if(p.indexOf('yahoo')>=0&&!seen.yahoo[client]){counts.yahoo++;seen.yahoo[client]=1;}
-  });
-  var el;
-  el=document.getElementById('count-rakuten');if(el)el.textContent=counts.rakuten;
-  el=document.getElementById('count-amazon');if(el)el.textContent=counts.amazon;
-  el=document.getElementById('count-yahoo');if(el)el.textContent=counts.yahoo;
-}
 
 function catClass(cat){
   if(cat==='furusato')return'tag-furusato';if(cat==='active')return'tag-active';
@@ -1991,7 +1965,7 @@ function adminRefreshPortalData(){
     if(d.accounts)renderAccounts(d.accounts);
     if(d.storeLogins)renderStoreLogins(d.storeLogins);
     if(d.clients)renderClients(d.clients,d.drive);
-    if(d.team){renderTeamCards(d.team);renderClientCounts(d.team);}
+    if(d.team){renderTeamCards(d.team);}
     if(d.news)renderNews(d.news);
     if(d.company)renderCompany(d.company);
     if(d.logins)renderLoginsFromApi(d.logins);
