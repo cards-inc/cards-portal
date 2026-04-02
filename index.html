@@ -1518,10 +1518,10 @@ function renderTeamCards(team){
   var tbody=document.getElementById('team-table-tbody');if(!tbody)return;
   var html='';var lastSection='';
   var sectionStyles={
-    'ふるさと納税':'background:#e74c3c;color:#fff;font-size:.95rem;font-weight:800;padding:.8rem 1.2rem',
-    '通常案件':'background:#bf0000;color:#fff',
-    'Amazon案件':'background:#ff9900;color:#111',
-    'BP案件':'background:#fdcb6e;color:#333'
+    'ふるさと納税':'background:linear-gradient(135deg,#0E043A,#6C3CE0);color:#fff;font-size:.95rem;font-weight:800;padding:.8rem 1.2rem',
+    '通常案件':'background:linear-gradient(135deg,#0E043A,#6C3CE0);color:#fff',
+    'Amazon案件':'background:linear-gradient(135deg,#0E043A,#6C3CE0);color:#fff',
+    'BP案件':'background:linear-gradient(135deg,#0E043A,#6C3CE0);color:#fff'
   };
   team.forEach(function(t){
     if(t.section&&t.section!==lastSection){
