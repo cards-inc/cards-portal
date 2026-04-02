@@ -1445,7 +1445,6 @@ function renderClients(clients,driveData){
     html+='<div class="cc-cat-bar '+escHtml(cat)+'"></div>';
     html+='<div class="cc-top"><div><div class="cc-name">'+escHtml(c.name)+'</div>';
     if(c.store)html+='<div class="cc-store">'+escHtml(c.store)+'</div>';
-    if(c.owner)html+='<div class="cc-store" style="color:#888;font-size:.75rem">\u62c5\u5f53: '+escHtml(c.owner)+'</div>';
     html+='</div><span class="tag '+catClass(cat)+'">'+catLabel(cat)+'</span></div>';
     var links=[];
     if(dr.sheetUrl||c.sheetUrl)links.push('<a href="'+escHtml(dr.sheetUrl||c.sheetUrl)+'" target="_blank" class="cc-link-btn primary">&#128196; \u30b7\u30fc\u30c8</a>');
