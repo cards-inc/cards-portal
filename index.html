@@ -1521,11 +1521,16 @@ function renderTeamCards(team){
   if(!team||!team.length)return;
   var tbody=document.getElementById('team-table-tbody');if(!tbody)return;
   var html='';var lastSection='';
-  var sectionColors={'ふるさと納税案件':'#e3f2fd','通常案件':'#e8f5e9','Amazon案件':'#fff3e0','BP案件':'#fce4ec'};
+  var sectionStyles={
+    'ふるさと納税案件':'background:linear-gradient(135deg,#1a73e8,#4a9afa);color:#fff',
+    '通常案件':'background:linear-gradient(135deg,#16a085,#1abc9c);color:#fff',
+    'Amazon案件':'background:linear-gradient(135deg,#e67e22,#f39c12);color:#fff',
+    'BP案件':'background:linear-gradient(135deg,#8e44ad,#9b59b6);color:#fff'
+  };
   team.forEach(function(t){
     if(t.section&&t.section!==lastSection){
-      var bg=sectionColors[t.section]||'#f5f5f5';
-      html+='<tr><td colspan="8" style="background:'+bg+';font-weight:700;color:var(--accent);padding:.6rem 1.2rem">'+escHtml(t.section)+'</td></tr>';
+      var st=sectionStyles[t.section]||'background:#555;color:#fff';
+      html+='<tr><td colspan="8" style="'+st+';font-weight:700;padding:.6rem 1.2rem;border-radius:6px;font-size:.85rem;letter-spacing:.03em">'+escHtml(t.section)+'</td></tr>';
       lastSection=t.section;
     }
     var platformTag='';
