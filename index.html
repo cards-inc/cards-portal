@@ -807,7 +807,7 @@ AIチャットボット
 </div>
 </div>
 
-<div class="sub-title" style="margin-top:2.5rem">担当者一覧</div>
+<div class="sub-title" style="margin-top:2.5rem">案件担当一覧</div>
 <div class="table-wrapper" style="overflow:hidden">
 <table class="team-table">
 <thead><tr><th>No.</th><th>クライアント</th><th>対応範囲</th><th>媒体</th><th>MGR</th><th>コンサル</th><th>広告運用</th><th>アシスタント</th></tr></thead>
@@ -1678,10 +1678,10 @@ var SHEET_MAP={
   'login-boss-tbody':{sheet:'店舗別ログイン',filter:'boss'},
   'login-teps-tbody':{sheet:'店舗別ログイン',filter:'teps'},
   'login-individual-tbody':{sheet:'個別ログイン'},
-  'team-table-tbody':{sheet:'担当者一覧'}
+  'team-table-tbody':{sheet:'案件担当一覧'}
 };
 
-var ALL_SHEETS=['お知らせ','会社情報','アカウント情報','店舗別ログイン','個別ログイン','クライアント一覧','共有ドライブ','担当者一覧','組織図','業務マニュアル','AIチャットボット','リンク集'];
+var ALL_SHEETS=['お知らせ','会社情報','アカウント情報','店舗別ログイン','個別ログイン','クライアント一覧','共有ドライブ','案件担当一覧','組織図','業務マニュアル','AIチャットボット','リンク集'];
 
 function adminOpenLoginModal(){
   document.getElementById('adminLoginModal').classList.add('open');
@@ -1917,8 +1917,8 @@ function adminInjectButtons(){
   var mappings=[
     {page:'page-home',sheets:['お知らせ','会社情報']},
     {page:'page-logins',sheets:['アカウント情報','店舗別ログイン','個別ログイン']},
-    {page:'page-clients',sheets:['クライアント一覧','共有ドライブ','担当者一覧']},
-    {page:'page-org',sheets:['組織図','担当者一覧']},
+    {page:'page-clients',sheets:['クライアント一覧','共有ドライブ','案件担当一覧']},
+    {page:'page-org',sheets:['組織図','案件担当一覧']},
     {page:'page-manual',sheets:['業務マニュアル']},
     {page:'page-ai',sheets:['AIチャットボット']},
     {page:'page-rules',sheets:['リンク集']}
