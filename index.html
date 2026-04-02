@@ -405,14 +405,6 @@ body.admin-mode .admin-only{display:inline-flex}
 <span class="nav-icon"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></span>
 学習コンテンツ
 </a>
-<a href="#" data-page="task" onclick="switchPage('task',this);return false">
-<span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></span>
-タスク管理
-</a>
-<a href="#" data-page="ai" onclick="switchPage('ai',this);return false">
-<span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M12 2a2 2 0 012 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 017 7h1a2 2 0 110 4h-1a7 7 0 01-7 7H9a7 7 0 01-7-7H1a2 2 0 110-4h1a7 7 0 017-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 012-2z"/><circle cx="9" cy="13" r="1.25"/><circle cx="15" cy="13" r="1.25"/><path d="M10 17h4" stroke-linecap="round"/></svg></span>
-AIチャットボット
-</a>
 </nav>
 <div class="admin-login-area" id="adminLoginArea">
 <button onclick="adminOpenLoginModal()" style="width:100%;padding:.45rem;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.15);border-radius:6px;font-size:.78rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:.4rem"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>管理者ログイン</button>
@@ -998,9 +990,13 @@ AIチャットボット
 <!-- ===== MANUAL ===== -->
 <div id="page-manual" class="page">
 <h2 class="page-title">業務マニュアル</h2>
-<p style="color:var(--text-light);margin-bottom:1.5rem;font-size:.9rem">業務に必要なマニュアル・手順書をまとめています。</p>
-<div id="manual-grid" class="info-grid"></div>
-<p style="color:var(--text-light);margin-top:2rem;font-size:.82rem">※ マニュアルは随時追加されます。管理画面から追加できます。</p>
+<p style="color:var(--text-light);margin-bottom:1.5rem;font-size:.9rem">業務に必要なマニュアル動画・スライドをまとめています。</p>
+<div class="filter-tabs" id="manual-tabs">
+<span class="filter-tab active" onclick="filterManual('all',this)">全て</span>
+</div>
+<div id="manual-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.2rem;margin-bottom:2rem">
+<div style="text-align:center;padding:2rem;color:var(--text-light)">読み込み中...</div>
+</div>
 </div>
 
 <!-- ===== LEARNING ===== -->
@@ -1015,29 +1011,6 @@ AIチャットボット
 </div>
 </div>
 
-<!-- ===== TASK MANAGEMENT ===== -->
-<div id="page-task" class="page">
-<h2 class="page-title">タスク管理</h2>
-<p style="color:var(--text-light);margin-bottom:1.5rem;font-size:.9rem">クライアントごとのタスク進捗・作業状況を一覧で管理できるダッシュボードです。担当案件のステータス確認や優先度の管理にご活用ください。</p>
-<div style="display:flex;justify-content:center;margin-top:2rem">
-<a href="https://cards-inc.github.io/cards-dashboard/" target="_blank" style="display:flex;align-items:center;gap:1rem;padding:1.5rem 2.5rem;background:linear-gradient(135deg,#0E043A,#2d1b69,#4a2d8a);border-radius:16px;color:#fff;text-decoration:none;font-size:1.1rem;font-weight:700;box-shadow:0 4px 20px rgba(14,4,58,.3);transition:transform .2s,box-shadow .2s" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 28px rgba(14,4,58,.4)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 20px rgba(14,4,58,.3)'">
-<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
-タスクダッシュボードを開く
-</a>
-</div>
-</div>
-
-<!-- ===== AI CHATBOT ===== -->
-<div id="page-ai" class="page">
-<h2 class="page-title">AIチャットボット</h2>
-<p style="color:var(--text-light);margin-bottom:1.5rem;font-size:.9rem">CARDSの業務知識を学習したAIアシスタントです。EC運用・広告運用・社内ルールなど、業務に関する質問や相談にご活用ください。Google Geminiベースで動作します。</p>
-<div style="display:flex;justify-content:center;margin-top:2rem">
-<a href="https://gemini.google.com/gem/1XVfbeFS2DXz_Y4Ya_RReJlow_pM2p-8X?usp=sharing" target="_blank" style="display:flex;align-items:center;gap:1rem;padding:1.5rem 2.5rem;background:linear-gradient(135deg,#4285f4,#9b72cb,#d96570);border-radius:16px;color:#fff;text-decoration:none;font-size:1.1rem;font-weight:700;box-shadow:0 4px 20px rgba(66,133,244,.3);transition:transform .2s,box-shadow .2s" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 28px rgba(66,133,244,.4)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 20px rgba(66,133,244,.3)'">
-<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-CARDS AI に質問する
-</a>
-</div>
-</div>
 
 <!-- ===== LINKS ===== -->
 </div><!-- /content -->
@@ -1134,12 +1107,10 @@ function buildSearchIndex(){
     {id:'home',label:'ホーム',keywords:['ホーム','MVV','ミッション','ビジョン','バリュー','お知らせ','ニュース']},
     {id:'rules',label:'社内規則',keywords:['社内規則','コミュニケーション','DM禁止','テキスト','Chatwork','請求書','月末締め','BP','工数','成果報酬','オプション請求']},
     {id:'manual',label:'業務マニュアル',keywords:['マニュアル','手順書','業務']},
-    {id:'task',label:'タスク管理',keywords:['タスク','進捗','ダッシュボード','管理']},
     {id:'org',label:'組織図',keywords:['組織図','担当者','メンバー']},
     {id:'clients',label:'管理シート一覧',keywords:['クライアント','顧客']},
     {id:'logins',label:'各種リンク/ログイン',keywords:['ログイン','パスワード','アカウント','ID','PW','EC','ツール','RMS','SFTP']},
     {id:'learning',label:'学習コンテンツ',keywords:['学習','動画','YouTube','研修']},
-    {id:'ai',label:'AIチャットボット',keywords:['AI','チャットボット','Gemini','CARDS AI']}
   ];
   pages.forEach(function(p){
     p.keywords.forEach(function(kw){
@@ -1602,25 +1573,50 @@ function renderManualFromApi(manual){
   if(!manual||!manual.length)return;
   var grid=document.getElementById('manual-grid');if(!grid)return;
   var cats={};
-  manual.forEach(function(m){
-    if(!cats[m.category])cats[m.category]=[];
-    cats[m.category].push(m);
-  });
-  var html='';
-  Object.keys(cats).forEach(function(cat){
-    html+='<div class="info-card"><h3>'+escHtml(cat)+'</h3><ul>';
-    cats[cat].forEach(function(m){
-      if(m.url){
-        html+='<li><a href="'+escHtml(m.url)+'" target="_blank" class="external-link">'+escHtml(m.title)+'</a>';
-      }else{
-        html+='<li>'+escHtml(m.title);
-      }
-      if(m.note)html+=' <span style="color:var(--text-light);font-size:.8rem">'+escHtml(m.note)+'</span>';
-      html+='</li>';
+  manual.forEach(function(m){if(m.category)cats[m.category]=true;});
+  var tabsEl=document.getElementById('manual-tabs');
+  if(tabsEl){
+    var tabHtml='<span class="filter-tab active" onclick="filterManual(\'all\',this)">全て</span>';
+    Object.keys(cats).forEach(function(c){
+      tabHtml+='<span class="filter-tab" onclick="filterManual(\''+escHtml(c)+'\',this)">'+escHtml(c)+'</span>';
     });
-    html+='</ul></div>';
+    tabsEl.innerHTML=tabHtml;
+  }
+  var html='';
+  manual.forEach(function(m){
+    if(!m.url)return;
+    var vid=getYouTubeId(m.url);
+    var isSlide=m.url.indexOf('docs.google.com/presentation')>=0;
+    html+='<div class="yt-card" data-cat="'+escHtml(m.category)+'">';
+    if(vid){
+      html+='<div class="yt-thumb">';
+      html+='<img src="https://img.youtube.com/vi/'+vid+'/mqdefault.jpg" alt="'+escHtml(m.title)+'" onclick="this.parentElement.innerHTML=\'<iframe src=\\\'https://www.youtube.com/embed/'+vid+'?autoplay=1\\\' allowfullscreen></iframe>\'">';
+      html+='<div class="yt-play"></div>';
+      html+='</div>';
+    } else if(isSlide){
+      var embedUrl=m.url.replace(/\/edit.*/,'/embed?start=false&loop=false&delayms=3000');
+      html+='<div class="yt-thumb" style="cursor:pointer" onclick="this.innerHTML=\'<iframe src=\\\''+escHtml(embedUrl)+'\\\' allowfullscreen style=\\\'border:none\\\'></iframe>\'">';
+      html+='<div style="display:flex;align-items:center;justify-content:center;height:100%;background:linear-gradient(135deg,#fbbc04,#ea4335)"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>';
+      html+='</div>';
+    } else {
+      html+='<div class="yt-thumb" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a1a2e,#16213e);cursor:pointer" onclick="window.open(\''+escHtml(m.url)+'\',\'_blank\')">';
+      html+='<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>';
+      html+='</div>';
+    }
+    html+='<div class="yt-info">';
+    if(m.category)html+='<span class="yt-cat">'+escHtml(m.category)+'</span> ';
+    html+='<div class="yt-title">'+escHtml(m.title)+'</div>';
+    if(m.note)html+='<div style="font-size:.78rem;color:var(--text-light);margin-top:.3rem">'+escHtml(m.note)+'</div>';
+    html+='</div></div>';
   });
   grid.innerHTML=html;
+}
+function filterManual(cat,btn){
+  document.querySelectorAll('#manual-tabs .filter-tab').forEach(function(t){t.classList.remove('active')});
+  if(btn)btn.classList.add('active');
+  document.querySelectorAll('#manual-grid .yt-card').forEach(function(c){
+    c.style.display=(cat==='all'||c.getAttribute('data-cat')===cat)?'':'none';
+  });
 }
 
 var AI_COLORS={'チャットAI':'#10a37f','AI検索':'#7c3aed','画像生成':'#0ea5e9','その他':'#475569'};
