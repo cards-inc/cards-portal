@@ -139,7 +139,7 @@ tbody tr:nth-child(even){background:#fafbfc}
 
 /* Client grid & cards */
 .client-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
-.client-card{background:var(--card-bg);border-radius:var(--radius);padding:0;box-shadow:var(--shadow);border:1px solid var(--border);transition:var(--transition);overflow:hidden;cursor:pointer;position:relative;height:160px}
+.client-card{background:var(--card-bg);border-radius:var(--radius);padding:0;box-shadow:var(--shadow);border:1px solid var(--border);transition:var(--transition);overflow:visible;cursor:pointer;position:relative;min-height:200px}
 .client-card:hover{box-shadow:0 6px 24px rgba(14,4,58,.12);transform:translateY(-2px)}
 .client-card.ended{opacity:.6}
 .cc-top{padding:1rem 1.2rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
