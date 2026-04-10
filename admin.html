@@ -210,6 +210,7 @@ var GAS_URL = 'https://script.google.com/macros/s/AKfycbxUxm3HCosAwW4EImmGzFnW-g
 
 // 変更通知の対象シート
 var NOTIFY_SHEETS = ['担当者一覧', '組織図'];
+var NOTIFY_GAS_URL = 'https://script.google.com/macros/s/AKfycbwC0urYi1FUIwwYa1K0kj_ygyJRypokxQ3o4LILuxH4GyjbShUx5gV9hV3eb0mEq6u0/exec';
 
 // ポータルのページ構成に合わせたタブ→シートマッピング
 var TAB_SHEETS = {
@@ -659,19 +660,21 @@ function notifyIfWatched(sheetId, changeType, values) {
   if (NOTIFY_SHEETS.indexOf(sheetId) === -1) return;
   var detail = '';
   if (values && values.length > 0) {
-    // 先頭2〜3カラムを詳細として使用
     detail = values.slice(0, 3).filter(function(v) { return v; }).join(' / ');
   }
-  apiPost({
-    password: password,
-    action: 'notify',
-    sheet: sheetId,
-    changeType: changeType,
-    detail: detail
-  }).then(function(res) {
-    if (res.notified) {
-      console.log('変更通知送信完了: ' + sheetId);
-    }
+  fetch(NOTIFY_GAS_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain' },
+    body: JSON.stringify({
+      password: password,
+      action: 'notify',
+      sheet: sheetId,
+      changeType: changeType,
+      detail: detail
+    })
+  }).then(function(r) { return r.json(); })
+  .then(function(res) {
+    if (res.notified) console.log('変更通知送信完了: ' + sheetId);
   }).catch(function(e) {
     console.error('変更通知エラー:', e);
   });
