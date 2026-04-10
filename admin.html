@@ -210,7 +210,7 @@ var GAS_URL = 'https://script.google.com/macros/s/AKfycbxUxm3HCosAwW4EImmGzFnW-g
 
 // 変更通知の対象シート
 var NOTIFY_SHEETS = ['担当者一覧', '組織図'];
-var NOTIFY_GAS_URL = 'https://script.google.com/macros/s/AKfycbwZScNwGQ6_aa5wcgQK6JbTTajwEHvfT8ahHLOkBFTE3dWkfPx9lMffyNhS4bD9Zaf_/exec';
+var NOTIFY_GAS_URL = 'https://script.google.com/macros/s/AKfycbxMI8UspnAEBmJif_6F3lm7-_5vgJXxFP4qEZrCFk1G7yYcFL0gyNhxxgCH63Ug-K6l/exec';
 
 // ポータルのページ構成に合わせたタブ→シートマッピング
 var TAB_SHEETS = {
@@ -516,6 +516,7 @@ function saveModalData() {
   });
 
   var action = currentEditRow === -1 ? 'add' : 'update';
+  var oldValues = (action === 'update' && data.rows[currentEditRow]) ? data.rows[currentEditRow].slice() : null;
   var body = {
     password: password,
     action: action,
@@ -543,6 +544,8 @@ function saveModalData() {
   var savedSheet = currentEditSheet;
   var savedAction = action;
   var savedValues = values.slice();
+  var savedOldValues = oldValues;
+  var savedHeaders = data.headers.slice();
   apiPost(body).then(function(res) {
     isSaving = false;
     saveBtn.disabled = false;
@@ -552,7 +555,7 @@ function saveModalData() {
       var rowEl = document.getElementById('row-' + savedSheet + '-' + (savedAction === 'add' ? data.rows.length - 1 : currentEditRow));
       if (rowEl) rowEl.classList.add('row-updated');
       // 監視対象シートなら通知を送信
-      notifyIfWatched(savedSheet, savedAction, savedValues);
+      notifyIfWatched(savedSheet, savedAction, savedValues, savedOldValues, savedHeaders);
     } else {
       showStatus('エラー: ' + (res.error || '不明') + ' - 再読み込みします', 'error');
       refreshSheet(savedSheet);
@@ -582,6 +585,8 @@ function confirmDelete(sheetId, rowIdx) {
 
   // Optimistic: remove from local cache immediately
   var data = sheetDataCache[sheetId];
+  var deletedValues = (data && data.rows[rowIdx]) ? data.rows[rowIdx].slice() : [];
+  var deletedHeaders = (data && data.headers) ? data.headers.slice() : [];
   if (data) {
     data.rows.splice(rowIdx, 1);
     var sheet = SHEETS.find(function(s) { return s.id === sheetId; });
@@ -599,7 +604,7 @@ function confirmDelete(sheetId, rowIdx) {
   }).then(function(res) {
     if (res.success) {
       showStatus('削除しました', 'success');
-      notifyIfWatched(deletedSheet, 'delete', []);
+      notifyIfWatched(deletedSheet, 'delete', deletedValues, null, deletedHeaders);
     } else {
       showStatus('エラー: ' + (res.error || '不明') + ' - 再読み込みします', 'error');
       refreshSheet(sheetId);
@@ -656,12 +661,9 @@ function escAttr(s) {
 }
 
 /* ========== Change Notification ========== */
-function notifyIfWatched(sheetId, changeType, values) {
+function notifyIfWatched(sheetId, changeType, values, oldValues, headers) {
   if (NOTIFY_SHEETS.indexOf(sheetId) === -1) return;
-  var detail = '';
-  if (values && values.length > 0) {
-    detail = values.slice(0, 3).filter(function(v) { return v; }).join(' / ');
-  }
+  var detail = buildNotifyDetail(sheetId, changeType, values, oldValues, headers);
   fetch(NOTIFY_GAS_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'text/plain' },
@@ -678,6 +680,85 @@ function notifyIfWatched(sheetId, changeType, values) {
   }).catch(function(e) {
     console.error('変更通知エラー:', e);
   });
+}
+
+function buildNotifyDetail(sheetId, changeType, values, oldValues, headers) {
+  if (!headers || !values) return '';
+
+  if (sheetId === '担当者一覧') {
+    // headers: セクション, No, クライアント, 業務範囲, 媒体, 管理者, コンサル, 広告運用
+    var client = values[2] || '不明';
+    var platform = values[4] || '';
+
+    if (changeType === 'add') {
+      var members = [];
+      if (values[5]) members.push('管理者: ' + values[5]);
+      if (values[6]) members.push('コンサル: ' + values[6]);
+      if (values[7]) members.push('広告運用: ' + values[7]);
+      return client + '(' + platform + ') を新規追加\n' + members.join(' / ');
+    }
+
+    if (changeType === 'delete') {
+      return client + '(' + platform + ') を削除';
+    }
+
+    // update: 変更前後を比較
+    if (oldValues) {
+      var changes = [];
+      var positionCols = [
+        { idx: 5, name: '管理者' },
+        { idx: 6, name: 'コンサル' },
+        { idx: 7, name: '広告運用' }
+      ];
+      positionCols.forEach(function(col) {
+        var oldVal = (oldValues[col.idx] || '').trim();
+        var newVal = (values[col.idx] || '').trim();
+        if (oldVal !== newVal) {
+          changes.push(col.name + ': ' + (oldVal || '未設定') + ' → ' + (newVal || '未設定'));
+        }
+      });
+      // その他のカラム変更も検出
+      var otherCols = [
+        { idx: 0, name: 'セクション' },
+        { idx: 2, name: 'クライアント' },
+        { idx: 3, name: '業務範囲' },
+        { idx: 4, name: '媒体' }
+      ];
+      otherCols.forEach(function(col) {
+        var oldVal = (oldValues[col.idx] || '').trim();
+        var newVal = (values[col.idx] || '').trim();
+        if (oldVal !== newVal) {
+          changes.push(col.name + ': ' + oldVal + ' → ' + newVal);
+        }
+      });
+      if (changes.length === 0) return client + '(' + platform + ') 変更なし';
+      return client + '(' + platform + ')\n' + changes.join('\n');
+    }
+  }
+
+  if (sheetId === '組織図') {
+    // headers: レベル, 部門/役職, 担当者, 担当クライアント, 上位部門, 備考
+    var role = values[1] || '';
+    var person = values[2] || '';
+
+    if (changeType === 'add') return role + ' / ' + person + ' を新規追加';
+    if (changeType === 'delete') return role + ' / ' + person + ' を削除';
+
+    if (oldValues) {
+      var changes = [];
+      headers.forEach(function(h, i) {
+        var oldVal = (oldValues[i] || '').trim();
+        var newVal = (values[i] || '').trim();
+        if (oldVal !== newVal) {
+          changes.push(h + ': ' + (oldVal || '未設定') + ' → ' + (newVal || '未設定'));
+        }
+      });
+      if (changes.length === 0) return role + ' / ' + person + ' 変更なし';
+      return role + ' / ' + person + '\n' + changes.join('\n');
+    }
+  }
+
+  return values.slice(0, 3).filter(function(v) { return v; }).join(' / ');
 }
 
 /* ========== Init ========== */
