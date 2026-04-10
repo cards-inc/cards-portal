@@ -208,6 +208,9 @@ tbody tr:nth-child(even){background:#fafbfc}
 /* ========== Config ========== */
 var GAS_URL = 'https://script.google.com/macros/s/AKfycbxUxm3HCosAwW4EImmGzFnW-g8svH-NKaquJ1a1G2kBrLLVQwhBZGgjGEpZxiw-Cj9h/exec';
 
+// 変更通知の対象シート
+var NOTIFY_SHEETS = ['担当者一覧', '組織図'];
+
 // ポータルのページ構成に合わせたタブ→シートマッピング
 var TAB_SHEETS = {
   'ホーム': ['お知らせ', '会社情報'],
@@ -536,23 +539,28 @@ function saveModalData() {
   var saveBtn = document.getElementById('modalSaveBtn');
   saveBtn.disabled = true;
 
+  var savedSheet = currentEditSheet;
+  var savedAction = action;
+  var savedValues = values.slice();
   apiPost(body).then(function(res) {
     isSaving = false;
     saveBtn.disabled = false;
     if (res.success) {
-      showStatus(action === 'add' ? '追加しました' : '更新しました', 'success');
+      showStatus(savedAction === 'add' ? '追加しました' : '更新しました', 'success');
       // Highlight updated row
-      var rowEl = document.getElementById('row-' + currentEditSheet + '-' + (action === 'add' ? data.rows.length - 1 : currentEditRow));
+      var rowEl = document.getElementById('row-' + savedSheet + '-' + (savedAction === 'add' ? data.rows.length - 1 : currentEditRow));
       if (rowEl) rowEl.classList.add('row-updated');
+      // 監視対象シートなら通知を送信
+      notifyIfWatched(savedSheet, savedAction, savedValues);
     } else {
       showStatus('エラー: ' + (res.error || '不明') + ' - 再読み込みします', 'error');
-      refreshSheet(currentEditSheet);
+      refreshSheet(savedSheet);
     }
   }).catch(function(e) {
     isSaving = false;
     saveBtn.disabled = false;
     showStatus('通信エラー - 再読み込みします', 'error');
-    refreshSheet(currentEditSheet);
+    refreshSheet(savedSheet);
   });
 }
 
@@ -581,6 +589,7 @@ function confirmDelete(sheetId, rowIdx) {
   }
   showStatus('削除中...', '');
 
+  var deletedSheet = sheetId;
   apiPost({
     password: password,
     action: 'delete',
@@ -589,6 +598,7 @@ function confirmDelete(sheetId, rowIdx) {
   }).then(function(res) {
     if (res.success) {
       showStatus('削除しました', 'success');
+      notifyIfWatched(deletedSheet, 'delete', []);
     } else {
       showStatus('エラー: ' + (res.error || '不明') + ' - 再読み込みします', 'error');
       refreshSheet(sheetId);
@@ -642,6 +652,29 @@ function esc(s) {
 function escAttr(s) {
   if (!s) return '';
   return s.toString().replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+/* ========== Change Notification ========== */
+function notifyIfWatched(sheetId, changeType, values) {
+  if (NOTIFY_SHEETS.indexOf(sheetId) === -1) return;
+  var detail = '';
+  if (values && values.length > 0) {
+    // 先頭2〜3カラムを詳細として使用
+    detail = values.slice(0, 3).filter(function(v) { return v; }).join(' / ');
+  }
+  apiPost({
+    password: password,
+    action: 'notify',
+    sheet: sheetId,
+    changeType: changeType,
+    detail: detail
+  }).then(function(res) {
+    if (res.notified) {
+      console.log('変更通知送信完了: ' + sheetId);
+    }
+  }).catch(function(e) {
+    console.error('変更通知エラー:', e);
+  });
 }
 
 /* ========== Init ========== */
