@@ -775,6 +775,7 @@ AIチャットボット
 <div class="rules-tabs">
 <button class="rules-tab active" onclick="switchRulesTab('comm',this)">I. コミュニケーションルール</button>
 <button class="rules-tab" onclick="switchRulesTab('procedures',this)">II. 業務・請求管理ルール</button>
+<button class="rules-tab" onclick="switchRulesTab('creative',this)">III. クリエイティブ料金表</button>
 </div>
 
 <!-- ===== Chapter I: コミュニケーションルール ===== -->
@@ -939,6 +940,80 @@ AIチャットボット
 
 </div>
 </div>
+
+<!-- ===== Chapter III: クリエイティブ料金表 ===== -->
+<div id="rules-creative" class="rules-panel">
+
+<div class="rule-card" style="border-left-color:#6C3CE0">
+<div class="rule-card-head"><span class="rule-num">01</span><h3>楽天制作物</h3></div>
+<div class="rule-table-wrap">
+<table class="rule-table">
+<thead><tr><th>制作物</th><th>画像数</th><th>請求金額(税抜)</th><th>納品物</th><th>修正回数</th><th>納期目安</th></tr></thead>
+<tbody>
+<tr><td><strong>TDAバナー</strong></td><td>4枚セット</td><td>¥24,000</td><td>jpg/png</td><td>3回</td><td>3〜14日間</td></tr>
+<tr><td><strong>サムネイル・LP</strong></td><td>1枚</td><td>¥10,000</td><td>jpg/png</td><td>3回</td><td>3〜14日間</td></tr>
+<tr><td><strong>サムネイル（楽天+さとふる+Amazon）</strong><br><span style="font-size:.75rem;color:var(--text-light)">※楽天サムネを元に他はリサイズが前提</span></td><td>3枚セット</td><td>¥14,000</td><td>jpg/png</td><td>3回</td><td>3〜14日間</td></tr>
+<tr><td><strong>バナー・クーポン</strong></td><td>1枚</td><td>¥10,000</td><td>jpg/png</td><td>3回</td><td>3〜14日間</td></tr>
+<tr><td><strong>バッヂ・エンブレム制作+取付け</strong><br><span style="font-size:.75rem;color:var(--text-light)">1商品</span></td><td>1枚</td><td>¥4,000</td><td>jpg/png</td><td>3回</td><td>3〜14日間</td></tr>
+<tr><td><strong>バッヂ・エンブレム取り付けのみ</strong><br><span style="font-size:.75rem;color:var(--text-light)">2商品目以降</span></td><td>1枚</td><td>¥600</td><td>jpg/png</td><td>-</td><td>3〜14日間</td></tr>
+<tr><td rowspan="3"><strong>写真・画像加工/編集</strong><br><span style="font-size:.75rem;color:var(--text-light)">しわ取り・影追加・鏡面・削除/追加・生成等</span></td><td>少量</td><td>¥1,000</td><td>jpg/png</td><td>-</td><td>即日〜3日</td></tr>
+<tr><td>中量</td><td>¥1,600</td><td>jpg/png</td><td>-</td><td>即日〜3日</td></tr>
+<tr><td>大量</td><td>¥2,000</td><td>jpg/png</td><td>-</td><td>即日〜3日</td></tr>
+<tr><td><strong>その他 何でも画像制作（要相談）</strong></td><td>1枚</td><td>要相談</td><td>jpg/png</td><td>3回</td><td>3〜14日間</td></tr>
+</tbody>
+</table>
+</div>
+<div class="rule-note">AI/PSデータは有料（要相談）。素材の書き出しも有料（要相談）。</div>
+</div>
+
+<div class="rule-card" style="border-left-color:#FF9900">
+<div class="rule-card-head"><span class="rule-num" style="background:#FF9900">02</span><h3>Amazon制作物</h3></div>
+<div class="rule-table-wrap">
+<table class="rule-table">
+<thead><tr><th>制作物</th><th>画像数</th><th>請求金額(税抜)</th><th>納品物</th><th>修正回数</th><th>納期目安</th></tr></thead>
+<tbody>
+<tr><td><strong>メイン画像：背景あり</strong><br><span style="font-size:.75rem;color:var(--text-light)">食品を中心にAmazonが背景OKなもの</span></td><td>1枚</td><td>¥10,000</td><td>jpg/png</td><td>3回</td><td>3〜14日間</td></tr>
+<tr><td><strong>メイン画像：白抜き</strong></td><td>1枚</td><td>¥10,000</td><td>jpg/png</td><td>3回</td><td>3〜14日間</td></tr>
+<tr><td><strong>メイン画像：2枚目以降</strong><br><span style="font-size:.75rem;color:var(--text-light)">基本白抜きで1枚目を作成後、簡易的に量産</span></td><td>1枚</td><td>¥2,000</td><td>jpg/png</td><td>-</td><td>3〜14日間</td></tr>
+<tr><td><strong>サブ画像</strong></td><td>1枚</td><td>¥10,000</td><td>jpg/png</td><td>3回</td><td>3〜14日間</td></tr>
+<tr><td><strong>アテンションステッカー作成</strong></td><td>1枚</td><td>¥10,000</td><td>jpg/png</td><td>3回</td><td>3〜14日間</td></tr>
+<tr><td><strong>A+画像制作</strong></td><td>1枚</td><td>¥10,000</td><td>jpg/png</td><td>3回</td><td>3〜14日間</td></tr>
+<tr><td><strong>A+画像制作</strong><br><span style="font-size:.75rem;color:var(--text-light)">LP作成後、同データ使用してA+を作成の場合</span></td><td>1枚</td><td>¥6,000</td><td>jpg/png</td><td>3回</td><td>3〜14日間</td></tr>
+<tr><td><strong>ストア制作</strong></td><td>1枚</td><td>¥10,000</td><td>jpg/png</td><td>3回</td><td>3〜14日間</td></tr>
+<tr><td rowspan="3"><strong>写真・画像加工/編集</strong><br><span style="font-size:.75rem;color:var(--text-light)">しわ取り・影追加・鏡面・削除/追加・生成等</span></td><td>少量</td><td>¥1,000</td><td>jpg/png</td><td>-</td><td>即日〜3日</td></tr>
+<tr><td>中量</td><td>¥1,600</td><td>jpg/png</td><td>-</td><td>即日〜3日</td></tr>
+<tr><td>大量</td><td>¥2,000</td><td>jpg/png</td><td>-</td><td>即日〜3日</td></tr>
+<tr><td><strong>その他 何でも画像制作（要相談）</strong></td><td>1枚</td><td>要相談</td><td>jpg/png</td><td>3回</td><td>3〜14日間</td></tr>
+</tbody>
+</table>
+</div>
+<div class="rule-note">AI/PSデータは有料（要相談）。素材の書き出しも有料（要相談）。</div>
+</div>
+
+<div class="rule-card" style="border-left-color:#00b894">
+<div class="rule-card-head"><span class="rule-num" style="background:#00b894">03</span><h3>Canva制作物（社内用）</h3></div>
+<div class="rule-table-wrap">
+<table class="rule-table">
+<thead><tr><th>制作物</th><th>画像数</th><th>制作費</th><th>備考</th></tr></thead>
+<tbody>
+<tr><td><strong>何でも</strong></td><td>1枚</td><td>¥3,000</td><td>ディレクション料なし</td></tr>
+</tbody>
+</table>
+</div>
+<div class="rule-note">お客様への納品物にCanva制作はなし。社内フロー効率化のためのクリエイティブ（使用期限が短いもの、クーポン・バナー等アシスタントが部分的に編集できた方が便利なもののみ）。</div>
+</div>
+
+<div class="rule-card" style="border-left-color:#fdcb6e">
+<div class="rule-card-head"><span class="rule-num" style="background:#fdcb6e;color:#0E043A">注意</span><h3>元データについて</h3></div>
+<p>元データ販売は<strong>1〜5万円</strong>がデータ格納料金。CARDSが同額で上乗せがベース（データ格納料金は枚数による）。</p>
+<ul>
+<li>AI/PSデータの納品は有料（要相談）</li>
+<li>素材の書き出しも有料（要相談）</li>
+</ul>
+</div>
+
+</div>
+
 </div>
 
 
@@ -1099,7 +1174,7 @@ function buildSearchIndex(){
   // Pages
   var pages=[
     {id:'home',label:'ホーム',keywords:['ホーム','MVV','ミッション','ビジョン','バリュー','お知らせ','ニュース']},
-    {id:'rules',label:'社内規則',keywords:['社内規則','コミュニケーション','DM禁止','テキスト','Chatwork','請求書','月末締め','BP','工数','成果報酬','オプション請求']},
+    {id:'rules',label:'社内規則',keywords:['社内規則','コミュニケーション','DM禁止','テキスト','Chatwork','請求書','月末締め','BP','工数','成果報酬','オプション請求','クリエイティブ','料金表','デザイン','制作費','TDA','バナー','サムネイル','LP','Canva']},
     {id:'manual',label:'業務マニュアル',keywords:['マニュアル','手順書','業務']},
     {id:'task',label:'タスク管理',keywords:['タスク','進捗','ダッシュボード','管理']},
     {id:'org',label:'組織図',keywords:['組織図','担当者','メンバー']},
