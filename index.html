@@ -345,7 +345,12 @@ body.admin-mode .admin-only{display:inline-flex}
 /* Admin Modal */
 .admin-modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:500;align-items:center;justify-content:center}
 .admin-modal-overlay.open{display:flex}
-.admin-modal{background:var(--card-bg);border-radius:var(--radius);box-shadow:0 20px 60px rgba(0,0,0,.2);width:650px;max-width:95vw;max-height:85vh;overflow-y:auto}
+.admin-modal{background:var(--card-bg);border-radius:var(--radius);box-shadow:0 20px 60px rgba(0,0,0,.2);width:650px;max-width:95vw;max-height:85vh;overflow-y:auto;transition:width .2s}
+.admin-modal.wide{width:95vw}
+.admin-modal.wide table thead th{background:linear-gradient(135deg,#0E043A,#2d1b69);color:#fff;padding:.6rem .8rem;font-weight:600;white-space:nowrap;position:sticky;top:0;z-index:2}
+.admin-modal.wide table tbody tr{border-bottom:1px solid var(--border)}
+.admin-modal.wide table tbody tr:nth-child(even) td{background:#fafbfc}
+.admin-modal.wide table tbody tr:hover td{background:#f0ecfa}
 .admin-modal-header{padding:1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
 .admin-modal-header h3{font-size:1rem;color:var(--primary)}
 .admin-modal-close{background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--text-light);padding:.3rem}
@@ -1925,25 +1930,27 @@ function adminOpenSheet(sheetName){
 
 function adminRenderSheetEditor(sheetName,data){
   document.getElementById('adminModalTitle').textContent=sheetName+' を編集';
+  var modal=document.getElementById('adminModal').querySelector('.admin-modal');
+  modal.classList.add('wide');
   var html='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem">';
   html+='<span style="font-size:.85rem;color:var(--text-light)">'+data.rows.length+'行</span>';
   html+='<button class="admin-add-btn" onclick="adminOpenAddRow(\''+escHtml(sheetName)+'\')">+ 新規追加</button>';
   html+='</div>';
-  html+='<div style="overflow-x:auto;max-height:60vh"><table style="font-size:.8rem"><thead><tr><th>#</th>';
-  data.headers.forEach(function(h){html+='<th>'+escHtml(h)+'</th>';});
-  html+='<th>操作</th></tr></thead><tbody>';
+  html+='<div style="overflow-x:auto;max-height:60vh;border:1px solid var(--border);border-radius:8px"><table style="font-size:.8rem;white-space:nowrap"><thead><tr><th style="position:sticky;left:0;z-index:1;background:linear-gradient(135deg,#0E043A,#2d1b69)">#</th>';
+  data.headers.forEach(function(h){html+='<th style="padding:.6rem .8rem">'+escHtml(h)+'</th>';});
+  html+='<th style="position:sticky;right:0;z-index:1;background:linear-gradient(135deg,#0E043A,#2d1b69)">操作</th></tr></thead><tbody>';
   data.rows.forEach(function(row,idx){
-    html+='<tr><td>'+(idx+1)+'</td>';
+    html+='<tr><td style="position:sticky;left:0;z-index:1;background:var(--card-bg)">'+(idx+1)+'</td>';
     row.forEach(function(cell,ci){
       var hdr=(data.headers[ci]||'').toLowerCase();
       if(hdr.indexOf('pw')>=0||hdr==='password'){
-        html+='<td style="font-family:monospace;color:var(--text-light)">******</td>';
+        html+='<td style="font-family:monospace;color:var(--text-light);padding:.5rem .8rem">******</td>';
       }else{
         var v=cell||'';
-        html+='<td>'+escHtml(v.length>40?v.substring(0,40)+'...':v)+'</td>';
+        html+='<td style="padding:.5rem .8rem;max-width:300px;overflow:hidden;text-overflow:ellipsis" title="'+escHtml(v)+'">'+escHtml(v)+'</td>';
       }
     });
-    html+='<td style="white-space:nowrap"><button class="admin-edit-btn" onclick="adminOpenEditRow(\''+escHtml(sheetName)+'\','+idx+')">編集</button> ';
+    html+='<td style="white-space:nowrap;position:sticky;right:0;z-index:1;background:var(--card-bg)"><button class="admin-edit-btn" onclick="adminOpenEditRow(\''+escHtml(sheetName)+'\','+idx+')">編集</button> ';
     html+='<button class="admin-delete-btn" onclick="adminOpenDeleteRow(\''+escHtml(sheetName)+'\','+idx+')">削除</button></td></tr>';
   });
   if(!data.rows.length)html+='<tr><td colspan="'+(data.headers.length+2)+'" style="text-align:center;padding:1.5rem;color:var(--text-light)">データなし</td></tr>';
@@ -1966,6 +1973,7 @@ function adminOpenAddRow(sheetName){
   document.getElementById('adminModalBody').innerHTML=html;
   document.getElementById('adminModalSaveBtn').style.display='';
   document.getElementById('adminModalSaveBtn').textContent='追加';
+  document.getElementById('adminModal').querySelector('.admin-modal').classList.remove('wide');
   document.getElementById('adminModal').classList.add('open');
 }
 
@@ -1983,6 +1991,7 @@ function adminOpenEditRow(sheetName,rowIdx){
   document.getElementById('adminModalBody').innerHTML=html;
   document.getElementById('adminModalSaveBtn').style.display='';
   document.getElementById('adminModalSaveBtn').textContent='更新';
+  document.getElementById('adminModal').querySelector('.admin-modal').classList.remove('wide');
   document.getElementById('adminModal').classList.add('open');
 }
 
@@ -2071,7 +2080,7 @@ function adminRefreshPortalData(){
 }
 
 /* ========== Modal Controls ========== */
-function adminCloseModal(){document.getElementById('adminModal').classList.remove('open');}
+function adminCloseModal(){document.getElementById('adminModal').classList.remove('open');document.getElementById('adminModal').querySelector('.admin-modal').classList.remove('wide');}
 function adminCloseDeleteModal(){document.getElementById('adminDeleteModal').classList.remove('open');}
 
 /* ========== Admin Inline Buttons ========== */
